@@ -23,4 +23,4 @@ public class validarPorMinuscula extends Validacion{
         return (cantMinuscula >= minimoMinuscula);
     }
 }
-}
+

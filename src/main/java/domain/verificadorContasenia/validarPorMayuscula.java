@@ -24,4 +24,4 @@ public class validarPorMayuscula extends Validacion {
         return (cantMayusculas >= minimoMayuscula);
     }
 }
-}
+

@@ -1,6 +1,5 @@
 package domain.verificadorContasenia;
 
-import jdk.nashorn.internal.objects.annotations.Setter;
 import org.jetbrains.annotations.NotNull;
 
 
