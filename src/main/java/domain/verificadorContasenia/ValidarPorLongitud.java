@@ -1,6 +1,6 @@
 package domain.verificadorContasenia;
 
-public class validarPorLongitud extends Validacion{
+public class ValidarPorLongitud extends Validacion{
 
     private int largoContrasenia = 8; //puede variar
 

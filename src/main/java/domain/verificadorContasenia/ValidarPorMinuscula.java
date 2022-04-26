@@ -2,7 +2,7 @@ package domain.verificadorContasenia;
 
 import org.jetbrains.annotations.NotNull;
 
-public class validarPorMinuscula extends Validacion{
+public class ValidarPorMinuscula extends Validacion{
 
     private int minimoMinuscula = 1;
 

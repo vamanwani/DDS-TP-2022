@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.Scanner;
 
-public class validarPorDiezMilPeores extends Validacion{
+public class ValidarPorDiezMilPeores extends Validacion{
 
     @Override
     public boolean claveValida(String clave) throws FileNotFoundException {

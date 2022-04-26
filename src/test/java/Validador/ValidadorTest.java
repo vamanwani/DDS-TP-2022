@@ -1,33 +1,29 @@
 package Validador;
 
-import domain.verificadorContasenia.Validador;
-import domain.verificadorContasenia.Validacion;
-import domain.verificadorContasenia.validarPorDiezMilPeores;
-import domain.verificadorContasenia.validarPorLongitud;
-import domain.verificadorContasenia.validarPorMayuscula;
-import domain.verificadorContasenia.validarPorMinuscula;
-import domain.verificadorContasenia.validarPorNumero;
+import domain.verificadorContasenia.ValidarPorDiezMilPeores;
+import domain.verificadorContasenia.ValidarPorLongitud;
+import domain.verificadorContasenia.ValidarPorMayuscula;
+import domain.verificadorContasenia.ValidarPorMinuscula;
+import domain.verificadorContasenia.ValidarPorNumero;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
+public class ValidadorTest {
 
-public class validadorTest {
-
-    public validarPorNumero validadorPorNumero;
-    public validarPorMinuscula validadorPorMinuscula;
-    public validarPorMayuscula validadorPorMayuscula;
-    public validarPorLongitud validadorPorLongitud;
-    public validarPorDiezMilPeores validadorPorDiezMilPeores;
+    public ValidarPorNumero validadorPorNumero;
+    public ValidarPorMinuscula validadorPorMinuscula;
+    public ValidarPorMayuscula validadorPorMayuscula;
+    public ValidarPorLongitud validadorPorLongitud;
+    public ValidarPorDiezMilPeores validadorPorDiezMilPeores;
 
     @Before
     public void init(){
-        this.validadorPorNumero = new validarPorNumero();
-        this.validadorPorDiezMilPeores = new validarPorDiezMilPeores();
-        this.validadorPorLongitud = new validarPorLongitud();
-        this.validadorPorMayuscula = new validarPorMayuscula();
-        this.validadorPorMinuscula = new validarPorMinuscula();
+        this.validadorPorNumero = new ValidarPorNumero();
+        this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores();
+        this.validadorPorLongitud = new ValidarPorLongitud();
+        this.validadorPorMayuscula = new ValidarPorMayuscula();
+        this.validadorPorMinuscula = new ValidarPorMinuscula();
     }
 
     @Test
@@ -61,5 +57,5 @@ public class validadorTest {
         Assert.assertFalse(validadorPorLongitud.claveValida(claveNoValida));
         Assert.assertTrue(validadorPorLongitud.claveValida(claveValida));
     }
-    
+
 }
