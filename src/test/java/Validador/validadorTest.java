@@ -61,11 +61,5 @@ public class validadorTest {
         Assert.assertFalse(validadorPorLongitud.claveValida(claveNoValida));
         Assert.assertTrue(validadorPorLongitud.claveValida(claveValida));
     }
-
-    @Test
-    public void unaContraseniaQueNoEsValidaPorDiezMil() throws FileNotFoundException {
-        String claveNoValida = "password";
-        Assert.assertFalse(validadorPorDiezMilPeores.claveValida(claveNoValida));
-    }
-
+    
 }
