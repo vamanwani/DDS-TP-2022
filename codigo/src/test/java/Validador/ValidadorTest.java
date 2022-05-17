@@ -1,13 +1,11 @@
 package Validador;
 
-import domain.verificadorContasenia.ValidarPorDiezMilPeores;
-import domain.verificadorContasenia.ValidarPorLongitud;
-import domain.verificadorContasenia.ValidarPorMayuscula;
-import domain.verificadorContasenia.ValidarPorMinuscula;
-import domain.verificadorContasenia.ValidarPorNumero;
+import domain.verificadorContasenia.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.FileNotFoundException;
 
 public class ValidadorTest {
 
@@ -16,14 +14,16 @@ public class ValidadorTest {
     public ValidarPorMayuscula validadorPorMayuscula;
     public ValidarPorLongitud validadorPorLongitud;
     public ValidarPorDiezMilPeores validadorPorDiezMilPeores;
+    public Validador validadorIntegrador;
 
     @Before
-    public void init(){
+    public void init() throws FileNotFoundException {
         this.validadorPorNumero = new ValidarPorNumero();
-        this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores();
+        //this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores();
         this.validadorPorLongitud = new ValidarPorLongitud();
         this.validadorPorMayuscula = new ValidarPorMayuscula();
         this.validadorPorMinuscula = new ValidarPorMinuscula();
+        this.validadorIntegrador = new Validador();
     }
 
     @Test
@@ -56,6 +56,11 @@ public class ValidadorTest {
         String claveValida = "12345678";
         Assert.assertFalse(validadorPorLongitud.claveValida(claveNoValida));
         Assert.assertTrue(validadorPorLongitud.claveValida(claveValida));
+    }
+    @Test
+    public void VerificadorValido() throws FileNotFoundException {
+        String claveNoValida = "password";
+        Assert.assertFalse(validadorIntegrador.contraseniaNoPerteneceALista(claveNoValida));
     }
 
 }
