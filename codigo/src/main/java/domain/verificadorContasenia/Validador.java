@@ -24,8 +24,13 @@ public class Validador {
     public ValidarPorMayuscula validadorPorMayuscula;
     public ValidarPorLongitud validadorPorLongitud;
     public ValidarPorDiezMilPeores validadorPorDiezMilPeores;
+
     public List<Validacion> getValidaciones() {
         return validaciones;
+    }
+
+    public List<String> getContraseniasNoSeguras() {
+        return contraseniasNoSeguras;
     }
 
     public void setValidaciones(List<Validacion> validaciones) {
@@ -34,12 +39,13 @@ public class Validador {
 
     public Validador() throws FileNotFoundException {
         this.contraseniasNoSeguras = new ArrayList<>();
+        this.validaciones = new ArrayList<>();
         guardarListaNoSegura();
-        this.validadorPorNumero = new ValidarPorNumero();
+        /*this.validadorPorNumero = new ValidarPorNumero();
         this.validadorPorMinuscula = new ValidarPorMinuscula();
         this.validadorPorMayuscula = new ValidarPorMayuscula();
         this.validadorPorLongitud = new ValidarPorLongitud();
-        this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores(this.contraseniasNoSeguras);
+        this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores(this.contraseniasNoSeguras);*/
     }
 
 
@@ -54,9 +60,36 @@ public class Validador {
         inputFile.close();
     }
 
-    public boolean contraseniaNoPerteneceALista(String contraseniaAVerificar) throws FileNotFoundException {
+    /*public boolean contraseniaNoPerteneceALista(String contraseniaAVerificar) throws FileNotFoundException {
         return validadorPorDiezMilPeores.claveValida(contraseniaAVerificar);
+    }*/
+
+    public void agregarValidador(Validacion tipoValidador)
+    {
+        if (!this.validaciones.contains(tipoValidador))
+        {
+            this.validaciones.add(tipoValidador);
+        }
     }
 
+    public void removerValidador(Validacion tipoValidador)
+    {
+        if (this.validaciones.contains(tipoValidador))
+        {
+            this.validaciones.remove(tipoValidador);
+        }
+    }
 
+    public boolean validadorPertenece(Validacion tipoValidador)
+    {
+        return this.validaciones.contains(tipoValidador);
+    }
+
+    public boolean todosLosValidadores(String claveAValidar) throws FileNotFoundException {
+        boolean esValido = true;
+        for (Validacion validado: validaciones) {
+            esValido = esValido && validado.claveValida(claveAValidar);
+        }
+        return esValido;
+    }
 }
