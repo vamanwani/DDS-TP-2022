@@ -1,13 +1,25 @@
 package domain.ubicacion;
 
-public class Ubicacion {
+public class Ubicacion extends PadreDeUbicacion{
     private String calle;
     private int altura;
-    private String barrio;
+    private String nombreLocalidad;
 
-    public Ubicacion(String calle, int altura, String barrio) {
+    public int idLocalidad(){
+        return this.obtenerIdLocalidad(nombreLocalidad);
+    }
+
+    public Ubicacion(String calle, int altura, String nombreLocalidad) {
         this.calle = calle;
         this.altura = altura;
-        this.barrio = barrio;
+        this.nombreLocalidad = nombreLocalidad;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public int getAltura() {
+        return altura;
     }
 }
