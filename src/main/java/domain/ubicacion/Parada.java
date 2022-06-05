@@ -2,8 +2,17 @@ package domain.ubicacion;
 
 public class Parada {
     private Ubicacion localizacion;
+    private Parada paradaAnterior;
 
-    public Parada(Ubicacion localizacion) {
+    private double distanciaParadaAnterior;
+    private Parada paradaSiguiente;
+
+    private double distanciaParadaSiguiente;
+
+    //TODO Hacer constructores opcionales por si no existe paradaAnterior o paradaSiguiente
+    public Parada(Ubicacion localizacion, Parada paradaAnterior, Parada paradaSiguiente) {
         this.localizacion = localizacion;
+        this.paradaAnterior = paradaAnterior;
+        this.paradaSiguiente = paradaSiguiente;
     }
 }

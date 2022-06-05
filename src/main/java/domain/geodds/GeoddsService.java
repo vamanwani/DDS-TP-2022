@@ -2,13 +2,24 @@ package domain.geodds;
 
 import domain.services.entities.Distancia;
 import domain.services.entities.ListaDeLocalidades;
+import domain.services.entities.Localidad;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
+import java.util.List;
+
 public interface GeoddsService {
+
     @GET("localidades")
-    Call<ListaDeLocalidades> localidades();
+    Call<List<Localidad>> localidades(
+            @Header("accept") String jsonAccept,
+            @Header("Authorization") String token,
+            @Query("offset") int offset, @Query("municipioid") int idMunicipio
+
+    );
 
     @GET("distancia")
     Call<Distancia> distancia(

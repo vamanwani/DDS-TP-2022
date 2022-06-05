@@ -1,8 +1,8 @@
 package domain.services.entities;
 
 public class Localidad {
-    private int id;
-    private String nombre;
+    public int id;
+    public String nombre;
 
     public String getNombre() {
         return nombre;
