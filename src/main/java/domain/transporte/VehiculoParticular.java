@@ -8,4 +8,7 @@ public class VehiculoParticular extends Transporte{
         this.vehiculo = vehiculo;
         this.combustible = combustible;
     }
+    public void registrarConsumoDeCombustible(){
+        //TODO
+    }
 }

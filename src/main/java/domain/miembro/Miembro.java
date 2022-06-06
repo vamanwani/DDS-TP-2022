@@ -30,4 +30,11 @@ public class Miembro {
         this.usuario = usuario;
         this.trayectos = trayectos;
     }
+
+    public double calcularDistanciaTotal(){
+
+        return trayectos.stream().mapToDouble(trayecto -> trayecto.calculoDistanciaTotal()).sum();
+
+    }
+
 }

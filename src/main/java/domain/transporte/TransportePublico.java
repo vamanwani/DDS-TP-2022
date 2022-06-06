@@ -22,4 +22,7 @@ public class TransportePublico extends Transporte{
         this.paradaInicial = paradaInicial;
         this.paradaFinal = paradaFinal;
     }
+    public void registrarConsumoDeCombustible(){
+        //TODO
+    }
 }

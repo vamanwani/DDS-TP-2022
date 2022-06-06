@@ -8,7 +8,8 @@ public class Consumo {
     private TipoConsumo tipoConsumo;
     private double valor;
 
-    public Double factorEmision(){
+    public Double factorEmision(Double valorTipoActividad, Double valorTipoConsumo){
+        //TODO
         return null;
     }
 

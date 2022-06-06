@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ServicioGeodds implements GeoddsServceAdapter {
     private static ServicioGeodds instancia=null;
+    private static String llaveAutorizacion = "Bearer DJ0KuKA+zEOH4bC9lezcCCLS4o5E5zvnJdgoyn2tkE0=";
     private static final String urlApi ="https://ddstpa.com.ar/api/";
     private Retrofit retrofit;
     private OkHttpClient cliente;
@@ -34,7 +35,9 @@ public class ServicioGeodds implements GeoddsServceAdapter {
     }
     public Distancia distancia(Ubicacion origen, Ubicacion destino) throws IOException {
         GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
-        Call<Distancia> requestDistancia=geoddsService.distancia(origen.idLocalidad(),
+        Call<Distancia> requestDistancia=geoddsService.distancia(
+                llaveAutorizacion,
+                origen.idLocalidad(),
                 origen.getCalle(), origen.getAltura(),
                 destino.idLocalidad(),destino.getCalle(),
                 destino.getAltura());
@@ -42,13 +45,25 @@ public class ServicioGeodds implements GeoddsServceAdapter {
         return responseDistancia.body();
 
     }
+    public int distanciaRespuesta(Ubicacion origen, Ubicacion destino) throws IOException {
+        GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
+        Call<Distancia> requestDistancia=geoddsService.distancia(
+                llaveAutorizacion,
+                origen.idLocalidad(),
+                origen.getCalle(), origen.getAltura(),
+                destino.idLocalidad(),destino.getCalle(),
+                destino.getAltura());
+        Response<Distancia> responseDistancia=requestDistancia.execute();
+        return responseDistancia.code();
+
+    }
 
     public List<Localidad> localidades() throws IOException {
         GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
         Call<List<Localidad>> requestlocalidades=geoddsService.localidades(
-                "application/json",
-                "Bearer DJ0KuKA+zEOH4bC9lezcCCLS4o5E5zvnJdgoyn2tkE0=",
-                1,1);
+                //"application/json",
+                llaveAutorizacion,
+                1,241);
         Response<List<Localidad>> responselocalidades=requestlocalidades.execute();
         return responselocalidades.body();
     }
@@ -56,9 +71,9 @@ public class ServicioGeodds implements GeoddsServceAdapter {
     public int localidadesRespuesta() throws IOException{
         GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
         Call<List<Localidad>> requestlocalidades=geoddsService.localidades(
-                "application/json",
-                "Bearer DJ0KuKA+zEOH4bC9lezcCCLS4o5E5zvnJdgoyn2tkE0=",
-                1,1);
+                //"application/json",
+                llaveAutorizacion,
+                1,241);
         Response<List<Localidad>> responselocalidades=requestlocalidades.execute();
         return responselocalidades.code();
     }

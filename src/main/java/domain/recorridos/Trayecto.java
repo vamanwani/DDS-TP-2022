@@ -11,4 +11,8 @@ public class Trayecto {
         }
 
     }
+
+    public double calculoDistanciaTotal(){
+        return tramos.stream().mapToDouble(tramo -> tramo.distancia()).sum();
+    }
 }

@@ -3,10 +3,8 @@ package domain.ubicacion;
 public class Parada {
     private Ubicacion localizacion;
     private Parada paradaAnterior;
-
     private double distanciaParadaAnterior;
     private Parada paradaSiguiente;
-
     private double distanciaParadaSiguiente;
 
     //TODO Hacer constructores opcionales por si no existe paradaAnterior o paradaSiguiente
@@ -14,5 +12,13 @@ public class Parada {
         this.localizacion = localizacion;
         this.paradaAnterior = paradaAnterior;
         this.paradaSiguiente = paradaSiguiente;
+    }
+
+    public double getDistanciaParadaAnterior() {
+        return distanciaParadaAnterior;
+    }
+
+    public double getDistanciaParadaSiguiente() {
+        return distanciaParadaSiguiente;
     }
 }

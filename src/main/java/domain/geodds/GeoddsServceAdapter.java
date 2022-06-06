@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface GeoddsServceAdapter {
     public Distancia distancia(Ubicacion origen,Ubicacion destino) throws IOException;
+    public int distanciaRespuesta(Ubicacion origen,Ubicacion destino) throws IOException;
     public List<Localidad> localidades() throws IOException;
-
     public int localidadesRespuesta() throws IOException;
 }

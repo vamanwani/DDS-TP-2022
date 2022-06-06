@@ -16,20 +16,34 @@ public class DistanciaTest {
     public Ubicacion terceraUbicacion;
     public Distancia distancia;
     @Before
-    public void init(){
+    public void init() throws IOException {
         this.servicioGeodds = new ServicioGeodds();
-        this.primeraUbicacion = new Ubicacion("Humberto Primo", 785,"CABA");
-        this.segundaUbicacion = new Ubicacion("Constitucion", 1500, "CABA");
-        this.terceraUbicacion = new Ubicacion("Mitre",750,"CABA");
+        this.primeraUbicacion = new Ubicacion("Humberto Primo", 785,"San telmo");
+        primeraUbicacion.setLocalidades(servicioGeodds.localidades());
+        this.segundaUbicacion = new Ubicacion("Constitucion", 1500, "Constitucion");
+        segundaUbicacion.setLocalidades(servicioGeodds.localidades());
+        this.terceraUbicacion = new Ubicacion("Mitre",750,"Ciudad de buenos aires");
 
     }
 
-
-    /*public void distanciaEntreDosUbicaciones() throws IOException {
-        Distancia unaDistancia = servicioGeodds.distancia(primeraUbicacion,segundaUbicacion);
-        Assert.assertTrue(unaDistancia.distancia() == 1);
+    @Test
+    public void distanciaEntreDosUbicacionesMensaje() throws IOException {
+        //Distancia unaDistancia = servicioGeodds.distancia(primeraUbicacion,segundaUbicacion);
+        Assert.assertEquals(servicioGeodds.distanciaRespuesta(primeraUbicacion,segundaUbicacion),200);
     }
-     */
+    @Test
+    public void distanciaEntreDosUbicacionesTest() throws IOException{
+        Assert.assertEquals(servicioGeodds.distancia(primeraUbicacion,segundaUbicacion).distancia(),0,5);
+    }
+    @Test
+    public void testObtenerIdLocalidad() throws IOException{
+        Assert.assertEquals(primeraUbicacion.obtenerIdLocalidad("San telmo"),2);
+    }
+    @Test
+    public void testLocalidad(){
+        Assert.assertEquals(primeraUbicacion.getLocalidades().get(1).getId(),5364);
+    }
+
     @Test
     public void localidadesTestRespuesta() throws IOException {
         Assert.assertEquals(servicioGeodds.localidadesRespuesta(),200);

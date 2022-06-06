@@ -26,4 +26,13 @@ public class Tramo {
         return miembrosMismoTransporte;
     }
 
+    public boolean esCompartido(){
+        return miembrosMismoTransporte.size() > 1;
+    }
+
+    public double distancia(){
+        //TODO
+        return 0.00;
+    }
+
 }

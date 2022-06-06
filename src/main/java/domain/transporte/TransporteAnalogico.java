@@ -6,4 +6,7 @@ public class TransporteAnalogico extends Transporte{
     public TransporteAnalogico(TipoTransporteAnalogico transporte) {
         this.transporte = transporte;
     }
+    public void registrarConsumoDeCombustible(){
+        //TODO
+    }
 }
