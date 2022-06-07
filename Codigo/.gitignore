@@ -1,2 +1,3 @@
 .idea
 /target/classes/tokenAutorizacion.txt
+/src/main/resources/tokenAutorizacion.txt
