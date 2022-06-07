@@ -1,20 +1,26 @@
 package distancia;
 
-import domain.geodds.ServicioGeodds;
+import domain.services.adapters.ServicioGeodds;
+import domain.services.adapters.ServicioGeoDdsRetrofitAdapter;
 import domain.services.entities.Distancia;
 import domain.ubicacion.Ubicacion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.io.IOException;
 
+import static org.mockito.Mockito.*;
+
 public class DistanciaTest {
     public ServicioGeodds servicioGeodds;
+    public ServicioGeoDdsRetrofitAdapter adapterMock;
     public Ubicacion primeraUbicacion;
     public Ubicacion segundaUbicacion;
     public Ubicacion terceraUbicacion;
     public Distancia distancia;
+
     @Before
     public void init() throws IOException {
         this.servicioGeodds = new ServicioGeodds();
@@ -26,9 +32,27 @@ public class DistanciaTest {
 
     }
 
+//    @BeforeEach
+//    public void init() throws IOException {
+//        this.adapterMock = mock(ServicioGeoDdsRetrofitAdapter.class);
+//        this.servicioGeodds = ServicioGeodds.getInstance();
+//        //this.servicioGeodds.setAdapter(this.adapterMock);
+//
+//        this.servicioGeodds = new ServicioGeodds();
+//        this.primeraUbicacion = new Ubicacion("Humberto Primo", 785,"San telmo");
+//        primeraUbicacion.setLocalidades(servicioGeodds.localidades());
+//        this.segundaUbicacion = new Ubicacion("Constitucion", 1500, "Constitucion");
+//        segundaUbicacion.setLocalidades(servicioGeodds.localidades());
+//        this.terceraUbicacion = new Ubicacion("Mitre",750,"Ciudad de buenos aires");
+//    }
+
+
     @Test
     public void distanciaEntreDosUbicacionesMensaje() throws IOException {
+
         //Distancia unaDistancia = servicioGeodds.distancia(primeraUbicacion,segundaUbicacion);
+
+
         Assert.assertEquals(servicioGeodds.distanciaRespuesta(primeraUbicacion,segundaUbicacion),200);
     }
     @Test
@@ -57,4 +81,6 @@ public class DistanciaTest {
     public void contenidoElementoDeListaTest() throws IOException{
         Assert.assertEquals(servicioGeodds.localidades().get(1).nombre,"BUENOS AIRES");
     }
+
+
 }

@@ -18,6 +18,17 @@ public class Organizacion {
     private Usuario usuario;
     private ArrayList<Consumo> consumos;
 
+    private static Organizacion instancia = null;
+
+    public static Organizacion getInstancia(){ // patron singleton
+        if (instancia == null){
+            instancia = new Organizacion();
+        }
+        return instancia;
+    }
+    private Organizacion(){ // constructor privado por singleton
+    }
+
     public Set<Miembro> listarMiembros(){
         Set<Miembro> miembroSet;
         miembroSet= (Set<Miembro>) this.sectores.stream().map(sector -> sector.getMiembros());
@@ -26,6 +37,8 @@ public class Organizacion {
   public void setTipoDeOrganizacion(TipoDeOrganizacion tipoDeOrganizacion) {
       this.tipoDeOrganizacion = tipoDeOrganizacion;
   }
+
+
 
 
 

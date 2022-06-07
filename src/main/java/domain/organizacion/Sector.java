@@ -18,4 +18,15 @@ public class Sector {
         this.miembros = miembros;
         this.nombre = nombre;
     }
+    public ArrayList<Miembro> miembrosQueDicenQuePertenecen(ArrayList<Miembro> miembrosAVerificar){
+        ArrayList<Miembro> miembrosQuePertenecen = new ArrayList<>();
+        ArrayList<Miembro> miembrosDelSector = this.getMiembros();
+        for (Miembro miembro : miembrosAVerificar){
+            if(miembrosDelSector.contains(miembro))
+            {
+                miembrosQuePertenecen.add(miembro);
+            }
+        }
+        return miembrosQuePertenecen;
+    }
 }

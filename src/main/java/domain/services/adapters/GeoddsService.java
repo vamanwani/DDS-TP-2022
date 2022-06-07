@@ -1,12 +1,10 @@
-package domain.geodds;
+package domain.services.adapters;
 
 import domain.services.entities.Distancia;
-import domain.services.entities.ListaDeLocalidades;
 import domain.services.entities.Localidad;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 import java.util.List;

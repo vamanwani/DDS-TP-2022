@@ -4,6 +4,7 @@ import domain.miembro.Miembro;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +31,8 @@ public class Tramo {
         return miembrosMismoTransporte.size() > 1;
     }
 
-    public double distancia(){
-        //TODO
-        return 0.00;
+    public double distanciaTramo() throws IOException {
+        return medioDeTransporte.distancia(puntoInicio,puntoFin);
     }
 
 }

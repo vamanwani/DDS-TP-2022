@@ -13,7 +13,10 @@ public class Parada {
         this.paradaAnterior = paradaAnterior;
         this.paradaSiguiente = paradaSiguiente;
     }
-
+    public Ubicacion getLocalizacion(){
+        return localizacion;
+    }
+    public Parada getParadaSiguiente(){return paradaSiguiente;}
     public double getDistanciaParadaAnterior() {
         return distanciaParadaAnterior;
     }

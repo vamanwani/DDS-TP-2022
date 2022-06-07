@@ -3,6 +3,7 @@ package domain.miembro;
 import domain.organizacion.Sector;
 import domain.recorridos.Trayecto;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Miembro {
@@ -31,9 +32,15 @@ public class Miembro {
         this.trayectos = trayectos;
     }
 
-    public double calcularDistanciaTotal(){
+    public double calcularDistanciaTotal() {
 
-        return trayectos.stream().mapToDouble(trayecto -> trayecto.calculoDistanciaTotal()).sum();
+        return trayectos.stream().mapToDouble(trayecto -> {
+            try {
+                return trayecto.calculoDistanciaTotal();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).sum();
 
     }
 
