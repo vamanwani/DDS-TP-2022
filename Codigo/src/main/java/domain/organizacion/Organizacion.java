@@ -7,27 +7,17 @@ import domain.ubicacion.Ubicacion;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Organizacion {
     private TipoDeOrganizacion tipoDeOrganizacion;
     private ClasificaciónDeOrg clasificacionDeOrg;
-    private ArrayList<Sector> sectores;
+    private List<Sector> sectores;
     private String razonSocial;
     private Ubicacion ubicacion;
     private Usuario usuario;
-    private ArrayList<Consumo> consumos;
-
-    private static Organizacion instancia = null;
-
-    public static Organizacion getInstancia(){ // patron singleton
-        if (instancia == null){
-            instancia = new Organizacion();
-        }
-        return instancia;
-    }
-    private Organizacion(){ // constructor privado por singleton
-    }
+    private List<Consumo> consumos;
 
     public Set<Miembro> listarMiembros(){
         Set<Miembro> miembroSet;

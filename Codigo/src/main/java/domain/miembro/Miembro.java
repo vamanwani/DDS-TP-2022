@@ -5,32 +5,42 @@ import domain.recorridos.Trayecto;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Miembro {
     private String apellido;
     private String nombre;
     private int numeroDeDocumento;
     private String tipoDeDocumento;
-    private ArrayList<Sector> trabajos;
+    private List<Sector> trabajos;
     private Usuario usuario;
-    private ArrayList<Trayecto> trayectos;
+    private List<Trayecto> trayectos;
+
 
     public Miembro(
             String apellido,
             String nombre,
             int numeroDeDocumento,
             String tipoDeDocumento,
-            ArrayList<Sector> trabajos,
-            Usuario usuario,
-            ArrayList<Trayecto> trayectos) {
+            Usuario usuario)
+    {
         this.apellido = apellido;
         this.nombre = nombre;
         this.numeroDeDocumento = numeroDeDocumento;
         this.tipoDeDocumento = tipoDeDocumento;
-        this.trabajos = trabajos;
+        this.trabajos = new ArrayList<>();
         this.usuario = usuario;
+        this.trayectos = new ArrayList<>();
+    }
+
+    public void setTrayectos(List<Trayecto> trayectos) {
         this.trayectos = trayectos;
     }
+
+    public void setTrabajos(List<Sector> trabajos) {
+        this.trabajos = trabajos;
+    }
+
 
     public double calcularDistanciaTotal() {
 

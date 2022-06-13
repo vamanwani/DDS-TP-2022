@@ -3,10 +3,12 @@ package domain.recorridos;
 import domain.miembro.Miembro;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
+import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
+
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Tramo {
     private Transporte medioDeTransporte;
@@ -18,7 +20,7 @@ public class Tramo {
         this.medioDeTransporte = medioDeTransporte;
         this.puntoFin = puntoFin;
         this.puntoInicio = puntoInicio;
-        this.miembrosMismoTransporte = new ArrayList<>();
+        this.miembrosMismoTransporte = new ArrayList<Miembro>();
     }
     public void agregarMiembroAlTramo(Miembro miembro){
         this.miembrosMismoTransporte.add(miembro);

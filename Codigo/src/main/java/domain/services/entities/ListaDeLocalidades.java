@@ -1,11 +1,12 @@
 package domain.services.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaDeLocalidades {
-    public ArrayList<Localidad> listado;
+    public List<Localidad> listado;
 
-    public ArrayList<Localidad> getListado() {
+    public List<Localidad> getListado() {
         return listado;
     }
 }

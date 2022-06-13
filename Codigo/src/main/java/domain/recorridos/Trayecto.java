@@ -3,10 +3,11 @@ package domain.recorridos;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+//import java.util.arrayList;
 
 public class Trayecto {
-    private ArrayList<Tramo> tramos;
+    private List<Tramo> tramos;
 
     public Trayecto(Tramo @NotNull ... tramos) {
         for(Tramo tramo : tramos){
