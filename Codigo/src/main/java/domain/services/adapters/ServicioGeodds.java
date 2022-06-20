@@ -12,12 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.*;
 import java.util.List;
 
-public class ServicioGeodds implements GeoddsServceAdapter {
+public class ServicioGeodds {
     private static ServicioGeodds instancia=null;
+    private static ServicioGeoDdsRetrofitAdapter adapter;
     private static String llaveAutorizacion;
     private static final String urlApi ="https://ddstpa.com.ar/api/";
     private Retrofit retrofit;
-    private OkHttpClient cliente;
+    //private OkHttpClient cliente;
 
     public static void setLlaveAutorizacion(String llaveAutorizacion) {
         ServicioGeodds.llaveAutorizacion = llaveAutorizacion;
@@ -28,11 +29,7 @@ public class ServicioGeodds implements GeoddsServceAdapter {
     }
 
     public ServicioGeodds() throws IOException {
-        tokenDeAutorizacion();
-        this.retrofit = new Retrofit.Builder()
-                .baseUrl(urlApi)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        this.adapter = new ServicioGeoDdsRetrofitAdapter();
     }
 
     public static ServicioGeodds getInstance() throws IOException {
@@ -42,53 +39,19 @@ public class ServicioGeodds implements GeoddsServceAdapter {
         return instancia;
     }
     public Distancia distancia(Ubicacion origen, Ubicacion destino) throws IOException {
-        GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
-        Call<Distancia> requestDistancia=geoddsService.distancia(
-                llaveAutorizacion,
-                origen.idLocalidad(),
-                origen.getCalle(), origen.getAltura(),
-                destino.idLocalidad(),destino.getCalle(),
-                destino.getAltura());
-        Response<Distancia> responseDistancia=requestDistancia.execute();
-
-        return responseDistancia.body();
+        return adapter.distancia(origen,destino);
     }
     public int distanciaRespuesta(Ubicacion origen, Ubicacion destino) throws IOException {
-        GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
-        Call<Distancia> requestDistancia=geoddsService.distancia(
-                llaveAutorizacion,
-                origen.idLocalidad(),
-                origen.getCalle(), origen.getAltura(),
-                destino.idLocalidad(),destino.getCalle(),
-                destino.getAltura());
-        Response<Distancia> responseDistancia=requestDistancia.execute();
-        return responseDistancia.code();
+        return adapter.distanciaRespuesta(origen, destino);
     }
 
-    private void tokenDeAutorizacion() throws IOException {
-        File tokenArchivo = new File("target/classes/tokenAutorizacion.txt");
-        BufferedReader tokenLinea = new BufferedReader(new FileReader(tokenArchivo));
-        setLlaveAutorizacion("Bearer " + tokenLinea.readLine());
-    }
 
     public List<Localidad> localidades() throws IOException {
-        GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
-        Call<List<Localidad>> requestlocalidades=geoddsService.localidades(
-                //"application/json",
-                llaveAutorizacion,
-                1,241);
-        Response<List<Localidad>> responselocalidades=requestlocalidades.execute();
-        return responselocalidades.body();
+        return adapter.localidades();
     }
 
     public int localidadesRespuesta() throws IOException{
-        GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
-        Call<List<Localidad>> requestlocalidades=geoddsService.localidades(
-                //"application/json",
-                llaveAutorizacion,
-                1,241);
-        Response<List<Localidad>> responselocalidades=requestlocalidades.execute();
-        return responselocalidades.code();
+        return adapter.localidadesRespuesta();
     }
 
 
