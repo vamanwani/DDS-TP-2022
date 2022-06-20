@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ServicioGeodds {
     private static ServicioGeodds instancia=null;
-    private static ServicioGeoDdsRetrofitAdapter adapter;
+    private static GeoddsServceAdapter adapter;
     private static String llaveAutorizacion;
     private static final String urlApi ="https://ddstpa.com.ar/api/";
     private Retrofit retrofit;
@@ -28,8 +28,12 @@ public class ServicioGeodds {
         return llaveAutorizacion;
     }
 
-    public ServicioGeodds() throws IOException {
-        this.adapter = new ServicioGeoDdsRetrofitAdapter();
+    public ServicioGeodds() {
+        //this.adapter = new ServicioGeoDdsRetrofitAdapter();
+    }
+
+    public static void setAdapter(GeoddsServceAdapter adapter) {
+        ServicioGeodds.adapter = adapter;
     }
 
     public static ServicioGeodds getInstance() throws IOException {

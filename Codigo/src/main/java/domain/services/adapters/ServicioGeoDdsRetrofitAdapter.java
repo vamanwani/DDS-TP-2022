@@ -16,11 +16,12 @@ import java.util.List;
 
 
 public class ServicioGeoDdsRetrofitAdapter implements  GeoddsServceAdapter{
-    private static ServicioGeoDdsRetrofitAdapter instancia=null;
+    //private static ServicioGeoDdsRetrofitAdapter instancia=null;
     private static String llaveAutorizacion;
     private static final String urlApi ="https://ddstpa.com.ar/api/";
     private Retrofit retrofit;
     //private OkHttpClient cliente;
+
 
     public static void setLlaveAutorizacion(String llaveAutorizacion) {
         ServicioGeoDdsRetrofitAdapter.llaveAutorizacion = llaveAutorizacion;
@@ -38,12 +39,14 @@ public class ServicioGeoDdsRetrofitAdapter implements  GeoddsServceAdapter{
                 .build();
     }
 
-    public static ServicioGeoDdsRetrofitAdapter getInstance() throws IOException {
+    /*public static ServicioGeoDdsRetrofitAdapter getInstance() throws IOException {
         if(instancia == null){
             instancia = new ServicioGeoDdsRetrofitAdapter();
         }
         return instancia;
     }
+
+     */
     public Distancia distancia(Ubicacion origen, Ubicacion destino) throws IOException {
         GeoddsService geoddsService=this.retrofit.create(GeoddsService.class);
         Call<Distancia> requestDistancia=geoddsService.distancia(

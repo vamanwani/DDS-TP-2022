@@ -1,5 +1,6 @@
 package distancia;
 
+import domain.services.adapters.GeoddsServceAdapter;
 import domain.services.adapters.ServicioGeodds;
 import domain.services.adapters.ServicioGeoDdsRetrofitAdapter;
 import domain.services.entities.Distancia;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.*;
 
 public class DistanciaTest {
     public ServicioGeodds servicioGeodds;
-    public ServicioGeoDdsRetrofitAdapter adapterMock;
+    public GeoddsServceAdapter adapterMock;
     public Ubicacion primeraUbicacion;
     public Ubicacion segundaUbicacion;
     public Ubicacion terceraUbicacion;
@@ -23,7 +24,10 @@ public class DistanciaTest {
 
     @Before
     public void init() throws IOException {
-        this.servicioGeodds = new ServicioGeodds();
+        this.adapterMock = mock(GeoddsServceAdapter.class);
+        this.servicioGeodds = ServicioGeodds.getInstance();
+        //this.adapterPrueba = new ServicioGeoDdsRetrofitAdapter();
+        this.servicioGeodds.setAdapter(this.adapterMock);
         this.primeraUbicacion = new Ubicacion("Humberto Primo", 785,"San telmo");
         primeraUbicacion.setLocalidades(servicioGeodds.localidades());
         this.segundaUbicacion = new Ubicacion("Constitucion", 1500, "Constitucion");
@@ -48,16 +52,21 @@ public class DistanciaTest {
 
 
     @Test
-    public void distanciaEntreDosUbicacionesMensaje() throws IOException {
-
-        //Distancia unaDistancia = servicioGeodds.distancia(primeraUbicacion,segundaUbicacion);
-
-
-        Assert.assertEquals(servicioGeodds.distanciaRespuesta(primeraUbicacion,segundaUbicacion),200);
-    }
-    @Test
     public void distanciaEntreDosUbicacionesTest() throws IOException{
-        Assert.assertEquals(servicioGeodds.distancia(primeraUbicacion,segundaUbicacion).distancia(),0,5);
+        Distancia distanciaUbicaciones = this.distanciaMock();
+        Distancia distanciaMockeada = mock(Distancia.class);
+
+        when(distanciaMockeada.distancia()).thenReturn(distanciaUbicaciones.distancia());
+        when(this.adapterMock.distancia(primeraUbicacion,segundaUbicacion)).thenReturn(distanciaMockeada);
+        Assert.assertEquals(this.servicioGeodds.distancia(primeraUbicacion,segundaUbicacion).distancia(),677,5);
+
+
+        //Assert.assertEquals(primeraUbicacion,null);
+    }
+
+    private Distancia distanciaMock(){
+        Distancia distancia = new Distancia("22","KM");
+        return distancia;
     }
     @Test
     public void testObtenerIdLocalidad() throws IOException{
