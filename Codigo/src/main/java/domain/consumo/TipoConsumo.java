@@ -6,6 +6,10 @@ public class TipoConsumo implements AsignableFE{
 
     private double valorParaFE;
 
+    public TipoConsumo(String nombre) {
+        this.nombre = nombre;
+    }
+
     public void setValorParaFE(double valorParaFE) {
         this.valorParaFE = valorParaFE;
     }

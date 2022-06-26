@@ -7,6 +7,10 @@ public class PeriodoDeImputacion {
     private int mes;
     private TipoPeriodicidad periodicidad;
 
+    public PeriodoDeImputacion(String formato) {
+        this.definirPeriodicidad(formato);
+    }
+
     public void definirPeriodicidad(String formato){
         if(formato.length() == 7){
             anio = Integer.parseInt(formato.substring(3, 6)); //Ultimos 4 elementos

@@ -28,6 +28,9 @@ public class Organizacion {
       this.tipoDeOrganizacion = tipoDeOrganizacion;
   }
 
+  public void agregarConsumo(Consumo consumo){
+        this.consumos.add(consumo);
+  }
 
 
 
