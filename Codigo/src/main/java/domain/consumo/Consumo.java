@@ -23,4 +23,8 @@ public class Consumo {
     public PeriodoDeImputacion getPeriodicidad() {
         return periodicidad;
     }
+
+    public calcularHC(){
+        this.actividad.
+    }
 }
