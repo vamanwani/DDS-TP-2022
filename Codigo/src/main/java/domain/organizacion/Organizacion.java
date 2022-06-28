@@ -1,17 +1,14 @@
-package domain.organizacion;
+package domain.organizacion; //TODO ORGANIZACION RECIBE LAS RECOMENDACIONES
 
-import domain.calculoHC.CalculadoraHCOrganizacion;
 import domain.consumo.Consumo;
-import domain.consumo.PeriodoDeImputacion;
-import domain.consumo.TipoPeriodicidad;
 import domain.miembro.Miembro;
 import domain.miembro.Usuario;
 import domain.ubicacion.Ubicacion;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Organizacion {
     private TipoDeOrganizacion tipoDeOrganizacion;
@@ -20,14 +17,16 @@ public class Organizacion {
     private String razonSocial;
     private Ubicacion ubicacion;
     private Usuario usuario;
-    private List<Consumo> consumos = new ArrayList<Consumo>();
+    private List<Consumo> consumos;
+    private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
+    private String linkRecomendacion; //LINK DEL .PDF DE RECOMENDACION
 
-    public List<Consumo> getConsumos() {
-        return consumos;
+
+    public void agregarContacto(Miembro nuevoContacto){
+        this.contactos.add(nuevoContacto);
     }
-
-    public Ubicacion getUbicacion() {
-        return ubicacion;
+    public void notificarContactos(String link){
+        this.contactos.forEach(contacto -> contacto.recibirRecomendacion(link));
     }
 
     public Set<Miembro> listarMiembros(){
@@ -35,17 +34,20 @@ public class Organizacion {
         miembroSet= (Set<Miembro>) this.sectores.stream().map(sector -> sector.getMiembros());
         return miembroSet;
     }
-
-    public void setTipoDeOrganizacion(TipoDeOrganizacion tipoDeOrganizacion) {
+  public void setTipoDeOrganizacion(TipoDeOrganizacion tipoDeOrganizacion) {
       this.tipoDeOrganizacion = tipoDeOrganizacion;
+  }
+
+    public Set<Miembro> getContactos() {
+        return contactos;
     }
 
     public void agregarConsumo(Consumo consumo){
         this.consumos.add(consumo);
-    }
+  }
 
-    public double calcularHCOrganizacion (PeriodoDeImputacion periodoACalcular) {
-        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular);
-                //+ sectores.stream().mapToDouble(sector -> sector.calcularHCSector()).sum();
-    }
+
+
+
+
 }

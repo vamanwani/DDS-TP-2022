@@ -1,8 +1,5 @@
 package domain.miembro;
 
-import domain.calculoHC.CalculdoraHCMiembro;
-import domain.consumo.PeriodoDeImputacion;
-import domain.organizacion.Organizacion;
 import domain.organizacion.Sector;
 import domain.recorridos.Trayecto;
 
@@ -18,6 +15,8 @@ public class Miembro {
     private List<Sector> trabajos;
     private Usuario usuario;
     private List<Trayecto> trayectos;
+    private String mail;
+    private String telefono;
 
 
     public Miembro(
@@ -54,16 +53,10 @@ public class Miembro {
                 throw new RuntimeException(e);
             }
         }).sum();
+
     }
 
-    public double calcularHCMiembro() throws IOException {
-        return new CalculdoraHCMiembro().calcularHC(trayectos);
+    public void recibirRecomendacion(String link) {
+        //TODO AL FINAL DE LO QUE RECIBE
     }
-
-    public double impactoEnOrganizacion(Organizacion organizacion) throws IOException {
-        PeriodoDeImputacion periodoDeImputacion = null;
-        return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion(periodoDeImputacion);
-    }
-
-
 }
