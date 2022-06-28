@@ -15,6 +15,8 @@ public class Miembro {
     private List<Sector> trabajos;
     private Usuario usuario;
     private List<Trayecto> trayectos;
+    private String mail;
+    private String telefono;
 
 
     public Miembro(
@@ -54,4 +56,7 @@ public class Miembro {
 
     }
 
+    public void recibirRecomendacion(String link) {
+        //TODO AL FINAL DE LO QUE RECIBE
+    }
 }

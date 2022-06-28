@@ -1,4 +1,4 @@
-package domain.organizacion;
+package domain.organizacion; //TODO ORGANIZACION RECIBE LAS RECOMENDACIONES
 
 import domain.consumo.Consumo;
 import domain.miembro.Miembro;
@@ -18,6 +18,16 @@ public class Organizacion {
     private Ubicacion ubicacion;
     private Usuario usuario;
     private List<Consumo> consumos;
+    private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
+    private String linkRecomendacion; //LINK DEL .PDF DE RECOMENDACION
+
+
+    public void agregarContacto(Miembro nuevoContacto){
+        this.contactos.add(nuevoContacto);
+    }
+    public void notificarContactos(String link){
+        this.contactos.forEach(contacto -> contacto.recibirRecomendacion(link));
+    }
 
     public Set<Miembro> listarMiembros(){
         Set<Miembro> miembroSet;
@@ -28,7 +38,11 @@ public class Organizacion {
       this.tipoDeOrganizacion = tipoDeOrganizacion;
   }
 
-  public void agregarConsumo(Consumo consumo){
+    public Set<Miembro> getContactos() {
+        return contactos;
+    }
+
+    public void agregarConsumo(Consumo consumo){
         this.consumos.add(consumo);
   }
 
