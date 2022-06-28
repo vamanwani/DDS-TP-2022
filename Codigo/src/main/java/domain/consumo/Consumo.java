@@ -24,7 +24,5 @@ public class Consumo {
         return periodicidad;
     }
 
-    public calcularHC(){
-        this.actividad.
-    }
+
 }
