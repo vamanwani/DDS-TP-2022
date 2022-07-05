@@ -1,10 +1,13 @@
 package domain.sugerencias;
 
-import domain.miembro.Miembro;
+import domain.organizacion.Organizacion;
 
 public class NotificadorRecomendacionesMailAPI implements  AdapterRecomendacionMail{
     @Override
-    public void NotificarContactoPorMail(String link, Miembro contacto) {
-        //TODO
+    public void notificarContactoPorMail(String link, Organizacion contacto) {
+
+        contacto.listarMiembros().forEach(unContacto -> {
+            //TODO hacerFuncionConAPI(unContacto.nro)
+        });
     }
 }
