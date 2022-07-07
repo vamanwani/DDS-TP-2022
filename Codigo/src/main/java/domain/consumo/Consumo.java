@@ -2,21 +2,17 @@ package domain.consumo;
 
 public class Consumo {
 
-    private Actividad actividad;
-    private PeriodoDeImputacion periodicidad;
-    private int proximaAcreditacionConsumo;
-    private TipoConsumo tipoConsumo;
-    private double valor;
+    protected Actividad actividad;
+    protected PeriodoDeImputacion periodicidad;
+    protected int proximaAcreditacionConsumo;
+    protected TipoConsumo tipoConsumo;
 
-    public Consumo(Actividad actividad, PeriodoDeImputacion periodicidad, TipoConsumo tipoConsumo, double valor) {
-        this.actividad = actividad;
-        this.periodicidad = periodicidad;
-        this.tipoConsumo = tipoConsumo;
-        this.valor = valor;
-    }
 
-    public Double factorEmision(Double valorTipoActividad, Double valorTipoConsumo){
-        //TODO
+
+    public Double factorEmision(){
+        String tipoConsumo = this.tipoConsumo.getNombre();
+        String tipoActividad = this.actividad.getNombre();
+        //Dependiendo de los dos tipos, se saca el FE (todavia no sabemos como)
         return null;
     }
 
@@ -24,5 +20,8 @@ public class Consumo {
         return periodicidad;
     }
 
+    public double calcularHC() {
+        return 0;
+    }
 
 }

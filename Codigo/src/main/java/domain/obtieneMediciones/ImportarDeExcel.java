@@ -2,10 +2,7 @@ package domain.obtieneMediciones;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
 import domain.consumo.*;
@@ -30,6 +27,9 @@ public class ImportarDeExcel {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
             Boolean esMensual = false;
             Boolean esAnual = false;
+            Boolean esLogistica = false;
+
+
             List<String> datosFila = new ArrayList<>();
             List<FilaConsumo> filaDeConsumos = new ArrayList<>();
             while (itr.hasNext()) {
@@ -42,6 +42,9 @@ public class ImportarDeExcel {
                     switch (cell.getCellType()) {
                         case STRING:    //field that represents string cell type
                             String leido = cell.getStringCellValue();
+                            if (leido == "LOGISTICA_PRODUCTOS_RESIDUOS"){
+                                esLogistica = true;
+                            }
                             datosFila.add(leido);
                             //System.out.print(leido + "\t\t\t");
                             if (Objects.equals(leido.toLowerCase(), "mensual")) {
@@ -92,17 +95,37 @@ public class ImportarDeExcel {
     }
 
     public void instanciasConsumosParaOrganizacion(List<FilaConsumo> listaDeFilaConsumo, Organizacion organizacion) {
-        for (FilaConsumo filaConsumo : listaDeFilaConsumo) {
-            organizacion.agregarConsumo(instanciarFilaConsumo(filaConsumo));
+        for (int i = 0; i < listaDeFilaConsumo.size() ; i++) {
+            FilaConsumo fila = listaDeFilaConsumo.get(i);
+            if (fila.getDatosString().get(1).toLowerCase(Locale.ROOT) == "categoria" ){
+                FilaConsumo medio = listaDeFilaConsumo.get(i+1);
+                FilaConsumo  distancia= listaDeFilaConsumo.get(i+2);
+                FilaConsumo  peso= listaDeFilaConsumo.get(i+3);
+                organizacion.agregarConsumo(instaciarConsumoLogistica(fila, medio, distancia, peso)); // por fila se refiere a categoria
+                i += 3; // te saltea las proximas tres filas de una
+            } else {
+                organizacion.agregarConsumo(instanciarOtroConsumo(listaDeFilaConsumo.get(i)));
+            }
         }
     }
 
-    public Consumo instanciarFilaConsumo(FilaConsumo filaConsumo) {
+    public Consumo instaciarConsumoLogistica(FilaConsumo categoria, FilaConsumo medio, FilaConsumo distancia, FilaConsumo peso){
+        List<String> df = categoria.getDatosString();
+        Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
+        TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
+        PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
+        Consumo consumoDeOrganizacion = new ConsumoLogistica(actividadConsumo, periodoDeImputacion, tipoConsumo, Integer.parseInt(peso.getDatosString().get(2)),
+                Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2));
+        return consumoDeOrganizacion;
+    }
+
+
+    public Consumo instanciarOtroConsumo(FilaConsumo filaConsumo) {
         List<String> df = filaConsumo.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
-        Consumo consumoDeOrganizacion = new Consumo(actividadConsumo, periodoDeImputacion, tipoConsumo, Double.parseDouble(df.get(2)));
+        Consumo consumoDeOrganizacion = new OtrosConsumos(actividadConsumo, periodoDeImputacion, tipoConsumo, Double.parseDouble(df.get(2)));
         return consumoDeOrganizacion;
     }
 

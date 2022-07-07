@@ -10,6 +10,10 @@ public class Actividad implements AsignableFE {
         this.nombre = nombre;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public void setValorParaFE(double valorParaFE) {
         this.valorParaFE = valorParaFE;
     }
