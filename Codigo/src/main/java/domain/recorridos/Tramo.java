@@ -2,6 +2,7 @@ package domain.recorridos;
 
 import domain.miembro.Miembro;
 import domain.transporte.Transporte;
+import domain.transporte.TransporteAnalogico;
 import domain.ubicacion.Ubicacion;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
@@ -36,5 +37,12 @@ public class Tramo {
     public double distanciaTramo() throws IOException {
         return medioDeTransporte.distancia(puntoInicio,puntoFin);
     }
+
+    public double huellaCarbonoTramo() throws IOException {
+        if (medioDeTransporte == TransporteAnalogico) return 0;
+        return this.distanciaTramo()*FE;
+    }
+
+
 
 }

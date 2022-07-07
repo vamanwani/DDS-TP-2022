@@ -7,6 +7,7 @@ import java.util.List;
 //import java.util.arrayList;
 
 public class Trayecto {
+
     private List<Tramo> tramos;
 
     public Trayecto(Tramo @NotNull ... tramos) {
@@ -26,4 +27,18 @@ public class Trayecto {
         }).sum();
     }
 
+    public List<Tramo> getTramos() {
+        return tramos;
+    }
+
+    public double huellaCarbono() {
+        return tramos.stream().mapToDouble(m -> {
+            try {
+                return m.huellaCarbonoTramo();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }).sum();
+    }
 }
