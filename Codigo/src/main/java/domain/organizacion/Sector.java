@@ -1,14 +1,19 @@
 package domain.organizacion;
 
 import domain.miembro.Miembro;
-import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Sector {
-    private Miembro agenteSectorial;
+    private Miembro agenteSectorial; // REVISAR
     private List<Miembro> miembros;
     private String nombre;
+    private Organizacion organizacion;
+
+    public Organizacion getOrganizacion() {
+        return organizacion;
+    }
 
     public List<Miembro> getMiembros() {
         return miembros;
@@ -35,4 +40,20 @@ public class Sector {
         }
         return miembrosQuePertenecen;
     }
+
+    public double calculoHCSector() {
+        return miembros.stream().mapToDouble( m -> {
+            try {
+                return m.calcularHCMiembro();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }).sum();
+    }
+
+    public double HCPerCapita(Sector sector){
+        return this.calculoHCSector() / miembros.size();
+    }
+
 }

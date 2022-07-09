@@ -32,6 +32,9 @@ public class Organizacion {
         this.consumos.add(consumo);
   }
 
+  public double calcularHCOrganizacion(){
+
+  }
 
 
 

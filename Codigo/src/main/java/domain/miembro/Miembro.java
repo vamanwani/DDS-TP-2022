@@ -1,5 +1,7 @@
 package domain.miembro;
 
+import domain.calculoHC.CalculdorarHCMiembro;
+import domain.organizacion.Organizacion;
 import domain.organizacion.Sector;
 import domain.recorridos.Trayecto;
 
@@ -51,7 +53,15 @@ public class Miembro {
                 throw new RuntimeException(e);
             }
         }).sum();
-
     }
+
+    public double calcularHCMiembro() throws IOException {
+        return new CalculdorarHCMiembro().calcularHC(trayectos);
+    }
+
+    public double impactoEnOrganizacion(Organizacion organizacion) throws IOException {
+        return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion();
+    }
+
 
 }
