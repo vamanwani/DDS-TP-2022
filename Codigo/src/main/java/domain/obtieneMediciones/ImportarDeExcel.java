@@ -4,14 +4,10 @@ import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import domain.calculoHC.CalcularConsumoLogistica;
-import domain.calculoHC.CalculoOtrosConsumos;
 import domain.consumo.*;
 import domain.organizacion.Organizacion;
 import domain.consumo.TipoAlcance;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -117,7 +113,7 @@ public class ImportarDeExcel {
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
         Consumo consumoDeOrganizacion = new ConsumoLogistica(actividadConsumo, periodoDeImputacion, tipoConsumo, Integer.parseInt(peso.getDatosString().get(2)),
-                Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2), new CalcularConsumoLogistica());
+                Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2));
         return consumoDeOrganizacion;
     }
 
@@ -127,7 +123,7 @@ public class ImportarDeExcel {
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
-        Consumo consumoDeOrganizacion = new OtrosConsumos(actividadConsumo, periodoDeImputacion, tipoConsumo, Double.parseDouble(df.get(2)), new CalculoOtrosConsumos());
+        Consumo consumoDeOrganizacion = new OtroConsumo(actividadConsumo, periodoDeImputacion, tipoConsumo, Double.parseDouble(df.get(2)));
         return consumoDeOrganizacion;
     }
 
