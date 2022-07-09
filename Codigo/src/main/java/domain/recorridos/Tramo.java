@@ -38,11 +38,7 @@ public class Tramo {
         return medioDeTransporte.distancia(puntoInicio,puntoFin);
     }
 
-    public double huellaCarbonoTramo() throws IOException {
-        if (medioDeTransporte == TransporteAnalogico) return 0;
-        return this.distanciaTramo()*FE;
+    public Transporte getMedioDeTransporte() {
+        return medioDeTransporte;
     }
-
-
-
 }

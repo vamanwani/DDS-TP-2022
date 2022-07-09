@@ -31,14 +31,4 @@ public class Trayecto {
         return tramos;
     }
 
-    public double huellaCarbono() {
-        return tramos.stream().mapToDouble(m -> {
-            try {
-                return m.huellaCarbonoTramo();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return 0;
-        }).sum();
-    }
 }
