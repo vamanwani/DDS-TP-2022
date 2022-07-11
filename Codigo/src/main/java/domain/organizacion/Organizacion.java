@@ -22,6 +22,10 @@ public class Organizacion {
     private String linkRecomendacion; //LINK DEL .PDF DE RECOMENDACION
 
 
+    public Organizacion() {
+        this.contactos = new HashSet<>();
+    }
+
     public void agregarContacto(Miembro nuevoContacto){
         this.contactos.add(nuevoContacto);
     }

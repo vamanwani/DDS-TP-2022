@@ -23,7 +23,9 @@ public class CalendarioContactos extends TimerTask {
     }
 
 
-
+    public void setComandos(Comando unNotificador){
+        this.comandos.add(unNotificador);
+    }
     @Override
     public void run() {
         for(Organizacion org : organizaciones){

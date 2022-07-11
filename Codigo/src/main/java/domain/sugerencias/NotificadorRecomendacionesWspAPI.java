@@ -11,6 +11,12 @@ public class NotificadorRecomendacionesWspAPI implements AdapterRecomendacionWha
         contacto.listarMiembros().forEach(unContacto -> {
             //TODO hacerFuncionConAPI(unContacto.nro)
         });
+
         //TODO Wassenger
+    }
+
+    @Override
+    public int notificarMiembrosPorWhatsApp(String link, Organizacion organizacion) {
+        return 0;
     }
 }
