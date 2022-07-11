@@ -19,5 +19,7 @@ public class TipoConsumo implements AsignableFE{
         return nombre;
     }
 
-
+    public double getValorParaFE() {
+        return valorParaFE;
+    }
 }

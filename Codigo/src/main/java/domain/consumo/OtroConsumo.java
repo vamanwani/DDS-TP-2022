@@ -3,7 +3,7 @@ package domain.consumo;
 public class OtroConsumo extends Consumo{
     private double valorConsumo;
 
-    public OtroConsumo(Actividad actividad, PeriodoDeImputacion periodicidad, TipoConsumo tipoConsumo, double valor) {
+    public OtroConsumo(Actividad actividad, PeriodoDeImputacion periodicidad, TipoConsumo tipoConsumo, double valorConsumo) {
         this.actividad = actividad;
         this.periodicidad = periodicidad;
         this.tipoConsumo = tipoConsumo;
@@ -12,7 +12,7 @@ public class OtroConsumo extends Consumo{
 
 
     public double calcularHC(){
-        return valorConsumo * factorEmision();
+        return valorConsumo * tipoConsumo.getValorParaFE();
     }
 
     public double getValorConsumo() {

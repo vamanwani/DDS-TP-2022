@@ -34,6 +34,7 @@ public class Organizacion {
 
   public double calcularHCOrganizacion(){
     //Todo
+      return 1;
   }
 
 
