@@ -3,8 +3,8 @@ package domain.consumo;
 public class ConsumoLogistica extends Consumo{
     private String categoria;
     private String medio;
-    private int peso;
-    private int distancia;
+    private double peso;
+    private double distancia;
 
     public ConsumoLogistica(Actividad actividad, PeriodoDeImputacion periodicidad, TipoConsumo tipoConsumo, int peso, int distancia, String medio, String categoria) {
         this.actividad = actividad;

@@ -14,8 +14,4 @@ public class OtroConsumo extends Consumo{
     public double calcularHC(){
         return valorConsumo * tipoConsumo.getValorParaFE();
     }
-
-    public double getValorConsumo() {
-        return valorConsumo;
-    }
 }

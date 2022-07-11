@@ -1,5 +1,6 @@
 package domain.organizacion;
 
+import domain.calculoHC.CalculadoraHCOrganizacion;
 import domain.consumo.Consumo;
 import domain.consumo.PeriodoDeImputacion;
 import domain.consumo.TipoPeriodicidad;
@@ -40,22 +41,6 @@ public class Organizacion {
     }
 
     public double calcularHCOrganizacion (PeriodoDeImputacion periodoACalcular) {
-
-        //if (tipo periodicidad == mes)
-            //filter segun ese mes/anio
-        // else // si o si va a ser anio
-            //filter segun ese anio
-        //hc de lo filtrado;
-
-        List<Consumo> auxiliar = null;
-
-        if (periodoACalcular.getPeriodicidad() == TipoPeriodicidad.ANUAL){
-            auxiliar = this.getConsumos().stream().filter(consumo -> consumo.getPeriodicidad().getAnio() == periodoACalcular.getAnio()).collect(Collectors.toList());
-        } else if (periodoACalcular.getPeriodicidad() == TipoPeriodicidad.MENSUAL){
-            auxiliar = this.getConsumos().stream().filter(consumo ->  (consumo.getPeriodicidad().getAnio() == periodoACalcular.getAnio()
-            && consumo.getPeriodicidad().getMes() == periodoACalcular.getMes())).collect(Collectors.toList());
-        }
-
-        return auxiliar.stream().mapToDouble(c -> c.calcularHC()).sum();
+        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular);
     }
 }

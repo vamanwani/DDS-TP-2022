@@ -58,12 +58,6 @@ public class HCTestOrganizacion {
     @Test
     public void testConsumosOrganizacion(){
 
-        Assert.assertTrue(consumo.getPeriodicidad().getPeriodicidad() == TipoPeriodicidad.MENSUAL);
-        Assert.assertTrue(consumo.getPeriodicidad().getAnio() == 2022);
-        Assert.assertTrue(consumo.getPeriodicidad().getMes() == 03);
-        Assert.assertTrue(consumoLogistica.getPeriodicidad().getAnio() == 2022);
-
-
         Assert.assertEquals(organizacion.calcularHCOrganizacion(new PeriodoDeImputacion("2022")), 225690, 0);
         Assert.assertEquals(organizacion.calcularHCOrganizacion(new PeriodoDeImputacion("2023")), 0, 0);
         Assert.assertEquals(organizacion.calcularHCOrganizacion(new PeriodoDeImputacion("03/2022")), 690, 0);

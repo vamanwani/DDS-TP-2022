@@ -1,5 +1,6 @@
 package domain.organizacion;
 
+import domain.calculoHC.CalculadoraHCSector;
 import domain.miembro.Miembro;
 
 import java.io.IOException;
@@ -41,19 +42,12 @@ public class Sector {
         return miembrosQuePertenecen;
     }
 
-    public double calculoHCSector() {
-        return miembros.stream().mapToDouble( m -> {
-            try {
-                return m.calcularHCMiembro();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return 0;
-        }).sum();
+    public double calcularHCSector() {
+        return new CalculadoraHCSector().calcularHC(miembros);
     }
 
-    public double HCPerCapita(Sector sector){
-        return this.calculoHCSector() / miembros.size();
+    public double HCPerCapita(){
+        return this.calcularHCSector() / miembros.size();
     }
 
 }

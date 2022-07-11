@@ -7,7 +7,7 @@ import domain.recorridos.Trayecto;
 import java.io.IOException;
 import java.util.List;
 
-public class CalculdorarHCMiembro {
+public class CalculdoraHCMiembro {
 
     private FactorEmision fe = new FactorEmision();
 
@@ -19,13 +19,15 @@ public class CalculdorarHCMiembro {
 
         double HC = 0;
 
-        for (Trayecto trayecto : trayectos){
-            for (Tramo tramo : trayecto.getTramos()){
-                if (tramo.getMedioDeTransporte().getId() == "Transporte analogico") break;
-                HC += (tramo.distanciaTramo() * fe.getFeTramo()) / tramo.getMiembrosMismoTransporte().size();
+        for (Trayecto trayecto : trayectos) {
+            for (Tramo tramo : trayecto.getTramos()) {
+                if (tramo.getMedioDeTransporte().getId() == "Transporte analogico") {
+                    HC += 0;
+                } else {
+                    HC += (tramo.distanciaTramo() * fe.getFeTramo()) / tramo.getMiembrosMismoTransporte().size();
+                }
             }
         }
         return HC;
     }
-
 }

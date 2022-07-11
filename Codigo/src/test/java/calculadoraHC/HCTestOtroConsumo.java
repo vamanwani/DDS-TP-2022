@@ -10,7 +10,7 @@ import static domain.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
 
 public class HCTestOtroConsumo {
 
-    public static OtroConsumo consumo;
+    public OtroConsumo consumo;
     public Actividad actividad;
     public PeriodoDeImputacion periodoDeImputacion;
     public TipoConsumo tipoConsumo;
@@ -23,6 +23,7 @@ public class HCTestOtroConsumo {
         this.periodoDeImputacion =  new PeriodoDeImputacion("02/2022");
         this.tipoConsumo = new TipoConsumo("Gas Natural", Unidad.M3);
         this.consumo = new OtroConsumo(actividad, periodoDeImputacion, tipoConsumo, 230);
+
     }
 
     @Test
