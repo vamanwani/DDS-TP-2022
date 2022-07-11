@@ -13,11 +13,12 @@ public class PeriodoDeImputacion {
 
     public void definirPeriodicidad(String formato){
         if(formato.length() == 7){
-            anio = Integer.parseInt(formato.substring(3, 6)); //Ultimos 4 elementos
-            mes = Integer.parseInt(formato.substring(0,1));//Primeros 2 elementos
+            mes = Integer.parseInt(formato.substring(0,2));//Primeros 2 elementos
+            anio = Integer.parseInt(formato.substring(3, 7)); //Ultimos 4 elementos
             setPeriodicidad(TipoPeriodicidad.MENSUAL);        }
         else{
             anio = Integer.parseInt(formato);
+            mes = 0;
             setPeriodicidad(TipoPeriodicidad.ANUAL);
         }
     }

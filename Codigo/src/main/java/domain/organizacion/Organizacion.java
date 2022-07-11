@@ -47,14 +47,15 @@ public class Organizacion {
             //filter segun ese anio
         //hc de lo filtrado;
 
-        List<Consumo> auxiliar;
+        List<Consumo> auxiliar = null;
 
-        if (periodoACalcular.getPeriodicidad() == TipoPeriodicidad.MENSUAL) {
-            auxiliar = this.getConsumos().stream().filter(c -> c.getPeriodicidad().getAnio() == periodoACalcular.getAnio()
-                    && c.getPeriodicidad().getMes() == periodoACalcular.getMes()).collect(Collectors.toList());
-        } else {
-            auxiliar = this.getConsumos().stream().filter(c -> c.getPeriodicidad().getAnio() == periodoACalcular.getAnio()).collect(Collectors.toList());
+        if (periodoACalcular.getPeriodicidad() == TipoPeriodicidad.ANUAL){
+            auxiliar = this.getConsumos().stream().filter(consumo -> consumo.getPeriodicidad().getAnio() == periodoACalcular.getAnio()).collect(Collectors.toList());
+        } else if (periodoACalcular.getPeriodicidad() == TipoPeriodicidad.MENSUAL){
+            auxiliar = this.getConsumos().stream().filter(consumo ->  (consumo.getPeriodicidad().getAnio() == periodoACalcular.getAnio()
+            && consumo.getPeriodicidad().getMes() == periodoACalcular.getMes())).collect(Collectors.toList());
         }
+
         return auxiliar.stream().mapToDouble(c -> c.calcularHC()).sum();
     }
 }
