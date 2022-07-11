@@ -21,6 +21,10 @@ public class Organizacion {
     private Usuario usuario;
     private List<Consumo> consumos = new ArrayList<Consumo>();
 
+    public List<Consumo> getConsumos() {
+        return consumos;
+    }
+
     public Set<Miembro> listarMiembros(){
         Set<Miembro> miembroSet;
         miembroSet= (Set<Miembro>) this.sectores.stream().map(sector -> sector.getMiembros());
@@ -43,15 +47,14 @@ public class Organizacion {
             //filter segun ese anio
         //hc de lo filtrado;
 
-        List<Consumo> auxiliar = new ArrayList<Consumo>();
+        List<Consumo> auxiliar;
 
         if (periodoACalcular.getPeriodicidad() == TipoPeriodicidad.MENSUAL) {
-            auxiliar = this.consumos.stream().filter(c -> c.getPeriodicidad().getAnio() == periodoACalcular.getAnio()
+            auxiliar = this.getConsumos().stream().filter(c -> c.getPeriodicidad().getAnio() == periodoACalcular.getAnio()
                     && c.getPeriodicidad().getMes() == periodoACalcular.getMes()).collect(Collectors.toList());
         } else {
-            auxiliar = this.consumos.stream().filter(c -> c.getPeriodicidad().getAnio() == periodoACalcular.getAnio()).collect(Collectors.toList());
+            auxiliar = this.getConsumos().stream().filter(c -> c.getPeriodicidad().getAnio() == periodoACalcular.getAnio()).collect(Collectors.toList());
         }
-
         return auxiliar.stream().mapToDouble(c -> c.calcularHC()).sum();
     }
 }

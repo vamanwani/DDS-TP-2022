@@ -26,6 +26,8 @@ public class HCTestConsumoLogistica {
 
     @Test
     public void calculadoraHCLogistica(){
+
+
         tipoConsumo.setValorParaFE(3);
         Assert.assertEquals(consumoLogistica.calcularHC(), 225000, 0);
         tipoConsumo.setValorParaFE(4);

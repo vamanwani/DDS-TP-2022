@@ -1,28 +1,65 @@
 package calculadoraHC;
 
-import domain.consumo.PeriodoDeImputacion;
+import domain.consumo.*;
 import domain.organizacion.Organizacion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.matchers.Or;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static domain.consumo.TipoAlcance.EMISIONESDIRECTAS;
+import static domain.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
+
 public class HCTestOrganizacion {
 
     public Organizacion organizacion;
     public PeriodoDeImputacion periodoDeImputacion;
 
+    public static OtroConsumo consumo;
+    public Actividad actividad;
+    public PeriodoDeImputacion periodo;
+    public TipoConsumo tipoConsumo;
+    public TipoAlcance tipoAlcance;
+
+    public static ConsumoLogistica consumoLogistica;
+    public Actividad actividadL;
+    public PeriodoDeImputacion periodoDeImputacionL;
+    public TipoConsumo tipoConsumoL;
+    public TipoAlcance tipoAlcanceL;
+
     @Before
     public void init(){
-        organizacion = new Organizacion();
-        organizacion.agregarConsumo(HCTestOtroConsumo.consumo);
-        organizacion.agregarConsumo(HCTestConsumoLogistica.consumoLogistica);
-        periodoDeImputacion = new PeriodoDeImputacion("02/2022");
+        this.organizacion = new Organizacion();
+        this.periodoDeImputacion = new PeriodoDeImputacion("02/2002");
+//        organizacion.agregarConsumo(HCTestConsumoLogistica.consumoLogistica);
+//        organizacion.agregarConsumo(HCTestOtroConsumo.consumo);
+
+
+        this.tipoAlcance = EMISIONESDIRECTAS;
+        this.actividad = new Actividad(tipoAlcance, "Combustion fija");
+        this.periodo =  new PeriodoDeImputacion("02/2022");
+        this.tipoConsumo = new TipoConsumo("Gas Natural", Unidad.M3);
+        tipoConsumo.setValorParaFE(3);
+        this.consumo = new OtroConsumo(actividad, periodo, tipoConsumo, 230);
+        organizacion.agregarConsumo(consumo);
+
+        this.tipoAlcanceL = EMISIONESINDIRECTASNOCONTROLADAS;
+        this.actividadL = new Actividad(tipoAlcance, "Logistica de productos y residuos");
+        this.periodoDeImputacionL =  new PeriodoDeImputacion("03/2022");
+        this.tipoConsumoL = new TipoConsumo("Logistica productos residuos", Unidad.KM);
+        this.consumoLogistica = new ConsumoLogistica(actividad, periodoDeImputacionL, tipoConsumo, 500, 150,"Camion carga", "Materia prima");
+        tipoConsumo.setValorParaFE(3);
+        organizacion.agregarConsumo(consumoLogistica);
+
     }
     @Test
     public void testConsumosOrganizacion(){
-        //Assert.assertEquals(organizacion.consumos.size(), 2);
-        Assert.assertEquals(organizacion.calcularHCOrganizacion(periodoDeImputacion), 3400, 0.00);
+        Assert.assertEquals(organizacion.calcularHCOrganizacion(new PeriodoDeImputacion("03/2022")), 225000, 0);
+        Assert.assertEquals(organizacion.calcularHCOrganizacion(new PeriodoDeImputacion("2022")), 225690, 0);
     }
 
 }
