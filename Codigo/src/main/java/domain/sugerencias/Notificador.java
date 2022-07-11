@@ -17,7 +17,7 @@ public class Notificador {
     public Notificador(){
         this.comandos = new ArrayList<Comando>();
         this.organizaciones = new ArrayList<Organizacion>();
-        this.comandos.add(new NotificarPorEmail());
+        //this.comandos.add(new NotificarPorEmail());
         this.comandos.add(new NotificarPorWhatsApp());
     }
 

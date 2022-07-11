@@ -9,6 +9,7 @@ public class NotificarPorWhatsApp implements Comando{
     @Override
     public void notificar(String link, Organizacion contacto) {
         //contacto.listarMiembros().forEach(unContacto -> adapter.notificarContactoPorWhatsApp(link,unContacto));
+
         adapter.notificarContactoPorWhatsApp(link, contacto);
     }
 }
