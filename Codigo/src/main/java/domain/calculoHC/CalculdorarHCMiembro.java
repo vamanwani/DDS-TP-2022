@@ -11,6 +11,10 @@ public class CalculdorarHCMiembro {
 
     private FactorEmision fe = new FactorEmision();
 
+    public void setFe(FactorEmision fe) {
+        this.fe = fe;
+    }
+
     public double calcularHC(List<Trayecto> trayectos) throws IOException {
 
         double HC = 0;
@@ -23,6 +27,5 @@ public class CalculdorarHCMiembro {
         }
         return HC;
     }
-
 
 }

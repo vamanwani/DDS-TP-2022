@@ -60,7 +60,7 @@ public class Miembro {
     }
 
     public double impactoEnOrganizacion(Organizacion organizacion) throws IOException {
-        return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion();
+        return 1;//this.calcularHCMiembro()/organizacion.calcularHCOrganizacion();
     }
 
 

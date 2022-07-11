@@ -9,7 +9,7 @@ import static domain.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
 
 public class HCTestConsumoLogistica {
 
-    public ConsumoLogistica consumoLogistica;
+    public static ConsumoLogistica consumoLogistica;
     public Actividad actividad;
     public PeriodoDeImputacion periodoDeImputacion;
     public TipoConsumo tipoConsumo;
@@ -18,7 +18,7 @@ public class HCTestConsumoLogistica {
     @Before
     public void init(){
         this.tipoAlcance = EMISIONESINDIRECTASNOCONTROLADAS;
-        this.actividad = new Actividad(tipoAlcance, "Logistica de bienes");
+        this.actividad = new Actividad(tipoAlcance, "Logistica de productos y residuos");
         this.periodoDeImputacion =  new PeriodoDeImputacion("2022");
         this.tipoConsumo = new TipoConsumo("Logistica productos residuos", Unidad.KM);
         this.consumoLogistica = new ConsumoLogistica(actividad, periodoDeImputacion, tipoConsumo, 500, 150,"Camion carga", "Materia prima");

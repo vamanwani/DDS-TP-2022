@@ -5,7 +5,7 @@ package domain.consumo;
 public class PeriodoDeImputacion {
     private int anio;
     private int mes;
-    private TipoPeriodicidad periodicidad;
+    private TipoPeriodicidad periodicidad; // enum
 
     public PeriodoDeImputacion(String formato) {
         this.definirPeriodicidad(formato);
@@ -24,5 +24,17 @@ public class PeriodoDeImputacion {
 
     public void setPeriodicidad(TipoPeriodicidad periodicidad) {
         this.periodicidad = periodicidad;
+    }
+
+    public TipoPeriodicidad getPeriodicidad() {
+        return periodicidad;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public int getMes() {
+        return mes;
     }
 }

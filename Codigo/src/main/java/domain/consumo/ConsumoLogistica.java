@@ -18,6 +18,10 @@ public class ConsumoLogistica extends Consumo{
 
     @Override
     public double calcularHC(){
+
+        // analiza periodicidad
+        // llama al metodo que le corresponda
+
         //HC = DISTANCIA x PESO x FE X K, donde K es un factor que afecta al cálculo según el peso y la distancia
         return (peso * distancia * this.valorDeK() * tipoConsumo.getValorParaFE());
     }
@@ -27,7 +31,5 @@ public class ConsumoLogistica extends Consumo{
             //Depende del peso y la distancia
         return 1;
     }
-
-
 
 }

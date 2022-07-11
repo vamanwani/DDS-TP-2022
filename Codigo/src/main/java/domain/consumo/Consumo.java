@@ -1,6 +1,6 @@
 package domain.consumo;
 
-public class Consumo {
+public abstract class Consumo {
 
     protected Actividad actividad;
     protected PeriodoDeImputacion periodicidad;
@@ -18,8 +18,9 @@ public class Consumo {
         return periodicidad;
     }
 
-    public double calcularHC(){
-        return 0;
-    }
 
+
+    public double calcularHC(){
+        return 1;
+    };
 }

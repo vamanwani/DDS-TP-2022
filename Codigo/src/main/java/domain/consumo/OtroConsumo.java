@@ -10,7 +10,7 @@ public class OtroConsumo extends Consumo{
         this.valorConsumo = valorConsumo;
     }
 
-
+    @Override
     public double calcularHC(){
         return valorConsumo * tipoConsumo.getValorParaFE();
     }
