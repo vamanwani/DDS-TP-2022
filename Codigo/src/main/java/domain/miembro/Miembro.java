@@ -1,5 +1,8 @@
 package domain.miembro;
 
+import domain.calculoHC.CalculdoraHCMiembro;
+import domain.consumo.PeriodoDeImputacion;
+import domain.organizacion.Organizacion;
 import domain.organizacion.Sector;
 import domain.recorridos.Trayecto;
 
@@ -60,7 +63,15 @@ public class Miembro {
     public void recibirRecomendacion(String link) {
         this.linkRecomendacion = link;
     }
+    public double calcularHCMiembro() throws IOException {
+        return new CalculdoraHCMiembro().calcularHC(trayectos);
+    }
+
     public String getLinkRecomendacion(){
         return linkRecomendacion;
+    }
+    public double impactoEnOrganizacion(Organizacion organizacion) throws IOException {
+        PeriodoDeImputacion periodoDeImputacion = null;
+        return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion(periodoDeImputacion);
     }
 }

@@ -6,8 +6,9 @@ public class TipoConsumo implements AsignableFE{
 
     private double valorParaFE;
 
-    public TipoConsumo(String nombre) {
+    public TipoConsumo(String nombre, Unidad unidad) {
         this.nombre = nombre;
+        this.unidad = unidad;
     }
 
     public void setValorParaFE(double valorParaFE) {
@@ -18,5 +19,7 @@ public class TipoConsumo implements AsignableFE{
         return nombre;
     }
 
-
+    public double getValorParaFE() {
+        return valorParaFE;
+    }
 }

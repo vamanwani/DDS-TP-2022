@@ -7,6 +7,11 @@ import java.io.IOException;
 
 public abstract class Transporte {
     private ServicioGeodds distanciaAPI;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
 
     public void setDistanciaAPI() throws IOException {
         this.distanciaAPI = ServicioGeodds.getInstance();

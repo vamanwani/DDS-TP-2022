@@ -1,14 +1,21 @@
 package domain.organizacion;
 
+import domain.calculoHC.CalculadoraHCSector;
 import domain.miembro.Miembro;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Sector {
-    private Miembro agenteSectorial;
+    private Miembro agenteSectorial; // REVISAR
     private List<Miembro> miembros;
     private String nombre;
+    private Organizacion organizacion;
+
+    public Organizacion getOrganizacion() {
+        return organizacion;
+    }
 
     public List<Miembro> getMiembros() {
         return miembros;
@@ -41,4 +48,13 @@ public class Sector {
         }
         return miembrosQuePertenecen;
     }
+
+    public double calcularHCSector() {
+        return new CalculadoraHCSector().calcularHC(miembros);
+    }
+
+    public double HCPorCantMiembros(){
+        return this.calcularHCSector() / miembros.size();
+    }
+
 }
