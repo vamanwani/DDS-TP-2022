@@ -6,8 +6,8 @@ import domain.organizacion.Organizacion;
 import java.util.List;
 
 public class SectorTerritorial {
-
-    public AgenteSectorial agenteSectorial;
+    private String nombre;
+    private AgenteSectorial agenteSectorial;
     private List<String> localidades;
     private List<Organizacion> organizaciones;
     private TipoSectorTerritorial tipoSector;
@@ -18,7 +18,7 @@ public class SectorTerritorial {
         }
     }
 
-    public double calcularHCTotal(){
+    public double calcularHCSectorTerritorial(){
         PeriodoDeImputacion periodoDeImputacion = null;
         return organizaciones.stream().mapToDouble(o -> o.calcularHCOrganizacion(periodoDeImputacion)).sum();
     }
