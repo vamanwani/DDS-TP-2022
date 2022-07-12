@@ -46,7 +46,7 @@ public class Sector {
         return new CalculadoraHCSector().calcularHC(miembros);
     }
 
-    public double HCPerCapita(){
+    public double HCPorCantMiembros(){
         return this.calcularHCSector() / miembros.size();
     }
 

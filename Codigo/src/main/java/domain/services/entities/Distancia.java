@@ -9,9 +9,7 @@ public class Distancia {
         this.unidad = unidad;
     }
 
-    public Distancia(){
 
-    }
 
     public Distancia getDistanciaClass(){
         return this;

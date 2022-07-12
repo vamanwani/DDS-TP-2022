@@ -26,6 +26,10 @@ public class Organizacion {
         return consumos;
     }
 
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
     public Set<Miembro> listarMiembros(){
         Set<Miembro> miembroSet;
         miembroSet= (Set<Miembro>) this.sectores.stream().map(sector -> sector.getMiembros());
@@ -42,5 +46,6 @@ public class Organizacion {
 
     public double calcularHCOrganizacion (PeriodoDeImputacion periodoACalcular) {
         return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular);
+                //+ sectores.stream().mapToDouble(sector -> sector.calcularHCSector()).sum();
     }
 }
