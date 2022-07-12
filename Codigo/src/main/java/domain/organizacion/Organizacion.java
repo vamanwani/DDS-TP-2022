@@ -1,6 +1,9 @@
 package domain.organizacion; //TODO ORGANIZACION RECIBE LAS RECOMENDACIONES
 
+import domain.calculoHC.CalculadoraHCOrganizacion;
 import domain.consumo.Consumo;
+import domain.consumo.PeriodoDeImputacion;
+import domain.consumo.TipoPeriodicidad;
 import domain.miembro.Miembro;
 import domain.miembro.Usuario;
 import domain.ubicacion.Ubicacion;
@@ -18,11 +21,18 @@ public class Organizacion {
     private String razonSocial;
     private Ubicacion ubicacion;
     private Usuario usuario;
-    private List<Consumo> consumos;
+    private List<Consumo> consumos = new ArrayList<Consumo>();;
     private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
     private String linkRecomendacion; //LINK DEL .PDF DE RECOMENDACION
 
 
+    public List<Consumo> getConsumos() {
+        return consumos;
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
     public Organizacion() {
         this.contactos = new HashSet<>();
         this.sectores = new ArrayList<>();
@@ -63,7 +73,10 @@ public class Organizacion {
     public void agregarSectores(Sector sector){
         this.sectores.add(sector);
     }
-
+    public double calcularHCOrganizacion (PeriodoDeImputacion periodoACalcular) {
+        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular);
+        //+ sectores.stream().mapToDouble(sector -> sector.calcularHCSector()).sum();
+    }
 
 
 }
