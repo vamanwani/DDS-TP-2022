@@ -17,6 +17,7 @@ public class Miembro {
     private List<Trayecto> trayectos;
     private String mail;
     private String telefono;
+    private String linkRecomendacion;
 
 
     public Miembro(
@@ -57,6 +58,9 @@ public class Miembro {
     }
 
     public void recibirRecomendacion(String link) {
-        //TODO AL FINAL DE LO QUE RECIBE
+        this.linkRecomendacion = link;
+    }
+    public String getLinkRecomendacion(){
+        return linkRecomendacion;
     }
 }

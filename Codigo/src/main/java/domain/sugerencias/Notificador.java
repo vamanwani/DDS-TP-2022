@@ -19,6 +19,8 @@ public class Notificador {
         this.organizaciones = new ArrayList<Organizacion>();
         //this.comandos.add(new NotificarPorEmail());
         this.comandos.add(new NotificarPorWhatsApp());
+        Organizacion unaOrganizacion = new Organizacion();
+        agregarOrganizacion(unaOrganizacion);
     }
 
 
@@ -32,12 +34,16 @@ public class Notificador {
     public void notificarOrganizaciones(String link){
         this.organizaciones.forEach(org -> org.notificarContactos(link));
     }
+    public void agregarOrganizacion(Organizacion unaOrganizacion){
+        this.organizaciones.add(unaOrganizacion);
+    }
 
     public static void main(String[] args){
          int valorPorMinuto = 60000;
          int valorPorHora = valorPorMinuto * 60;
          int valorPorDia = valorPorHora * 24;
          int periodicidad = valorPorDia;
+
 
         Timer timer = new Timer();
         TimerTask task = new CalendarioContactos();

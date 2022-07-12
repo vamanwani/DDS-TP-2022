@@ -3,6 +3,7 @@ package TestNotificador;
 import domain.miembro.Miembro;
 import domain.miembro.Usuario;
 import domain.organizacion.Organizacion;
+import domain.organizacion.Sector;
 import domain.sugerencias.Notificador;
 import domain.sugerencias.NotificadorRecomendacionesWspAPI;
 import domain.sugerencias.NotificarPorWhatsApp;
@@ -26,6 +27,10 @@ public class NotificadorTest {
     public Miembro segundoMiembro;
     public Miembro tercerMiembro;
     public Miembro cuartoMiembro;
+    public Sector primerSector;
+    public Sector segundoSector;
+    public Sector tercerSector;
+
 
     @Before
     public void init(){
@@ -62,17 +67,36 @@ public class NotificadorTest {
         primeraOrganizacion.agregarContacto(segundoMiembro);
         segundaOrganizacion.agregarContacto(tercerMiembro);
         segundaOrganizacion.agregarContacto(cuartoMiembro);
+        primerSector = new Sector();
+        segundoSector = new Sector();
+        primeraOrganizacion.agregarSectores(primerSector);
+        primeraOrganizacion.agregarSectores(segundoSector);
+
+        primerSector.agregarMiembro(primerMiembro);
+        primerSector.agregarMiembro(segundoMiembro);
+
+        notificador.agregarOrganizacion(primeraOrganizacion);
+        notificador.agregarOrganizacion(segundaOrganizacion);
     }
 
     @Test
-    public void testNotificadorWhatsapp(){
-        when(this.adapterMockWsp.notificarMiembrosPorWhatsApp("UnLink",primeraOrganizacion)).thenReturn(200);
-        Assert.assertEquals(200,200);
+    public void testRecorridoMiembros(){
+        //when(this.adapterMockWsp.notificarMiembrosPorWhatsApp("UnLink",primeraOrganizacion)).thenReturn(200);
+        primeraOrganizacion.notificarContactos("Prueba de Link");
+        //Miembro[] contactos= primeraOrganizacion.listarMiembros().toArray(new Miembro[primeraOrganizacion.listarMiembros().size()]);
+        Assert.assertEquals(primeraOrganizacion.listarMiembros().iterator().next().getLinkRecomendacion(),"Prueba de Link");
+        Assert.assertEquals(primeraOrganizacion.listarMiembros().iterator().next().getLinkRecomendacion(),"Prueba de Link");
+        Assert.assertEquals(primerMiembro.getLinkRecomendacion(),"Prueba de Link");
+        Assert.assertNotEquals(tercerMiembro.getLinkRecomendacion(),"Prueba de Link");
     }
-    public int ClaseTestOrganizaciones(String link, Organizacion organizacion){
 
-        return 200;
+    @Test
+    public void testRecorridoTodasLasOrganizaciones(){
+        notificador.notificarOrganizaciones("Prueba");
+        Assert.assertEquals(primerMiembro.getLinkRecomendacion(),"Prueba");
+        Assert.assertNotEquals(primerMiembro.getLinkRecomendacion(),"Asd");
+        Assert.assertEquals(segundoMiembro.getLinkRecomendacion(),"Prueba");
+        Assert.assertEquals(tercerMiembro.getLinkRecomendacion(),"Prueba");
     }
-
 
 }
