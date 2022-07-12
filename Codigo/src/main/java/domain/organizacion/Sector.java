@@ -19,6 +19,12 @@ public class Sector {
         this.miembros = new ArrayList<>();
         this.nombre = nombre;
     }
+    public Sector(){
+        this.miembros = new ArrayList<>();
+    }
+    public void agregarMiembro(Miembro unMiembro){
+        this.miembros.add(unMiembro);
+    }
 
     public void setMiembros(List<Miembro> miembros) {
         this.miembros = miembros;

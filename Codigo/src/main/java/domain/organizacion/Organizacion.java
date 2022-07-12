@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Organizacion {
     private TipoDeOrganizacion tipoDeOrganizacion;
@@ -24,18 +25,27 @@ public class Organizacion {
 
     public Organizacion() {
         this.contactos = new HashSet<>();
+        this.sectores = new ArrayList<>();
     }
 
     public void agregarContacto(Miembro nuevoContacto){
         this.contactos.add(nuevoContacto);
     }
     public void notificarContactos(String link){
+        //TODO Se contacta con la api para mandar mails y mensajes de wpp
         this.contactos.forEach(contacto -> contacto.recibirRecomendacion(link));
     }
 
     public Set<Miembro> listarMiembros(){
-        Set<Miembro> miembroSet;
-        miembroSet= (Set<Miembro>) this.sectores.stream().map(sector -> sector.getMiembros());
+        Set<Miembro> miembroSet = new HashSet<>();
+        for (Sector unSector : this.sectores)
+        {
+            for(Miembro unMiembro : unSector.getMiembros())
+            {
+                miembroSet.add(unMiembro);
+            }
+        }
+        //miembroList=  this.sectores.stream().map(sector -> sector.getMiembros()).collect(Collectors.toList());
         return miembroSet;
     }
   public void setTipoDeOrganizacion(TipoDeOrganizacion tipoDeOrganizacion) {
@@ -50,7 +60,9 @@ public class Organizacion {
         this.consumos.add(consumo);
   }
 
-
+    public void agregarSectores(Sector sector){
+        this.sectores.add(sector);
+    }
 
 
 
