@@ -39,6 +39,10 @@ public class Miembro {
         this.trayectos = new ArrayList<>();
     }
 
+    public Usuario getUsuario(){
+        return this.usuario;
+    }
+
     public void setTrayectos(List<Trayecto> trayectos) {
         this.trayectos = trayectos;
     }
