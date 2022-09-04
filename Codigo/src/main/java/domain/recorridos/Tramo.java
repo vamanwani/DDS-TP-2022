@@ -5,17 +5,30 @@ import domain.transporte.Transporte;
 import domain.transporte.TransporteAnalogico;
 import domain.ubicacion.Ubicacion;
 import org.jetbrains.annotations.NotNull;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 
 
 import java.io.IOException;
 import java.util.*;
-
+@Entity
+@Table(name = "tramo")
 public class Tramo {
+    @Id
+    @GeneratedValue
+    private Integer id;
+    @Transient
     private Transporte medioDeTransporte;
+    @Transient
     private Ubicacion puntoFin;
+    @Transient
     private Ubicacion puntoInicio;
+    @Transient
     private List<Miembro> miembrosMismoTransporte;
+
+    public Tramo() {
+    }
 
     public Tramo(Transporte medioDeTransporte, Ubicacion puntoFin, Ubicacion puntoInicio) {
         this.medioDeTransporte = medioDeTransporte;
@@ -23,6 +36,7 @@ public class Tramo {
         this.puntoInicio = puntoInicio;
         this.miembrosMismoTransporte = new ArrayList<Miembro>();
     }
+
     public void agregarMiembroAlTramo(Miembro miembro){
         this.miembrosMismoTransporte.add(miembro);
     }

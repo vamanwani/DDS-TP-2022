@@ -1,7 +1,9 @@
 package domain.consumo;
 
-public abstract class Consumo {
+import javax.persistence.Entity;
 
+@Entity
+public abstract class Consumo {
     protected Actividad actividad;
     protected PeriodoDeImputacion periodicidad;
     protected int proximaAcreditacionConsumo;

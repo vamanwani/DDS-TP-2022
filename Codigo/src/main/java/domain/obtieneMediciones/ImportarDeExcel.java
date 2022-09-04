@@ -1,18 +1,16 @@
 package domain.obtieneMediciones;
-import java.io.File;
-import java.io.FileInputStream;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import domain.consumo.*;
 import domain.organizacion.Organizacion;
-import org.apache.poi.ss.formula.functions.T;
-import domain.consumo.TipoAlcance;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
+import java.util.*;
 public class ImportarDeExcel {
     public static void main(String[] args) {
         try {

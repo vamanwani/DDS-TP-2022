@@ -1,13 +1,12 @@
 package domain.sugerencias;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import domain.miembro.Miembro;
 import domain.organizacion.Organizacion;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class Notificador {
     private List<Organizacion> organizaciones;

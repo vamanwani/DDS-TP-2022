@@ -6,22 +6,60 @@ import domain.organizacion.Organizacion;
 import domain.organizacion.Sector;
 import domain.recorridos.Trayecto;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "miembro")
 public class Miembro {
+    @Id
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "apellido")
     private String apellido;
+
+    @Column(name = "nombre")
     private String nombre;
+
+
+    //TODO Definir si documento es una entidad extra o no
     private int numeroDeDocumento;
+
+
     private String tipoDeDocumento;
+
+    @Transient
     private List<Sector> trabajos;
+
+    @Transient //??????????????
     private Usuario usuario;
+
+    @Transient
     private List<Trayecto> trayectos;
+
+    @Column(name = "mail")
     private String mail;
+
+    @Column(name = "telefono")
     private String telefono;
+
+    @Column(name = "link_recomendacion")
     private String linkRecomendacion;
 
+    public Miembro() {
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Miembro(
             String apellido,

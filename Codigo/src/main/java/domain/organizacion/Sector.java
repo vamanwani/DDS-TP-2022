@@ -3,14 +3,29 @@ package domain.organizacion;
 import domain.calculoHC.CalculadoraHCSector;
 import domain.miembro.Miembro;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.*;
 
+@Entity
+@Table(name = "sector")
 public class Sector {
+    @Id
+    @GeneratedValue
+    private int id;
+    @Transient
     private Miembro agenteSectorial; // REVISAR
+    @Transient
     private List<Miembro> miembros;
+    @Column(name = "nombre")
     private String nombre;
+    @ManyToOne
+    @JoinColumn(name = "organizacion_id")
     private Organizacion organizacion;
+
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
+    }
 
     public Organizacion getOrganizacion() {
         return organizacion;

@@ -8,21 +8,44 @@ import domain.miembro.Miembro;
 import domain.miembro.Usuario;
 import domain.ubicacion.Ubicacion;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+@Entity
+@Table(name = "organizacion")
 public class Organizacion {
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @Column(name = "tipo_org")
     private TipoDeOrganizacion tipoDeOrganizacion;
+
+    @Column(name = "clasificacion")
     private ClasificaciónDeOrg clasificacionDeOrg;
+
+    @Transient
     private List<Sector> sectores;
+
+    @Column(name = "razon_social")
     private String razonSocial;
+
+    @Transient
     private Ubicacion ubicacion;
+
+    @Transient
     private Usuario usuario;
+
+    @Transient
     private List<Consumo> consumos = new ArrayList<Consumo>();;
+
+    @Transient
     private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
+
+    @Column(name = "link_recomendacion")
     private String linkRecomendacion; //LINK DEL .PDF DE RECOMENDACION
 
 
