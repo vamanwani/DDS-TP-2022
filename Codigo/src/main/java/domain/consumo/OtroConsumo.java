@@ -1,7 +1,15 @@
 package domain.consumo;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("otroConsumo")
 public class OtroConsumo extends Consumo{
     private double valorConsumo;
+
+    public OtroConsumo() {
+    }
 
     public OtroConsumo(Actividad actividad, PeriodoDeImputacion periodicidad, TipoConsumo tipoConsumo, double valorConsumo) {
         this.actividad = actividad;

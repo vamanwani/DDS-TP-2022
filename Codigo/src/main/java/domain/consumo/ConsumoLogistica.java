@@ -1,10 +1,20 @@
 package domain.consumo;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("consumoLogistica")
 public class ConsumoLogistica extends Consumo{
+    @Column()
     private String categoria;
     private String medio;
     private double peso;
     private double distancia;
+
+    public ConsumoLogistica() {
+    }
 
     public ConsumoLogistica(Actividad actividad, PeriodoDeImputacion periodicidad, TipoConsumo tipoConsumo, int peso, int distancia, String medio, String categoria) {
         this.actividad = actividad;

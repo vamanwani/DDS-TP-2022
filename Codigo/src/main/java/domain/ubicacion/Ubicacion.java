@@ -1,15 +1,42 @@
 package domain.ubicacion;
 
-public class Ubicacion extends PadreDeUbicacion{
-    private String calle;
-    private int altura;
-    private String nombreLocalidad;
+import domain.sectorTerritorial.Localidad;
 
-    public int idLocalidad(){
-        return this.obtenerIdLocalidad(nombreLocalidad);
+import javax.persistence.*;
+import java.util.Locale;
+
+@Entity
+@Table(name = "ubicacion")
+public class Ubicacion extends PadreDeUbicacion{
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "calle")
+    private String calle;
+
+    @Column(name = "altura")
+    private int altura;
+
+    @ManyToOne
+    private Localidad nombreLocalidad;
+
+    public Long getId() {
+        return id;
     }
 
-    public Ubicacion(String calle, int altura, String nombreLocalidad) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Ubicacion() {
+    }
+
+    public int idLocalidad(){
+        return nombreLocalidad.getId();
+    }
+
+    public Ubicacion(String calle, int altura, Localidad nombreLocalidad) {
         this.calle = calle;
         this.altura = altura;
         this.nombreLocalidad = nombreLocalidad;

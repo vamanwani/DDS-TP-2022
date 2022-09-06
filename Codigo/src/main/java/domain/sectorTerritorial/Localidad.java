@@ -6,6 +6,10 @@ import javax.persistence.Id;
 
 
 public class Localidad {
+    public Integer getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue
     private Integer id;

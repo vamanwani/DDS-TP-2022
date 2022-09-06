@@ -1,12 +1,23 @@
 package domain.consumo;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "consumo")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "clase")
 public abstract class Consumo {
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @Transient
     protected Actividad actividad;
+    @Transient
     protected PeriodoDeImputacion periodicidad;
+    @Column(name = "proxima_acreditacion")
     protected int proximaAcreditacionConsumo;
+    @Transient
     protected TipoConsumo tipoConsumo;
 
     public Double factorEmision(){
