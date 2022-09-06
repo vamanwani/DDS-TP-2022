@@ -13,13 +13,17 @@ public class SectorTerritorial {
     private Integer id;
     @Column(name = "nombre")
     private String nombre;
-    @Transient
+
+    @Column(name = "agente_sectorial")
     private AgenteSectorial agenteSectorial;
-    @Transient
+
+    @OneToMany
     private List<Localidad> localidades;
-    @Transient
+
+    @OneToMany
     private List<Organizacion> organizaciones;
-    @Transient
+
+    @Column(name = "tipoSector")
     private TipoSectorTerritorial tipoSector;
 
     public void agregarOrganizacion(Organizacion organizacion){

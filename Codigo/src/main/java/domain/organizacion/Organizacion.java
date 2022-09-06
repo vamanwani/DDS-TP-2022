@@ -27,22 +27,22 @@ public class Organizacion {
     @Column(name = "clasificacion")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
-    @Transient
+    @OneToMany
     private List<Sector> sectores;
 
     @Column(name = "razon_social")
     private String razonSocial;
 
-    @Transient
+    @OneToOne
     private Ubicacion ubicacion;
 
-    @Transient
+    @OneToOne
     private Usuario usuario;
 
-    @Transient
+    @OneToMany
     private List<Consumo> consumos = new ArrayList<Consumo>();;
 
-    @Transient
+    @OneToMany
     private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
 
     @Column(name = "link_recomendacion")

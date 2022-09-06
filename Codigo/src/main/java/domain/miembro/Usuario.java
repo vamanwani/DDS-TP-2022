@@ -1,15 +1,33 @@
 package domain.miembro;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "contrasenia")
     private String contrasenia;
+
+    @Column(name = "mail")
     private String mail;
+
+    @Column(name = "telefono")
     private String telefono;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Usuario() {
     }
