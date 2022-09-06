@@ -18,13 +18,14 @@ public class Tramo {
     @Id
     @GeneratedValue
     private Integer id;
-    @Transient
+
+    @Column(name = "medio de transporte")
     private Transporte medioDeTransporte;
-    @Transient
+    @Column(name = "puntoFin")
     private Ubicacion puntoFin;
-    @Transient
+    @Column(name = "puntoInicio")
     private Ubicacion puntoInicio;
-    @Transient
+    @Column(name = "miembroTransporte")
     private List<Miembro> miembrosMismoTransporte;
 
     public Tramo() {

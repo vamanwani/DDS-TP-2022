@@ -24,20 +24,20 @@ public class Miembro {
     @Column(name = "nombre")
     private String nombre;
 
-
     //TODO Definir si documento es una entidad extra o no
+    @Column(name = "nroDoc")
     private int numeroDeDocumento;
 
-
+    @Column(name = "tipoDoc")
     private String tipoDeDocumento;
 
-    @Transient
+    @OneToMany
     private List<Sector> trabajos;
 
-    @Transient //??????????????
+    @OneToOne //??????????????
     private Usuario usuario;
 
-    @Transient
+    @ManyToMany
     private List<Trayecto> trayectos;
 
     @Column(name = "mail")

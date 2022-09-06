@@ -14,11 +14,12 @@ public class Trayecto {
     @GeneratedValue
     private Integer id;
 
-    @Transient
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Tramo> tramos = new ArrayList<>();
 
     @Column(name = "nombre")
     private String nombre;
+
     @Column(name = "descripcion")
     private String descripcion;
 

@@ -13,12 +13,13 @@ public class Sector {
     @Id
     @GeneratedValue
     private int id;
-    @Transient
-    private Miembro agenteSectorial; // REVISAR
-    @Transient
+
+    @OneToMany
     private List<Miembro> miembros;
+
     @Column(name = "nombre")
     private String nombre;
+
     @ManyToOne
     @JoinColumn(name = "organizacion_id")
     private Organizacion organizacion;
@@ -35,8 +36,7 @@ public class Sector {
         return miembros;
     }
 
-    public Sector(Miembro agenteSectorial, String nombre) {
-        this.agenteSectorial = agenteSectorial;
+    public Sector(String nombre) {
         this.miembros = new ArrayList<>();
         this.nombre = nombre;
     }
