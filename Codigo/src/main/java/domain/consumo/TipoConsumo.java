@@ -16,6 +16,7 @@ public class TipoConsumo implements AsignableFE{
     @Column(name = "unidad")
     private Unidad unidad;
 
+    @Column(name = "valor_fe")
     private double valorParaFE;
 
     public Long getId() {

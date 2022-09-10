@@ -1,14 +1,11 @@
 package domain.sectorTerritorial;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-
+@Entity
+@Table(name = "localidad")
 public class Localidad {
-    public Integer getId() {
-        return id;
-    }
+
 
     @Id
     @GeneratedValue
@@ -17,6 +14,8 @@ public class Localidad {
     @Column(name = "nombre")
     private String nombre;
 
-
+    public Integer getId() {
+        return id;
+    }
 
 }

@@ -1,11 +1,23 @@
 package domain.consumo;
 
-//import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
+import javax.persistence.*;
 
+//import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
+@Entity
+@Table(name = "periodo_imputacion")
 public class PeriodoDeImputacion {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(name = "anio")
     private int anio;
+    @Column(name = "mes")
     private int mes;
+    @Column(name = "periodicidad")
     private TipoPeriodicidad periodicidad; // enum
+
+    public PeriodoDeImputacion() {
+    }
 
     public PeriodoDeImputacion(String formato) {
         this.definirPeriodicidad(formato);

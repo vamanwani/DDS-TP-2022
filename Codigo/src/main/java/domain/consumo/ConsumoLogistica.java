@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("consumoLogistica")
 public class ConsumoLogistica extends Consumo{
-    @Column()
+    @Column(name = "categoria")
     private String categoria;
+    @Column(name = "medio")
     private String medio;
+    @Column(name = "peso")
     private double peso;
+    @Column(name = "distancia")
     private double distancia;
 
     public ConsumoLogistica() {

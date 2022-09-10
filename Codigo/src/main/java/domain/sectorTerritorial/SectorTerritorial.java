@@ -14,7 +14,7 @@ public class SectorTerritorial {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "agente_sectorial")
+    @Embedded
     private AgenteSectorial agenteSectorial;
 
     @OneToMany

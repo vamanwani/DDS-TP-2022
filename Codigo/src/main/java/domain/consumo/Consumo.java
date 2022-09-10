@@ -11,13 +11,13 @@ public abstract class Consumo {
     @GeneratedValue
     private Integer id;
 
-    @Transient
+    @Column(name = "actividad")
     protected Actividad actividad;
-    @Transient
+    @Column(name = "periodo_imputacion")
     protected PeriodoDeImputacion periodicidad;
     @Column(name = "proxima_acreditacion")
     protected int proximaAcreditacionConsumo;
-    @Transient
+    @Column(name = "tipo_consumo")
     protected TipoConsumo tipoConsumo;
 
     public Double factorEmision(){

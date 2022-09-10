@@ -9,7 +9,7 @@ public class Actividad implements AsignableFE {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "alacnce")
+    @Column(name = "alcance")
     private TipoAlcance alcance;
 
     @Column(name = "tipoActividad")

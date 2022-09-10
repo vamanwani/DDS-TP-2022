@@ -19,6 +19,7 @@ public class Ubicacion extends PadreDeUbicacion{
     private int altura;
 
     @ManyToOne
+    @JoinColumn(name = "localidad_id")
     private Localidad nombreLocalidad;
 
     public Long getId() {
