@@ -23,10 +23,10 @@ public class Tramo {
     @JoinColumn(name = "transporte_id")
     private Transporte medioDeTransporte;
     @OneToOne
-    @JoinColumn(name = "ubicacion_id")
+    @JoinColumn(name = "ubicacionInicio_id")
     private Ubicacion puntoFin;
     @OneToOne
-    @JoinColumn(name = "ubicacion_id")
+    @JoinColumn(name = "ubicacionFin_id")
     private Ubicacion puntoInicio;
     @ManyToMany
     @JoinColumn(name = "miembro_id")

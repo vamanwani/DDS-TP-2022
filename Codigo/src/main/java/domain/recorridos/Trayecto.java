@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.arrayList;
+//@Entity
 @Entity
 @Table(name = "trayecto")
 public class Trayecto {

@@ -24,7 +24,7 @@ public class DistanciaTest {
 
     @Before
     public void init() throws IOException {
-        this.adapterMock = mock(GeoddsServceAdapter.class);
+        /*this.adapterMock = mock(GeoddsServceAdapter.class);
         this.servicioGeodds = ServicioGeodds.getInstance();
         //this.adapterPrueba = new ServicioGeoDdsRetrofitAdapter();
         this.servicioGeodds.setAdapter(this.adapterMock);
@@ -33,7 +33,7 @@ public class DistanciaTest {
         this.segundaUbicacion = new Ubicacion("Constitucion", 1500, "Constitucion");
         segundaUbicacion.setLocalidades(servicioGeodds.localidades());
         this.terceraUbicacion = new Ubicacion("Mitre",750,"Ciudad de buenos aires");
-
+*/
     }
 
 //    @BeforeEach

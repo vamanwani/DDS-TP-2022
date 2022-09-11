@@ -20,7 +20,7 @@ public class Parada {
     @OneToOne
     @JoinColumn(name = "parada_sig_id")
     private Parada paradaSiguiente;
-    @Column(name = "distancia_parada_ant")
+    @Column(name = "distancia_parada_sig")
     private double distanciaParadaSiguiente;
 
     public void setLocalizacion(Ubicacion localizacion) {

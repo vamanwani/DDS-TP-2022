@@ -3,16 +3,19 @@ package domain.transporte;
 import domain.services.adapters.ServicioGeodds;
 import domain.ubicacion.Ubicacion;
 
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 import java.io.IOException;
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Transporte {
+    @Transient
     private ServicioGeodds distanciaAPI;
-    private String id;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
     public String getId() {
-        return id;
+        return id.toString();
     }
 
     public void setDistanciaAPI() throws IOException {

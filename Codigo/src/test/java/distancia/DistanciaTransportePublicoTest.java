@@ -26,7 +26,7 @@ public class DistanciaTransportePublicoTest {
         public Parada cuartaParada;
         @Before
         public void init() throws IOException {
-                ubicacionPrimeraParada = new Ubicacion("Leandro Alem", 400, "Ciudad de buenos Aires");
+                /*ubicacionPrimeraParada = new Ubicacion("Leandro Alem", 400, "Ciudad de buenos Aires");
                 ubicacionSegundaParada = new Ubicacion("Florida", 500, "Ciudad de Buenos Aires");
                 ubicacionTerceraParada = new Ubicacion("Carlos pellegrini",400,"Ciudad de buenosAires");
                 ubicacionCuartaParada = new Ubicacion("Av corrientes",1400,"Ciudad De Buenos Aires");
@@ -44,7 +44,7 @@ public class DistanciaTransportePublicoTest {
 
                 subte.setParadas(paradas);
 
-
+*/
                 //this.subte = new TransportePublico("Subte B", //TipoTransportePublico.lineaSubte,);
         }
 
