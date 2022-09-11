@@ -9,13 +9,14 @@ public class Actividad implements AsignableFE {
     @GeneratedValue
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "alcance")
     private TipoAlcance alcance;
 
     @Column(name = "tipoActividad")
     private String nombre;
 
-    @Transient
+    @Column(name = "valor_fe")
     private double valorParaFE;
 
     public Long getId() {

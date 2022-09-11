@@ -15,6 +15,7 @@ public class Sector {
     private int id;
 
     @OneToMany
+    @JoinColumn(name = "miembro_id")
     private List<Miembro> miembros;
 
     @Column(name = "nombre")

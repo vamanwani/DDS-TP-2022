@@ -13,6 +13,7 @@ public class PeriodoDeImputacion {
     private int anio;
     @Column(name = "mes")
     private int mes;
+    @Enumerated(EnumType.STRING)
     @Column(name = "periodicidad")
     private TipoPeriodicidad periodicidad; // enum
 

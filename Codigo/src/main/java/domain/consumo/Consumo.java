@@ -11,13 +11,16 @@ public abstract class Consumo {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "actividad")
+    @OneToOne
+    @JoinColumn(name = "actividad_id")
     protected Actividad actividad;
-    @Column(name = "periodo_imputacion")
+    @ManyToOne
+    @JoinColumn(name = "periodo_imputacion_id")
     protected PeriodoDeImputacion periodicidad;
     @Column(name = "proxima_acreditacion")
     protected int proximaAcreditacionConsumo;
-    @Column(name = "tipo_consumo")
+    @ManyToOne
+    @JoinColumn(name = "tipo_consumo_id")
     protected TipoConsumo tipoConsumo;
 
     public Double factorEmision(){

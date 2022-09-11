@@ -21,28 +21,34 @@ public class Organizacion {
     @GeneratedValue
     private int id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_org")
     private TipoDeOrganizacion tipoDeOrganizacion;
 
-    @Column(name = "clasificacion")
+    @Embedded
     private ClasificaciónDeOrg clasificacionDeOrg;
 
     @OneToMany
+    @JoinColumn(name = "sector_id")
     private List<Sector> sectores;
 
     @Column(name = "razon_social")
     private String razonSocial;
 
     @OneToOne
+    @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
 
     @OneToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @OneToMany
+    @JoinColumn(name = "consumo_id")
     private List<Consumo> consumos = new ArrayList<Consumo>();;
 
     @OneToMany
+    @JoinColumn(name = "miembro_id")
     private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
 
     @Column(name = "link_recomendacion")

@@ -32,12 +32,15 @@ public class Miembro {
     private String tipoDeDocumento;
 
     @OneToMany
+    @JoinColumn(name = "sector_id")
     private List<Sector> trabajos;
 
     @OneToOne //??????????????
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @ManyToMany
+    @JoinColumn(name = "trayecto_id")
     private List<Trayecto> trayectos;
 
     @Column(name = "mail")

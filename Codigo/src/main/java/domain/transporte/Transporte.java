@@ -3,8 +3,10 @@ package domain.transporte;
 import domain.services.adapters.ServicioGeodds;
 import domain.ubicacion.Ubicacion;
 
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.io.IOException;
-
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Transporte {
     private ServicioGeodds distanciaAPI;
     private String id;

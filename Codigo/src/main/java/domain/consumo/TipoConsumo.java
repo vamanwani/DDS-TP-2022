@@ -4,7 +4,7 @@ package domain.consumo;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tipoConsumo")
+@Table(name = "tipo_consumo")
 public class TipoConsumo implements AsignableFE{
     @Id
     @GeneratedValue
@@ -13,6 +13,7 @@ public class TipoConsumo implements AsignableFE{
     @Column(name = "nombre")
     private String nombre;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "unidad")
     private Unidad unidad;
 

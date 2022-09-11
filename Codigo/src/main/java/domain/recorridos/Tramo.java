@@ -19,13 +19,17 @@ public class Tramo {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "medio de transporte")
+    @OneToOne
+    @JoinColumn(name = "transporte_id")
     private Transporte medioDeTransporte;
-    @Column(name = "puntoFin")
+    @OneToOne
+    @JoinColumn(name = "ubicacion_id")
     private Ubicacion puntoFin;
-    @Column(name = "puntoInicio")
+    @OneToOne
+    @JoinColumn(name = "ubicacion_id")
     private Ubicacion puntoInicio;
-    @Column(name = "miembroTransporte")
+    @ManyToMany
+    @JoinColumn(name = "miembro_id")
     private List<Miembro> miembrosMismoTransporte;
 
     public Tramo() {

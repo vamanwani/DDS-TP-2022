@@ -18,11 +18,14 @@ public class SectorTerritorial {
     private AgenteSectorial agenteSectorial;
 
     @OneToMany
+    @JoinColumn(name = "localidad_id")
     private List<Localidad> localidades;
 
     @OneToMany
+    @JoinColumn(name = "organizacion_id")
     private List<Organizacion> organizaciones;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipoSector")
     private TipoSectorTerritorial tipoSector;
 
