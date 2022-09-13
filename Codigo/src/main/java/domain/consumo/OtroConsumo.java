@@ -7,6 +7,14 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("otroConsumo")
 public class OtroConsumo extends Consumo{
+    public double getValorConsumo() {
+        return valorConsumo;
+    }
+
+    public void setValorConsumo(double valorConsumo) {
+        this.valorConsumo = valorConsumo;
+    }
+
     @Column(name = "valor")
     private double valorConsumo;
 

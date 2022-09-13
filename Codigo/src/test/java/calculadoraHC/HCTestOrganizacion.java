@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.internal.matchers.Or;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +57,7 @@ public class HCTestOrganizacion {
 
     }
     @Test
-    public void testConsumosOrganizacion(){
+    public void testConsumosOrganizacion() throws IOException {
 
         Assert.assertEquals(organizacion.calcularHCOrganizacion(new PeriodoDeImputacion("2022")), 225690, 0);
         Assert.assertEquals(organizacion.calcularHCOrganizacion(new PeriodoDeImputacion("2023")), 0, 0);

@@ -39,6 +39,10 @@ public class Miembro {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    public List<Trayecto> getTrayectos() {
+        return trayectos;
+    }
+
     @OneToMany
     @JoinColumn(name = "trayecto_id")
     private List<Trayecto> trayectos;

@@ -1,19 +1,24 @@
 package domain.organizacion; //TODO ORGANIZACION RECIBE LAS RECOMENDACIONES
 
 import domain.calculoHC.CalculadoraHCOrganizacion;
+import domain.calculoHC.CalculdoraHCMiembro;
 import domain.consumo.Consumo;
 import domain.consumo.PeriodoDeImputacion;
 import domain.consumo.TipoPeriodicidad;
 import domain.miembro.Miembro;
 import domain.miembro.Usuario;
+import domain.recorridos.Trayecto;
 import domain.ubicacion.Ubicacion;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Entity
 @Table(name = "organizacion")
 public class Organizacion {
@@ -29,7 +34,7 @@ public class Organizacion {
     @Embedded
     private ClasificaciónDeOrg clasificacionDeOrg;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sector")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizacion")
     private List<Sector> sectores;
 
     @Column(name = "razon_social")
@@ -102,10 +107,21 @@ public class Organizacion {
     public void agregarSectores(Sector sector){
         this.sectores.add(sector);
     }
-    public double calcularHCOrganizacion (PeriodoDeImputacion periodoACalcular) {
-        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular);
+    public double calcularHCOrganizacion(PeriodoDeImputacion periodoACalcular) throws IOException {
+        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular) + hcMiembrosOrganizacion();
+
         //+ sectores.stream().mapToDouble(sector -> sector.calcularHCSector()).sum();
     }
 
+    public double hcMiembrosOrganizacion() throws IOException {
+        List<Double> hcs = new ArrayList<>();
+        for (Miembro m : listarMiembros()){
+            hcs.add(new CalculdoraHCMiembro().calcularHC(m.getTrayectos()));
+        }
+        return  hcs.stream().mapToDouble(Double::doubleValue).sum();
+    }
 
+    public List<Sector> getSectores() {
+        return sectores;
+    }
 }

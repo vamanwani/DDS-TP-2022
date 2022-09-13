@@ -31,6 +31,9 @@ public abstract class Consumo {
         return null;
     }
 
+    public void setTipoConsumo(TipoConsumo consumo){
+        tipoConsumo = consumo;
+    }
     public PeriodoDeImputacion getPeriodicidad() {
         return periodicidad;
     }

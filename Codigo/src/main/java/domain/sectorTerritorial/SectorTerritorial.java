@@ -4,6 +4,7 @@ import domain.consumo.PeriodoDeImputacion;
 import domain.organizacion.Organizacion;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.List;
 @Entity
 @Table(name = "sectorTerritorial")
@@ -13,6 +14,8 @@ public class SectorTerritorial {
     private Integer id;
     @Column(name = "nombre")
     private String nombre;
+
+
 
     @Embedded
     private AgenteSectorial agenteSectorial;
@@ -37,7 +40,17 @@ public class SectorTerritorial {
 
     public double calcularHCSectorTerritorial(){
         PeriodoDeImputacion periodoDeImputacion = null;
-        return organizaciones.stream().mapToDouble(o -> o.calcularHCOrganizacion(periodoDeImputacion)).sum();
+        return organizaciones.stream().mapToDouble(o -> {
+            try {
+                return o.calcularHCOrganizacion(periodoDeImputacion);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).sum();
+    }
+
+    public List<Organizacion> getOrganizaciones() {
+        return organizaciones;
     }
 
 }
