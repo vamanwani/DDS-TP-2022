@@ -3,17 +3,32 @@ package domain.transporte;
 import domain.ubicacion.Parada;
 import domain.ubicacion.Ubicacion;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "transporte_publico")
 public class TransportePublico extends Transporte {
+    @Id
+    @GeneratedValue
+    private Integer id;
+    @Column(name = "linea")
     private String linea;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transporte")
     private TipoTransportePublico transporte;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parada_id")
     private List<Parada> paradas;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parada_id")
     private Parada paradaInicial;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parada_id")
     private Parada paradaFinal;
 
 

@@ -12,17 +12,17 @@ import java.util.*;
 public class Sector {
     @Id
     @GeneratedValue
+    @Column(name = "id_sector")
     private int id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
     private List<Miembro> miembros;
 
     @Column(name = "nombre")
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "organizacion_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organizacion organizacion;
 
     public void setOrganizacion(Organizacion organizacion) {

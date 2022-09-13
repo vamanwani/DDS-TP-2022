@@ -9,6 +9,7 @@ public class Localidad {
 
     @Id
     @GeneratedValue
+    @Column(name = "id_localidad")
     private Integer id;
 
     @Column(name = "nombre")

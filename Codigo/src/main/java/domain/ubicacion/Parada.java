@@ -6,18 +6,18 @@ import javax.persistence.*;
 @Table(name = "parada")
 public class Parada {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id_parada", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localizacion_id")
     private Ubicacion localizacion;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parada_ant_id")
     private Parada paradaAnterior;
     @Column(name = "distancia_parada_ant")
     private double distanciaParadaAnterior;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parada_sig_id")
     private Parada paradaSiguiente;
     @Column(name = "distancia_parada_sig")

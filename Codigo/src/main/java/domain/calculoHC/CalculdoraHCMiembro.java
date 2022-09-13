@@ -1,16 +1,15 @@
 package domain.calculoHC;
 
-import domain.consumo.FactorEmision;
+import domain.consumo.FactorDeEmision;
 import domain.recorridos.Tramo;
 import domain.recorridos.Trayecto;
-import domain.services.entities.Distancia;
 
 import java.io.IOException;
 import java.util.List;
 
 public class CalculdoraHCMiembro {
 
-    private FactorEmision fe = new FactorEmision();
+    private FactorDeEmision fe = new FactorDeEmision();
 
     public double calcularHC(List<Trayecto> trayectos) throws IOException {
         double HC = 0;
@@ -19,7 +18,7 @@ public class CalculdoraHCMiembro {
                 if (tramo.getMedioDeTransporte().getId() == "Transporte analogico") {
                     HC += 0;
                 } else {
-                    HC += (tramo.distanciaTramo() * fe.getFeTramo()) / tramo.getMiembrosMismoTransporte().size();
+                    HC += (tramo.distanciaTramo() * fe.getValorFE()) / tramo.getMiembrosMismoTransporte().size();
                 }
             }
         }

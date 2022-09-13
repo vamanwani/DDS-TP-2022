@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Actividad implements AsignableFE {
     @Id
     @GeneratedValue
+    @Column(name = "actividad_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)

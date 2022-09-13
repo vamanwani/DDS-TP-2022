@@ -9,17 +9,18 @@ import javax.persistence.*;
 public abstract class Consumo {
     @Id
     @GeneratedValue
+    @Column(name = "consumo_id")
     private Integer id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "actividad_id")
     protected Actividad actividad;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "periodo_imputacion_id")
     protected PeriodoDeImputacion periodicidad;
     @Column(name = "proxima_acreditacion")
     protected int proximaAcreditacionConsumo;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_consumo_id")
     protected TipoConsumo tipoConsumo;
 

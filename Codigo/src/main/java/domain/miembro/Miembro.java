@@ -15,7 +15,8 @@ import java.util.List;
 @Table(name = "miembro")
 public class Miembro {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
+    @Column(name = "miembro_id")
     private Long id;
 
     @Column(name = "apellido")
@@ -24,22 +25,21 @@ public class Miembro {
     @Column(name = "nombre")
     private String nombre;
 
-    //TODO Definir si documento es una entidad extra o no
     @Column(name = "nroDoc")
     private int numeroDeDocumento;
 
     @Column(name = "tipoDoc")
     private String tipoDeDocumento;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "sector_id")
     private List<Sector> trabajos;
 
-    @OneToOne //??????????????
+    @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "trayecto_id")
     private List<Trayecto> trayectos;
 

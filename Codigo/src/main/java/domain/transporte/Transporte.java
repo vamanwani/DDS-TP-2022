@@ -8,10 +8,7 @@ import java.io.IOException;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Transporte {
-    @Transient
     private ServicioGeodds distanciaAPI;
-    @Id
-    @GeneratedValue
     private Integer id;
 
     public String getId() {

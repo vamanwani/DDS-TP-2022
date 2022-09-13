@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class Organizacion {
     @Id
     @GeneratedValue
+    @Column(name = "id_organizacion")
     private int id;
 
     @Enumerated(EnumType.STRING)
@@ -28,8 +29,7 @@ public class Organizacion {
     @Embedded
     private ClasificaciónDeOrg clasificacionDeOrg;
 
-    @OneToMany
-    @JoinColumn(name = "sector_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sector")
     private List<Sector> sectores;
 
     @Column(name = "razon_social")
@@ -39,15 +39,15 @@ public class Organizacion {
     @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "consumo_id")
     private List<Consumo> consumos = new ArrayList<Consumo>();;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
     private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
 

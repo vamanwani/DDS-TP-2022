@@ -17,18 +17,19 @@ import java.util.*;
 public class Tramo {
     @Id
     @GeneratedValue
+    @Column(name = "id_tramo")
     private Integer id;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transporte_id")
     private Transporte medioDeTransporte;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionInicio_id")
     private Ubicacion puntoFin;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionFin_id")
     private Ubicacion puntoInicio;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
     private List<Miembro> miembrosMismoTransporte;
 

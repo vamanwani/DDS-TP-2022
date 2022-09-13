@@ -1,5 +1,5 @@
 package domain.recorridos;
-
+import org.apache.poi.ss.formula.functions.Na;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -13,6 +13,7 @@ import java.util.List;
 public class Trayecto {
     @Id
     @GeneratedValue
+    @Column(name = "id_trayecto")
     private Integer id;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

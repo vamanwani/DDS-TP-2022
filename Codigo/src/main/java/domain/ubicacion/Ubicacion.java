@@ -10,6 +10,7 @@ import java.util.Locale;
 public class Ubicacion extends PadreDeUbicacion{
     @Id
     @GeneratedValue
+    @Column(name = "id_ubicacion")
     private Long id;
 
     @Column(name = "calle")
@@ -18,7 +19,7 @@ public class Ubicacion extends PadreDeUbicacion{
     @Column(name = "altura")
     private int altura;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
     private Localidad nombreLocalidad;
 

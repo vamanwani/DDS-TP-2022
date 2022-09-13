@@ -17,11 +17,11 @@ public class SectorTerritorial {
     @Embedded
     private AgenteSectorial agenteSectorial;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
     private List<Localidad> localidades;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizacion_id")
     private List<Organizacion> organizaciones;
 

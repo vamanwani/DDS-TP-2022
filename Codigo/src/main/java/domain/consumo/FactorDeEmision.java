@@ -9,19 +9,20 @@ import javax.persistence.*;
 public class FactorDeEmision{
     @Id
     @GeneratedValue
+    @Column(name = "id_factorEmision")
     private Integer id;
 
     @Column(name = "valor_fe")
     private double valorFE;
 
 
-    public Double calcularFE(Actividad actividad, TipoConsumo consumo){
-        //TODO
-        return null;
+    //borramos metodos calcularFE, calcularFETransporte
+
+    public double getValorFE() {
+        return valorFE;
     }
 
-    public Double calcularFETransporte (Transporte medioTransporte){
-        //TODO
-        return null;
+    public void setValor(double valorFE){
+        this.valorFE = valorFE;
     }
 }
