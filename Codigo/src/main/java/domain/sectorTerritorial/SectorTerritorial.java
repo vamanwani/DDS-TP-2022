@@ -32,6 +32,10 @@ public class SectorTerritorial {
     @Column(name = "tipoSector")
     private TipoSectorTerritorial tipoSector;
 
+    public TipoSectorTerritorial getTipoSector() {
+        return tipoSector;
+    }
+
     public void agregarOrganizacion(Organizacion organizacion){
         if(localidades.contains(organizacion.getUbicacion().idLocalidad()) && !organizaciones.contains(organizacion)){
             organizaciones.add(organizacion);

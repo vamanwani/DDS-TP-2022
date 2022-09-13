@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class TransportePublico extends Transporte {
     @Id
     @GeneratedValue
+    @Column(name = "transporte_id")
     private Integer id;
     @Column(name = "linea")
     private String linea;
@@ -22,15 +23,18 @@ public class TransportePublico extends Transporte {
     @Column(name = "transporte")
     private TipoTransportePublico transporte;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parada_id")
+    @JoinColumn(name = "paradas_id")
     private List<Parada> paradas;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parada_id")
+    @JoinColumn(name = "paradaInicio_id")
     private Parada paradaInicial;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parada_id")
+    @JoinColumn(name = "paradaFinal_id")
     private Parada paradaFinal;
 
+
+    public TransportePublico() {
+    }
 
     public TransportePublico(String linea,
                              TipoTransportePublico transporte,

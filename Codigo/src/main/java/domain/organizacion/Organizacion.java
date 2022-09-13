@@ -44,7 +44,7 @@ public class Organizacion {
     @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

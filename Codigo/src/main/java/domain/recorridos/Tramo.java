@@ -20,6 +20,7 @@ public class Tramo {
     @Column(name = "id_tramo")
     private Integer id;
 
+    @Transient
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transporte_id")
     private Transporte medioDeTransporte;
