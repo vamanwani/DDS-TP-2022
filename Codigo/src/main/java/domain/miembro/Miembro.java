@@ -123,4 +123,8 @@ public class Miembro {
         PeriodoDeImputacion periodoDeImputacion = null;
         return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion(periodoDeImputacion);
     }
+
+    public void generarSolicitud(Organizacion organizacion){
+        new SolicitudVinculacion(this, organizacion);
+    }
 }

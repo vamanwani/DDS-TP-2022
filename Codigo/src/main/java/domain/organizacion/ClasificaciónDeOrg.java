@@ -1,10 +1,13 @@
 package domain.organizacion;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
-@Embeddable
+@Entity
+@Table(name = "clasificacion_org")
 public class ClasificaciónDeOrg {
+    @Id
+    @GeneratedValue
+    private Integer id;
     @Column(name = "clasificacion")
     private String nombre;
 

@@ -6,6 +6,7 @@ import domain.consumo.Consumo;
 import domain.consumo.PeriodoDeImputacion;
 import domain.consumo.TipoPeriodicidad;
 import domain.miembro.Miembro;
+import domain.miembro.SolicitudVinculacion;
 import domain.miembro.Usuario;
 import domain.recorridos.Trayecto;
 import domain.ubicacion.Ubicacion;
@@ -31,7 +32,12 @@ public class Organizacion {
     @Column(name = "tipo_org")
     private TipoDeOrganizacion tipoDeOrganizacion;
 
-    @Embedded
+    @OneToMany
+    @JoinColumn(name = "solicitud_vinculacion_id")
+    private List<SolicitudVinculacion> solicitudes;
+
+    @ManyToOne
+    @JoinColumn(name = "clasificacion_org")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizacion")
