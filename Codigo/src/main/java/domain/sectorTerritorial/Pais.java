@@ -6,7 +6,7 @@ public class Pais {
     private Set<SectorTerritorial> sectoresTerritoriales;
 
     public double calcularHCPais(){
-        return sectoresTerritoriales.stream().mapToDouble(s -> s.calcularHCSectorTerritorial()).sum();
+        return sectoresTerritoriales.stream().mapToDouble(s -> s.calcularHCSectorTerritorial(null)).sum();
     }
 
     public Set<SectorTerritorial> getSectoresTerritoriales() {

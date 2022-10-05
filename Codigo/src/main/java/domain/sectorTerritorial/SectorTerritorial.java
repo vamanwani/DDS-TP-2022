@@ -2,6 +2,7 @@ package domain.sectorTerritorial;
 
 import domain.consumo.PeriodoDeImputacion;
 import domain.organizacion.Organizacion;
+import javafx.beans.binding.BooleanExpression;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -12,10 +13,9 @@ public class SectorTerritorial {
     @Id
     @GeneratedValue
     private Integer id;
+
     @Column(name = "nombre")
     private String nombre;
-
-
 
     @Embedded
     private AgenteSectorial agenteSectorial;
@@ -23,6 +23,10 @@ public class SectorTerritorial {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
     private List<Localidad> localidades;
+
+    public String getNombre() {
+        return nombre;
+    }
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizacion_id")
@@ -42,8 +46,11 @@ public class SectorTerritorial {
         }
     }
 
-    public double calcularHCSectorTerritorial(){
-        PeriodoDeImputacion periodoDeImputacion = null;
+    public Boolean esProvincia(){
+        return this.tipoSector == TipoSectorTerritorial.PROCVINCIAS;
+    }
+
+    public double calcularHCSectorTerritorial(PeriodoDeImputacion periodoDeImputacion){
         return organizaciones.stream().mapToDouble(o -> {
             try {
                 return o.calcularHCOrganizacion(periodoDeImputacion);
@@ -51,6 +58,14 @@ public class SectorTerritorial {
                 throw new RuntimeException(e);
             }
         }).sum();
+    }
+
+    public double calcularHCSectorHistorico() throws IOException{
+        double hc = 0;
+        for (Organizacion organizacion : organizaciones){
+            hc += organizacion.calcularHCOrgHistorico();
+        }
+        return hc;
     }
 
     public List<Organizacion> getOrganizaciones() {

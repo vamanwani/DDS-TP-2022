@@ -64,6 +64,10 @@ public class Sector {
         return miembrosQuePertenecen;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public double calcularHCSector() {
         return new CalculadoraHCSector().calcularHC(miembros);
     }

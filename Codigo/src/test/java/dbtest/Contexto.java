@@ -21,7 +21,7 @@ public class Contexto {
     }
     @Test
     public void persistirUsuario() {
-        Usuario usuario = new Usuario("vmanwani", "password", "atolaba@utn.frba.utn.ar", "1112345678");
+        //Usuario usuario = new Usuario("vmanwani", "password", "atolaba@utn.frba.utn.ar", "1112345678");
         Miembro miembro = new Miembro("Manwani", "Vignesh", 12345679, "DNI", null);
 
         EntityManagerHelper.beginTransaction();

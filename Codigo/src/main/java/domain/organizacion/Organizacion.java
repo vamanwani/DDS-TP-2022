@@ -40,6 +40,10 @@ public class Organizacion {
     @JoinColumn(name = "clasificacion_org")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
+    public ClasificaciónDeOrg getClasificacionDeOrg() {
+        return clasificacionDeOrg;
+    }
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "organizacion")
     private List<Sector> sectores;
 
@@ -113,10 +117,19 @@ public class Organizacion {
     public void agregarSectores(Sector sector){
         this.sectores.add(sector);
     }
+
     public double calcularHCOrganizacion(PeriodoDeImputacion periodoACalcular) throws IOException {
         return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular) + hcMiembrosOrganizacion();
 
         //+ sectores.stream().mapToDouble(sector -> sector.calcularHCSector()).sum();
+    }
+
+    public double calcularHCOrgHistorico() throws IOException{
+        double hc = 0;
+        for (int i = 0; i < consumos.size(); i++){
+            hc += this.calcularHCOrganizacion(consumos.get(i).getPeriodicidad());
+        }
+        return hc;
     }
 
     public double hcMiembrosOrganizacion() throws IOException {
@@ -129,5 +142,9 @@ public class Organizacion {
 
     public List<Sector> getSectores() {
         return sectores;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
     }
 }
