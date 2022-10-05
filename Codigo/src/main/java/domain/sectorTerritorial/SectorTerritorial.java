@@ -2,10 +2,12 @@ package domain.sectorTerritorial;
 
 import domain.consumo.PeriodoDeImputacion;
 import domain.organizacion.Organizacion;
+import domain.organizacion.Sector;
 import javafx.beans.binding.BooleanExpression;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "sectorTerritorial")
@@ -24,6 +26,10 @@ public class SectorTerritorial {
     @JoinColumn(name = "localidad_id")
     private List<Localidad> localidades;
 
+    public SectorTerritorial() {
+        this.organizaciones = new ArrayList<>();
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -36,6 +42,15 @@ public class SectorTerritorial {
     @Column(name = "tipoSector")
     private TipoSectorTerritorial tipoSector;
 
+    public SectorTerritorial(String nombre){
+        this.organizaciones = new ArrayList<>();
+        this.nombre = nombre;
+    }
+
+    public void setTipoSector(TipoSectorTerritorial tipoSector) {
+        this.tipoSector = tipoSector;
+    }
+
     public TipoSectorTerritorial getTipoSector() {
         return tipoSector;
     }
@@ -44,6 +59,10 @@ public class SectorTerritorial {
         if(localidades.contains(organizacion.getUbicacion().idLocalidad()) && !organizaciones.contains(organizacion)){
             organizaciones.add(organizacion);
         }
+    }
+
+    public void setOrganizaciones(Organizacion organizacion) {
+        this.organizaciones.add(organizacion);
     }
 
     public Boolean esProvincia(){
@@ -71,5 +90,6 @@ public class SectorTerritorial {
     public List<Organizacion> getOrganizaciones() {
         return organizaciones;
     }
+
 
 }

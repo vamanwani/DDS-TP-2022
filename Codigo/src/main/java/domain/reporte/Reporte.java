@@ -90,9 +90,9 @@ public class Reporte {
         return map;
     }
 
-    public Double contenidoReporteHCSectorTerritorial(SectorTerritorial sectorTerritorial){
+    public Double contenidoReporteHCSectorTerritorial(SectorTerritorial sectorTerritorial) throws IOException{
         //Sumatoria de las hc de cada organizacion (usando calculadora para c/u)
-            return sectorTerritorial.calcularHCSectorTerritorial(null);
+            return sectorTerritorial.calcularHCSectorHistorico();
     }
 
 }

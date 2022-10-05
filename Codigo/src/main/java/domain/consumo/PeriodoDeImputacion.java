@@ -17,6 +17,7 @@ public class PeriodoDeImputacion {
     @Column(name = "periodicidad")
     private TipoPeriodicidad periodicidad; // enum
 
+
     public PeriodoDeImputacion() {
     }
 

@@ -24,6 +24,10 @@ public abstract class Consumo {
     @JoinColumn(name = "tipo_consumo_id")
     protected TipoConsumo tipoConsumo;
 
+    public void setPeriodicidad(PeriodoDeImputacion periodicidad) {
+        this.periodicidad = periodicidad;
+    }
+
     public Double factorEmision(){
         String tipoConsumo = this.tipoConsumo.getNombre();
         String tipoActividad = this.actividad.getNombre();

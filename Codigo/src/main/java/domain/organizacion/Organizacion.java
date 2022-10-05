@@ -106,6 +106,8 @@ public class Organizacion {
       this.tipoDeOrganizacion = tipoDeOrganizacion;
   }
 
+  public void setClasificacionDeOrg(ClasificaciónDeOrg clasificacionDeOrg){ this.clasificacionDeOrg = clasificacionDeOrg;}
+
     public Set<Miembro> getContactos() {
         return contactos;
     }
