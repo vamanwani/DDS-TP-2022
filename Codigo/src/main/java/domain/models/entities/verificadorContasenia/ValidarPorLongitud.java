@@ -1,4 +1,4 @@
-package domain.verificadorContasenia;
+package domain.models.entities.verificadorContasenia;
 
 public class ValidarPorLongitud extends Validacion{
 

@@ -1,6 +1,7 @@
 package Validador;
 
-import domain.verificadorContasenia.*;
+import domain.models.entities.verificadorContasenia.*;
+import domain.models.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,12 +50,12 @@ public class ValidadorIntegradorTest {
     @Test
     public void testValidadorIntegrador() throws FileNotFoundException
     {
-        validadorIntegrador.agregarValidador(validadorPorNumero);
-        validadorIntegrador.agregarValidador(validadorPorLongitud);
-        validadorIntegrador.agregarValidador(validadorPorMayuscula);
-        validadorIntegrador.agregarValidador(validadorPorMinuscula);
+        //validadorIntegrador.agregarValidador(validadorPorNumero);
+        //validadorIntegrador.agregarValidador(validadorPorLongitud);
+        //validadorIntegrador.agregarValidador(validadorPorMayuscula);
+        //validadorIntegrador.agregarValidador(validadorPorMinuscula);
         validadorIntegrador.agregarValidador(validadorPorDiezMilPeores);
-        String claveValidaMenosNumero = "PPSLDWMDASDWDASDASDasdw1";
+        String claveValidaMenosNumero = "qwerty1dewdew";
         Assert.assertTrue(validadorIntegrador.todosLosValidadores(claveValidaMenosNumero));
     }
 

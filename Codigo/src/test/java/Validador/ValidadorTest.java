@@ -1,6 +1,7 @@
 package Validador;
 
-import domain.verificadorContasenia.*;
+import domain.models.entities.verificadorContasenia.*;
+import domain.controllers.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

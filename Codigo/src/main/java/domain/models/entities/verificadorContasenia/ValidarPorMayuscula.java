@@ -1,4 +1,4 @@
-package domain.verificadorContasenia;
+package domain.models.entities.verificadorContasenia;
 
 import org.jetbrains.annotations.NotNull;
 

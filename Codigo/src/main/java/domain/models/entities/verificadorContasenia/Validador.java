@@ -1,11 +1,4 @@
-package domain.verificadorContasenia;
-
-import domain.verificadorContasenia.Validacion;
-import domain.verificadorContasenia.ValidarPorDiezMilPeores;
-import domain.verificadorContasenia.ValidarPorLongitud;
-import domain.verificadorContasenia.ValidarPorMayuscula;
-import domain.verificadorContasenia.ValidarPorMinuscula;
-import domain.verificadorContasenia.ValidarPorNumero;
+package domain.models.entities.verificadorContasenia;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,11 +34,11 @@ public class Validador {
         this.contraseniasNoSeguras = new ArrayList<>();
         this.validaciones = new ArrayList<>();
         guardarListaNoSegura();
-        /*this.validadorPorNumero = new ValidarPorNumero();
+        this.validadorPorNumero = new ValidarPorNumero();
         this.validadorPorMinuscula = new ValidarPorMinuscula();
         this.validadorPorMayuscula = new ValidarPorMayuscula();
         this.validadorPorLongitud = new ValidarPorLongitud();
-        this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores(this.contraseniasNoSeguras);*/
+        this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores(this.contraseniasNoSeguras);
     }
 
 
