@@ -1,15 +1,16 @@
 package reportes;
 
 import domain.consumo.*;
-import domain.miembro.Miembro;
-import domain.miembro.Usuario;
-import domain.organizacion.ClasificaciónDeOrg;
-import domain.organizacion.Organizacion;
-import domain.organizacion.Sector;
-import domain.reporte.Reporte;
-import domain.sectorTerritorial.Pais;
-import domain.sectorTerritorial.SectorTerritorial;
-import domain.sectorTerritorial.TipoSectorTerritorial;
+import domain.models.entities.consumo.*;
+import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.Usuario;
+import domain.models.entities.organizacion.ClasificaciónDeOrg;
+import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
+import domain.models.entities.reporte.Reporte;
+import domain.models.entities.sectorTerritorial.Pais;
+import domain.models.entities.sectorTerritorial.SectorTerritorial;
+import domain.models.entities.sectorTerritorial.TipoSectorTerritorial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.*;
 
-import static domain.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
+import static domain.models.entities.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
 
 public class ReportesInit {
 
@@ -64,7 +65,7 @@ public class ReportesInit {
         otraOrganizacion = new Organizacion();
         otraOrganizacion.setClasificacionDeOrg(clasificaciónDeOrg2);
         primerConsumo = new ConsumoLogistica();
-        primerTipoConsumo = new TipoConsumo("Nafta",Unidad.LT);
+        primerTipoConsumo = new TipoConsumo("Nafta", Unidad.LT);
         primerTipoConsumo.setValorParaFE(2.0);
         primerConsumo.setTipoConsumo(primerTipoConsumo);
         primerConsumo.setDistancia(24.0);

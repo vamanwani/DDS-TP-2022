@@ -1,12 +1,16 @@
 package domain.controllers;
 
-import domain.miembro.Usuario;
+import domain.models.entities.miembro.Usuario;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 public class LoginController {
+
+    // LOGIN
+    // LOGUT
+    // SIGNUP
 
     public ModelAndView pantallaDeLogin(Request request, Response response) {
         return new ModelAndView(null, "login.hbs");

@@ -1,12 +1,12 @@
 package TestNotificador;
 
-import domain.miembro.Miembro;
-import domain.miembro.Usuario;
-import domain.organizacion.Organizacion;
-import domain.organizacion.Sector;
-import domain.sugerencias.Notificador;
-import domain.sugerencias.NotificadorRecomendacionesWspAPI;
-import domain.sugerencias.NotificarPorWhatsApp;
+import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.Usuario;
+import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
+import domain.models.entities.sugerencias.Notificador;
+import domain.models.entities.sugerencias.NotificadorRecomendacionesWspAPI;
+import domain.models.entities.sugerencias.NotificarPorWhatsApp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

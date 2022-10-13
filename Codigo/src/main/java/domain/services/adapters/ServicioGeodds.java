@@ -2,12 +2,8 @@ package domain.services.adapters;
 
 import domain.services.entities.Distancia;
 import domain.services.entities.Localidad;
-import domain.ubicacion.Ubicacion;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Response;
+import domain.models.entities.ubicacion.Ubicacion;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.*;
 import java.util.List;

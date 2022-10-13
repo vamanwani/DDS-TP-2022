@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="anual" />
+        <module name="2022-ma-ma-mama-grupo-05" />
       </profile>
     </annotationProcessing>
   </component>

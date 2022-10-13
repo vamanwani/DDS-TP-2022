@@ -1,16 +1,13 @@
 package distancia;
 
-import domain.transporte.TipoTransportePublico;
-import domain.transporte.TransportePublico;
-import domain.ubicacion.Parada;
-import domain.ubicacion.Ubicacion;
+import domain.models.entities.transporte.TransportePublico;
+import domain.models.entities.ubicacion.Parada;
+import domain.models.entities.ubicacion.Ubicacion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DistanciaTransportePublicoTest {

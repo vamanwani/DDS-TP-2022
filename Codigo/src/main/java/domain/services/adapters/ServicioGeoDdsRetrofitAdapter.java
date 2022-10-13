@@ -2,7 +2,7 @@ package domain.services.adapters;
 
 import domain.services.entities.Distancia;
 import domain.services.entities.Localidad;
-import domain.ubicacion.Ubicacion;
+import domain.models.entities.ubicacion.Ubicacion;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;

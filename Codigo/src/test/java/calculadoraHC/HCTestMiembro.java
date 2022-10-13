@@ -1,25 +1,6 @@
 package calculadoraHC;
 
-import domain.calculoHC.CalculdoraHCMiembro;
-import domain.miembro.Miembro;
-import domain.miembro.Usuario;
-import domain.recorridos.Tramo;
-import domain.recorridos.Trayecto;
-import domain.services.adapters.GeoddsServceAdapter;
-import domain.services.adapters.ServicioGeodds;
-import domain.services.entities.Distancia;
-import domain.transporte.*;
-import domain.ubicacion.Ubicacion;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 
 public class HCTestMiembro {

@@ -1,11 +1,8 @@
 package dbtest;
 
-import domain.miembro.Miembro;
-import domain.miembro.Usuario;
+import domain.models.entities.miembro.Miembro;
 import domain.services.dbManager.EntityManagerHelper;
 import org.junit.Test;
-
-import javax.persistence.Entity;
 
 import static domain.services.dbManager.EntityManagerHelper.*;
 import static org.junit.Assert.assertNotNull;

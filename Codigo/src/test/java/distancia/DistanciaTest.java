@@ -2,13 +2,11 @@ package distancia;
 
 import domain.services.adapters.GeoddsServceAdapter;
 import domain.services.adapters.ServicioGeodds;
-import domain.services.adapters.ServicioGeoDdsRetrofitAdapter;
 import domain.services.entities.Distancia;
-import domain.ubicacion.Ubicacion;
+import domain.models.entities.ubicacion.Ubicacion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.io.IOException;
 

@@ -1,12 +1,12 @@
 package calculadoraHC;
 
 import domain.consumo.*;
+import domain.models.entities.consumo.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static domain.consumo.TipoAlcance.EMISIONESDIRECTAS;
-import static domain.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
+import static domain.models.entities.consumo.TipoAlcance.EMISIONESDIRECTAS;
 
 public class HCTestOtroConsumo {
 

@@ -1,20 +1,16 @@
 package calculadoraHC;
 
 import domain.consumo.*;
-import domain.organizacion.Organizacion;
+import domain.models.entities.consumo.*;
+import domain.models.entities.organizacion.Organizacion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.internal.matchers.Or;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import static domain.consumo.TipoAlcance.EMISIONESDIRECTAS;
-import static domain.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
+import static domain.models.entities.consumo.TipoAlcance.EMISIONESDIRECTAS;
+import static domain.models.entities.consumo.TipoAlcance.EMISIONESINDIRECTASNOCONTROLADAS;
 
 public class HCTestOrganizacion {
 
