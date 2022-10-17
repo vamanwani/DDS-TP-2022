@@ -34,6 +34,8 @@ public class Router {
         OrganizacionController organizacionController = new OrganizacionController();
         AgenteSectorialController agenteSectorialController = new AgenteSectorialController();
         MiembroController miembroController = new MiembroController();
+        TrayectoController trayectoController = new TrayectoController();
+        ReporteController reporteController = new ReporteController();
 
         Spark.path("/login", () -> {
             Spark.get("", loginController::pantallaDeLogin, engine);
@@ -48,25 +50,34 @@ public class Router {
             Spark.get("/aceptar_vinculacion", organizacionController::mostrarSolicitantes, engine);
             Spark.put("/aceptar_vinculacion", organizacionController :: actualizarMiembros);
             Spark.get("/recomendaciones", organizacionController::mostrarRecomendaciones, engine);
-            Spark.get("/reporte", organizacionController::mostrarReportes, engine);
+
+            // REPORTE
+            Spark.get("/reporte", reporteController::mostrarReportes, engine);//TODO HANDLEBARS
         });
 
         Spark.path("/miembro/:id", () -> {
+
             Spark.get("/", miembroController::mostrarMenu, engine); // MENU MIEMBRO
-            Spark.get("/trayectos", miembroController::mostrarTrayectos, engine);
-            Spark.get("/trayectos/:id_trayecto/tramos", miembroController::mostrarTramosDeTrayecto, engine);
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);
-            Spark.get("/reporte", miembroController::mostrarReportes, engine);
+            Spark.post("/organizaciones", miembroController::vincularAOrg);
+
+            // REPORTE
+            Spark.get("/reporte", reporteController::mostrarReportes, engine);//TODO HANDLEBARS
+
+            // MANIPULACION DE TRAYECTOS -> SIENDO TRAYECTO UN RECURSO ANIDADO
+            Spark.path("/trayectos",() -> {
+                Spark.get("/", trayectoController::mostrarTrayectos, engine);//TODO HANDLEBARS
+                Spark.get("/:id_trayecto/tramos", trayectoController::mostrarTramosDeTrayecto, engine);//TODO HANDLEBARS
+            });
         });
 
-        Spark.path("/reporte", () -> {
-
-        });
 
         Spark.path("/agente_sectorial", () -> {
             Spark.get("/", agenteSectorialController::mostrarMenu, engine); // MENU AGENTE
             Spark.get("/recomendaciones", agenteSectorialController::mostrarRecomendaciones, engine);
-            Spark.get("/reporte", agenteSectorialController::mostrarReportes, engine);
+
+            // REPORTE
+            Spark.get("/reporte", reporteController::mostrarReportes, engine);
         });
     }
 

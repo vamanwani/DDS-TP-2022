@@ -60,4 +60,20 @@ public class Tramo {
     public Transporte getMedioDeTransporte() {
         return medioDeTransporte;
     }
+
+    public void setMedioDeTransporte(Transporte medioDeTransporte) {
+        this.medioDeTransporte = medioDeTransporte;
+    }
+
+    public void setPuntoFin(Ubicacion puntoFin) {
+        this.puntoFin = puntoFin;
+    }
+
+    public void setPuntoInicio(Ubicacion puntoInicio) {
+        this.puntoInicio = puntoInicio;
+    }
+
+    public String getMedioTransporte(){
+        return medioDeTransporte.getClass().getName();
+    }
 }

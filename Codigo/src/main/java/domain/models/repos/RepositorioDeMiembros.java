@@ -3,19 +3,15 @@ package domain.models.repos;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 import domain.services.dbManager.EntityManagerHelper;
 
 import java.util.List;
 
 public class RepositorioDeMiembros {
-    public List<Trayecto> buscarTodosLosTrayectos(Request request, Response response) {
-        return EntityManagerHelper
-                .getEntityManager()
-                .createQuery("select " + Trayecto.class.getName() + "from " + Miembro.class.getName() +
-                        "where miembro_id = '""")
-                .getResultList();
-    }
+
 
     public Miembro buscar(Integer id) {
         return EntityManagerHelper
@@ -37,5 +33,14 @@ public class RepositorioDeMiembros {
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().remove(miembro);
         EntityManagerHelper.commit();
+    }
+
+
+
+    public List<Organizacion> buscarOrganizaciones(Integer idMiembro){
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("select sector_id from " + Miembro.class.getName() + "where id = " + idMiembro)
+                .getResultList();
     }
 }

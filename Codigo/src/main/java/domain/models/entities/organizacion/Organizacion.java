@@ -62,6 +62,10 @@ public class Organizacion {
     @JoinColumn(name = "miembro_id")
     private Set<Miembro> contactos; //DEFINIDOS POR EL ADMININSTANCIAR EN CONSTRUCTOR
 
+    public String getLinkRecomendacion() {
+        return linkRecomendacion;
+    }
+
     @Column(name = "link_recomendacion")
     private String linkRecomendacion; //LINK DEL .PDF DE RECOMENDACION
 

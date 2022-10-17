@@ -47,4 +47,15 @@ public class Trayecto {
         return tramos;
     }
 
+    public void setTramos(List<Tramo> tramos) {
+        this.tramos = tramos;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
