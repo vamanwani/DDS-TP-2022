@@ -2,11 +2,8 @@ package domain.controllers;
 
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.organizacion.Organizacion;
-import domain.models.entities.recorridos.Tramo;
-import domain.models.entities.recorridos.Trayecto;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.services.dbManager.EntityManagerHelper;
-import org.hibernate.EntityNameResolver;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -27,7 +24,7 @@ public class MiembroController {
     // Mostrar organizaciones "miembros/:id/organizaciones"
 
     public ModelAndView mostrarMenu(Request request, Response response){
-        return new ModelAndView(null, "Template/Miembro/index_miembro");// el viewname que sea igual al home de miembro
+        return new ModelAndView(null, "/Miembro/indexMiembro.hbs");// el viewname que sea igual al home de miembro
     }
 
     public ModelAndView mostrarOrganizaciones(Request request, Response response){
@@ -35,7 +32,7 @@ public class MiembroController {
         List<Organizacion> organizaciones = this.repo.buscarOrganizaciones(new Integer(idMiembro));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("organizaciones", organizaciones);
-        }}, "Template/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
+        }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
     }
 
     public Response vincularAOrg(Request request, Response response){
@@ -44,7 +41,7 @@ public class MiembroController {
                 .getEntityManager()
                 .find(Organizacion.class, request.queryParams("organizacion_id"));
         miembro.generarSolicitud(organizacionAVincular);
-        response.redirect("Template/Miembro/unirseAOrg.hbs");
+        response.redirect("/Miembro/unirseAOrg.hbs");
         return response;
     }
 
@@ -54,10 +51,10 @@ public class MiembroController {
                 .find(Miembro.class, request.params("id"));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("hcMiembro", miembro.calcularHCMiembro());
-        }}, "Template/Miembro/hcMiembro.hbs");
+        }}, "/Miembro/hcMiembro.hbs");
     }
 
     public ModelAndView mostrarReportes(Request request, Response response){
-        return new ModelAndView(null, "Template/Miembro/reportesMiembro.hbs");
+        return new ModelAndView(null, "templates/Miembro/reportesMiembro.hbs");
     }
 }

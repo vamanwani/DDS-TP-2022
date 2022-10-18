@@ -1,10 +1,7 @@
 package domain.controllers;
 
-import domain.models.entities.organizacion.Organizacion;
-import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.models.entities.sectorTerritorial.SectorTerritorial;
 import domain.models.repos.RepositorioDeAgentesSectoriales;
-import domain.models.repos.RepositorioDeOrganizaciones;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -18,7 +15,7 @@ public class AgenteSectorialController {
     // VER RECOMENDACIONES
 
     public ModelAndView mostrarMenu(Request request, Response response){
-        return new ModelAndView(null, "Template/AgenteSectorial/indexAgSec.hbs");
+        return new ModelAndView(null, "/AgenteSectorial/indexAgSec.hbs");
     }
 
     public ModelAndView mostrarRecomendaciones(Request request, Response response){
@@ -30,6 +27,6 @@ public class AgenteSectorialController {
     }
 
     public ModelAndView mostrarReportes(Request request, Response response){
-        return new ModelAndView(null, "Template/AgenteSectorial/reportesAgSec.hbs");
+        return new ModelAndView(null, "/AgenteSectorial/reportesAgSec.hbs");
     }
 }

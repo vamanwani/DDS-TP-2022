@@ -7,7 +7,6 @@ import domain.models.entities.reporte.Reporte;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.services.dbManager.EntityManagerHelper;
-import org.apache.poi.hssf.dev.ReSave;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -18,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OrganizacionController {
+
     //
     // MOSTRAR TRABAJADORES
     // GENERAR REPORTES
@@ -29,7 +29,7 @@ public class OrganizacionController {
     private RepositorioDeMiembros repositorioDeMiembros;
     //Organizaciones
     public ModelAndView mostrarMenu(spark.Request request, spark.Response response){
-        return new ModelAndView(null , "indexOrg.hbs");// el viewname que sea igual al home de organizacion
+        return new ModelAndView(null , "/Organizacion/indexOrg.hbs");// el viewname que sea igual al home de organizacion
     }
 
     public ModelAndView mostrarRecomendaciones(spark.Request request, spark.Response response){
@@ -69,7 +69,7 @@ public class OrganizacionController {
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(request.queryParams("periodo_imputacion"));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("hcOrganizacion", organizacion.calcularHCOrganizacion(periodoDeImputacion));
-        }}, "Template/Organizacion/hcOrganizacion.hbs");
+        }}, "/Organizacion/hcOrganizacion.hbs");
     }
 
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
@@ -78,11 +78,11 @@ public class OrganizacionController {
                 .find(Organizacion.class, request.params("id"));
         List<HashMap> reportes = new ArrayList<>();
         Reporte reporte = new Reporte();
-        if (evolucion) else if (composicion)
+//        if (evolucion) else if (composicion)
         reportes.add(reporte.contenidoReporteEvolucionOrganizacion(organizacion));
         reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
         return new ModelAndView(new HashMap<String, HashMap>(){{
-            put("reportes", reportes);
+            //put("reportes", reportes);
         }}, "");
     }
 }

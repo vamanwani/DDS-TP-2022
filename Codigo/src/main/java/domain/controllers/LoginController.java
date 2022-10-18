@@ -12,7 +12,6 @@ import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.TemplateEngine;
 
 import java.io.FileNotFoundException;
 
@@ -27,9 +26,8 @@ public class LoginController {
     // SIGNUP
 
     public ModelAndView pantallaDeLogin(Request request, Response response) {
-        return new ModelAndView(null, "login.hbs");
+        return new ModelAndView(null, "/Login/login.hbs");
     }
-
     public Response login(Request request, Response response) {
         try {
             String query = "from "
@@ -51,18 +49,18 @@ public class LoginController {
                 response.redirect("/servicios");
             }
             else {
-                response.redirect("Template/Login/login.hbs");
+                response.redirect("templates/Login/login.hbs");
             }
         }
         catch (Exception ex) {
-            response.redirect("Template/Login/login.hbs");
+            response.redirect("templates/Login/login.hbs");
         }
         return response;
     }
 
     public Response logout(Request request, Response response) {
         request.session().invalidate();
-        response.redirect("Template/Login/login.hbs");
+        response.redirect("templates/Login/login.hbs");
         return response;
     }
 
@@ -116,7 +114,7 @@ public class LoginController {
                         agenteSectorial.setUsuario(usuarioCreado);
                         repositorioDeAgentesSectoriales.guardar(agenteSectorial);
                     } else {
-                        response.redirect("Template/prohibido.hbs");
+                        response.redirect("templates/prohibido.hbs");
                     }
                 }
                 response.redirect("/login/login.hbs");
