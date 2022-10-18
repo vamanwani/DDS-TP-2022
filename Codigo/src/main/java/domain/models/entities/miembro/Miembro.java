@@ -35,6 +35,10 @@ public class Miembro {
     @JoinColumn(name = "sector_id")
     private List<Sector> trabajos;
 
+    public List<Sector> getTrabajos() {
+        return trabajos;
+    }
+
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

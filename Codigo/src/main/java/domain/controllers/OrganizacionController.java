@@ -67,9 +67,7 @@ public class OrganizacionController {
                 .getEntityManager()
                 .find(Organizacion.class, request.params("id"));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(request.queryParams("periodo_imputacion"));
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("hcOrganizacion", organizacion.calcularHCOrganizacion(periodoDeImputacion));
-        }}, "/Organizacion/hcOrganizacion.hbs");
+        return new ModelAndView(null, "/Organizacion/hcOrganizacion.hbs");
     }
 
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {

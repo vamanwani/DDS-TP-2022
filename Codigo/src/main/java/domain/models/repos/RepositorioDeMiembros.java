@@ -9,6 +9,7 @@ import domain.models.entities.recorridos.Trayecto;
 import domain.services.dbManager.EntityManagerHelper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RepositorioDeMiembros {
 
@@ -35,12 +36,9 @@ public class RepositorioDeMiembros {
         EntityManagerHelper.commit();
     }
 
-
-
     public List<Organizacion> buscarOrganizaciones(Integer idMiembro){
-        return EntityManagerHelper
-                .getEntityManager()
-                .createQuery("select sector_id from " + Miembro.class.getName() + "where id = " + idMiembro)
-                .getResultList();
+        Miembro miembro =  EntityManagerHelper.getEntityManager().find(Miembro.class, Long.valueOf(idMiembro));
+        List<Organizacion> organizaciones = miembro.getTrabajos().stream().map(s -> s.getOrganizacion()).collect(Collectors.toList());
+        return organizaciones;
     }
 }

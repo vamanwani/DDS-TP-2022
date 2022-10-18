@@ -23,7 +23,7 @@ public class AgenteSectorialController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("linkRecomendacionesAgSec", sectorTerritorial.getLink_recomendacion());
-        }}, "/Organizacion/recomendacionesAgSec.hbs");
+        }}, "/AgenteSectorial/recomendacionesAgSec.hbs");
     }
 
     public ModelAndView mostrarReportes(Request request, Response response){

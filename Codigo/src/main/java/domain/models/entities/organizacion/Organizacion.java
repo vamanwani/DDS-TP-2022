@@ -33,7 +33,7 @@ public class Organizacion {
     @JoinColumn(name = "solicitud_vinculacion_id")
     private List<SolicitudVinculacion> solicitudes;
 
-    @ManyToOne
+    @Transient
     @JoinColumn(name = "clasificacion_org")
     private ClasificaciónDeOrg clasificacionDeOrg;
 

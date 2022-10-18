@@ -98,12 +98,15 @@ public class ReportesInit {
 
 
         otraOrganizacion.agregarConsumo(segundoConsumo);
+        primerUsuario = new Usuario("atolaba", "contrasenia");
+        segundoUsuario = new Usuario("naparicio", "password");
+        tercerUsuario = new Usuario("cbodirikyan", "root");
 
-        primerMiembro = new Miembro("tolaba","adrian",12345678,"DNI", new Usuario("atolaba", "contrasenia"));
+        primerMiembro = new Miembro("tolaba","adrian",12345678,"DNI", primerUsuario);
 
-        segundoMiembro = new Miembro("aparicio", "nicolas",11111111, "DNI", new Usuario("naparicio", "password"));
+        segundoMiembro = new Miembro("aparicio", "nicolas",11111111, "DNI", segundoUsuario);
 
-        tercerMiembro = new Miembro("bodirikyan", "cristian", 22554489, "DNI", new Usuario("cbodirikyan", "root"));
+        tercerMiembro = new Miembro("bodirikyan", "cristian", 22554489, "DNI",tercerUsuario );
 
         primerSector = new Sector("primerSector");
         primerSector.agregarMiembro(primerMiembro);

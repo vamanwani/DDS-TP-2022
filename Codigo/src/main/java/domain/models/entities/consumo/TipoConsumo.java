@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Table(name = "tipo_consumo")
 public class TipoConsumo implements AsignableFE{
     @Id
+    @GeneratedValue
     @JoinColumn(name = "id_consumo")
     private Long id;
 

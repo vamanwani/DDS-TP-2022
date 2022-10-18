@@ -1,5 +1,9 @@
 package calculadoraHC;
 
+import domain.models.entities.recorridos.Tramo;
+import domain.models.entities.transporte.VehiculoParticular;
+import domain.models.entities.ubicacion.Ubicacion;
+
 import static org.mockito.Mockito.mock;
 
 

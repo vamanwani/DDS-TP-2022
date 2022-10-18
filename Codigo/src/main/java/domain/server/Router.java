@@ -62,13 +62,13 @@ public class Router {
             //Spark.before("", AuthMiddleware::verificarSesion);
             //Spark.before("/*", AuthMiddleware::verificarSesion);
 
-            Spark.get("/", miembroController::mostrarMenu, engine); // MENU MIEMBRO
-            Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);
+            Spark.get("/", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
+            Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA
             Spark.get("/hc", miembroController::mostrarHC);
             Spark.post("/organizaciones", miembroController::vincularAOrg);
 
             // REPORTE
-            Spark.get("/reporte", miembroController::mostrarReportes, engine);
+            Spark.get("/reporte", miembroController::mostrarReportes, engine);//MUESTRA
 
             // MANIPULACION DE TRAYECTOS -> SIENDO TRAYECTO UN RECURSO ANIDADO
             Spark.path("/trayectos",() -> {

@@ -45,16 +45,14 @@ public class MiembroController {
         return response;
     }
 
-    public Object mostrarHC(Request request, Response response) throws IOException {
+    public ModelAndView mostrarHC(Request request, Response response) throws IOException {
         Miembro miembro = EntityManagerHelper
                 .getEntityManager()
-                .find(Miembro.class, request.params("id"));
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("hcMiembro", miembro.calcularHCMiembro());
-        }}, "/Miembro/hcMiembro.hbs");
+                .find(Miembro.class, Long.valueOf(request.params("id")));
+        return new ModelAndView(null, "/Miembro/hcMiembro.hbs");
     }
 
     public ModelAndView mostrarReportes(Request request, Response response){
-        return new ModelAndView(null, "templates/Miembro/reportesMiembro.hbs");
+        return new ModelAndView(null, "/Miembro/reportesMiembro.hbs");
     }
 }

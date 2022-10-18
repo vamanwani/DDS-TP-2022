@@ -24,18 +24,18 @@ public class TrayectoController {
         List<Trayecto> trayectos = this.repo.buscarTodos(new Integer(idMimebro));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("trayectos", trayectos);
-        }}, "templates/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
+        }}, "/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
     }
 
     public ModelAndView mostrarTramosDeTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("tramos", trayecto.getTramos());
-        }}, "templates/Miembro/editarTrayecto.hbs"); // MODIFICAR ESTO
+        }}, "/Miembro/editarTrayecto.hbs"); // MODIFICAR ESTO
     }
 
     public ModelAndView agregarTrayecto(Request request, Response response){
-        return new ModelAndView(null, "templates/Miembro/agregarTrayecto.hbs");
+        return new ModelAndView(null, "/Miembro/agregarTrayecto.hbs");
     }
 
     public Response crearTramo(Request request, Response response){

@@ -3,7 +3,7 @@ package domain.models.entities.organizacion;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+
 @Table(name = "clasificacion_org")
 public class ClasificaciónDeOrg {
     @Id
