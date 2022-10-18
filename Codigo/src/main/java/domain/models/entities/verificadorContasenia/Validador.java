@@ -41,6 +41,14 @@ public class Validador {
         this.validadorPorDiezMilPeores = new ValidarPorDiezMilPeores(this.contraseniasNoSeguras);
     }
 
+    public void usarTodosLosValidadores(){
+        agregarValidador(validadorPorDiezMilPeores);
+        agregarValidador(validadorPorLongitud);
+        agregarValidador(validadorPorMayuscula);
+        agregarValidador(validadorPorMinuscula);
+        agregarValidador(validadorPorNumero);
+    }
+
 
 
     public void guardarListaNoSegura() throws FileNotFoundException {

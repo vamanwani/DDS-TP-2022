@@ -112,6 +112,7 @@ public class Miembro {
     public void recibirRecomendacion(String link) {
         this.linkRecomendacion = link;
     }
+
     public double calcularHCMiembro() throws IOException {
         return new CalculdoraHCMiembro().calcularHC(trayectos);
     }
@@ -126,5 +127,33 @@ public class Miembro {
 
     public void generarSolicitud(Organizacion organizacion){
         new SolicitudVinculacion(this, organizacion);
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setNumeroDeDocumento(int numeroDeDocumento) {
+        this.numeroDeDocumento = numeroDeDocumento;
+    }
+
+    public void setTipoDeDocumento(String tipoDeDocumento) {
+        this.tipoDeDocumento = tipoDeDocumento;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

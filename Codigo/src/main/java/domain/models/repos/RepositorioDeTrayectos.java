@@ -15,13 +15,10 @@ public class RepositorioDeTrayectos {
                 .createQuery("select trayecto_id " + "from " + Miembro.class.getName() + " where id =" + idMiembro)
                 .getResultList();
     }
-    public List<Tramo> buscar(Integer idTrayecto) {
-        Trayecto trayecto = EntityManagerHelper.getEntityManager().find(Trayecto.class, idTrayecto);
-        List<Tramo> tramos = new ArrayList<>();
-        for (Tramo tramo : trayecto.getTramos()){
-            tramos.add(tramo);
-        }
-        return tramos;
+    public Trayecto buscar(Integer idTrayecto) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .find(Trayecto.class, idTrayecto);
     }
 
 

@@ -1,12 +1,26 @@
 package domain.controllers;
 
+import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
+import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.sectorTerritorial.AgenteSectorial;
+import domain.models.entities.verificadorContasenia.Validador;
+import domain.models.repos.RepositorioDeAgentesSectoriales;
+import domain.models.repos.RepositorioDeMiembros;
+import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.TemplateEngine;
+
+import java.io.FileNotFoundException;
 
 public class LoginController {
+
+    RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+    RepositorioDeAgentesSectoriales repositorioDeAgentesSectoriales = new RepositorioDeAgentesSectoriales();
+    RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
 
     // LOGIN
     // LOGUT
@@ -37,22 +51,80 @@ public class LoginController {
                 response.redirect("/servicios");
             }
             else {
-                response.redirect("/login");
+                response.redirect("Template/Login/login.hbs");
             }
         }
         catch (Exception ex) {
-            response.redirect("/login");
+            response.redirect("Template/Login/login.hbs");
         }
         return response;
     }
 
     public Response logout(Request request, Response response) {
         request.session().invalidate();
-        response.redirect("/login");
+        response.redirect("Template/Login/login.hbs");
         return response;
     }
 
     public ModelAndView prohibido(Request request, Response response) {
         return new ModelAndView(null, "prohibido.hbs");
+    }
+    public Response signup(Request request,Response response) throws FileNotFoundException {
+        String nombreUsuario=request.params("id");
+        String contrasenia=request.params("password");
+        Validador validador= new Validador();
+        validador.usarTodosLosValidadores();
+
+        try {
+            String query = "from "
+                    + Usuario.class.getName()
+                    + " WHERE nombre = '"
+                    + request.queryParams("nombre" )
+                    + "'";
+
+            Usuario usuario = (Usuario) EntityManagerHelper
+                    .getEntityManager()
+                    .createQuery(query)
+                    .getSingleResult();
+
+            if(usuario != null) {
+                response.redirect("prohibido.hbs");
+            }
+            else {
+                if(validador.todosLosValidadores(contrasenia)){
+                    Usuario usuarioCreado=new Usuario(nombreUsuario,contrasenia);
+                    String tipoUsuario=request.params("tipo_usuario");
+
+                    EntityManagerHelper.beginTransaction();
+                    EntityManagerHelper.getEntityManager().persist(usuarioCreado);
+                    EntityManagerHelper.commit();
+
+                    if (tipoUsuario == "miembro"){
+                        Miembro miembro = new Miembro();
+                        miembro.setUsuario(usuarioCreado);
+//                        miembro.setNombre(new MiembroController::llenarDatos);
+                        repositorioDeMiembros.guardar(miembro);
+
+                    } else if (tipoUsuario == "organizacion"){
+                        Organizacion organizacion=new Organizacion();
+                        organizacion.setUsuario(usuarioCreado);
+//                        organizacion.setRazonSocial(new OrganizacionController::llenarDatos);
+                        repositorioDeOrganizaciones.guardar(organizacion);
+
+                    } else if (tipoUsuario == "agenteSec"){
+                        AgenteSectorial agenteSectorial=new AgenteSectorial();
+                        agenteSectorial.setUsuario(usuarioCreado);
+                        repositorioDeAgentesSectoriales.guardar(agenteSectorial);
+                    } else {
+                        response.redirect("Template/prohibido.hbs");
+                    }
+                }
+                response.redirect("/login/login.hbs");
+            }
+        }
+        catch (Exception ex) {
+            response.redirect("/login/login.hbs");
+        }
+        return response;
     }
 }

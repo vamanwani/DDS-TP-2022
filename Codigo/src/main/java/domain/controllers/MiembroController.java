@@ -6,10 +6,12 @@ import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.services.dbManager.EntityManagerHelper;
+import org.hibernate.EntityNameResolver;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class MiembroController {
     // Mostrar organizaciones "miembros/:id/organizaciones"
 
     public ModelAndView mostrarMenu(Request request, Response response){
-        return new ModelAndView(null, "")// el viewname que sea igual al home de miembro
+        return new ModelAndView(null, "Template/Miembro/index_miembro");// el viewname que sea igual al home de miembro
     }
 
     public ModelAndView mostrarOrganizaciones(Request request, Response response){
@@ -33,7 +35,7 @@ public class MiembroController {
         List<Organizacion> organizaciones = this.repo.buscarOrganizaciones(new Integer(idMiembro));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("organizaciones", organizaciones);
-        }}, "Template/Miembro/unirseA.hbs"); // MODIFICAR ESTO
+        }}, "Template/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
     }
 
     public Response vincularAOrg(Request request, Response response){
@@ -42,12 +44,20 @@ public class MiembroController {
                 .getEntityManager()
                 .find(Organizacion.class, request.queryParams("organizacion_id"));
         miembro.generarSolicitud(organizacionAVincular);
-        response.redirect("Template/Miembro/unirseA.hbs");
+        response.redirect("Template/Miembro/unirseAOrg.hbs");
         return response;
     }
 
-    public ModelAndView mostrarReportes(Request request, Response response){
-        return new ModelAndView();
+    public Object mostrarHC(Request request, Response response) throws IOException {
+        Miembro miembro = EntityManagerHelper
+                .getEntityManager()
+                .find(Miembro.class, request.params("id"));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("hcMiembro", miembro.calcularHCMiembro());
+        }}, "Template/Miembro/hcMiembro.hbs");
     }
 
+    public ModelAndView mostrarReportes(Request request, Response response){
+        return new ModelAndView(null, "Template/Miembro/reportesMiembro.hbs");
+    }
 }

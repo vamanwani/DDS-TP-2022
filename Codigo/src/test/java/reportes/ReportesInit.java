@@ -1,6 +1,5 @@
 package reportes;
 
-import domain.consumo.*;
 import domain.models.entities.consumo.*;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;

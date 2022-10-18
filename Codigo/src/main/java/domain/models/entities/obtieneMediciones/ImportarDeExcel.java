@@ -1,6 +1,6 @@
 package domain.models.entities.obtieneMediciones;
 
-import domain.consumo.*;
+import domain.models.entities.consumo.*;
 import domain.models.entities.consumo.*;
 import domain.models.entities.organizacion.Organizacion;
 import org.apache.poi.ss.usermodel.Cell;

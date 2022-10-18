@@ -50,4 +50,7 @@ public class Usuario {
     public String getTelefono(){
         return telefono;
     }
+
+
+
 }

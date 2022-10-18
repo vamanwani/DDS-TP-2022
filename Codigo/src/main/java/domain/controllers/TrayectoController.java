@@ -17,8 +17,6 @@ public class TrayectoController {
     // Mostrar trayectos "miembros/:id/trayectos"
     // Editar trayectos "miembros/:id/trayectos/:id_trayecto/tramos"
     // Agregar trayectos POST DE "miembros/:id/trayectos/:id_trayecto/tramos"
-
-
     RepositorioDeTrayectos repo = new RepositorioDeTrayectos();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
@@ -26,15 +24,18 @@ public class TrayectoController {
         List<Trayecto> trayectos = this.repo.buscarTodos(new Integer(idMimebro));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("trayectos", trayectos);
-        }}, "servicios/servicio.hbs"); // MODIFICAR ESTO
+        }}, "Template/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
     }
 
     public ModelAndView mostrarTramosDeTrayecto(Request request, Response response){
-        String idTrayecto = request.params("id_trayecto");
-        List<Tramo> tramos = this.repo.buscar(new Integer(idTrayecto));
+        Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("tramos", tramos);
-        }}, "servicios/servicio.hbs"); // MODIFICAR ESTO
+            put("tramos", trayecto.getTramos());
+        }}, "Template/Miembro/editarTrayecto.hbs"); // MODIFICAR ESTO
+    }
+
+    public ModelAndView agregarTrayecto(Request request, Response response){
+        return new ModelAndView(null, "Template/Miembro/agregarTrayecto.hbs");
     }
 
     public Response crearTramo(Request request, Response response){
@@ -51,7 +52,8 @@ public class TrayectoController {
         nuevoTrayecto.setDescripcion(request.queryParams("descripcion"));
         nuevoTrayecto.setNombre(request.queryParams("nombre"));
 
-        response.redirect("")// Pantalla de gestion de trayectos
+        response.redirect("");// Pantalla de gestion de trayectos
+        return response;
     }
 
 }

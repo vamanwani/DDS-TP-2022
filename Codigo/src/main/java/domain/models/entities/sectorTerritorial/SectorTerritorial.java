@@ -2,7 +2,6 @@ package domain.models.entities.sectorTerritorial;
 
 import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.organizacion.Organizacion;
-import javafx.beans.binding.BooleanExpression;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -20,6 +19,10 @@ public class SectorTerritorial {
 
     @Embedded
     private AgenteSectorial agenteSectorial;
+
+
+    @Column(name = "link_recomendacion")
+    private String link_recomendacion;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
@@ -90,5 +93,8 @@ public class SectorTerritorial {
         return organizaciones;
     }
 
+    public String getLink_recomendacion() {
+        return link_recomendacion;
+    }
 
 }

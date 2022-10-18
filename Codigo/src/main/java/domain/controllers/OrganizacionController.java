@@ -1,14 +1,19 @@
 package domain.controllers;
 
-import com.sendgrid.Request;
-import com.sendgrid.Response;
+import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.reporte.Reporte;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
+import domain.services.dbManager.EntityManagerHelper;
 import org.apache.poi.hssf.dev.ReSave;
 import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,12 +37,12 @@ public class OrganizacionController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("linkRecomendacionesOrg", organizacion.getLinkRecomendacion());
-        }}, "Template/Organizacion/recomendaciones.hbs");
+        }}, "/Organizacion/recomendaciones.hbs");
     }
 
 
-    public void registrarMediciones(spark.Request request, spark.Response response) {
-
+    public Response registrarMediciones(spark.Request request, spark.Response response) {
+        return response;
     }
 
     public ModelAndView mostrarSolicitantes(spark.Request request, spark.Response response) {
@@ -45,13 +50,40 @@ public class OrganizacionController {
         List<Miembro> solicitantes = this.repo.buscarTodasLosSolicitantes(new Integer(idOrganizacion));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("solicitantes", solicitantes);
-        }}, "Template/Organizacion/aceptarVinculaciones.hbs");
+        }}, "/Organizacion/aceptarVinculaciones.hbs");
     }
 
-    public void actualizarMiembros(spark.Request request, spark.Response response) {
+    public Response actualizarMiembros(spark.Request request, spark.Response response) {
         String idmiembroNuevo=request.params("idmiembro");
         Miembro miembro=repositorioDeMiembros.buscar(new Integer(idmiembroNuevo));
         Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
+        organizacion.agregarMiembro(miembro);
+        response.redirect("/Organizacion/aceptarVinculaciones.hbs");
+        return response;
+    }
 
+    public ModelAndView mostrarHC(spark.Request request, Response response) throws IOException {
+        Organizacion organizacion = EntityManagerHelper
+                .getEntityManager()
+                .find(Organizacion.class, request.params("id"));
+        PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(request.queryParams("periodo_imputacion"));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("hcOrganizacion", organizacion.calcularHCOrganizacion(periodoDeImputacion));
+        }}, "Template/Organizacion/hcOrganizacion.hbs");
+    }
+
+    public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
+        Organizacion organizacion = EntityManagerHelper
+                .getEntityManager()
+                .find(Organizacion.class, request.params("id"));
+        List<HashMap> reportes = new ArrayList<>();
+        Reporte reporte = new Reporte();
+        if (evolucion) else if (composicion)
+        reportes.add(reporte.contenidoReporteEvolucionOrganizacion(organizacion));
+        reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
+        return new ModelAndView(new HashMap<String, HashMap>(){{
+            put("reportes", reportes);
+        }}, "");
     }
 }
+

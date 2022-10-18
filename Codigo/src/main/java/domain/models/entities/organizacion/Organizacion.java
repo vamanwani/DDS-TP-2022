@@ -18,6 +18,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "organizacion")
+
 public class Organizacion {
     @Id
     @GeneratedValue
@@ -148,5 +149,20 @@ public class Organizacion {
 
     public String getRazonSocial() {
         return razonSocial;
+    }
+    public void agregarMiembro(Miembro miembro){
+        this.contactos.add(miembro);
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
