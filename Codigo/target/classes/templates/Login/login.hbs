@@ -10,59 +10,61 @@
     <link href="login/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <form method="POST" action="/login">
-      <div class="form-group">
-        <label>Nombre de usuario</label>
-        <input type="text" name="nombre_de_usuario" class="form-control" placeholder="Nombre de usuario">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="contrasenia" class="form-control" placeholder="Contraseña">
-      </div>
-      <button type="submit" class="btn btn-primary">Ingresar</button>
-    </form>
-{{!--     <header> --}}
-{{!--         <h1>MI IMPACTO AMBIENTAL</h1> --}}
-{{!--     </header> --}}
-{{!--     <main class="main palevioletred"> --}}
-{{!--         <section id="login"> --}}
-{{!--             <h1>LOG-IN</h1> --}}
-{{!--             <form method="POST" id="formularioLogin" class="formul"> --}}
-{{!--                 <div class="bordeForm"> --}}
-{{!--                     <h4>Ingrese un usuario</h4> --}}
-{{!--                     <input id="userName" class="form-control inputForm" type="text" placeholder="Nombre Usuario"> --}}
-{{!--                     <h4>Ingrese una contraseña</h4> --}}
-{{!--                     <input type="password" id="userPassword" class="form-control inputForm" type="text" placeholder="Contraseña Usuario"> --}}
-{{!--                 </div> --}}
-{{!--                 <a class="botonCrearCuenta">CREAR CUENTA</a> --}}
-{{!--                 <button id="btnIngresar" type="button submit" class="botonConfirmacion">INGRESAR</button> --}}
-{{!--             </form> --}}
-{{!--         </section> --}}
-{{!--         <section id="crearCuenta"> --}}
-{{!--             <h1>CREAR CUENTA</h1> --}}
-{{!--              --}}
-{{!--             <form method="PSOT" id="formularioRegistro" class="formul"> --}}
-{{!--                 <div class="bloqueCrearCuenta"> --}}
-{{!--                     <div class="bordeForm"> --}}
-{{!--                         <h4>Ingrese un usuario</h4> --}}
-{{!--                         <input id="newUserName" class="form-control inputForm" type="text" placeholder="Nombre Usuario"> --}}
-{{!--                         <h4>Ingrese una contraseña</h4> --}}
-{{!--                         <input type="password" id="newUserPassword" class="form-control inputForm" type="text" placeholder="Contraseña Usuario"> --}}
-{{!--                         <h4>Ingrese un email</h4> --}}
-{{!--                         <input type="email" id="newUserEmail" class="form-control inputForm" placeholder="Email Usuario"> --}}
-{{!--                         <h4>Ingrese un teléfono</h4> --}}
-{{!--                         <input type="number" id="newUserPhone" class="form-control inputForm" placeholder="Telefono Usuario"> --}}
-{{!--                         <select  id="userType" class="form-select" aria-label="Default select example"> --}}
-{{!--                             <option value="" selected>Tipo Usuario</option> --}}
-{{!--                             <option value="Organizacion">Organización</option> --}}
-{{!--                             <option value="Miembro">Miembro</option> --}}
-{{!--                         </select> --}}
-{{!--                     </div> --}}
-{{!--                     <button id="btnRegistro" type="button submit" class="botonConfirmacion">CREAR CUENTA</button> --}}
-{{!--                     <a class="botonVolver">Volver</a> --}}
-{{!--                 </div> --}}
-{{!--             </form> --}}
-{{!--         </section> --}}
+{{!--     <form method="POST" action="/login"> --}}
+{{!--       <div class="form-group"> --}}
+{{!--         <label>Nombre de usuario</label> --}}
+{{!--         <input type="text" name="nombre_de_usuario" class="form-control" placeholder="Nombre de usuario"> --}}
+{{!--       </div> --}}
+{{!--       <div class="form-group"> --}}
+{{!--         <label>Password</label> --}}
+{{!--         <input type="password" name="contrasenia" class="form-control" placeholder="Contraseña"> --}}
+{{!--       </div> --}}
+{{!--       <button type="submit" class="btn btn-primary">Ingresar</button> --}}
+{{!--     </form> --}}
+
+
+    <header>
+        <h1>MI IMPACTO AMBIENTAL</h1>
+    </header>
+    <main class="main palevioletred">
+        <section id="login">
+            <h1>LOG-IN</h1>
+            <form method="POST" action="/login" {{!--id="formularioLogin" --}} class="formul">
+                <div class="bordeForm">
+                    <h4>Ingrese un usuario</h4>
+                    <input id="userName" class="form-control inputForm" type="text" placeholder="Nombre Usuario" name="nombre_de_usuario">
+                    <h4>Ingrese una contraseña</h4>
+                    <input type="password" id="userPassword" class="form-control inputForm" type="text" placeholder="Contraseña Usuario" name="contrasenia">
+                </div>
+                <a class="botonCrearCuenta">CREAR CUENTA</a>
+                <button id="btnIngresar" type="submit" class="botonConfirmacion">INGRESAR</button>
+            </form>
+        </section>
+        <section id="crearCuenta">
+            <h1>CREAR CUENTA</h1>
+
+            <form method="PSOT" id="formularioRegistro" class="formul">
+                <div class="bloqueCrearCuenta">
+                    <div class="bordeForm">
+                        <h4>Ingrese un usuario</h4>
+                        <input id="newUserName" class="form-control inputForm" type="text" placeholder="Nombre Usuario">
+                        <h4>Ingrese una contraseña</h4>
+                        <input type="password" id="newUserPassword" class="form-control inputForm" type="text" placeholder="Contraseña Usuario">
+                        <h4>Ingrese un email</h4>
+                        <input type="email" id="newUserEmail" class="form-control inputForm" placeholder="Email Usuario">
+                        <h4>Ingrese un teléfono</h4>
+                        <input type="number" id="newUserPhone" class="form-control inputForm" placeholder="Telefono Usuario">
+                        <select  id="userType" class="form-select" aria-label="Default select example">
+                            <option value="" selected>Tipo Usuario</option>
+                            <option value="Organizacion">Organización</option>
+                            <option value="Miembro">Miembro</option>
+                        </select>
+                    </div>
+                    <button id="btnRegistro" type="button submit" class="botonConfirmacion">CREAR CUENTA</button>
+                    <a class="botonVolver">Volver</a>
+                </div>
+            </form>
+        </section>
 
     </main>
     <footer>

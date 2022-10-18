@@ -46,20 +46,19 @@ public class LoginController {
             if(usuario != null) {
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
-                response.redirect("/miembro/1");
-            }
-            else {
-//                if (1){}/*(tipo == miembro){
+//                if (usuario.){}(tipo == miembro){
 //                    response.redirect("/Miembro/miembro/" + usuario.getId());
 //                } else if (tipo == organizaciones){
 //                    response.redirect("/Organizacion/organizaciones/" + usuario.getId());
 //                } else if (tipo == agente sectorial){
 //                    response.redirect("/AgenteSectorial/");
-//                }*/ else {
-                    response.redirect("/login");
 //                }
+                response.redirect("miembro/1/");
             }
-        }
+            else {
+                response.redirect("/login");}
+            }
+
         catch (Exception ex) {
             response.redirect("/login");
         }
