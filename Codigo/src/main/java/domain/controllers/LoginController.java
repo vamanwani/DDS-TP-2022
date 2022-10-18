@@ -49,12 +49,21 @@ public class LoginController {
                 response.redirect("/servicios");
             }
             else {
-                response.redirect("templates/Login/login.hbs");
+                if (false){}/*(tipo == miembro){
+                    response.redirect("/Miembro/miembro/" + usuario.getId());
+                } else if (tipo == organizaciones){
+                    response.redirect("/Organizacion/organizaciones/" + usuario.getId());
+                } else if (tipo == agente sectorial){
+                    response.redirect("/AgenteSectorial/");
+                }*/ else {
+                    response.redirect("templates/Login/login.hbs");
+                }
             }
         }
         catch (Exception ex) {
             response.redirect("templates/Login/login.hbs");
         }
+
         return response;
     }
 
