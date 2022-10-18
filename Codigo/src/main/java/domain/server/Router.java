@@ -66,8 +66,8 @@ public class Router {
 
             // MANIPULACION DE TRAYECTOS -> SIENDO TRAYECTO UN RECURSO ANIDADO
             Spark.path("/trayectos",() -> {
-                Spark.get("/", trayectoController::mostrarTrayectos, engine);//TODO HANDLEBARS
-                Spark.get("/:id_trayecto/tramos", trayectoController::mostrarTramosDeTrayecto, engine);//TODO HANDLEBARS
+                Spark.get("/", trayectoController::mostrarTrayectos, engine);
+                Spark.get("/:id_trayecto/tramos", trayectoController::mostrarTramosDeTrayecto, engine);
             });
         });
 
