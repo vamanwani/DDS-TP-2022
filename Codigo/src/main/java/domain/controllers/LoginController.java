@@ -33,7 +33,7 @@ public class LoginController {
             String query = "from "
                     + Usuario.class.getName()
                     + " WHERE nombre = '"
-                    + request.queryParams("nombre")
+                    + request.queryParams("nombre_de_usuario")
                     + "' AND contrasenia='"
                     + request.queryParams("contrasenia")
                     + "'";
@@ -46,30 +46,29 @@ public class LoginController {
             if(usuario != null) {
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
-                response.redirect("/servicios");
+                response.redirect("/miembro/1");
             }
             else {
-                if (false){}/*(tipo == miembro){
-                    response.redirect("/Miembro/miembro/" + usuario.getId());
-                } else if (tipo == organizaciones){
-                    response.redirect("/Organizacion/organizaciones/" + usuario.getId());
-                } else if (tipo == agente sectorial){
-                    response.redirect("/AgenteSectorial/");
-                }*/ else {
-                    response.redirect("templates/Login/login.hbs");
-                }
+//                if (1){}/*(tipo == miembro){
+//                    response.redirect("/Miembro/miembro/" + usuario.getId());
+//                } else if (tipo == organizaciones){
+//                    response.redirect("/Organizacion/organizaciones/" + usuario.getId());
+//                } else if (tipo == agente sectorial){
+//                    response.redirect("/AgenteSectorial/");
+//                }*/ else {
+                    response.redirect("/login");
+//                }
             }
         }
         catch (Exception ex) {
-            response.redirect("templates/Login/login.hbs");
+            response.redirect("/login");
         }
-
         return response;
     }
 
     public Response logout(Request request, Response response) {
         request.session().invalidate();
-        response.redirect("templates/Login/login.hbs");
+        response.redirect("login");
         return response;
     }
 

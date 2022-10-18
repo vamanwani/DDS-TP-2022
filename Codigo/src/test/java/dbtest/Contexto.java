@@ -1,6 +1,7 @@
 package dbtest;
 
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.Usuario;
 import domain.services.dbManager.EntityManagerHelper;
 import org.junit.Test;
 
@@ -18,11 +19,11 @@ public class Contexto {
     }
     @Test
     public void persistirUsuario() {
-        //Usuario usuario = new Usuario("vmanwani", "password", "atolaba@utn.frba.utn.ar", "1112345678");
+        Usuario usuario = new Usuario("vmanwani", "contra", "atolaba@utn.frba.utn.ar", "1112345678");
         Miembro miembro = new Miembro("Manwani", "Vignesh", 12345679, "DNI", null);
 
         EntityManagerHelper.beginTransaction();
-        //EntityManagerHelper.getEntityManager().persist(usuario);
+        EntityManagerHelper.getEntityManager().persist(usuario);
         EntityManagerHelper.getEntityManager().persist(miembro);
         EntityManagerHelper.commit();
 
