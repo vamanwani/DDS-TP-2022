@@ -1,6 +1,7 @@
 package domain.controllers;
 
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.services.dbManager.EntityManagerHelper;
@@ -55,4 +56,5 @@ public class MiembroController {
     public ModelAndView mostrarReportes(Request request, Response response){
         return new ModelAndView(null, "/Miembro/reportesMiembro.hbs");
     }
+
 }

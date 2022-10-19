@@ -3,6 +3,7 @@ package domain.models.repos;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
@@ -18,6 +19,14 @@ public class RepositorioDeMiembros {
         return EntityManagerHelper
                 .getEntityManager()
                 .find(Miembro.class, id);
+    }
+
+    public Miembro buscarSegunUsuario(Usuario usuario){
+        String queryMiembro = "from "+ Miembro.class.getName() +" where usuario_id=" + usuario.getId();
+        return (Miembro) EntityManagerHelper
+                .getEntityManager()
+                .createQuery(queryMiembro)
+                .getSingleResult();
     }
 
     public void modificar(Miembro servicio) {

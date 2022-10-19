@@ -9,6 +9,7 @@ import domain.models.entities.verificadorContasenia.Validador;
 import domain.models.repos.RepositorioDeAgentesSectoriales;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
+import domain.models.repos.RepositorioDeUsuarios;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
@@ -22,6 +23,7 @@ public class LoginController {
     RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
     RepositorioDeAgentesSectoriales repositorioDeAgentesSectoriales = new RepositorioDeAgentesSectoriales();
     RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
+    RepositorioDeUsuarios repositorioDeUsuarios = new RepositorioDeUsuarios();
 
     // LOGIN
     // LOGUT
@@ -32,37 +34,22 @@ public class LoginController {
     }
     public Response login(Request request, Response response) {
         try {
-            String query = "from "
-                    + Usuario.class.getName()
-                    + " WHERE nombre = '"
-                    + request.queryParams("nombre_de_usuario")
-                    + "' AND contrasenia='"
-                    + request.queryParams("contrasenia")
-                    + "'";
+            String nombreDeUsuario = request.queryParams("nombre_de_usuario");
+            String contrasenia = request.queryParams("contrasenia");
 
-            Usuario usuario = (Usuario) EntityManagerHelper
-                    .getEntityManager()
-                    .createQuery(query)
-                    .getSingleResult();
+            Usuario usuario = this.repositorioDeUsuarios.buscar(nombreDeUsuario, contrasenia);
 
             if(usuario != null) {
+
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
 
                 if (usuario.getTipoUsuario() == TipoUsuario.MIEMBRO){
-                    String queryMiembro = "from "+ Miembro.class.getName() +" where usuario_id=" + usuario.getId();
-                    Miembro miembro = (Miembro) EntityManagerHelper
-                            .getEntityManager()
-                            .createQuery(queryMiembro)
-                            .getSingleResult();
+                    Miembro miembro = this.repositorioDeMiembros.buscarSegunUsuario(usuario);
                     response.redirect("/miembro/"+miembro.getId());
 
                 } else if (usuario.getTipoUsuario() == TipoUsuario.ORGANIZACION) {
-                    String queryOrg = "from " + Organizacion.class.getName() + " where usuario_id=" + usuario.getId();
-                    Organizacion organizacion = (Organizacion) EntityManagerHelper
-                            .getEntityManager()
-                            .createQuery(queryOrg)
-                            .getSingleResult();
+                    Organizacion organizacion = this.repositorioDeOrganizaciones.buscarSegunUsuario(usuario);
                     response.redirect("/organizaciones/" + organizacion.getId());
 
                 } else if (usuario.getTipoUsuario() == TipoUsuario.AGENTESECTORIAL){
@@ -116,7 +103,7 @@ public class LoginController {
             } catch (Exception exception){
                 if (validador.todosLosValidadores(contrasenia)){
                     Usuario usuario = new Usuario(nombreUsuario, contrasenia, email, telefono, TipoUsuario.MIEMBRO);
-                    Miembro miembro = new Miembro("", "", "", "", usuario);
+                    Miembro miembro = new Miembro("32532", "124", 12, "", usuario);
 
                     EntityManagerHelper.beginTransaction();
                     EntityManagerHelper.getEntityManager().persist(usuario);
@@ -124,6 +111,7 @@ public class LoginController {
                     repositorioDeMiembros.guardar(miembro);
                 } else {
                     //TODO tirar mensaje de que elija otra contrasenia
+                    response.redirect();
                 }
 
             }

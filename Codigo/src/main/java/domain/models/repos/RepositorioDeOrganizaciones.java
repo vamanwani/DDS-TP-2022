@@ -4,6 +4,7 @@ import com.sendgrid.Request;
 import com.sendgrid.Response;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
+import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
@@ -28,6 +29,14 @@ public class RepositorioDeOrganizaciones {
         return EntityManagerHelper
                 .getEntityManager()
                 .find(Organizacion.class, id);
+    }
+
+    public Organizacion buscarSegunUsuario(Usuario usuario){
+        String query = "from "+ Organizacion.class.getName() +" where usuario_id=" + usuario.getId();
+        return (Organizacion) EntityManagerHelper
+                .getEntityManager()
+                .createQuery(query)
+                .getSingleResult();
     }
 
     public void modificar(Organizacion servicio) {
