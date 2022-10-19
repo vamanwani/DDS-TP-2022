@@ -48,7 +48,7 @@ public class Router {
             //Spark.before("", AuthMiddleware::verificarSesion);
             //Spark.before("/*", AuthMiddleware::verificarSesion);
 
-            Spark.get("/", organizacionController::mostrarMenu, engine); // MENU ORG
+            Spark.get("", organizacionController::mostrarMenu, engine); // MENU ORG
             Spark.post("/registrar_mediciones", organizacionController::registrarMediciones); // TODO VINCULAR EL ARCHIVO EXCEL
             Spark.get("/aceptar_vinculacion", organizacionController::mostrarSolicitantes, engine);
             Spark.put("/aceptar_vinculacion", organizacionController :: actualizarMiembros);
@@ -62,8 +62,7 @@ public class Router {
         Spark.path("/miembro/:id", () -> {
             //Spark.before("", AuthMiddleware::verificarSesion);
             //Spark.before("/*", AuthMiddleware::verificarSesion);
-
-            Spark.get("/", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
+            Spark.get("", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA
             Spark.get("/hc", miembroController::mostrarHC);
             Spark.post("/organizaciones", miembroController::vincularAOrg);
@@ -81,13 +80,16 @@ public class Router {
             });
         });
 
-        Spark.path("/agente_sectorial", () -> {
+        Spark.path("/agente_sectorial/:id", () -> {
             //Spark.before("", AuthMiddleware::verificarSesion);
             //Spark.before("/*", AuthMiddleware::verificarSesion);
-
-            Spark.get("/", agenteSectorialController::mostrarMenu, engine); // MENU AGENTE
+            Spark.get("", agenteSectorialController::mostrarMenu, engine); // MENU AGENTE
             Spark.get("/recomendaciones", agenteSectorialController::mostrarRecomendaciones, engine);
             Spark.get("/reporte", agenteSectorialController::mostrarReportes, engine); // REPORTE
+        });
+
+        Spark.path("/prohibido",()->{
+            Spark.get("", loginController::prohibido, engine);
         });
     }
 

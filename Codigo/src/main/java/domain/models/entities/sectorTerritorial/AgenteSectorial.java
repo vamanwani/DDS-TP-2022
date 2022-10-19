@@ -5,8 +5,13 @@ import domain.models.entities.miembro.Usuario;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "agente_sectorial")
+@Table(name = "agenteSectorial")
 public class AgenteSectorial {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "agente_id")
+    private int id;
 
     @Column(name = "nombreAgente")
     private String nombre;
@@ -14,6 +19,13 @@ public class AgenteSectorial {
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    public AgenteSectorial() {
+    }
+
+    public AgenteSectorial(String nombre) {
+        this.nombre = nombre;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -23,4 +35,7 @@ public class AgenteSectorial {
         this.usuario = usuario;
     }
 
+    public int getId() {
+        return id;
+    }
 }

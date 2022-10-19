@@ -17,7 +17,8 @@ public class SectorTerritorial {
     @Column(name = "nombre")
     private String nombre;
 
-    @Embedded
+    @OneToOne
+    @JoinColumn(name = "agente_sectorial_id")
     private AgenteSectorial agenteSectorial;
 
 

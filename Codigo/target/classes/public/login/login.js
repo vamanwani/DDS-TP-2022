@@ -117,5 +117,5 @@ crearCuenta.addEventListener("click", irACrearCuenta);
 let volverALogin = document.querySelector(".botonVolver");
 volverALogin.addEventListener("click", regresarALogin);
 
-document.querySelector("#formularioLogin").addEventListener("submit", logueo);
-document.querySelector("#formularioRegistro").addEventListener("submit", registro);
+//document.querySelector("#formularioLogin").addEventListener("submit", logueo);
+//document.querySelector("#formularioRegistro").addEventListener("submit", registro);

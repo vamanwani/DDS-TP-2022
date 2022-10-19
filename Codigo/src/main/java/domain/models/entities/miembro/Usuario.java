@@ -22,13 +22,9 @@ public class Usuario {
     @Column(name = "telefono")
     private String telefono;
 
-    public void setTipoUsuario(domain.models.entities.miembro.tipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_usuario")
-    private tipoUsuario tipoUsuario;
+    private TipoUsuario tipoUsuario;
 
     public Integer getId() {
         return id;
@@ -41,11 +37,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String contrasenia, String mail, String telefono) {
+    public Usuario(String nombre, String contrasenia, String mail, String telefono, TipoUsuario tipoUsuario) {
         this.nombre = nombre;
         this.contrasenia = contrasenia;
         this.mail = mail;
         this.telefono = telefono;
+        this.tipoUsuario = tipoUsuario;
     }
     public Usuario(String nombre, String contrasenia){
         this.nombre = nombre;
@@ -59,7 +56,7 @@ public class Usuario {
         return telefono;
     }
 
-    public domain.models.entities.miembro.tipoUsuario getTipoUsuario() {
+    public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 }
