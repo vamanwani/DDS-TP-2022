@@ -2,13 +2,12 @@ package domain.models.entities.sectorTerritorial;
 
 import domain.models.entities.miembro.Usuario;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-@Embeddable
+@Entity
+@Table(name = "agente_sectorial")
 public class AgenteSectorial {
+
     @Column(name = "nombreAgente")
     private String nombre;
 
@@ -23,4 +22,5 @@ public class AgenteSectorial {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
 }

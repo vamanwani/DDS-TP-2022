@@ -165,4 +165,8 @@ public class Organizacion {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public int getId() {
+        return id;
+    }
 }

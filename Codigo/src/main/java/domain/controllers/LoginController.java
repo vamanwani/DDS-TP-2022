@@ -1,7 +1,9 @@
 package domain.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
+import domain.models.entities.miembro.tipoUsuario;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.models.entities.verificadorContasenia.Validador;
@@ -46,14 +48,28 @@ public class LoginController {
             if(usuario != null) {
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
-//                if (usuario.){}(tipo == miembro){
-//                    response.redirect("/Miembro/miembro/" + usuario.getId());
-//                } else if (tipo == organizaciones){
-//                    response.redirect("/Organizacion/organizaciones/" + usuario.getId());
-//                } else if (tipo == agente sectorial){
-//                    response.redirect("/AgenteSectorial/");
-//                }
-                response.redirect("miembro/1/");
+                if (usuario.getTipoUsuario() == tipoUsuario.MIEMBRO){
+                    String queryMiembro = "from "+ Miembro.class.getName() +" where usuario_id=" + usuario.getId();
+                    Miembro miembro = (Miembro) EntityManagerHelper
+                            .getEntityManager()
+                            .createQuery(queryMiembro)
+                            .getSingleResult();
+                    response.redirect("/Miembro/miembro/"+miembro.getId());
+                } else if (usuario.getTipoUsuario() == tipoUsuario.ORGANIZACION){
+                    String queryOrg = "from "+ Organizacion.class.getName() +" where usuario_id=" + usuario.getId();
+                    Organizacion organizacion = (Organizacion) EntityManagerHelper
+                            .getEntityManager()
+                            .createQuery(queryOrg)
+                            .getSingleResult();
+                    response.redirect("/Organizacion/organizacion"+organizacion.getId());
+                } else if (usuario.getTipoUsuario() == tipoUsuario.AGENTESECTORIAL){
+                    String queryAgente = "from agente_sectorial where usuario_id=" + usuario.getId();
+                    AgenteSectorial agenteSectorial = (AgenteSectorial) EntityManagerHelper
+                            .getEntityManager()
+                            .createQuery(queryAgente)
+                            .getSingleResult();
+                    response.redirect("//organizacion"+queryAgente.getId());
+                }
             }
             else {
                 response.redirect("/login");}
@@ -75,16 +91,16 @@ public class LoginController {
         return new ModelAndView(null, "prohibido.hbs");
     }
     public Response signup(Request request,Response response) throws FileNotFoundException {
-        String nombreUsuario=request.params("id");
-        String contrasenia=request.params("password");
+        String nombreUsuario=request.queryParams("nombre_de_usuario");
+        String contrasenia=request.queryParams("contrasenia");
         Validador validador= new Validador();
-        validador.usarTodosLosValidadores();
+//        validador.usarTodosLosValidadores();
 
         try {
             String query = "from "
                     + Usuario.class.getName()
                     + " WHERE nombre = '"
-                    + request.queryParams("nombre" )
+                    + request.queryParams("nombre_de_usuario")
                     + "'";
 
             Usuario usuario = (Usuario) EntityManagerHelper
@@ -96,36 +112,36 @@ public class LoginController {
                 response.redirect("prohibido.hbs");
             }
             else {
-                if(validador.todosLosValidadores(contrasenia)){
+
                     Usuario usuarioCreado=new Usuario(nombreUsuario,contrasenia);
-                    String tipoUsuario=request.params("tipo_usuario");
+//                    String tipoUsuario=request.params("tipo_usuario");
 
                     EntityManagerHelper.beginTransaction();
                     EntityManagerHelper.getEntityManager().persist(usuarioCreado);
                     EntityManagerHelper.commit();
 
-                    if (tipoUsuario == "miembro"){
-                        Miembro miembro = new Miembro();
-                        miembro.setUsuario(usuarioCreado);
-//                        miembro.setNombre(new MiembroController::llenarDatos);
-                        repositorioDeMiembros.guardar(miembro);
-
-                    } else if (tipoUsuario == "organizacion"){
-                        Organizacion organizacion=new Organizacion();
-                        organizacion.setUsuario(usuarioCreado);
-//                        organizacion.setRazonSocial(new OrganizacionController::llenarDatos);
-                        repositorioDeOrganizaciones.guardar(organizacion);
-
-                    } else if (tipoUsuario == "agenteSec"){
-                        AgenteSectorial agenteSectorial=new AgenteSectorial();
-                        agenteSectorial.setUsuario(usuarioCreado);
-                        repositorioDeAgentesSectoriales.guardar(agenteSectorial);
-                    } else {
-                        response.redirect("templates/prohibido.hbs");
-                    }
+//                    if (tipoUsuario == "miembro"){
+//                        Miembro miembro = new Miembro();
+//                        miembro.setUsuario(usuarioCreado);
+////                        miembro.setNombre(new MiembroController::llenarDatos);
+//                        repositorioDeMiembros.guardar(miembro);
+//
+//                    } else if (tipoUsuario == "organizacion"){
+//                        Organizacion organizacion=new Organizacion();
+//                        organizacion.setUsuario(usuarioCreado);
+////                        organizacion.setRazonSocial(new OrganizacionController::llenarDatos);
+//                        repositorioDeOrganizaciones.guardar(organizacion);
+//
+//                    } else if (tipoUsuario == "agenteSec"){
+//                        AgenteSectorial agenteSectorial=new AgenteSectorial();
+//                        agenteSectorial.setUsuario(usuarioCreado);
+//                        repositorioDeAgentesSectoriales.guardar(agenteSectorial);
+//                    } else {
+//                        response.redirect("templates/prohibido.hbs");
+//                    }
                 }
-                response.redirect("/login/login.hbs");
-            }
+                response.redirect("/login");
+
         }
         catch (Exception ex) {
             response.redirect("/login/login.hbs");

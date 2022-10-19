@@ -22,6 +22,14 @@ public class Usuario {
     @Column(name = "telefono")
     private String telefono;
 
+    public void setTipoUsuario(domain.models.entities.miembro.tipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_usuario")
+    private tipoUsuario tipoUsuario;
+
     public Integer getId() {
         return id;
     }
@@ -51,6 +59,7 @@ public class Usuario {
         return telefono;
     }
 
-
-
+    public domain.models.entities.miembro.tipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
 }
