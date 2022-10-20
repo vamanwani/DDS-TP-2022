@@ -31,11 +31,11 @@ public class RepositorioDeOrganizaciones {
                 .find(Organizacion.class, id);
     }
 
-    public Organizacion buscarSegunUsuario(Usuario usuario){
-        String query = "from "+ Organizacion.class.getName() +" where usuario_id=" + usuario.getId();
+    public Organizacion buscarSegunUsuarioId(int usuario){
+        String queryMiembro = "from "+ Organizacion.class.getName() +" where usuario_id=" + usuario;
         return (Organizacion) EntityManagerHelper
                 .getEntityManager()
-                .createQuery(query)
+                .createQuery(queryMiembro)
                 .getSingleResult();
     }
 

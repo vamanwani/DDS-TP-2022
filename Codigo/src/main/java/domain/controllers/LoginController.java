@@ -45,11 +45,11 @@ public class LoginController {
                 request.session().attribute("id", usuario.getId());
 
                 if (usuario.getTipoUsuario() == TipoUsuario.MIEMBRO){
-                    Miembro miembro = this.repositorioDeMiembros.buscarSegunUsuario(usuario);
+                    Miembro miembro = this.repositorioDeMiembros.buscarSegunUsuarioId(usuario.getId());
                     response.redirect("/miembro/"+miembro.getId());
 
                 } else if (usuario.getTipoUsuario() == TipoUsuario.ORGANIZACION) {
-                    Organizacion organizacion = this.repositorioDeOrganizaciones.buscarSegunUsuario(usuario);
+                    Organizacion organizacion = this.repositorioDeOrganizaciones.buscarSegunUsuarioId(usuario.getId());
                     response.redirect("/organizaciones/" + organizacion.getId());
 
                 } else if (usuario.getTipoUsuario() == TipoUsuario.AGENTESECTORIAL){
@@ -73,7 +73,7 @@ public class LoginController {
 
     public Response logout(Request request, Response response) {
         request.session().invalidate();
-        response.redirect("login");
+        response.redirect("/login");
         return response;
     }
 
@@ -101,19 +101,18 @@ public class LoginController {
                 System.out.println(user.getId());
                 // TODO decir que elija otro username
             } catch (Exception exception){
+
                 if (validador.todosLosValidadores(contrasenia)){
+
                     Usuario usuario = new Usuario(nombreUsuario, contrasenia, email, telefono, TipoUsuario.MIEMBRO);
                     Miembro miembro = new Miembro("32532", "124", 12, "", usuario);
 
-                    EntityManagerHelper.beginTransaction();
-                    EntityManagerHelper.getEntityManager().persist(usuario);
-                    EntityManagerHelper.commit();
+                    repositorioDeUsuarios.guardar(usuario);
                     repositorioDeMiembros.guardar(miembro);
                 } else {
                     //TODO tirar mensaje de que elija otra contrasenia
-                    response.redirect();
+                    response.redirect("/contraNoValida");
                 }
-
             }
                 response.redirect("/login");
         }

@@ -1,5 +1,6 @@
 package domain.models.repos;
 
+import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.Request;
@@ -20,7 +21,10 @@ public class RepositorioDeUsuarios {
                 .getSingleResult();
     }
 
-
-
+    public void guardar(Usuario usuario) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(usuario);
+        EntityManagerHelper.commit();
+    }
 
 }

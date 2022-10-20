@@ -28,6 +28,7 @@ public class Tramo {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionFin_id")
     private Ubicacion puntoInicio;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
     private List<Miembro> miembrosMismoTransporte;

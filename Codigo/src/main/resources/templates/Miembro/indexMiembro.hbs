@@ -21,7 +21,7 @@
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
+                        <h3 id="nombreUsuario">{{miembro.nombre}}</h3>
                     </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -31,12 +31,12 @@
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./editarTrayectos.html">Editar Trayectos</a></li>
-                      <li><a class="dropdown-item" href="./unirseAOrg.html">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../login/login.html">Cerrar sesión</a>
+                    <a class="nav-link" href="/login/logout">Cerrar sesión</a>
                   </li>
                 </ul>
               </div>
@@ -46,8 +46,8 @@
     <main style="background-color: #b854b8;">
         <h1>MENU MIEMBRO</h1>
         <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="./editarTrayectos.html" class="btn botonMain" type="button" style="background-color: #e3f2fd;">EDITAR REGISTRO DE TRAYECTOS</a>
-            <a href="./unirseAOrg.html" class="btn botonMain" type="button" style="background-color: #e3f2fd;">UNIRSE A ORGANIZACION</a>
+            <a href="/miembro/{{miembro.id}}/trayectos" class="btn botonMain" type="button" style="background-color: #e3f2fd;">EDITAR REGISTRO DE TRAYECTOS</a>
+            <a href="/miembro/{{miembro.id}}/organizaciones" class="btn botonMain" type="button" style="background-color: #e3f2fd;">UNIRSE A ORGANIZACION</a>
         </div>
     </main>
     <footer style="background-color: black;">

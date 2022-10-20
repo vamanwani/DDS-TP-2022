@@ -21,8 +21,8 @@ public class RepositorioDeMiembros {
                 .find(Miembro.class, id);
     }
 
-    public Miembro buscarSegunUsuario(Usuario usuario){
-        String queryMiembro = "from "+ Miembro.class.getName() +" where usuario_id=" + usuario.getId();
+    public Miembro buscarSegunUsuarioId(int usuario){
+        String queryMiembro = "from "+ Miembro.class.getName() +" where usuario_id=" + usuario;
         return (Miembro) EntityManagerHelper
                 .getEntityManager()
                 .createQuery(queryMiembro)

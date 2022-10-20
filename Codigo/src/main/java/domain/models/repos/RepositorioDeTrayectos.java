@@ -12,7 +12,7 @@ public class RepositorioDeTrayectos {
     public List<Trayecto> buscarTodos(int idMiembro) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("select trayecto_id " + "from " + Miembro.class.getName() + " where id =" + idMiembro)
+                .createQuery("select trayecto_id " + "from " + Trayecto.class.getName() + " where id =" + idMiembro)
                 .getResultList();
     }
     public Trayecto buscar(Integer idTrayecto) {

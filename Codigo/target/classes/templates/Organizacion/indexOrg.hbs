@@ -20,7 +20,7 @@
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
+                        <h3 id="nombreUsuario">{{organizacion.nombre}}</h3>
                     </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -31,8 +31,8 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="./registrarMediciones.html">Registrar medición</a></li>
-                      <li><a class="dropdown-item" href="./aceptarVinculaciones.html">Aceptar vinculación</a></li>
-                      <li><a class="dropdown-item" href="./recomendaciones.html">Ver recomendaciones</a></li>
+                      <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/aceptar_vinculacion">Aceptar vinculación</a></li>
+                      <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/recomendaciones">Ver recomendaciones</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
@@ -47,8 +47,8 @@
         <h1>MENU ORGANIZACION</h1>
         <div class="d-grid gap-2 col-6 mx-auto">
             <a href="./registrarMediciones.html" class="btn botonMain" type="button" style="background-color: #e3f2fd;">REGISTRAR MEDICIONES</a>
-            <a href="./aceptarVinculaciones.html" class="btn botonMain" type="button" style="background-color: #e3f2fd;">ACEPTAR VINCULACIÓN DE TRABAJADOR</a>
-            <a href="./recomendaciones.html" class="btn botonMain" type="button" style="background-color: #e3f2fd;">RECOMENDACIONES ACTUALES</a>
+            <a href="/organizaciones/{{organizacion.id}}/aceptar_vinculacion" class="btn botonMain" type="button" style="background-color: #e3f2fd;">ACEPTAR VINCULACIÓN DE TRABAJADOR</a>
+            <a href="/organizaciones/{{organizacion.id}}/recomendaciones" class="btn botonMain" type="button" style="background-color: #e3f2fd;">RECOMENDACIONES ACTUALES</a>
         </div>
     </main>
     <footer style="background-color: black;">

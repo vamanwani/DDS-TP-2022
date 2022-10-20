@@ -24,12 +24,19 @@ public class OrganizacionController {
     // REGISTRAR MEDICIONES pantalla del excel
     // ACEPTAR VINCULACION
     // VER SUGERENCIAS
-
     private RepositorioDeOrganizaciones repo;
     private RepositorioDeMiembros repositorioDeMiembros;
+
+    public OrganizacionController(){
+        this.repo = new RepositorioDeOrganizaciones();
+    }
+
     //Organizaciones
     public ModelAndView mostrarMenu(spark.Request request, spark.Response response){
-        return new ModelAndView(null , "/Organizacion/indexOrg.hbs");// el viewname que sea igual al home de organizacion
+        Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("organizacion", organizacion);
+        }} , "/Organizacion/indexOrg.hbs");// el viewname que sea igual al home de organizacion
     }
 
     public ModelAndView mostrarRecomendaciones(spark.Request request, spark.Response response){

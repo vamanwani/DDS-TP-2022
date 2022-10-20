@@ -25,7 +25,10 @@ public class MiembroController {
     // Mostrar organizaciones "miembros/:id/organizaciones"
 
     public ModelAndView mostrarMenu(Request request, Response response){
-        return new ModelAndView(null, "/Miembro/indexMiembro.hbs");// el viewname que sea igual al home de miembro
+        Miembro miembro = this.repo.buscarSegunUsuarioId(Integer.valueOf(request.params("id")));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("miembro", miembro);
+        }}, "/Miembro/indexMiembro.hbs");// el viewname que sea igual al home de miembro
     }
 
     public ModelAndView mostrarOrganizaciones(Request request, Response response){
