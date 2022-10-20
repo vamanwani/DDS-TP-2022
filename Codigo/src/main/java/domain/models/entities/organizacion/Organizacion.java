@@ -18,7 +18,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "organizacion")
-
 public class Organizacion {
     @Id
     @GeneratedValue
@@ -34,7 +33,7 @@ public class Organizacion {
     private List<SolicitudVinculacion> solicitudes;
 
     @ManyToOne
-    @JoinColumn(name = "clasificacion_org")
+    @JoinColumn(name = "clasificacion_org_id")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
     public ClasificaciónDeOrg getClasificacionDeOrg() {
@@ -178,8 +177,8 @@ public class Organizacion {
         return razonSocial;
     }
 
-    public ClasificaciónDeOrg getClasificacion() {
-        return clasificacionDeOrg;
+    public String getClasificacion() {
+        return clasificacionDeOrg.getNombre();
     }
 
 }

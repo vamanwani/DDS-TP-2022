@@ -46,6 +46,7 @@ public class Contexto {
         EntityManagerHelper.getEntityManager().persist(usuario);
         EntityManagerHelper.getEntityManager().persist(miembro);
         EntityManagerHelper.getEntityManager().persist(usuarioOrg);
+        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
         EntityManagerHelper.getEntityManager().persist(organizacion);
 //        EntityManagerHelper.getEntityManager().persist(usuarioAgSec);
 //        EntityManagerHelper.getEntityManager().persist(agenteSectorial);
@@ -63,6 +64,7 @@ public class Contexto {
         organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
         organizacion.setRazonSocial("razonSocial");
         EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
         EntityManagerHelper.getEntityManager().persist(organizacion);
         EntityManagerHelper.commit();
     }

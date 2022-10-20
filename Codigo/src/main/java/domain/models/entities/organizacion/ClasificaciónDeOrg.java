@@ -8,7 +8,8 @@ import java.util.List;
 public class ClasificaciónDeOrg {
     @Id
     @GeneratedValue
-    private Integer id;
+    private int id;
+
     @Column(name = "nombre")
     private String nombre;
 
@@ -19,8 +20,7 @@ public class ClasificaciónDeOrg {
         this.nombre = nombre;
     }
 
-    @Transient
-    public List<Organizacion> organizacionList;
+
 
     public String getNombre() {
         return nombre;
