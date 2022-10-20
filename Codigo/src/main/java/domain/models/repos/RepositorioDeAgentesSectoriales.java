@@ -7,10 +7,11 @@ import domain.models.entities.sectorTerritorial.SectorTerritorial;
 import domain.services.dbManager.EntityManagerHelper;
 
 public class RepositorioDeAgentesSectoriales {
-    public SectorTerritorial buscar(Integer id) {
+
+    public AgenteSectorial buscar(Integer id) {
         return EntityManagerHelper
                 .getEntityManager()
-                .find(SectorTerritorial.class, id);
+                .find(AgenteSectorial.class, id);
     }
 
     public AgenteSectorial buscarSegunUsuarioId(int usuario){

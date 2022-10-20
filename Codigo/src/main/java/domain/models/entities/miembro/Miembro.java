@@ -26,7 +26,7 @@ public class Miembro {
     private String nombre;
 
     @Column(name = "nroDoc")
-    private int numeroDeDocumento;
+    private String numeroDeDocumento;
 
     @Column(name = "tipoDoc")
     private String tipoDeDocumento;
@@ -54,9 +54,6 @@ public class Miembro {
     @Column(name = "mail")
     private String mail;
 
-    @Column(name = "telefono")
-    private String telefono;
-
     @Column(name = "link_recomendacion")
     private String linkRecomendacion;
 
@@ -75,7 +72,7 @@ public class Miembro {
     public Miembro(
             String apellido,
             String nombre,
-            int numeroDeDocumento,
+            String numeroDeDocumento,
             String tipoDeDocumento,
             Usuario usuario)
     {
@@ -141,7 +138,7 @@ public class Miembro {
         this.nombre = nombre;
     }
 
-    public void setNumeroDeDocumento(int numeroDeDocumento) {
+    public void setNumeroDeDocumento(String  numeroDeDocumento) {
         this.numeroDeDocumento = numeroDeDocumento;
     }
 
@@ -157,7 +154,4 @@ public class Miembro {
         this.mail = mail;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 }

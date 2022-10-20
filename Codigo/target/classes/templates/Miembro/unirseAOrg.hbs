@@ -51,15 +51,15 @@
     <div style="background-color: white; height: 300px;">
         <table id="listaOrganizaciones" style="width: 100%;">
             <tr>
-                <th>ID</th>
+                <th>Razon social</th>
                 <th>Tipo</th>
                 <th>Clasificacion</th>
             </tr>
             {{#each organizaciones}}
                 <tr class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
-                  <th>{{id_organizacion}}</th>
-                  <th>{{tipo_org}}</th>
-                  <th>{{clasificacion_org}}</th>
+                  <th>{{razon}}</th>
+                  <th>{{tipo}}</th>
+                  <th>{{clasificacion.clasificacion}}</th>
                 </tr>
               {{/each}}
         </table>

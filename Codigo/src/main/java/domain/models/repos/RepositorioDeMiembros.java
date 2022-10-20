@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class RepositorioDeMiembros {
 
-
     public Miembro buscar(Integer id) {
         return EntityManagerHelper
                 .getEntityManager()
@@ -50,5 +49,11 @@ public class RepositorioDeMiembros {
         Miembro miembro =  EntityManagerHelper.getEntityManager().find(Miembro.class, Long.valueOf(idMiembro));
         List<Organizacion> organizaciones = miembro.getTrabajos().stream().map(s -> s.getOrganizacion()).collect(Collectors.toList());
         return organizaciones;
+    }
+
+    public List<Organizacion> mostrarOrganizaciones(){
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("from " + Organizacion.class.getName())
+                .getResultList();
     }
 }

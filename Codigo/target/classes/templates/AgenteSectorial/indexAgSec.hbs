@@ -20,7 +20,7 @@
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
+                        <h3 id="nombreUsuario">{{agSec.nombre}}</h3>
                     </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -30,8 +30,8 @@
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./reportesAgSec.hbs">Visualizar reportes</a></li>
-                      <li><a class="dropdown-item" href="./recomendacionesAgSec.hbs">Ver recomendaciones</a></li>
+                      <li><a class="dropdown-item" href="/agente_sectorial/{{agSec.id}}/reporte">Visualizar reportes</a></li>
+                      <li><a class="dropdown-item" href="/agente_sectorial/{{agSec.id}}/recomendaciones">Ver recomendaciones</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
@@ -45,8 +45,8 @@
     <main style="background-color: #33a5c2;">
         <h1>MENU AGENTE SECTORIAL</h1>
         <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="./reportesAgSec.hbs" class="btn botonMain" type="button" style="background-color: black; color: white;">VISUALIZAR REPORTES</a>
-            <a href="./recomendacionesAgSec.hbs" class="btn botonMain" type="button" style="background-color: black; color: white;">VER RECOMENDACIONES</a>
+            <a href="/agente_sectorial/{{agSec.id}}/reporte" class="btn botonMain" type="button" style="background-color: black; color: white;">VISUALIZAR REPORTES</a>
+            <a href="/agente_sectorial/{{agSec.id}}/recomendaciones" type="button" style="background-color: black; color: white;">VER RECOMENDACIONES</a>
         </div>
     </main>
     <footer style="background-color: black;">

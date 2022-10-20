@@ -45,22 +45,22 @@ public class NotificadorTest {
         organizaciones.add(segundaOrganizacion);
         this.primerMiembro = new Miembro("miembro",
                 "primero",
-                111111111,
+                "111111111",
                 "DNI",
                 new Usuario("primer","miembro123"));
         this.segundoMiembro = new Miembro("miembro",
                 "segundo",
-                22222222,
+                "22222222",
                 "DNI",
                 new Usuario("segundo","miembro123"));
         this.tercerMiembro = new Miembro("miembro",
                 "tercero",
-                33333333,
+                "33333333",
                 "DNI",
                 new Usuario("tercero","miembro123"));
         this.cuartoMiembro = new Miembro("miembro",
                 "cuarto",
-                44444444,
+                "44444444",
                 "DNI",
                 new Usuario("cuarto","miembro123"));
         primeraOrganizacion.agregarContacto(primerMiembro);

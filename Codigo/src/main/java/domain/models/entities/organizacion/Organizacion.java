@@ -33,7 +33,7 @@ public class Organizacion {
     @JoinColumn(name = "solicitud_vinculacion_id")
     private List<SolicitudVinculacion> solicitudes;
 
-    @Transient
+    @ManyToOne
     @JoinColumn(name = "clasificacion_org")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
@@ -169,4 +169,17 @@ public class Organizacion {
     public int getId() {
         return id;
     }
+
+    public TipoDeOrganizacion getTipo() {
+        return tipoDeOrganizacion;
+    }
+
+    public String getRazon() {
+        return razonSocial;
+    }
+
+    public ClasificaciónDeOrg getClasificacion() {
+        return clasificacionDeOrg;
+    }
+
 }

@@ -83,6 +83,16 @@ public class LoginController {
         String contrasenia=request.queryParams("contrasenia");
         String email = request.queryParams("email");
         String telefono = request.queryParams("telefono");
+        String nombre = request.queryParams("nombre");
+        String apellido = request.queryParams("apellido");
+        String tipoDoc = request.queryParams("tipoDoc");
+        String nroDoc = request.queryParams("nroDoc");
+
+        System.out.println(nombre);
+        System.out.println(apellido);
+        System.out.println(tipoDoc);
+        System.out.println(nroDoc);
+
 
         Validador validador= new Validador();
         validador.usarTodosLosValidadores();
@@ -102,12 +112,13 @@ public class LoginController {
                 if (validador.todosLosValidadores(contrasenia)){
 
                     Usuario usuario = new Usuario(nombreUsuario, contrasenia, email, telefono, TipoUsuario.MIEMBRO);
-                    Miembro miembro = new Miembro("32532", "124", 12, "", usuario);
+                    Miembro miembro = new Miembro(apellido, nombre, nroDoc, tipoDoc, usuario);
 
                     repositorioDeUsuarios.guardar(usuario);
                     repositorioDeMiembros.guardar(miembro);
                 } else {
                     //TODO tirar mensaje de que elija otra contrasenia
+
                     response.redirect("/contraNoValida");
                 }
             }

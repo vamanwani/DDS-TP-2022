@@ -32,8 +32,7 @@ public class MiembroController {
     }
 
     public ModelAndView mostrarOrganizaciones(Request request, Response response){
-        String idMiembro = request.params("id");
-        List<Organizacion> organizaciones = this.repo.buscarOrganizaciones(new Integer(idMiembro));
+        List<Organizacion> organizaciones = this.repo.mostrarOrganizaciones();
         return new ModelAndView(new HashMap<String, Object>(){{
             put("organizaciones", organizaciones);
         }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO

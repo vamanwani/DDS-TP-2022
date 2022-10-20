@@ -102,11 +102,11 @@ public class ReportesInit {
         segundoUsuario = new Usuario("naparicio", "password");
         tercerUsuario = new Usuario("cbodirikyan", "root");
 
-        primerMiembro = new Miembro("tolaba","adrian",12345678,"DNI", primerUsuario);
+        primerMiembro = new Miembro("tolaba","adrian","12345678","DNI", primerUsuario);
 
-        segundoMiembro = new Miembro("aparicio", "nicolas",11111111, "DNI", segundoUsuario);
+        segundoMiembro = new Miembro("aparicio", "nicolas","11111111", "DNI", segundoUsuario);
 
-        tercerMiembro = new Miembro("bodirikyan", "cristian", 22554489, "DNI",tercerUsuario );
+        tercerMiembro = new Miembro("bodirikyan", "cristian", "22554489", "DNI",tercerUsuario );
 
         primerSector = new Sector("primerSector");
         primerSector.agregarMiembro(primerMiembro);
