@@ -40,9 +40,13 @@ public class Router {
             Spark.get("", loginController::pantallaDeLogin, engine);
             Spark.post("", loginController::login);
             Spark.post("/signup", loginController::signup);
-            Spark.post("/logout", loginController::logout);
             // PARA LO DE CREAR LA CUENTA HAY QUE HACER LO DEL VALIDADOR DE CONTRASENIAS
         });
+
+        Spark.path("/logout", () -> {
+            Spark.get("", loginController::logout);
+        });
+
 
         Spark.path("/organizaciones/:id", () -> {
             //Spark.before("", AuthMiddleware::verificarSesion);

@@ -53,20 +53,17 @@ public class LoginController {
                     response.redirect("/organizaciones/" + organizacion.getId());
 
                 } else if (usuario.getTipoUsuario() == TipoUsuario.AGENTESECTORIAL){
-                    String queryAgente = "from agentesectorial where usuario_id=" + usuario.getId();
-                    AgenteSectorial agenteSectorial = (AgenteSectorial) EntityManagerHelper
-                            .getEntityManager()
-                            .createQuery(queryAgente)
-                            .getSingleResult();
+                    System.out.println("usuario id: " + usuario.getId());
+                    AgenteSectorial agenteSectorial = this.repositorioDeAgentesSectoriales.buscarSegunUsuarioId(usuario.getId());
                     response.redirect("/agente_sectorial/"+agenteSectorial.getId()); // CONSULTAR
                 }
             }
             else {
-                response.redirect("/login");
+                response.redirect("/SeMeteAlElse");
             }
         }
         catch (Exception ex) {
-            response.redirect("/login");
+            response.redirect("/seMeteAlCatch");
         }
         return response;
     }

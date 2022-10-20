@@ -20,7 +20,7 @@ public class RepositorioDeOrganizaciones {
     public List<Miembro> buscarTodasLosSolicitantes(int idOrganizacion) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("select miembro_miembro_id " + "from " + SolicitudVinculacion.class.getName() + " where organizacion_id_organizacion =" + idOrganizacion)
+                .createQuery("select miembro_miembro_id " + "from solicitud_vinculacion where organizacion_id_organizacion =" + idOrganizacion)
                 .getResultList();
     }
 

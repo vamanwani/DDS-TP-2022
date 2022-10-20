@@ -13,6 +13,15 @@ public class RepositorioDeAgentesSectoriales {
                 .find(SectorTerritorial.class, id);
     }
 
+    public AgenteSectorial buscarSegunUsuarioId(int usuario){
+        String query = "from " + AgenteSectorial.class.getName() +" where usuario_id=" + usuario;
+        System.out.println("query: " + query);
+        return (AgenteSectorial) EntityManagerHelper
+                .getEntityManager()
+                .createQuery(query)
+                .getSingleResult();
+    }
+
 
     public void guardar(AgenteSectorial agenteSectorial) {
         EntityManagerHelper.beginTransaction();

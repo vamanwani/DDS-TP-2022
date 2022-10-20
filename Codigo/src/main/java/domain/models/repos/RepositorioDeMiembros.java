@@ -23,6 +23,7 @@ public class RepositorioDeMiembros {
 
     public Miembro buscarSegunUsuarioId(int usuario){
         String queryMiembro = "from "+ Miembro.class.getName() +" where usuario_id=" + usuario;
+        System.out.println("query: " + queryMiembro);
         return (Miembro) EntityManagerHelper
                 .getEntityManager()
                 .createQuery(queryMiembro)
