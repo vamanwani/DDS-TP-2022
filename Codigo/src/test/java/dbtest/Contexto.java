@@ -48,8 +48,8 @@ public class Contexto {
         EntityManagerHelper.getEntityManager().persist(usuarioOrg);
         EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
         EntityManagerHelper.getEntityManager().persist(organizacion);
-//        EntityManagerHelper.getEntityManager().persist(usuarioAgSec);
-//        EntityManagerHelper.getEntityManager().persist(agenteSectorial);
+        EntityManagerHelper.getEntityManager().persist(usuarioAgSec);
+        EntityManagerHelper.getEntityManager().persist(agenteSectorial);
         EntityManagerHelper.commit();
 
         // ahora con un miembro para probar las fk

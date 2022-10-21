@@ -25,13 +25,17 @@ public class AgenteSectorialController {
 
     public ModelAndView mostrarRecomendaciones(Request request, Response response){
         AgenteSectorial agenteSectorial=repo.buscar(new Integer(request.params("id")));
+        try{
         SectorTerritorial sectorTerritorial = (SectorTerritorial) EntityManagerHelper
                 .getEntityManager()
                 .createQuery("from "+ SectorTerritorial.class.getName() +" where agente_sectorial_id=" + agenteSectorial.getId())
                 .getSingleResult();
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("linkRecomendacionesAgSec", sectorTerritorial.getLink_recomendacion());
-        }}, "/AgenteSectorial/recomendacionesAgSec.hbs");
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("linkRecomendacionesAgSec", sectorTerritorial.getLink_recomendacion());
+            }}, "/AgenteSectorial/recomendacionesAgSec.hbs");}
+        catch(Exception exception){
+            return new ModelAndView(null, "/AgenteSectorial/recomendacionesAgSec.hbs");}
+
     }
 
     public ModelAndView mostrarReportes(Request request, Response response){

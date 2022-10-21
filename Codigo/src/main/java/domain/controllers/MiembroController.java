@@ -25,17 +25,21 @@ public class MiembroController {
     // Mostrar organizaciones "miembros/:id/organizaciones"
 
     public ModelAndView mostrarMenu(Request request, Response response){
-        Miembro miembro = this.repo.buscarSegunUsuarioId(Integer.valueOf(request.params("id")));
+        Miembro miembro = this.repo.buscar(Integer.valueOf(request.params("id")));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("miembro", miembro);
         }}, "/Miembro/indexMiembro.hbs");// el viewname que sea igual al home de miembro
     }
 
     public ModelAndView mostrarOrganizaciones(Request request, Response response){
-        List<Organizacion> organizaciones = this.repo.mostrarOrganizaciones();
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("organizaciones", organizaciones);
-        }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
+        try{
+            List<Organizacion> organizaciones = this.repo.mostrarOrganizaciones();
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("organizaciones", organizaciones);
+            }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
+        } catch (Exception ex){
+            return new ModelAndView (null, "/Miembro/unirseAOrg.hbs");
+        }
     }
 
     public Response vincularAOrg(Request request, Response response){

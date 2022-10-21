@@ -24,7 +24,6 @@ public class RepositorioDeOrganizaciones {
                 .getResultList();
     }
 
-
     public Organizacion buscar(Integer id) {
         return EntityManagerHelper
                 .getEntityManager()

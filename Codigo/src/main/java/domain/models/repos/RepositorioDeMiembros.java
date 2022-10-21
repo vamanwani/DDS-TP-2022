@@ -15,9 +15,10 @@ import java.util.stream.Collectors;
 public class RepositorioDeMiembros {
 
     public Miembro buscar(Integer id) {
-        return EntityManagerHelper
+        return (Miembro) EntityManagerHelper
                 .getEntityManager()
-                .find(Miembro.class, id);
+                .createQuery("from " + Miembro.class.getName() + " where miembro_id=" + id)
+                .getSingleResult();
     }
 
     public Miembro buscarSegunUsuarioId(int usuario){

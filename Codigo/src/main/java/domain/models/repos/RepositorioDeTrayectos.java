@@ -10,6 +10,8 @@ import java.util.List;
 
 public class RepositorioDeTrayectos {
     public List<Trayecto> buscarTodos(int idMiembro) {
+        //BUSCAR LOS TRAMOS DEL IDMIEMBRO, BUSCAR LOS TRAYECTOS A LOS QUE PERTENECEN
+
         return EntityManagerHelper
                 .getEntityManager()
                 .createQuery("select trayecto_id " + "from " + Trayecto.class.getName() + " where id =" + idMiembro)

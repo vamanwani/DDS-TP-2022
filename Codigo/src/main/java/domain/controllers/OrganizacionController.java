@@ -40,11 +40,15 @@ public class OrganizacionController {
     }
 
     public ModelAndView mostrarRecomendaciones(spark.Request request, spark.Response response){
-        Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
+        try{
+            Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("linkRecomendacionesOrg", organizacion.getLinkRecomendacion());
+            }}, "/Organizacion/recomendaciones.hbs");
+        } catch (Exception ex){
+            //TODO si no hay link de recomendaciones
+        }
 
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("linkRecomendacionesOrg", organizacion.getLinkRecomendacion());
-        }}, "/Organizacion/recomendaciones.hbs");
     }
 
 
@@ -53,11 +57,17 @@ public class OrganizacionController {
     }
 
     public ModelAndView mostrarSolicitantes(spark.Request request, spark.Response response) {
-        String idOrganizacion = request.params("id");
-        List<Miembro> solicitantes = this.repo.buscarTodasLosSolicitantes(new Integer(idOrganizacion));
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("solicitantes", solicitantes);
-        }}, "/Organizacion/aceptarVinculaciones.hbs");
+        try {
+            String idOrganizacion = request.params("id");
+            List<Miembro> solicitantes = this.repo.buscarTodasLosSolicitantes(new Integer(idOrganizacion));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("solicitantes", solicitantes);
+            }}, "/Organizacion/aceptarVinculaciones.hbs");
+        } catch (Exception ex){
+            //TODO si no hay solicitantes
+            return new ModelAndView(null,"/Organizacion/aceptarVinculaciones.hbs");
+        }
+
     }
 
     public Response actualizarMiembros(spark.Request request, spark.Response response) {

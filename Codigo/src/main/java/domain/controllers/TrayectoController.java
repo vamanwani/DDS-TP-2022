@@ -20,11 +20,16 @@ public class TrayectoController {
     RepositorioDeTrayectos repo = new RepositorioDeTrayectos();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
-        String idMimebro = request.params("id");
-        List<Trayecto> trayectos = this.repo.buscarTodos(new Integer(idMimebro));
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("trayectos", trayectos);
-        }}, "/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
+        try{
+            String idMimebro = request.params("id");
+            List<Trayecto> trayectos = this.repo.buscarTodos(new Integer(idMimebro));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("trayectos", trayectos);
+            }}, "/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
+        } catch (Exception ex){
+            return new ModelAndView(null, "/Miembro/editarTrayectos.hbs");
+        }
+
     }
 
     public ModelAndView mostrarTramosDeTrayecto(Request request, Response response){
@@ -40,10 +45,12 @@ public class TrayectoController {
 
     public Response crearTramo(Request request, Response response){
         Tramo tramo = new Tramo();
-        tramo.setMedioDeTransporte(EntityManagerHelper.getEntityManager().find(Transporte.class, request.queryParams("medio_transporte")));
+        Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
+        Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
+//        tramo.setMedioDeTransporte(EntityManagerHelper.getEntityManager().find(Transporte.class, request.queryParams("medio_transporte")));
         tramo.setPuntoInicio(EntityManagerHelper.getEntityManager().find(Ubicacion.class, request.queryParams("punto_inicio")));
         tramo.setPuntoInicio(EntityManagerHelper.getEntityManager().find(Ubicacion.class, request.queryParams("punto_fin")));
-        response.redirect("");//Pantalla de agregar tramos
+        response.redirect("/trayectos/agregar");//Pantalla de agregar tramos
         return response;
     }
 
