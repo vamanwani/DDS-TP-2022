@@ -45,12 +45,14 @@
     </header>
     <main style="background-color: #873ab9;">
         <h1>REGISTRAR MEDICIONES</h1>
+        <form action = "registrar_mediciones" method='post' enctype='multipart/form-data'>
           <h4 style="background-color: rgb(161, 161, 161); margin-bottom: 0;">Cargar planilla con datos de las actividades</h4>
           <div class="input-group mb-3 cargarPlanilla">
-            <input type="file" class="form-control" id="inputGroupFile02">
+            <input type='file' name='file' class="form-control" id="inputGroupFile02">
             <label class="input-group-text" for="inputGroupFile02">Upload</label>
           </div>
-          <a type="button" class="btn btn-danger btn-lg" style="margin-bottom: 1rem;">Aplicar</a>
+          <input type="submit" class="btn btn-danger btn-lg" style="margin-bottom: 1rem;" value="Aplicar"/>
+        </form>
     </main>
     <footer style="background-color: black;">
         <p style="color: white;">@2022 Todos los derechos reservados</p>

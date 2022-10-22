@@ -11,7 +11,16 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,12 +56,33 @@ public class OrganizacionController {
             }}, "/Organizacion/recomendaciones.hbs");
         } catch (Exception ex){
             //TODO si no hay link de recomendaciones
+            return new ModelAndView(null, null);
         }
 
     }
 
+    public ModelAndView registroMediciones(Request request, Response response) {
+        try{
+            Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("organizacion", organizacion);
+            }} , "/Organizacion/registrarMediciones.hbs");// el viewname que sea igual al home de organizacion
+        } catch (Exception ex){
+            return new ModelAndView(null, "Organizacion/registrarMediciones.hbs");
+        }
+    }
 
-    public Response registrarMediciones(spark.Request request, spark.Response response) {
+    public Response registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads");
+        request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+        final Part uploadedFile = request.raw().getPart("file");
+        final Path path = Paths.get("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\meh");
+        try (final InputStream in = uploadedFile.getInputStream()) {
+            Files.copy(in, path);
+        }
+
+        response.redirect("/");
+        response.redirect("/organizaciones/" + request.params("id"));
         return response;
     }
 
@@ -100,5 +130,7 @@ public class OrganizacionController {
             //put("reportes", reportes);
         }}, "");
     }
+
+
 }
 

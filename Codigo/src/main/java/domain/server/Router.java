@@ -6,10 +6,18 @@ import domain.controllers.*;
 import domain.middlewares.AuthMiddleware;
 import domain.middlewares.Middleware;
 
+import spark.Route;
 import spark.Spark;
+import spark.TemplateViewRoute;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import domain.spark.BooleanHelper;
 import domain.spark.HandlebarsTemplateEngineBuilder;
+
+import javax.servlet.MultipartConfigElement;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public class Router {
     private static HandlebarsTemplateEngine engine;
@@ -53,6 +61,7 @@ public class Router {
             //Spark.before("/*", AuthMiddleware::verificarSesion);
 
             Spark.get("", organizacionController::mostrarMenu, engine); // MENU ORG
+            Spark.get("/registro_mediciones", organizacionController::registroMediciones, engine);
             Spark.post("/registrar_mediciones", organizacionController::registrarMediciones); // TODO VINCULAR EL ARCHIVO EXCEL
             Spark.get("/aceptar_vinculacion", organizacionController::mostrarSolicitantes, engine);
             Spark.put("/aceptar_vinculacion", organizacionController :: actualizarMiembros);
