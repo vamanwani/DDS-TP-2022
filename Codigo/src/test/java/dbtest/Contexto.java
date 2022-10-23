@@ -39,8 +39,7 @@ public class Contexto {
         organizacion.setUsuario(usuarioOrg);
 
         Usuario usuarioAgSec = new Usuario("agsec", "agente", "agsec@gmail.com", "45062020", TipoUsuario.AGENTESECTORIAL);
-        AgenteSectorial agenteSectorial = new AgenteSectorial("agente");
-        agenteSectorial.setUsuario(usuarioAgSec);
+        AgenteSectorial agenteSectorial = new AgenteSectorial("agente", usuarioAgSec);
 
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().persist(usuario);

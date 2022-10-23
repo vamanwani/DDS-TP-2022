@@ -23,8 +23,9 @@ public class AgenteSectorial {
     public AgenteSectorial() {
     }
 
-    public AgenteSectorial(String nombre) {
+    public AgenteSectorial(String nombre, Usuario usuario) {
         this.nombre = nombre;
+        this.usuario = usuario;
     }
 
     public void setNombre(String nombre) {

@@ -1,5 +1,5 @@
 package domain.models.entities.miembro;
 
 public enum TipoUsuario {
-    MIEMBRO, ORGANIZACION, AGENTESECTORIAL
+    MIEMBRO, ORGANIZACION, AGENTESECTORIAL, ADMIN
 }

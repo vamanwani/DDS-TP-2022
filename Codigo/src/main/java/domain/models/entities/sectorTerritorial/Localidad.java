@@ -5,8 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "localidad")
 public class Localidad {
-
-
     @Id
     @GeneratedValue
     @Column(name = "id_localidad")
@@ -14,6 +12,10 @@ public class Localidad {
 
     @Column(name = "nombre")
     private String nombre;
+
+    public Localidad(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Integer getId() {
         return id;

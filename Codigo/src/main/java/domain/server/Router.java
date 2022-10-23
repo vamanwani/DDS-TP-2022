@@ -6,6 +6,7 @@ import domain.controllers.*;
 import domain.middlewares.AuthMiddleware;
 import domain.middlewares.Middleware;
 
+import domain.models.entities.miembro.Adminisitrador;
 import spark.Route;
 import spark.Spark;
 import spark.TemplateViewRoute;
@@ -43,6 +44,7 @@ public class Router {
         AgenteSectorialController agenteSectorialController = new AgenteSectorialController();
         MiembroController miembroController = new MiembroController();
         TrayectoController trayectoController = new TrayectoController();
+        AdministradorController administradorController = new AdministradorController();
 
         Spark.path("/login", () -> {
             Spark.get("", loginController::pantallaDeLogin, engine);
@@ -100,6 +102,11 @@ public class Router {
             Spark.get("", agenteSectorialController::mostrarMenu, engine); // MENU AGENTE
             Spark.get("/recomendaciones", agenteSectorialController::mostrarRecomendaciones, engine);
             Spark.get("/reporte", agenteSectorialController::mostrarReportes, engine); // REPORTE
+        });
+
+        Spark.path("/administrador/:id", () -> {
+            Spark.post("/generar_org", administradorController::generar_org);
+            Spark.post("/generar_agente", administradorController::generar_agente);
         });
 
         Spark.path("/prohibido",()->{

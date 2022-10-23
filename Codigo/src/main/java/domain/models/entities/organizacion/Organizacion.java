@@ -36,6 +36,16 @@ public class Organizacion {
     @JoinColumn(name = "clasificacion_org_id")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
+    public Organizacion(TipoDeOrganizacion tipoDeOrganizacion, ClasificaciónDeOrg clasificacionDeOrg, String razonSocial, Ubicacion ubicacion, Usuario usuario) {
+        this.tipoDeOrganizacion = tipoDeOrganizacion;
+        this.clasificacionDeOrg = clasificacionDeOrg;
+        this.razonSocial = razonSocial;
+        this.ubicacion = ubicacion;
+        this.usuario = usuario;
+        this.contactos = new HashSet<>();
+        this.sectores = new ArrayList<>();
+    }
+
     public ClasificaciónDeOrg getClasificacionDeOrg() {
         return clasificacionDeOrg;
     }
