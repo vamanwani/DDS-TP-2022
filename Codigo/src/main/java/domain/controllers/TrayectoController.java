@@ -3,13 +3,18 @@ package domain.controllers;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 import domain.models.entities.transporte.Transporte;
+import domain.models.entities.transporte.TransportePublico;
+import domain.models.entities.transporte.VehiculoParticular;
 import domain.models.entities.ubicacion.Ubicacion;
+import domain.models.repos.RepositorioDeTramos;
 import domain.models.repos.RepositorioDeTrayectos;
+import domain.models.repos.RepositorioDeUbicaciones;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import javax.persistence.Entity;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +23,8 @@ public class TrayectoController {
     // Editar trayectos "miembros/:id/trayectos/:id_trayecto/tramos"
     // Agregar trayectos POST DE "miembros/:id/trayectos/:id_trayecto/tramos"
     RepositorioDeTrayectos repo = new RepositorioDeTrayectos();
+    RepositorioDeUbicaciones repositorioDeUbicaciones = new RepositorioDeUbicaciones();
+    RepositorioDeTramos repositorioDeTramos = new RepositorioDeTramos();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
         try{
@@ -44,13 +51,40 @@ public class TrayectoController {
     }
 
     public Response crearTramo(Request request, Response response){
+
         Tramo tramo = new Tramo();
         Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
         Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
 //        tramo.setMedioDeTransporte(EntityManagerHelper.getEntityManager().find(Transporte.class, request.queryParams("medio_transporte")));
-        tramo.setPuntoInicio(EntityManagerHelper.getEntityManager().find(Ubicacion.class, request.queryParams("punto_inicio")));
-        tramo.setPuntoInicio(EntityManagerHelper.getEntityManager().find(Ubicacion.class, request.queryParams("punto_fin")));
-        response.redirect("/trayectos/agregar");//Pantalla de agregar tramos
+
+        String medio_transporte= request.queryParams("medio_transporte");
+        Integer transporte = 0;
+        if(medio_transporte == "Vehiculo Particular"){
+            String tipoVehiculo = request.queryParams("tipo_vehiculo");
+            String tipoCombustible = request.queryParams("tipo_vehiculo");
+//            VehiculoParticular vehiculoParticular = new VehiculoParticular();
+            transporte = 1;
+        } else if (medio_transporte == "Transporte Publico"){
+            String tipoVehiculo =  request.queryParams("tipo_vehiculo");
+            String paradaInicial=request.queryParams("tipo_vehiculo");
+            TransportePublico transportePublico=new TransportePublico();
+            //TODO : fijarse si el transporte se debe crear y persistir acá o si el Admin lo tiene que cargar de antemano junto con sus paradas
+            transporte = 2;
+        } else if (medio_transporte == "Servicio Contratado"){
+            String servicioContratado=request.queryParams("servicio_contratado");
+            transporte = 3;
+        } else if (medio_transporte == "Transporte Analogico"){
+            transporte = 4;
+        }
+
+        repositorioDeUbicaciones.guardarSiNoExiste(puntoInicio);
+        repositorioDeUbicaciones.guardarSiNoExiste(puntoFin);
+        Ubicacion ubicacion = repositorioDeUbicaciones.buscar(puntoInicio.getCalle(), puntoInicio.getAltura());
+        Ubicacion ubicacionFin = repositorioDeUbicaciones.buscar(puntoFin.getCalle(), puntoFin.getAltura());
+        tramo.setPuntoInicio(ubicacion);
+        tramo.setPuntoFin(ubicacionFin);
+        repositorioDeTramos.guardar(tramo);
+        response.redirect("agregar");//Pantalla de agregar tramos
         return response;
     }
 

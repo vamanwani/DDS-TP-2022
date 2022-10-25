@@ -91,8 +91,8 @@ public class Router {
                 Spark.get("/", trayectoController::mostrarTrayectos, engine);
                 Spark.get("/:id_trayecto/tramos", trayectoController::mostrarTramosDeTrayecto, engine);
                 Spark.get("/agregar", trayectoController::agregarTrayecto, engine);
-                Spark.post("", trayectoController::crearTrayecto);// TODO
-                Spark.post("/tramo", trayectoController::crearTramo);
+                Spark.post("/agregar", trayectoController::crearTrayecto);// TODO
+                Spark.post("/agregar_tramo", trayectoController::crearTramo);
             });
         });
 

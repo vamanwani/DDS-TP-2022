@@ -69,25 +69,28 @@
             </section>
             <section style="width: 100%; display: flex; justify-content: space-evenly;">
                 <a id="btnAgregarTramo" type="button" class="btn btn-lg"
-                    style="background-color: rgb(21, 165, 201); margin-top: 1rem;">AGREGAR TRAMO</button>
-                    <a id="btnAgregarTrayecto" type="button" class="btn btn-lg"
-                        style="background-color: rgb(4, 197, 45); margin-top: 1rem;">AGREGAR TRAYECTO</a>
+                    style="background-color: rgb(21, 165, 201); margin-top: 1rem;">AGREGAR TRAMO</a>
+                <a id="btnAgregarTrayecto" type="submit" class="btn btn-lg"
+                    style="background-color: rgb(4, 197, 45); margin-top: 1rem;">AGREGAR TRAYECTO</a>
             </section>
         </section>
         <section style="width: 90%; height: 400px;" class="bloqueAgregarTramo">
             <h1>AGREGAR TRAMO</h1>
-            <form method="POST" action="/trayectos/agregar/tramo" class="formul">
+            <form method="POST" action="/miembro/1/trayectos/agregar_tramo" class="formul">
                 <section style="display: flex; justify-content:space-around; width:100%">
                     <div class="ptoInicio">
                         <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">PUNTO DE INICIO</h4>
                         <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
-                            <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio" placeholder="Ingrese...">
+                            <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_calle" placeholder="Ingrese calle...">
+                            <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_altura" placeholder="Ingrese altura...">
                         </div>
                     </div>
                     <div class="ptoDestino">
                         <h4 style="background-color: rgb(39, 167, 56); margin-bottom: 0;">PUNTO DESTINO</h4>
                         <div style="height: 40px; background-color: rgb(42, 219, 66);">
-                            <input type="text" class="form-control" id="valuePuntoDestino" name = "punto_fin" placeholder="Ingrese...">
+                            <input type="text" class="form-control" id="valuePuntoDestino" name = "punto_fin_calle" placeholder="Ingrese calle...">
+                            <input type="text" class="form-control" id="valuePuntoInicio" name="punto_fin_altura" placeholder="Ingrese altura...">
+
                         </div>
                     </div>
                     <div class="medioTransporte">
@@ -108,7 +111,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <select id="valueMedioTransporte" class="form-select"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" name = "medio_transporte">
                                                 <option selected value="">TIPO DE TRANSPORTE</option>
                                                 <option value="Vehiculo Particular">Vehiculo Particular</option>
                                                 <option value="Transporte Publico">Transporte Publico</option>
@@ -118,14 +121,14 @@
                                             <br><br>
                                             Para vehiculo particular:
                                             <select id="valueVehiculo" class="form-select"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" name = "tipo_vehiculo">
                                                 <option selected value="">Tipo Vehiculo</option>
                                                 <option value="Moto">Moto</option>
                                                 <option value="Auto">Auto</option>
                                                 <option value="Camioneta">Camioneta</option>
                                             </select>
                                             <select id="valueCombustible" class="form-select"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" name ="tipo_combustible">
                                                 <option selected value="">Tipo Combustible</option>
                                                 <option value="GNC">GNC</option>
                                                 <option value="Nafta">Nafta</option>
@@ -135,9 +138,9 @@
                                             <br><br>
                                             Para transporte público:
                                             <input id="valueLinea" type="text" class="form-control" id="linea"
-                                                placeholder="Linea">
+                                                placeholder="Linea" name ="linea">
                                             <select id="valueTransportePublico" class="form-select"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" name ="tipo_transporte_publico">
                                                 <option value="" selected>Tipo Transporte</option>
                                                 <option value="Linea Ferrea">Línea Férrea</option>
                                                 <option value="Linea Subterraneo">Línea Subterráneo</option>
@@ -146,11 +149,11 @@
                                             <br><br>
                                             Para servicio contratado:
                                             <input id="valueServicio" type="text" class="form-control"
-                                                id="tipoServicioContratado" placeholder="Tipo servicio">
+                                                id="tipoServicioContratado" placeholder="Tipo servicio" name = "tipo_servicio_contratado">
                                             <br><br>
                                             Para transporte analógico:
                                             <select id="valueTransporteAnalogico" class="form-select"
-                                                aria-label="Default select example">
+                                                aria-label="Default select example" name = "tipo_transporte_analogico">
                                                 <option value="" selected>Tipo Transporte</option>
                                                 <option value="Bicicleta">Bicicleta</option>
                                                 <option value="Pie">Pie</option>
@@ -171,7 +174,7 @@
                 <section style="width: 100%; display: flex; justify-content: space-evenly;">
                     <button id="btnVolver" type="button" class="btn btn-lg"
                         style="background-color: rgb(21, 165, 201); margin-top: 1rem;">VOLVER</button>
-                    <button id="btnConfirmarTramo" type="button" class="btn btn-lg"
+                    <button class="btn btn-lg"
                         style="background-color: rgb(4, 197, 45); margin-top: 1rem;"
                         type="submit">CONFIRMAR TRAMO</button>
                 </section>
