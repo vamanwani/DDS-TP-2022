@@ -39,19 +39,33 @@ public class TrayectoController {
 
     }
 
+    public ModelAndView mostarTrayecto(Request request, Response response){
+        try{
+            String idTrayecto = request.params("id_trayecto");
+            Trayecto trayecto = this.repo.buscar(Integer.valueOf(idTrayecto));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("datos", trayecto);
+            }}, "/Miembro/editarTrayecto.hbs");
+        } catch (Exception ex){
+            return new ModelAndView(null, "");// "no such trayecto"
+        }
+    }
+
     public ModelAndView mostrarTramosDeTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("tramos", trayecto.getTramos());
-        }}, "/Miembro/editarTrayecto.hbs"); // MODIFICAR ESTO
+        return new ModelAndView(null,"/Miembro/editarTrayecto.hbs"); // MODIFICAR ESTO
     }
 
     public ModelAndView agregarTrayecto(Request request, Response response){
-        return new ModelAndView(null, "/Miembro/agregarTrayecto.hbs");
+        Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        return new ModelAndView(new HashMap<String,Object>(){{
+            put("trayecto_id", trayecto.getId());
+            put("tramos", trayecto.getTramos());
+        }}, "/Miembro/agregarTrayecto.hbs");
     }
 
     public Response crearTramo(Request request, Response response){
-
+        Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         Tramo tramo = new Tramo();
         Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
         Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
@@ -83,17 +97,17 @@ public class TrayectoController {
         Ubicacion ubicacionFin = repositorioDeUbicaciones.buscar(puntoFin.getCalle(), puntoFin.getAltura());
         tramo.setPuntoInicio(ubicacion);
         tramo.setPuntoFin(ubicacionFin);
-        repositorioDeTramos.guardar(tramo);
-        response.redirect("agregar");//Pantalla de agregar tramos
+        repositorioDeTramos.guardarSiNoExiste(tramo);
+        trayecto.agregarTramo(tramo);
+        repo.guardar(trayecto);
+        response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/agregar");//Pantalla de agregar tramos
         return response;
     }
 
     public Response crearTrayecto(Request request, Response response){
         Trayecto nuevoTrayecto = new Trayecto();
-        nuevoTrayecto.setDescripcion(request.queryParams("descripcion"));
-        nuevoTrayecto.setNombre(request.queryParams("nombre"));
-
-        response.redirect("");// Pantalla de gestion de trayectos
+        this.repo.guardar(nuevoTrayecto);
+        response.redirect("" + nuevoTrayecto.getId() + "/agregar");// Pantalla de gestion de trayectos
         return response;
     }
 

@@ -27,13 +27,11 @@ public class ImportarDeExcel {
             Boolean esAnual = false;
             Boolean esLogistica = false;
 
-
             List<String> datosFila = new ArrayList<>();
             List<FilaConsumo> filaDeConsumos = new ArrayList<>();
             while (itr.hasNext()) {
                 row = itr.next();
                 Iterator<Cell> cellIterator = row.cellIterator();   //iterating over each column
-
 
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();

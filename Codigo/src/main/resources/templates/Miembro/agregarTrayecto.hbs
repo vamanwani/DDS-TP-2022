@@ -53,12 +53,13 @@
             <h1>AGREGAR TRAYECTO</h1>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">NOMBRE TRAYECTO</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" name= "nombreTrayecto">
             </div>
             <section>
                 <h3 style="background-color: rgb(175, 174, 174); margin-bottom: 0;">LISTADO DE TRAMOS</h3>
                 <div style="background-color: white; height: 300px;">
                     <table id="listaTramos" style="width: 100%;">
+                    {#each tramos}
                         <tr>
                             <th>Punto Inicio</th>
                             <th>Punto Destino</th>
@@ -70,13 +71,13 @@
             <section style="width: 100%; display: flex; justify-content: space-evenly;">
                 <a id="btnAgregarTramo" type="button" class="btn btn-lg"
                     style="background-color: rgb(21, 165, 201); margin-top: 1rem;">AGREGAR TRAMO</a>
-                <a id="btnAgregarTrayecto" type="submit" class="btn btn-lg"
+                <a id="btnAgregarTrayecto" type="submit" class="btn btn-lg" href=""
                     style="background-color: rgb(4, 197, 45); margin-top: 1rem;">AGREGAR TRAYECTO</a>
             </section>
         </section>
         <section style="width: 90%; height: 400px;" class="bloqueAgregarTramo">
             <h1>AGREGAR TRAMO</h1>
-            <form method="POST" action="/miembro/1/trayectos/agregar_tramo" class="formul">
+            <form method="POST" action="/miembro/1/trayectos/{{trayecto_id}}/tramos/agregar_tramo" class="formul">
                 <section style="display: flex; justify-content:space-around; width:100%">
                     <div class="ptoInicio">
                         <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">PUNTO DE INICIO</h4>

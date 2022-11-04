@@ -77,4 +77,8 @@ public class Tramo {
     public String getMedioTransporte(){
         return medioDeTransporte.getClass().getName();
     }
+
+    public Integer getId() {
+        return id;
+    }
 }

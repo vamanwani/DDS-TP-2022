@@ -3,6 +3,7 @@ package domain.models.repos;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
+import domain.models.entities.ubicacion.Ubicacion;
 import domain.services.dbManager.EntityManagerHelper;
 
 import java.util.ArrayList;
@@ -22,7 +23,10 @@ public class RepositorioDeTrayectos {
                 .getEntityManager()
                 .find(Trayecto.class, idTrayecto);
     }
-
-
+    public void guardar(Trayecto trayecto) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(trayecto);
+        EntityManagerHelper.commit();
+    }
 
 }

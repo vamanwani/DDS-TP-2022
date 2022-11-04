@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
+                        <h3 id="nombreUsuario">NOMBRE USUARIO</h3>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./indexMiembro.hbs">Home</a>
@@ -59,13 +59,13 @@
                         <th>Punto Destino</th>
                         <th>Medio Transporte</th>
                     </tr>
-                    {{#each tramos}}
-                        <tr class="opcionTramo tramo{{id_tramo}}" onClick="elegirTramo({{id_tramo}})">
-                            <th>{{}}<!--PUNTO INICIO--></th>
-                            <th>{{}}<!--PUNTO FIN--></th>
-                            <th>{{}}<!--TRANSPORTE--></th>
+{{!--                     {{#each tramos}} --}}
+                        <tr class="opcionTramo tramo{{id_tramo}}" onClick="elegirTramo()">
+                            <th>PUNTO INICIO</th>
+                            <th>PUNTO FIN</th>
+                            <th>Transporte</th>
                         </tr>
-                    {{/each}}
+{{!--                     {{/each}} --}}
                 </table>
             </div>
         </section>

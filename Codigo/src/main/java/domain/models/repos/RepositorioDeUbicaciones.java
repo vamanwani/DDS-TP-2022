@@ -19,7 +19,6 @@ public class RepositorioDeUbicaciones {
     }
 
     public void guardarSiNoExiste(Ubicacion ubic){
-        this.buscar(ubic.getCalle(), ubic.getAltura());
         try {
             Ubicacion ubicacion = this.buscar(ubic.getCalle(), ubic.getAltura());
             System.out.println("printear algo");
