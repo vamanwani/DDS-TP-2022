@@ -50,4 +50,6 @@ public class Ubicacion extends PadreDeUbicacion{
     public int getAltura() {
         return altura;
     }
+
+    public String getDirec(){return this.getCalle() + " " +String.valueOf(this.getAltura());}
 }

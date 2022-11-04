@@ -24,10 +24,10 @@ public class Tramo {
     private Transporte medioDeTransporte;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionInicio_id")
-    private Ubicacion puntoFin;
+    private Ubicacion puntoInicio;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionFin_id")
-    private Ubicacion puntoInicio;
+    private Ubicacion puntoFin;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
@@ -80,5 +80,13 @@ public class Tramo {
 
     public Integer getId() {
         return id;
+    }
+
+    public Ubicacion getPuntoInicio() {
+        return puntoInicio;
+    }
+
+    public Ubicacion getPuntoFin() {
+        return puntoFin;
     }
 }
