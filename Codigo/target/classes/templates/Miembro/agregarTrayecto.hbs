@@ -52,8 +52,10 @@
         <section style="width: 90%; height: 600px;" class="bloqueAgregarTrayecto">
             <h1>AGREGAR TRAYECTO</h1>
             <div class="mb-3">
+            <form method="post", action ="/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}">
                 <label for="exampleFormControlInput1" class="form-label">NOMBRE TRAYECTO</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" name= "nombreTrayecto">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" name= "nombre">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Descripcion" name= "descripcion">
             </div>
             <section>
                 <h3 style="background-color: rgb(175, 174, 174); margin-bottom: 0;">LISTADO DE TRAMOS</h3>
@@ -78,15 +80,16 @@
                 </div>
             </section>
             <section style="width: 100%; display: flex; justify-content: space-evenly;">
-                <a id="btnAgregarTramo" type="button" class="btn btn-lg"
-                    style="background-color: rgb(21, 165, 201); margin-top: 1rem;">AGREGAR TRAMO</a>
-                <a id="btnAgregarTrayecto" type="submit" class="btn btn-lg" href=""
-                    style="background-color: rgb(4, 197, 45); margin-top: 1rem;">AGREGAR TRAYECTO</a>
+                <button id="btnAgregarTramo" type="button" class="btn btn-lg"
+                    style="background-color: rgb(21, 165, 201); margin-top: 1rem;">AGREGAR TRAMO</button>
+                <button id="btnAgregarTrayecto" type="submit" class="btn btn-lg"
+                    style="background-color: rgb(4, 197, 45); margin-top: 1rem;">AGREGAR TRAYECTO</button>
+             </form>
             </section>
         </section>
         <section style="width: 90%; height: 400px;" class="bloqueAgregarTramo">
             <h1>AGREGAR TRAMO</h1>
-            <form method="POST" action="/miembro/1/trayectos/{{trayecto_id}}/tramos/agregar_tramo" class="formul">
+            <form method="POST" action="/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}/tramos/agregar_tramo" class="formul">
                 <section style="display: flex; justify-content:space-around; width:100%">
                     <div class="ptoInicio">
                         <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">PUNTO DE INICIO</h4>

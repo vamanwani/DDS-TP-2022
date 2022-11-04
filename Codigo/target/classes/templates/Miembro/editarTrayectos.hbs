@@ -51,12 +51,36 @@
         <div class="nombreTrayecto" style="background-color: rgb(200, 181, 218);">
             <h4>NOMBRE DE TRAYECTO</h4>
             <div id="listaTrayectos"
-                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <table style="width: 100%;">
+                <thead>
+
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Descripcion</td>
+                        <td>Cantidad de tramos</td>
+                    </tr>
+
+                </thead>
+
+                <tbody>
                 {{#each trayectos}}
-                <div class="opcionTrayecto trayecto{{id_trayecto}}">
-                    <h5 onClick="elegirTrayecto({{id_trayecto}})">{{nombre}}</h5>
-                </div>
-                {{/each}}
+                    <tr>
+                        <td>{{nombre}}</td>
+                        <td>{{descripcion}}</td>
+                        <td>{{cantidadTramos}}</td>
+                        <td>
+                        <a type="button" class="btn btn-lg" href="trayectos/{{id}}/editar"
+                                        style="background-color: rgb(212, 211, 211);">EDITAR TRAYECTO</a>
+                        </td>
+                        <td>
+                        <a type="button" class="btn btn-lg"
+                                        style="background-color: rgb(184, 9, 9);">ELIMINAR TRAYECTO</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
             </div>
         </div>
         <div class="cantTramos"

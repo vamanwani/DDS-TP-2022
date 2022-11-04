@@ -1,8 +1,8 @@
-document.querySelector("#btnAgregarTramo").addEventListener("click", menuEditarTramo);
+document.querySelector(".btnEditarTramo").addEventListener("click", menuEditarTramo);
 document.querySelector("#btnVolver").addEventListener("click", menuEditarTrayecto);
-document.querySelector("#btnConfirmarTramo").addEventListener("click", confirmarTramo);
+//document.querySelector("#btnConfirmarTramo").addEventListener("click", confirmarTramo);
 
-document.querySelector("#btnAgregarTrayecto").addEventListener("click", confirmarEdicion);
+//document.querySelector("#btnAgregarTrayecto").addEventListener("click", confirmarEdicion);
 
 
 const user = JSON.parse(localStorage.getItem("usuarioLogueado"))
@@ -17,14 +17,9 @@ actualizarTramos();
 
 function menuEditarTramo(e){
     e.preventDefault();
-    if(tramoElegido != ""){
-        document.querySelector(".bloqueAgregarTrayecto").style.display="none";
-        document.querySelector(".bloqueAgregarTramo").style.display="block";
-        setearFormulario();
-    }
-    else{
-        alert("Por favor, elija un tramo")
-    }
+    document.querySelector(".bloqueAgregarTrayecto").style.display="none";
+    document.querySelector(".bloqueAgregarTramo").style.display="block";
+    setearFormulario();
 }
 
 function setearFormulario(){

@@ -74,10 +74,13 @@ public class Contexto {
         organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
         ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Educacion");
         organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
-        organizacion.setRazonSocial("UTN");
+        organizacion.setRazonSocial("UBA");
+        Usuario usuarioOrg = new Usuario("orga", "password", "fasdf@sdfsa.com", "12345434", TipoUsuario.ORGANIZACION);
+        organizacion.setUsuario(usuarioOrg);
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
         EntityManagerHelper.getEntityManager().persist(organizacion);
+        EntityManagerHelper.getEntityManager().persist(usuarioOrg);
         EntityManagerHelper.commit();
     }
 

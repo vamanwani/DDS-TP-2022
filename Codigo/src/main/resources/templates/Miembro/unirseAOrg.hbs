@@ -56,16 +56,15 @@
                 <th>Clasificacion</th>
             </tr>
             {{#each organizaciones}}
-                <tr class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
+                <tr style="margin-top: 15px"  class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
                   <th>{{razon}}</th>
                   <th>{{tipo}}</th>
                   <th>{{clasificacion}}</th>
+                  <td><button type="button" class="btn btn-primary">Solicitar unirse</button></td>
                 </tr>
               {{/each}}
         </table>
     </div>
-    <button id="btnSolicitarUnirse" type="button" class="btn btn-lg"
-        style="background-color: rgb(4, 197, 45); margin-top: 1rem;">SOLICITAR UNIRSE</button>
 </main>
 <footer style="background-color: black;">
     <p style="color: white;">@2022 Todos los derechos reservados</p>

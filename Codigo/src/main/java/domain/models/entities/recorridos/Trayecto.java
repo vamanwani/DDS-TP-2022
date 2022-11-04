@@ -1,4 +1,5 @@
 package domain.models.entities.recorridos;
+import domain.models.entities.miembro.Miembro;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -23,6 +24,10 @@ public class Trayecto {
 
     @Column(name = "descripcion")
     private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "miembro_id")
+    private Miembro miembro;
 
     public Trayecto() {
     }
@@ -64,4 +69,22 @@ public class Trayecto {
     }
 
     public void agregarTramo(Tramo tramo){this.tramos.add(tramo);}
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public int getCantidadTramos(){return this.tramos.size();}
+
+    public Miembro getMiembro() {
+        return miembro;
+    }
+
+    public void setMiembro(Miembro miembro) {
+        this.miembro = miembro;
+    }
 }

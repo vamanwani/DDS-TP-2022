@@ -1,8 +1,8 @@
 document.querySelector("#btnAgregarTramo").addEventListener("click", menuAgregarTramo);
 document.querySelector("#btnVolver").addEventListener("click", menuAgregarTrayecto);
-document.querySelector("#btnConfirmarTramo").addEventListener("click", confirmarTramo);
+//document.querySelector("#btnConfirmarTramo").addEventListener("click", confirmarTramo);
 
-document.querySelector("#btnAgregarTrayecto").addEventListener("click", agregarTrayecto);
+//document.querySelector("#btnAgregarTrayecto").addEventListener("click", agregarTrayecto);
 
 
 let tramos = [];

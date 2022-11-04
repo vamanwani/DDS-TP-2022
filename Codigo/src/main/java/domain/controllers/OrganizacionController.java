@@ -81,7 +81,6 @@ public class OrganizacionController {
             Files.copy(in, path);
         }
 
-        response.redirect("/");
         response.redirect("/organizaciones/" + request.params("id"));
         return response;
     }

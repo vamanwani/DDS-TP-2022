@@ -6,6 +6,7 @@ import domain.models.entities.transporte.Transporte;
 import domain.models.entities.transporte.TransportePublico;
 import domain.models.entities.transporte.VehiculoParticular;
 import domain.models.entities.ubicacion.Ubicacion;
+import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeTramos;
 import domain.models.repos.RepositorioDeTrayectos;
 import domain.models.repos.RepositorioDeUbicaciones;
@@ -25,6 +26,7 @@ public class TrayectoController {
     RepositorioDeTrayectos repo = new RepositorioDeTrayectos();
     RepositorioDeUbicaciones repositorioDeUbicaciones = new RepositorioDeUbicaciones();
     RepositorioDeTramos repositorioDeTramos = new RepositorioDeTramos();
+    RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
         try{
@@ -36,7 +38,6 @@ public class TrayectoController {
         } catch (Exception ex){
             return new ModelAndView(null, "/Miembro/editarTrayectos.hbs");
         }
-
     }
 
     public ModelAndView mostarTrayecto(Request request, Response response){
@@ -44,7 +45,8 @@ public class TrayectoController {
             String idTrayecto = request.params("id_trayecto");
             Trayecto trayecto = this.repo.buscar(Integer.valueOf(idTrayecto));
             return new ModelAndView(new HashMap<String, Object>(){{
-                put("datos", trayecto);
+                put("trayecto", trayecto);
+                put("tramos", trayecto.getTramos());
             }}, "/Miembro/editarTrayecto.hbs");
         } catch (Exception ex){
             return new ModelAndView(null, "");// "no such trayecto"
@@ -59,10 +61,36 @@ public class TrayectoController {
     public ModelAndView agregarTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         return new ModelAndView(new HashMap<String,Object>(){{
+            put("miembro_id", request.params("id"));
             put("trayecto_id", trayecto.getId());
             put("tramos", trayecto.getTramos());
         }}, "/Miembro/agregarTrayecto.hbs");
     }
+
+    public Response crearTrayecto(Request request, Response response){
+        Trayecto nuevoTrayecto = new Trayecto();
+        this.repo.guardar(nuevoTrayecto);
+        response.redirect("" + nuevoTrayecto.getId() + "/agregar");// Pantalla de gestion de trayectos
+        return response;
+    }
+
+    public Response definirTrayecto(Request request, Response response){
+        Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        trayecto.setNombre(request.queryParams("nombre"));
+        trayecto.setDescripcion(request.queryParams("descripcion"));
+        trayecto.setMiembro(this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id"))));
+        this.repo.guardar(trayecto);
+        response.redirect("/miembro/"+ request.params("id") +"/trayectos");
+        return response;
+    }
+
+    public ModelAndView mostrarTramo(Request request, Response response){
+        Tramo tramo = this.repositorioDeTramos.buscar(Integer.valueOf(request.params("id_tramo")));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("tramo",tramo );
+        }}, "/Miembro/editarTramo.hbs");
+    }
+
 
     public Response crearTramo(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
@@ -104,10 +132,13 @@ public class TrayectoController {
         return response;
     }
 
-    public Response crearTrayecto(Request request, Response response){
-        Trayecto nuevoTrayecto = new Trayecto();
-        this.repo.guardar(nuevoTrayecto);
-        response.redirect("" + nuevoTrayecto.getId() + "/agregar");// Pantalla de gestion de trayectos
+
+    public Response editarTramo(Request request, Response response){
+//        Tramo tramo = this.repositorioDeTramos.buscar(Integer.valueOf(request.params("id_tramo")));
+//
+//        this.repositorioDeTramos.guardar(tramo);
+//        response.redirect("/miembro/"+ request.params("id") +"/trayectos" + request.params("id_trayecto") + "/editar");
+        response.redirect("funciona");
         return response;
     }
 
