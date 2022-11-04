@@ -60,7 +60,6 @@ public class TrayectoController {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         return new ModelAndView(new HashMap<String,Object>(){{
             put("trayecto_id", trayecto.getId());
-            put("tramos", trayecto.getTramos());
         }}, "/Miembro/agregarTrayecto.hbs");
     }
 

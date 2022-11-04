@@ -68,4 +68,17 @@ public class Contexto {
         EntityManagerHelper.commit();
     }
 
+    @Test
+    public void persistirOrg1(){
+        Organizacion organizacion = new Organizacion();
+        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
+        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Educacion");
+        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
+        organizacion.setRazonSocial("UTN");
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
+        EntityManagerHelper.getEntityManager().persist(organizacion);
+        EntityManagerHelper.commit();
+    }
+
 }

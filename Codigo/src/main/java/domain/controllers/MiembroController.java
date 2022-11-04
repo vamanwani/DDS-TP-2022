@@ -4,6 +4,7 @@ import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.repos.RepositorioDeMiembros;
+import domain.models.repos.RepositorioDeSolicitudes;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
@@ -16,6 +17,7 @@ import java.util.List;
 public class MiembroController {
 
     private RepositorioDeMiembros repo;
+    private RepositorioDeSolicitudes repositorioDeSolicitudes;
 
     public MiembroController() {
         this.repo = new RepositorioDeMiembros();
