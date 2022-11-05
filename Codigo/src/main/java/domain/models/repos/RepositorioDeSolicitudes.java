@@ -1,8 +1,10 @@
 package domain.models.repos;
 
+import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
-import domain.models.entities.organizacion.Organizacion;
 import domain.services.dbManager.EntityManagerHelper;
+
+import java.util.List;
 
 public class RepositorioDeSolicitudes {
 
@@ -18,4 +20,10 @@ public class RepositorioDeSolicitudes {
         EntityManagerHelper.commit();
     }
 
+    public List<SolicitudVinculacion> buscarSolicitudesDeOrg(Integer idOrg) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id_organizacion = 1")
+                .getResultList();
+    }
 }

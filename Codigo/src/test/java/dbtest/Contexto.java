@@ -32,9 +32,9 @@ public class Contexto {
 
         Usuario usuarioOrg = new Usuario("org", "organizacion", "fasdf@sdfsa.com", "12345434", TipoUsuario.ORGANIZACION);
         Organizacion organizacion = new Organizacion();
-        organizacion.setRazonSocial("razonRandom");
-        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Empresa);
-        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("clasificacion");
+        organizacion.setRazonSocial("UTN");
+        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
+        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Educacion");
         organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
         organizacion.setUsuario(usuarioOrg);
 

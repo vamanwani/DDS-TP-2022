@@ -126,8 +126,8 @@ public class Miembro {
         return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion(periodoDeImputacion);
     }
 
-    public void generarSolicitud(Organizacion organizacion){
-        new SolicitudVinculacion(this, organizacion);
+    public SolicitudVinculacion generarSolicitud(Organizacion organizacion){
+        return new SolicitudVinculacion(this, organizacion);
     }
 
     public void setApellido(String apellido) {
@@ -154,4 +154,19 @@ public class Miembro {
         this.mail = mail;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getNombreYApellido(){return this.getNombre() + " " + this.getApellido();}
+
+    public String getTelefono(){return this.getUsuario().getTelefono();}
 }

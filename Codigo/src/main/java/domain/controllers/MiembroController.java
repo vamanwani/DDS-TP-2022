@@ -1,9 +1,11 @@
 package domain.controllers;
 
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.SolicitudVinculacion;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.repos.RepositorioDeMiembros;
+import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.models.repos.RepositorioDeSolicitudes;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
@@ -17,7 +19,8 @@ import java.util.List;
 public class MiembroController {
 
     private RepositorioDeMiembros repo;
-    private RepositorioDeSolicitudes repositorioDeSolicitudes;
+    private RepositorioDeSolicitudes repositorioDeSolicitudes = new RepositorioDeSolicitudes();
+    private RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
 
     public MiembroController() {
         this.repo = new RepositorioDeMiembros();
@@ -46,11 +49,10 @@ public class MiembroController {
 
     public Response vincularAOrg(Request request, Response response){
         Miembro miembro = this.repo.buscar(Integer.valueOf(request.params("id")));
-        Organizacion organizacionAVincular = EntityManagerHelper
-                .getEntityManager()
-                .find(Organizacion.class, request.queryParams("organizacion_id"));
-        miembro.generarSolicitud(organizacionAVincular);
-        response.redirect("/Miembro/unirseAOrg.hbs");
+        Organizacion organizacionAVincular = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
+        SolicitudVinculacion solicitudVinculacion = miembro.generarSolicitud(organizacionAVincular);
+        this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
+        response.redirect("" ); // TODO arreglar path
         return response;
     }
 

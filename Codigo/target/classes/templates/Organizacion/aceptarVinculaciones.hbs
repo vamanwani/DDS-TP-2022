@@ -48,18 +48,31 @@
         <h4 style="background-color: rgb(161, 161, 161); margin-bottom: 0; width: 85%;">Listado de solicitantes</h4>
         <section style="background-color: white; height: 300px; width: 85%;">
             <table id="listaSolicitantes" style="width: 100%;">
+            <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Teléfono</th>
+                    <th>BOTON ACEPTAR</th>
+                    <th>BOTON RECHAZAR</th>
                 </tr>
-                {{#each solicitantes}}
+                </thead>
+                <tbody>
+                {{#each solicitudes}}
                 <tr id="solicitante{{id}}" class="solicitante" onClick="elegirSolicitante({{id}})">
-                    <th>{{nombre}}</th>
-                    <th>{{mail}}</th>
-                    <th>{{telefono}}</th>
+
+                    <td>{{nombre}}</td>
+                    <td>{{mail}}</td>
+                    <td>{{telefono}}</td>
+                    <form method = "post" action = "aceptar_vinculacion/{{id}}/aceptar">
+                    <td> <button type="submit" class="btn btn-success btn-lg">Aceptar</button></td>
+                    </form>
+                    <form method = "post" action = "aceptar_vinculacion/{{id}}/rechazar">
+                    <td> <button type="submit" class="btn btn-danger btn-lg">RECHAZAR</button></td>
+                    </form>
                 </tr>
                 {{/each}}
+                </tbody>
             </table>
         </section>
         <section style="display: flex; justify-content: space-evenly; width: 100%; margin-top: 1rem;">

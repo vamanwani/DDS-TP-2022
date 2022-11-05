@@ -5,7 +5,7 @@ import domain.models.entities.organizacion.Organizacion;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "solicitud_vinculacion")
+@Table(name = "solicitudVinculacion")
 public class SolicitudVinculacion {
 
     @Id
@@ -21,7 +21,11 @@ public class SolicitudVinculacion {
     @JoinColumn(name = "organizacion_id_organizacion")
     private Organizacion organizacion;
     private String descripcion;
-    private Boolean aceptada = false;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_solicitud")
+    private EstadoSolicitud estadoSolicitud = EstadoSolicitud.PENDIENTE;
+
 
     protected SolicitudVinculacion() {
     }
@@ -48,4 +52,15 @@ public class SolicitudVinculacion {
         this.organizacion = organizacion;
     }
 
+    public String getMail(){return getMiembro().getMail();}
+    public String getTelefono(){return getMiembro().getTelefono();}
+    public String getNombre(){return getMiembro().getNombreYApellido();}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setEstadoSolicitud(EstadoSolicitud estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
+    }
 }

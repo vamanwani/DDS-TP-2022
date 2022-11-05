@@ -1,12 +1,16 @@
 package domain.controllers;
 
 import domain.models.entities.consumo.PeriodoDeImputacion;
+import domain.models.entities.miembro.EstadoSolicitud;
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.SolicitudVinculacion;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.reporte.Reporte;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
+import domain.models.repos.RepositorioDeSolicitudes;
 import domain.services.dbManager.EntityManagerHelper;
+import org.hibernate.cfg.CreateKeySecondPass;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -34,7 +38,8 @@ public class OrganizacionController {
     // ACEPTAR VINCULACION
     // VER SUGERENCIAS
     private RepositorioDeOrganizaciones repo;
-    private RepositorioDeMiembros repositorioDeMiembros;
+    private RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
+    private RepositorioDeSolicitudes repositorioDeSolicitudes = new RepositorioDeSolicitudes();
 
     public OrganizacionController(){
         this.repo = new RepositorioDeOrganizaciones();
@@ -88,9 +93,9 @@ public class OrganizacionController {
     public ModelAndView mostrarSolicitantes(spark.Request request, spark.Response response) {
         try {
             String idOrganizacion = request.params("id");
-            List<Miembro> solicitantes = this.repo.buscarTodasLosSolicitantes(new Integer(idOrganizacion));
+            List<SolicitudVinculacion> solicitudes = this.repositorioDeSolicitudes.buscarSolicitudesDeOrg(new Integer(idOrganizacion));
             return new ModelAndView(new HashMap<String, Object>(){{
-                put("solicitantes", solicitantes);
+                put("solicitudes", solicitudes);
             }}, "/Organizacion/aceptarVinculaciones.hbs");
         } catch (Exception ex){
             //TODO si no hay solicitantes
@@ -130,6 +135,22 @@ public class OrganizacionController {
         }}, "");
     }
 
+
+    public Response aceptarSolicitud(Request request, Response response){
+        SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
+        solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
+        this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
+        response.redirect("solicitudAceptada");
+        return response;
+    }
+
+    public Response rechazarSolicitud(Request request, Response response){
+        SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
+        solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.RECHAZADA);
+        this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
+        response.redirect("solicitudRechazada");
+        return response;
+    }
 
 }
 

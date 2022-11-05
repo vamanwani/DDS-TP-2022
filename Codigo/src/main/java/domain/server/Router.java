@@ -69,6 +69,8 @@ public class Router {
             Spark.put("/aceptar_vinculacion", organizacionController :: actualizarMiembros);
             Spark.get("/recomendaciones", organizacionController::mostrarRecomendaciones, engine);
             Spark.get("/hc", organizacionController::mostrarHC,engine);
+            Spark.post("/aceptar_vinculacion/:id_solicitud/aceptar", organizacionController::aceptarSolicitud);
+            Spark.post("/aceptar_vinculacion/:id_solicitud/rechazar", organizacionController::rechazarSolicitud);
 
             // REPORTE
             Spark.get("/reporte", organizacionController::mostrarReportes, engine);
@@ -80,7 +82,8 @@ public class Router {
             Spark.get("", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA
             Spark.get("/hc", miembroController::mostrarHC);
-            Spark.post("/organizaciones", miembroController::vincularAOrg);
+            Spark.post("/organizaciones/:id_organizacion/unirse", miembroController::vincularAOrg);
+
 
             // REPORTE
             Spark.get("/reporte", miembroController::mostrarReportes, engine);//MUESTRA
