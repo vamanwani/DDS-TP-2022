@@ -5,6 +5,7 @@ import domain.models.entities.miembro.EstadoSolicitud;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
 import domain.models.entities.reporte.Reporte;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
@@ -136,6 +137,10 @@ public class OrganizacionController {
 
     public Response aceptarSolicitud(Request request, Response response){
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
+        Miembro miembro = solicitudVinculacion.getMiembro();
+        miembro.agregarTrabajo(solicitudVinculacion.getSector());
+        Sector sector = solicitudVinculacion.getSector();
+        sector.agregarMiembro(miembro);
         solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
         response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");

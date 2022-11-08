@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.IOException;
 
 @Entity
-@Table(name = "transporte_analogico")
+@Table(name = "transporteanalogico")
 public class TransporteAnalogico extends Transporte{
     @Id
     @GeneratedValue
@@ -12,6 +12,7 @@ public class TransporteAnalogico extends Transporte{
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_transporte")
     private TipoTransporteAnalogico transporte;
+    private String nombre = "Transporte Analogico";
 
     public TransporteAnalogico(TipoTransporteAnalogico transporte) throws IOException {
         this.transporte = transporte;

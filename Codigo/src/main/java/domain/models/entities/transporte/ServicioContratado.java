@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.IOException;
 
 @Entity
-@Table(name = "servicio_contratado")
+@Table(name = "serviciocontratado")
 public class ServicioContratado extends Transporte{
     @Id
     @GeneratedValue

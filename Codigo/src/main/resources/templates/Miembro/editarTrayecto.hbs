@@ -59,6 +59,7 @@
                                 <th>Punto Inicio</th>
                                 <th>Punto Destino</th>
                                 <th>Medio Transporte</th>
+                                <th> </th>
                             </tr>
                             </thead>
                         <tbody>
@@ -67,6 +68,7 @@
                             <form method = "post" action = "tramos/{{id}}/editar_tramo">
                                 <td>{{puntoInicio.direc}}</td>
                                 <td>{{puntoFin.direc}}</td>
+                                <td>{{medioDeTransporte.nombre}} </td>
                                 <td><button type="submit" class = "btn btn-primary"
                                      >Editar Tramo</button></td>
                                 </form>

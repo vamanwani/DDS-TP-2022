@@ -2,14 +2,9 @@ package domain.controllers;
 
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
-import domain.models.entities.transporte.Transporte;
-import domain.models.entities.transporte.TransportePublico;
-import domain.models.entities.transporte.VehiculoParticular;
+import domain.models.entities.transporte.*;
 import domain.models.entities.ubicacion.Ubicacion;
-import domain.models.repos.RepositorioDeMiembros;
-import domain.models.repos.RepositorioDeTramos;
-import domain.models.repos.RepositorioDeTrayectos;
-import domain.models.repos.RepositorioDeUbicaciones;
+import domain.models.repos.*;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
@@ -27,6 +22,7 @@ public class TrayectoController {
     RepositorioDeUbicaciones repositorioDeUbicaciones = new RepositorioDeUbicaciones();
     RepositorioDeTramos repositorioDeTramos = new RepositorioDeTramos();
     RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
+    RepositoriosDeTransporte repositoriosDeTransporte = new RepositoriosDeTransporte();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
         try{
@@ -97,26 +93,26 @@ public class TrayectoController {
         Tramo tramo = new Tramo();
         Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
         Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
-//        tramo.setMedioDeTransporte(EntityManagerHelper.getEntityManager().find(Transporte.class, request.queryParams("medio_transporte")));
 
         String medio_transporte= request.queryParams("medio_transporte");
-        Integer transporte = 0;
         if(medio_transporte == "Vehiculo Particular"){
             String tipoVehiculo = request.queryParams("tipo_vehiculo");
-            String tipoCombustible = request.queryParams("tipo_vehiculo");
-//            VehiculoParticular vehiculoParticular = new VehiculoParticular();
-            transporte = 1;
+            String tipoCombustible = request.queryParams("tipo_combustible");
+            VehiculoParticular transporte = this.repositoriosDeTransporte.buscarParticular(tipoVehiculo, tipoCombustible);
+            tramo.setMedioDeTransporte(transporte);
         } else if (medio_transporte == "Transporte Publico"){
-            String tipoVehiculo =  request.queryParams("tipo_vehiculo");
-            String paradaInicial=request.queryParams("tipo_vehiculo");
-            TransportePublico transportePublico=new TransportePublico();
-            //TODO : fijarse si el transporte se debe crear y persistir acá o si el Admin lo tiene que cargar de antemano junto con sus paradas
-            transporte = 2;
+            String linea =  request.queryParams("linea");
+            String tipoTransportePublico = request.queryParams("tipo_transporte_publico");
+            TransportePublico transporte= this.repositoriosDeTransporte.buscarTransportePublico(linea, tipoTransportePublico);
+            tramo.setMedioDeTransporte(transporte);
         } else if (medio_transporte == "Servicio Contratado"){
-            String servicioContratado=request.queryParams("servicio_contratado");
-            transporte = 3;
+            String servicioContratado=request.queryParams("tipo_servicio_contratado");
+            ServicioContratado transporte = this.repositoriosDeTransporte.buscarContratado(servicioContratado);
+            tramo.setMedioDeTransporte(transporte);
         } else if (medio_transporte == "Transporte Analogico"){
-            transporte = 4;
+            String transporteAnalogico = request.queryParams("tipo_transporte_analogico");
+            TransporteAnalogico transporte = this.repositoriosDeTransporte.buscarAnalogico(transporteAnalogico);
+            tramo.setMedioDeTransporte(transporte);
         }
 
         repositorioDeUbicaciones.guardarSiNoExiste(puntoInicio);

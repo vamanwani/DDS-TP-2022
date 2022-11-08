@@ -169,4 +169,6 @@ public class Miembro {
     public String getNombreYApellido(){return this.getNombre() + " " + this.getApellido();}
 
     public String getTelefono(){return this.getUsuario().getTelefono();}
+
+    public void agregarTrabajo(Sector sector){trabajos.add(sector);}
 }

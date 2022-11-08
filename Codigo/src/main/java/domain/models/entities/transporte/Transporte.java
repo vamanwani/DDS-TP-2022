@@ -10,6 +10,7 @@ import java.io.IOException;
 public abstract class Transporte {
     private ServicioGeodds distanciaAPI;
     private Integer id;
+    private String nombre;
 
     public String getId() {
         return id.toString();
@@ -25,5 +26,9 @@ public abstract class Transporte {
 
     public double distancia(Ubicacion puntoInicio, Ubicacion puntoFin) throws IOException {
         return distanciaAPI.distancia(puntoInicio,puntoFin).distancia();
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 }

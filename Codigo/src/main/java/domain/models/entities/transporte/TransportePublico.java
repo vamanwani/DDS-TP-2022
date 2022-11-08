@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "transporte_publico")
+@Table(name = "transportepublico")
 public class TransportePublico extends Transporte {
     @Id
     @GeneratedValue
@@ -30,6 +30,7 @@ public class TransportePublico extends Transporte {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paradaFinal_id")
     private Parada paradaFinal;
+    private String nombre = "Transporte Publico";
 
 
     public TransportePublico() {

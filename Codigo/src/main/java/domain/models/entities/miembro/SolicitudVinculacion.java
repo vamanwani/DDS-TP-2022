@@ -1,6 +1,7 @@
 package domain.models.entities.miembro;
 
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
 
 import javax.persistence.*;
 
@@ -20,6 +21,15 @@ public class SolicitudVinculacion {
     @ManyToOne
     @JoinColumn(name = "organizacion_id_organizacion")
     private Organizacion organizacion;
+
+    @ManyToOne
+    @JoinColumn(name = "sector_id")
+    private Sector sector;
+
+    public Sector getSector() {
+        return sector;
+    }
+
     private String descripcion;
 
     @Enumerated(EnumType.STRING)
@@ -50,9 +60,10 @@ public class SolicitudVinculacion {
     }
 
 
-    public SolicitudVinculacion(Miembro miembro, Organizacion organizacion){
+    public SolicitudVinculacion(Miembro miembro, Organizacion organizacion, Sector sector){
         this.miembro = miembro;
         this.organizacion = organizacion;
+        this.sector = sector;
     }
 
     public String getMail(){return getMiembro().getMail();}

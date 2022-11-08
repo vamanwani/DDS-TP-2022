@@ -3,7 +3,7 @@ package domain.models.entities.transporte;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "vehiculo_particular")
+@Table(name = "vehiculoparticular")
 public class VehiculoParticular extends Transporte{
     @Id
     @GeneratedValue
@@ -14,6 +14,8 @@ public class VehiculoParticular extends Transporte{
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_combustible")
     private TipoCombustible combustible;
+
+    private String nombre = "Vehiculo Particular";
 
     public VehiculoParticular(TipoVehiculoParticular vehiculo, TipoCombustible combustible) {
         this.vehiculo = vehiculo;
