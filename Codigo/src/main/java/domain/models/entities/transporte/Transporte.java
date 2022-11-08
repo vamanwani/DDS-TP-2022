@@ -5,11 +5,20 @@ import domain.services.adapters.ServicioGeodds;
 
 import javax.persistence.*;
 import java.io.IOException;
-//@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+@Table(name = "transporte")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
 public abstract class Transporte {
+
+    @Transient
     private ServicioGeodds distanciaAPI;
+
+    @Id
+    @GeneratedValue
     private Integer id;
+
+    @Column(name = "nombre")
     private String nombre;
 
     public String getId() {
@@ -30,5 +39,9 @@ public abstract class Transporte {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

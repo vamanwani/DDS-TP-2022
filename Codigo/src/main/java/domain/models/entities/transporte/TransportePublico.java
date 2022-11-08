@@ -8,29 +8,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Entity
-@Table(name = "transportepublico")
+
+@DiscriminatorValue("Publico")
 public class TransportePublico extends Transporte {
-    @Id
-    @GeneratedValue
-    @Column(name = "transporte_id")
-    private Integer id;
+
+
     @Column(name = "linea")
     private String linea;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "transporte")
     private TipoTransportePublico transporte;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "paradas_id")
     private List<Parada> paradas;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paradaInicio_id")
     private Parada paradaInicial;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paradaFinal_id")
     private Parada paradaFinal;
-    private String nombre = "Transporte Publico";
+
 
 
     public TransportePublico() {
@@ -46,6 +48,7 @@ public class TransportePublico extends Transporte {
         this.paradaInicial = paradaInicial;
         this.paradaFinal = paradaFinal;
         this.setDistanciaAPI();
+        this.setNombre("Transporte Publico");
     }
 
     public void setParadas(List<Parada> paradas) {

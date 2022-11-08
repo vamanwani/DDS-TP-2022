@@ -7,6 +7,7 @@ import domain.models.entities.organizacion.Sector;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.models.repos.RepositorioDeSolicitudes;
+import domain.models.repos.RespositorioDeSectores;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
@@ -21,6 +22,7 @@ public class MiembroController {
     private RepositorioDeMiembros repo;
     private RepositorioDeSolicitudes repositorioDeSolicitudes = new RepositorioDeSolicitudes();
     private RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+    private RespositorioDeSectores respositorioDeSectores = new RespositorioDeSectores();
 
     public MiembroController() {
         this.repo = new RepositorioDeMiembros();
@@ -54,7 +56,8 @@ public class MiembroController {
     public Response vincularAOrg(Request request, Response response){
         Miembro miembro = this.repo.buscar(Integer.valueOf(request.params("id")));
         Organizacion organizacionAVincular = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
-        SolicitudVinculacion solicitudVinculacion = miembro.generarSolicitud(organizacionAVincular);
+        Sector sectorAVincular = this.respositorioDeSectores.buscar(request.params("id_sector"));
+        SolicitudVinculacion solicitudVinculacion = miembro.generarSolicitud(sectorAVincular);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
         response.redirect("" ); // TODO arreglar path
         return response;

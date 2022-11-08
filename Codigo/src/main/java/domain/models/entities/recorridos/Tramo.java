@@ -18,13 +18,14 @@ public class Tramo {
     @Column(name = "id_tramo")
     private Integer id;
 
-    @Transient
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "transporte_id")
     private Transporte medioDeTransporte;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionInicio_id")
     private Ubicacion puntoInicio;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionFin_id")
     private Ubicacion puntoFin;
@@ -89,6 +90,8 @@ public class Tramo {
     public Ubicacion getPuntoFin() {
         return puntoFin;
     }
+
+    public String getMedioTransporteNombre(){return this.medioDeTransporte.getNombre();}
 
 
 

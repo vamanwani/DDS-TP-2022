@@ -126,8 +126,8 @@ public class Miembro {
         return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion(periodoDeImputacion);
     }
 
-    public SolicitudVinculacion generarSolicitud(Organizacion organizacion){
-        return new SolicitudVinculacion(this, organizacion);
+    public SolicitudVinculacion generarSolicitud(Sector sector){
+        return new SolicitudVinculacion(this, sector.getOrganizacion(), sector);
     }
 
     public void setApellido(String apellido) {

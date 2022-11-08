@@ -13,6 +13,7 @@ import spark.Response;
 import javax.persistence.Entity;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class TrayectoController {
     // Mostrar trayectos "miembros/:id/trayectos"
@@ -98,7 +99,7 @@ public class TrayectoController {
         if(medio_transporte == "Vehiculo Particular"){
             String tipoVehiculo = request.queryParams("tipo_vehiculo");
             String tipoCombustible = request.queryParams("tipo_combustible");
-            VehiculoParticular transporte = this.repositoriosDeTransporte.buscarParticular(tipoVehiculo, tipoCombustible);
+            VehiculoParticular transporte = this.repositoriosDeTransporte.buscarParticular(tipoVehiculo.toUpperCase(Locale.ROOT), tipoCombustible);
             tramo.setMedioDeTransporte(transporte);
         } else if (medio_transporte == "Transporte Publico"){
             String linea =  request.queryParams("linea");

@@ -2,13 +2,10 @@ package domain.models.entities.transporte;
 
 import javax.persistence.*;
 import java.io.IOException;
-
 @Entity
-@Table(name = "serviciocontratado")
+@DiscriminatorValue("Servicio Contratado")
 public class ServicioContratado extends Transporte{
-    @Id
-    @GeneratedValue
-    private Integer id;
+
     @Column(name = "servicio")
     private String tipoServicio;
 
@@ -17,6 +14,7 @@ public class ServicioContratado extends Transporte{
     }
     public ServicioContratado() throws IOException {
         this.setDistanciaAPI();
+        this.setNombre("Servicio Contratado");
     }
 
 

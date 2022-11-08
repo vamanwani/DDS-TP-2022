@@ -46,6 +46,9 @@
         <h1>REGISTRAR ORGANIZACION</h1>
         <form action="" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
             <h4>Introduzca los siguientes datos</h4>
+            <div class="clase1">
+
+            </div>
             <input style="width: 75%;" class="form-control" type="text" placeholder="Razón social">
             <div style="display: flex; flex-direction:row; margin-top: 1rem;">
                 <select style="margin-right: 3rem;" class="form-select" aria-label="Default select example">
@@ -62,11 +65,25 @@
                     <input type="text" class="form-control" placeholder="Calle">
                     <input type="text" class="form-control" placeholder="Altura">
                 </div>
+                <div>
+
+
+                  <select class="form-select" id="selectProvincia" aria-label="Default select example">
+                    <option value="" selected>Provincia</option>
+                    <option class="optionLocalidades" value="CABA">CABA</option>
+                    <option class="optionLocalidades" value="Buenos Aires">Buenos Aires</option>
+                    <option class="optionLocalidades" value="Cordoba">Cordoba</option>
+                  </select>
+                  <select class="form-select localidades" aria-label="Default select example">
+
+
+                  </select>
+
+                </div>
                 <div style="display:flex; justify-content:center; align-items:center">
                     <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         SECTORES
                       </button>
-
                       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -124,6 +141,49 @@
             document.querySelector("#bloqueCantSectores").style.display="flex";
             document.querySelector("#bloqueSectores").style.display="none";
             document.querySelector("#btnConfirmarSectores").classList.add("disabled")
+        }
+
+
+
+
+        let provincias = document.querySelector("#selectProvincia")
+
+        provincias.addEventListener("change", mostrarLocalidades)
+        function mostrarLocalidades(e){
+          e.preventDefault();
+          let prov = this.value
+          let html = `
+          <option value="" selected>Localidad</option>
+          `;
+
+          switch(prov){
+            case "CABA":{
+              html+=`
+              <option value="Flores">Flores</option>
+              <option value="Lugano">Lugano</option>
+              <option value="Caballito">Caballito</option>
+              `
+              break;
+            }
+            case "Cordoba": {
+              html+=`
+              <option value="Cordoba">Cordoba</option>
+              <option value="Capilla Del Monte">Capilla Del Monte</option>
+              <option value="Carlos Paz">Carlos Paz</option>
+              `
+              break;
+            }
+            case "Buenos Aires": {
+              html+=`
+              <option value="Bahia Blanca">Bahia Blanca</option>
+              <option value="Lanus">Lanus</option>
+              <option value="Avellaneda">Avellaneda</option>
+              `
+              break;
+            }
+            default: break;
+          }
+          document.querySelector(".localidades").innerHTML = html;
         }
     </script>
     <script src="/navbar.js"></script>

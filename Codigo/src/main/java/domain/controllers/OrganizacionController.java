@@ -126,6 +126,7 @@ public class OrganizacionController {
                 .find(Organizacion.class, request.params("id"));
         List<HashMap> reportes = new ArrayList<>();
         Reporte reporte = new Reporte();
+
 //        if (evolucion) else if (composicion)
         reportes.add(reporte.contenidoReporteEvolucionOrganizacion(organizacion));
         reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
