@@ -3,22 +3,10 @@ package domain.server;
 
 import domain.controllers.*;
 
-import domain.middlewares.AuthMiddleware;
-import domain.middlewares.Middleware;
-
-import domain.models.entities.miembro.Adminisitrador;
-import spark.Route;
 import spark.Spark;
-import spark.TemplateViewRoute;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import domain.spark.BooleanHelper;
 import domain.spark.HandlebarsTemplateEngineBuilder;
-
-import javax.servlet.MultipartConfigElement;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 
 public class Router {
     private static HandlebarsTemplateEngine engine;

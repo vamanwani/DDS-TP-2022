@@ -24,8 +24,11 @@ public class SolicitudVinculacion {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_solicitud")
-    private EstadoSolicitud estadoSolicitud = EstadoSolicitud.PENDIENTE;
+    private domain.models.entities.miembro.EstadoSolicitud estadoSolicitud = EstadoSolicitud.PENDIENTE;
 
+    public EstadoSolicitud getEstadoSolicitud() {
+        return estadoSolicitud;
+    }
 
     protected SolicitudVinculacion() {
     }

@@ -1,7 +1,7 @@
 package domain.services.adapters;
 
+import domain.models.entities.sectorTerritorial.Localidad;
 import domain.services.entities.Distancia;
-import domain.services.entities.Localidad;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

@@ -1,7 +1,7 @@
 package domain.services.adapters;
 
+import domain.models.entities.sectorTerritorial.Localidad;
 import domain.services.entities.Distancia;
-import domain.services.entities.Localidad;
 import domain.models.entities.ubicacion.Ubicacion;
 import retrofit2.Retrofit;
 

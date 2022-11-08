@@ -1,16 +1,15 @@
 package dbtest;
 
-import domain.models.entities.calculoHC.CalculdoraHCMiembro;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.TipoUsuario;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.ClasificaciónDeOrg;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
 import domain.models.entities.organizacion.TipoDeOrganizacion;
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.services.dbManager.EntityManagerHelper;
 import org.junit.Test;
-import org.mockito.internal.matchers.Or;
 
 import static domain.services.dbManager.EntityManagerHelper.*;
 import static org.junit.Assert.assertNotNull;
@@ -38,6 +37,9 @@ public class Contexto {
         organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
         organizacion.setUsuario(usuarioOrg);
 
+        Sector rrhh = new Sector();
+        organizacion.agregarSectores(rrhh);
+
         Usuario usuarioAgSec = new Usuario("agsec", "agente", "agsec@gmail.com", "45062020", TipoUsuario.AGENTESECTORIAL);
         AgenteSectorial agenteSectorial = new AgenteSectorial("agente", usuarioAgSec);
 
@@ -46,6 +48,7 @@ public class Contexto {
         EntityManagerHelper.getEntityManager().persist(miembro);
         EntityManagerHelper.getEntityManager().persist(usuarioOrg);
         EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
+        EntityManagerHelper.getEntityManager().persist(rrhh);
         EntityManagerHelper.getEntityManager().persist(organizacion);
         EntityManagerHelper.getEntityManager().persist(usuarioAgSec);
         EntityManagerHelper.getEntityManager().persist(agenteSectorial);
@@ -83,5 +86,4 @@ public class Contexto {
         EntityManagerHelper.getEntityManager().persist(usuarioOrg);
         EntityManagerHelper.commit();
     }
-
 }

@@ -1,8 +1,6 @@
 package domain.models.repos;
 
-import domain.models.entities.miembro.Usuario;
 import domain.models.entities.recorridos.Tramo;
-import domain.models.entities.ubicacion.Ubicacion;
 import domain.services.dbManager.EntityManagerHelper;
 
 public class RepositorioDeTramos {

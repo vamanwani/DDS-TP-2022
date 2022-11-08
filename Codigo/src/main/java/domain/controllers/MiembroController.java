@@ -2,8 +2,8 @@ package domain.controllers;
 
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
-import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
 import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.models.repos.RepositorioDeSolicitudes;
@@ -39,6 +39,10 @@ public class MiembroController {
     public ModelAndView mostrarOrganizaciones(Request request, Response response){
         try{
             List<Organizacion> organizaciones = this.repo.mostrarOrganizaciones();
+            Miembro miembro = this.repo.buscar(Integer.valueOf(request.params("id")));
+            List<Sector> sectores = miembro.getTrabajos();
+            List<Organizacion> orgsDelMiembro = (List<Organizacion>) sectores.stream().map(s -> s.getOrganizacion());
+            organizaciones.stream().filter(o -> !orgsDelMiembro.contains(o));
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("organizaciones", organizaciones);
             }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO

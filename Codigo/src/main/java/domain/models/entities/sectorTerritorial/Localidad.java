@@ -21,4 +21,7 @@ public class Localidad {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
 }

@@ -1,6 +1,6 @@
 package domain.models.repos;
 
-import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.EstadoSolicitud;
 import domain.models.entities.miembro.SolicitudVinculacion;
 import domain.services.dbManager.EntityManagerHelper;
 
@@ -20,10 +20,17 @@ public class RepositorioDeSolicitudes {
         EntityManagerHelper.commit();
     }
 
+    public List<SolicitudVinculacion> buscarSolicitudesPendientesDeOrg(Integer idOrg) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id_organizacion = " + idOrg + " and estado_solicitud = 'PENDIENTE'")
+                .getResultList();
+    }
+
     public List<SolicitudVinculacion> buscarSolicitudesDeOrg(Integer idOrg) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id_organizacion = 1")
+                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id_organizacion = " + idOrg)
                 .getResultList();
     }
 }

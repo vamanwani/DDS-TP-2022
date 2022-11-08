@@ -1,7 +1,7 @@
 package domain.models.entities.ubicacion;
 
+import domain.models.entities.sectorTerritorial.Localidad;
 import domain.services.entities.ListaDeLocalidades;
-import domain.services.entities.Localidad;
 
 import java.util.ArrayList;
 import java.util.List;

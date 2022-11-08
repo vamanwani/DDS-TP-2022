@@ -1,10 +1,7 @@
 package domain.models.repos;
 
-import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
 import domain.services.dbManager.EntityManagerHelper;
-import spark.Request;
-import spark.Response;
 
 public class RepositorioDeUsuarios {
 

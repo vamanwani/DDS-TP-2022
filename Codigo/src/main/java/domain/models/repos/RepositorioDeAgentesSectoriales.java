@@ -1,9 +1,6 @@
 package domain.models.repos;
 
-import domain.models.entities.miembro.Miembro;
-import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
-import domain.models.entities.sectorTerritorial.SectorTerritorial;
 import domain.services.dbManager.EntityManagerHelper;
 
 public class RepositorioDeAgentesSectoriales {

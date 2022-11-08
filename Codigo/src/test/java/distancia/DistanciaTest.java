@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -72,7 +73,7 @@ public class DistanciaTest {
     }
     @Test
     public void testLocalidad(){
-        Assert.assertEquals(primeraUbicacion.getLocalidades().get(1).getId(),5364);
+        Assert.assertEquals(Optional.ofNullable(primeraUbicacion.getLocalidades().get(1).getId()),5364);
     }
 
     @Test
@@ -86,7 +87,7 @@ public class DistanciaTest {
     }
     @Test
     public void contenidoElementoDeListaTest() throws IOException{
-        Assert.assertEquals(servicioGeodds.localidades().get(1).nombre,"BUENOS AIRES");
+        Assert.assertEquals(servicioGeodds.localidades().get(1).getNombre(),"BUENOS AIRES");
     }
 
 

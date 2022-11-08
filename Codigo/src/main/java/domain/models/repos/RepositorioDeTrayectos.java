@@ -1,12 +1,8 @@
 package domain.models.repos;
 
-import domain.models.entities.miembro.Miembro;
-import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
-import domain.models.entities.ubicacion.Ubicacion;
 import domain.services.dbManager.EntityManagerHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioDeTrayectos {

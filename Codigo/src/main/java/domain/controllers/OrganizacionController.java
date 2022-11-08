@@ -10,7 +10,6 @@ import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.models.repos.RepositorioDeSolicitudes;
 import domain.services.dbManager.EntityManagerHelper;
-import org.hibernate.cfg.CreateKeySecondPass;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -18,16 +17,15 @@ import spark.Response;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.Part;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrganizacionController {
 
@@ -93,7 +91,7 @@ public class OrganizacionController {
     public ModelAndView mostrarSolicitantes(spark.Request request, spark.Response response) {
         try {
             String idOrganizacion = request.params("id");
-            List<SolicitudVinculacion> solicitudes = this.repositorioDeSolicitudes.buscarSolicitudesDeOrg(new Integer(idOrganizacion));
+            List<SolicitudVinculacion> solicitudes = this.repositorioDeSolicitudes.buscarSolicitudesPendientesDeOrg(new Integer(idOrganizacion));
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("solicitudes", solicitudes);
             }}, "/Organizacion/aceptarVinculaciones.hbs");
@@ -140,7 +138,7 @@ public class OrganizacionController {
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
         solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
-        response.redirect("solicitudAceptada");
+        response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");
         return response;
     }
 
@@ -148,7 +146,7 @@ public class OrganizacionController {
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
         solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.RECHAZADA);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
-        response.redirect("solicitudRechazada");
+        response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");
         return response;
     }
 

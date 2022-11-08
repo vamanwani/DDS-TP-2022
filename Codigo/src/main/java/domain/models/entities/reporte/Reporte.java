@@ -37,6 +37,7 @@ public class Reporte {
         }
         return map;
     }
+
     public HashMap contenidoReporteEvolucionOrganizacion(Organizacion organizacion) throws IOException{
         //Diccionario que tenga actualizaciones con mes, año y valor de HC de una organizacion
         HashMap<String, Double> map = new HashMap<String, Double>();
@@ -74,6 +75,7 @@ public class Reporte {
 
         return map;
     }
+
     public HashMap contenidoReporteHCOrganizacion(List<ClasificaciónDeOrg> clasificaciónDeOrgList, List<Organizacion> organizacionList) throws IOException {
         HashMap<String, Double> map = new HashMap<String, Double>();
         for (int i = 0; i < clasificaciónDeOrgList.size(); i++){

@@ -15,7 +15,6 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.io.Console;
 import java.io.FileNotFoundException;
 
 public class LoginController {

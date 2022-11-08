@@ -1,12 +1,7 @@
 package domain.models.repos;
 
-import com.sendgrid.Request;
-import com.sendgrid.Response;
 import domain.models.entities.miembro.Miembro;
-import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.Organizacion;
-import domain.models.entities.recorridos.Tramo;
-import domain.models.entities.recorridos.Trayecto;
 import domain.services.dbManager.EntityManagerHelper;
 
 import java.util.List;
