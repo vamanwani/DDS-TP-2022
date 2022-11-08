@@ -11,6 +11,7 @@ import spark.Request;
 import spark.Response;
 
 import javax.persistence.Entity;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -89,28 +90,29 @@ public class TrayectoController {
     }
 
 
-    public Response crearTramo(Request request, Response response){
+    public Response crearTramo(Request request, Response response) throws IOException {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         Tramo tramo = new Tramo();
         Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
         Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
-
+        Integer transporteN;
         String medio_transporte= request.queryParams("medio_transporte");
-        if(medio_transporte == "Vehiculo Particular"){
+        if(medio_transporte.equals("particular")){
             String tipoVehiculo = request.queryParams("tipo_vehiculo");
             String tipoCombustible = request.queryParams("tipo_combustible");
-            VehiculoParticular transporte = this.repositoriosDeTransporte.buscarParticular(tipoVehiculo.toUpperCase(Locale.ROOT), tipoCombustible);
+            Transporte transporte = this.repositoriosDeTransporte.buscarParticular(tipoVehiculo, tipoCombustible);
             tramo.setMedioDeTransporte(transporte);
-        } else if (medio_transporte == "Transporte Publico"){
+        } else if (medio_transporte.equals("publico")){
             String linea =  request.queryParams("linea");
             String tipoTransportePublico = request.queryParams("tipo_transporte_publico");
             TransportePublico transporte= this.repositoriosDeTransporte.buscarTransportePublico(linea, tipoTransportePublico);
             tramo.setMedioDeTransporte(transporte);
-        } else if (medio_transporte == "Servicio Contratado"){
+        } else if (medio_transporte.equals("contratado")){
             String servicioContratado=request.queryParams("tipo_servicio_contratado");
-            ServicioContratado transporte = this.repositoriosDeTransporte.buscarContratado(servicioContratado);
+            ServicioContratado transporte = new ServicioContratado(servicioContratado);
+            this.repositoriosDeTransporte.guardarSiNoExisteContratado(transporte);
             tramo.setMedioDeTransporte(transporte);
-        } else if (medio_transporte == "Transporte Analogico"){
+        } else if (medio_transporte.equals("analogico")){
             String transporteAnalogico = request.queryParams("tipo_transporte_analogico");
             TransporteAnalogico transporte = this.repositoriosDeTransporte.buscarAnalogico(transporteAnalogico);
             tramo.setMedioDeTransporte(transporte);

@@ -1,8 +1,11 @@
 package domain.models.entities.transporte;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.IOException;
 @Entity
+@NoArgsConstructor
 @DiscriminatorValue("Analogico")
 public class TransporteAnalogico extends Transporte{
 

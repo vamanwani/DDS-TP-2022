@@ -92,7 +92,7 @@
             <h1>AGREGAR TRAMO</h1>
             <form method="POST" action="/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}/tramos/agregar_tramo" class="formul">
                 <section style="display: flex; justify-content:space-around; width:100%">
-                    <div class="ptoInicio">
+                <div class="ptoInicio">
                         <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">PUNTO DE INICIO</h4>
                         <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_calle" placeholder="Ingrese calle...">
@@ -110,80 +110,38 @@
                     <div class="medioTransporte">
                         <h4 style="background-color: rgb(184, 181, 12); margin-bottom: 0">MEDIO DE TRANSPORTE</h4>
                         <div style="height: 40px; background-color: rgb(236, 234, 68);">
-                            <button type="button" style="background-color: white;" class="btn" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Ingresar Acá
-                            </button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Medio de Transporte</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                        <button type="button" style="background-color: white;" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Ingresar Acá
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Medio de Transporte</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <select id="valueMedioTransporte" class="form-select tipoTransporte" aria-label="Default select example">
+                                            <option selected value="">TIPO DE TRANSPORTE</option>
+                                            <option value="Vehiculo Particular">Vehiculo Particular</option>
+                                            <option value="Transporte Publico">Transporte Publico</option>
+                                            <option value="Servicio Contratado">Servicio Contratado</option>
+                                            <option value="Transporte Analógico">Transporte Analógico</option>
+                                        </select>
+                                        <br><br>
+                                        <div id="contenidoTransporteElegido">
+
                                         </div>
-                                        <div class="modal-body">
-                                            <select id="valueMedioTransporte" class="form-select"
-                                                aria-label="Default select example" name = "medio_transporte">
-                                                <option selected value="">TIPO DE TRANSPORTE</option>
-                                                <option value="Vehiculo Particular">Vehiculo Particular</option>
-                                                <option value="Transporte Publico">Transporte Publico</option>
-                                                <option value="Servicio Contratado">Servicio Contratado</option>
-                                                <option value="Transporte Analógico">Transporte Analógico</option>
-                                            </select>
-                                            <br><br>
-                                            Para vehiculo particular:
-                                            <select id="valueVehiculo" class="form-select"
-                                                aria-label="Default select example" name = "tipo_vehiculo">
-                                                <option selected value="">Tipo Vehiculo</option>
-                                                <option value="Moto">Moto</option>
-                                                <option value="Auto">Auto</option>
-                                                <option value="Camioneta">Camioneta</option>
-                                            </select>
-                                            <select id="valueCombustible" class="form-select"
-                                                aria-label="Default select example" name ="tipo_combustible">
-                                                <option selected value="">Tipo Combustible</option>
-                                                <option value="GNC">GNC</option>
-                                                <option value="Nafta">Nafta</option>
-                                                <option value="Electrico">Eléctrico</option>
-                                                <option value="Gasoil">Gasoil</option>
-                                            </select>
-                                            <br><br>
-                                            Para transporte público:
-                                            <input id="valueLinea" type="text" class="form-control" id="linea"
-                                                placeholder="Linea" name ="linea">
-                                            <select id="valueTransportePublico" class="form-select"
-                                                aria-label="Default select example" name ="tipo_transporte_publico">
-                                                <option value="" selected>Tipo Transporte</option>
-                                                <option value="Linea Ferrea">Línea Férrea</option>
-                                                <option value="Linea Subterraneo">Línea Subterráneo</option>
-                                                <option value="Colectivo">Colectivo</option>
-                                            </select>
-                                            <br><br>
-                                            Para servicio contratado:
-                                            <input id="valueServicio" type="text" class="form-control"
-                                                id="tipoServicioContratado" placeholder="Tipo servicio" name = "tipo_servicio_contratado">
-                                            <br><br>
-                                            Para transporte analógico:
-                                            <select id="valueTransporteAnalogico" class="form-select"
-                                                aria-label="Default select example" name = "tipo_transporte_analogico">
-                                                <option value="" selected>Tipo Transporte</option>
-                                                <option value="Bicicleta">Bicicleta</option>
-                                                <option value="Pie">Pie</option>
-                                            </select>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cerrar</button>
-                                            <button id="btnGuardarCambios" type="button" class="btn btn-primary">Guardar
-                                                Cambios</button>
-                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button id="btnGuardarCambios" type="button" class="btn btn-primary">Guardar Cambios</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 </section>
                 <section style="width: 100%; display: flex; justify-content: space-evenly;">
                     <button id="btnVolver" type="button" class="btn btn-lg"
@@ -201,6 +159,116 @@
         <p style="color: white;">@2022 Todos los derechos reservados</p>
     </footer>
     <!-- JavaScript Bundle with Popper -->
+    <script>
+          let tiposTransporte = document.querySelector(".tipoTransporte")
+
+          tiposTransporte.addEventListener("change", cambiarTipoTransporte)
+
+          function cambiarTipoTransporte(e){
+            e.preventDefault()
+            let tipo = this.value
+            let html = ``;
+            switch(tipo){
+              case "Vehiculo Particular":{
+                html+=`
+                <select name = "tipo_vehiculo" id="valueVehiculo" class="form-select" aria-label="Default select example">
+                    <option selected value="">Tipo Vehiculo</option>
+                    <option value="Moto">Moto</option>
+                    <option value="Auto">Auto</option>
+                    <option value="Camioneta">Camioneta</option>
+                </select>
+
+                <select id="valueCombustible" class="form-select" aria-label="Default select example" name ="tipo_combustible">
+                    <option selected value="">Tipo Combustible</option>
+                    <option value="GNC">GNC</option>
+                    <option value="Nafta">Nafta</option>
+                    <option value="Electrico">Eléctrico</option>
+                    <option value="Gasoil">Gasoil</option>
+                </select>
+
+                `
+                break;
+              }
+              case "Transporte Publico":{
+                html+=`
+                Para transporte público:
+                <select name = "tipo_transporte_publico" id="valueTransportePublico" class="form-select tipoPublico" aria-label="Default select example">
+                    <option value="" selected>Tipo Transporte</option>
+                    <option value="Linea Ferrea">Línea Férrea</option>
+                    <option value="Linea Subterraneo">Línea Subterráneo</option>
+                    <option value="Colectivo">Colectivo</option>
+                </select>
+                <div class="contenidoLinea"></div>
+                `
+                break;
+              }
+              case "Servicio Contratado":{
+                html+=`
+                Para servicio contratado:
+                    <input name = "tipo_servicio_contratado" id="valueServicio" type="text" class="form-control" id="tipoServicioContratado" placeholder="Tipo servicio">
+                `
+                break;
+              }
+              case "Transporte Analógico":{
+                html+=`
+                Para transporte analógico:
+                                  <select name= "tipo_transporte_analogico" id="valueTransporteAnalogico" class="form-select" aria-label="Default select example">
+                                    <option value="" selected>Tipo Transporte</option>
+                                    <option value="Bicicleta">Bicicleta</option>
+                                    <option value="Pie">Pie</option>
+                                  </select>
+                `
+                break;
+              }
+              default: break;
+            }
+            document.querySelector("#contenidoTransporteElegido").innerHTML = html;
+            document.querySelector(".scriptPublico").innerHTML = `
+                  let tipoPublico = document.querySelector(".tipoPublico")
+
+                  tipoPublico.addEventListener("change", cambiarTipoPubico)
+            `
+          }
+
+          function cambiarTipoPubico(e){
+            e.preventDefault()
+            console.log("entro")
+            let tipo = this.value
+            let html = ``;
+            switch(tipo){
+              case "Linea Ferrea":{
+                html+= `
+                <select name = "linea" class="form-select" aria-label="Default select example">
+                  <option value="" selected>Linea (LF)</option>
+
+                </select>
+                `
+                break;
+              }
+              case "Linea Subterraneo":{
+                html+= `
+                <select name = "linea" class="form-select" aria-label="Default select example">
+                  <option value="" selected>Linea (LS)</option>
+
+                </select>
+                `
+                break;
+              }
+              case "Colectivo":{
+                html+= `
+                <select name = "linea" class="form-select" aria-label="Default select example">
+                  <option value="" selected>Linea (C)</option>
+
+                </select>
+                `
+                break;
+              }
+              default: break;
+            }
+            document.querySelector(".contenidoLinea").innerHTML=html;
+          }
+        </script>
+        <script class="scriptPublico"></script>
     <script src="/miembro/agregarTrayecto.js"></script>
     <script src="/navbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

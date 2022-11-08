@@ -1,8 +1,11 @@
 package domain.models.entities.transporte;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 @Entity
 @DiscriminatorValue("Particular")
+@NoArgsConstructor
 public class VehiculoParticular extends Transporte{
 
     @Enumerated(EnumType.STRING)

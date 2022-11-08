@@ -148,7 +148,7 @@ public class ReportesInit {
     @Test
     public void pruebaReporteHCOrganizacionSegunClasificacion() throws IOException {
         Reporte unReporte = new Reporte();
-        HashMap<String,Double> hasheo = unReporte.contenidoReporteHCOrganizacion(listaClasificaciones, listaDeOrganizaciones);
+        HashMap<String,Double> hasheo = unReporte.contenidoReporteHCOrganizacion("Universidad", listaDeOrganizaciones);
         System.out.println(hasheo);
         Assert.assertEquals(hasheo.size(),0);
     } // BIEN

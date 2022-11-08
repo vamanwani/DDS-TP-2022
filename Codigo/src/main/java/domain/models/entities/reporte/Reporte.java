@@ -76,17 +76,19 @@ public class Reporte {
         return map;
     }
 
-    public HashMap contenidoReporteHCOrganizacion(List<ClasificaciónDeOrg> clasificaciónDeOrgList, List<Organizacion> organizacionList) throws IOException {
+    //TODO ESTE REPORTE NO PUEDEN GENERARLO LOS MIEMBROS.
+    //Organizaciones->contenidoReporteHCOrganizacion(this.clasificacion, [this])
+    //AgenteSecorial->contenidoReporteHCOrganizacion(unaClasificacion, this.organizaciones)
+        public HashMap contenidoReporteHCOrganizacion(String clasificaciónDeOrg, List<Organizacion> organizacionList) throws IOException {
         HashMap<String, Double> map = new HashMap<String, Double>();
-        for (int i = 0; i < clasificaciónDeOrgList.size(); i++){
             double hcDeLaClasificacion = 0;
             for (int j = 0; j < organizacionList.size(); j++){
-                if (organizacionList.get(j).getClasificacionDeOrg() == clasificaciónDeOrgList.get(i)) {
+                if (organizacionList.get(j).getClasificacionDeOrg().getNombre() == clasificaciónDeOrg) {
                     hcDeLaClasificacion += organizacionList.get(j).calcularHCOrgHistorico();
                 }
             }
-            map.put(clasificaciónDeOrgList.get(i).getNombre(), hcDeLaClasificacion);
-        }
+            map.put(clasificaciónDeOrg, hcDeLaClasificacion);
+
         return map;
     }
 

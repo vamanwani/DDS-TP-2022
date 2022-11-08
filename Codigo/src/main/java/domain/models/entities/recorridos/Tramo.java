@@ -18,10 +18,6 @@ public class Tramo {
     @Column(name = "id_tramo")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "transporte_id")
-    private Transporte medioDeTransporte;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionInicio_id")
     private Ubicacion puntoInicio;
@@ -29,6 +25,10 @@ public class Tramo {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ubicacionFin_id")
     private Ubicacion puntoFin;
+
+    @OneToOne
+    @JoinColumn(name = "transporte_id")
+    private Transporte medioDeTransporte;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")

@@ -2,6 +2,7 @@ package domain.models.entities.transporte;
 
 import domain.models.entities.ubicacion.Parada;
 import domain.models.entities.ubicacion.Ubicacion;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Entity
-
+@NoArgsConstructor
 @DiscriminatorValue("Publico")
 public class TransportePublico extends Transporte {
 
@@ -33,10 +34,6 @@ public class TransportePublico extends Transporte {
     @JoinColumn(name = "paradaFinal_id")
     private Parada paradaFinal;
 
-
-
-    public TransportePublico() {
-    }
 
     public TransportePublico(String linea,
                              TipoTransportePublico transporte,

@@ -1,10 +1,10 @@
 package dbtest;
 
-import domain.models.entities.transporte.TipoCombustible;
-import domain.models.entities.transporte.TipoVehiculoParticular;
-import domain.models.entities.transporte.VehiculoParticular;
+import domain.models.entities.transporte.*;
 import domain.services.dbManager.EntityManagerHelper;
 import org.junit.Test;
+
+import java.io.IOException;
 
 public class MediosTransporteInit {
 
@@ -41,4 +41,16 @@ public class MediosTransporteInit {
         EntityManagerHelper.persist(camionetaElectrico);
         EntityManagerHelper.commit();
     }
+
+    @Test
+    public void instanciarTransportesAnalogicos() throws IOException {
+        TransporteAnalogico pie = new TransporteAnalogico(TipoTransporteAnalogico.PIE);
+        TransporteAnalogico bici = new TransporteAnalogico(TipoTransporteAnalogico.BICICLETA);
+
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.persist(pie);
+        EntityManagerHelper.persist(bici);
+        EntityManagerHelper.commit();
+    }
+
 }
