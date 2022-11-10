@@ -11,7 +11,7 @@ public class Parada {
     @Column(name = "id_parada")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "localizacion_id")
     private Ubicacion localizacion;
 

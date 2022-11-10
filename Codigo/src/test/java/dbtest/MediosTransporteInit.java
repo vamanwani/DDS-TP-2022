@@ -68,10 +68,10 @@ public class MediosTransporteInit {
         TransportePublico lineaD = new TransportePublico("D", TipoTransportePublico.lineaSubte, paradaInicial, paradaFinal);
 
         EntityManagerHelper.beginTransaction();
-//        EntityManagerHelper.persist(localidadInicial);
-//        EntityManagerHelper.persist(localidadFinal);
-//        EntityManagerHelper.persist(ubicacionInicial);
-//        EntityManagerHelper.persist(ubicacionInicial);
+        EntityManagerHelper.persist(localidadInicial);
+        EntityManagerHelper.persist(localidadFinal);
+        EntityManagerHelper.persist(ubicacionInicial);
+        EntityManagerHelper.persist(ubicacionInicial);
 //        EntityManagerHelper.commit();
         EntityManagerHelper.persist(paradaInicial);
         EntityManagerHelper.persist(paradaFinal);
