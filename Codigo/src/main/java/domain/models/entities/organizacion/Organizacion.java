@@ -44,6 +44,7 @@ public class Organizacion {
         this.usuario = usuario;
         this.contactos = new HashSet<>();
         this.sectores = new ArrayList<>();
+        this.consumos = new ArrayList<>();
     }
 
     public ClasificaciónDeOrg getClasificacionDeOrg() {
@@ -64,9 +65,9 @@ public class Organizacion {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "consumo_id")
-    private List<Consumo> consumos = new ArrayList<Consumo>();;
+    private List<Consumo> consumos;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
@@ -90,6 +91,7 @@ public class Organizacion {
     public Organizacion() {
         this.contactos = new HashSet<>();
         this.sectores = new ArrayList<>();
+        this.consumos = new ArrayList<>();
     }
 
     public void agregarContacto(Miembro nuevoContacto){

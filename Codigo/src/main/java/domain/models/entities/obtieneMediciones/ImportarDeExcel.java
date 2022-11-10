@@ -96,7 +96,7 @@ public class ImportarDeExcel {
                 FilaConsumo medio = listaDeFilaConsumo.get(i+1);
                 FilaConsumo  distancia= listaDeFilaConsumo.get(i+2);
                 FilaConsumo  peso= listaDeFilaConsumo.get(i+3);
-                organizacion.agregarConsumo(instaciarConsumoLogistica(fila, medio, distancia, peso)); // por fila se refiere a categoria
+                instaciarConsumoLogistica(fila, medio, distancia, peso,organizacion); // por fila se refiere a categoria
                 i += 3; // te saltea las proximas tres filas de una
             } else {
                 organizacion.agregarConsumo(instanciarOtroConsumo(listaDeFilaConsumo.get(i)));
@@ -104,14 +104,16 @@ public class ImportarDeExcel {
         }
     }
 
-    public Consumo instaciarConsumoLogistica(FilaConsumo categoria, FilaConsumo medio, FilaConsumo distancia, FilaConsumo peso){
+    public Consumo instaciarConsumoLogistica(FilaConsumo categoria, FilaConsumo medio, FilaConsumo distancia, FilaConsumo peso, Organizacion unaOrganizacion){
         List<String> df = categoria.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
         Consumo consumoDeOrganizacion = new ConsumoLogistica(actividadConsumo, periodoDeImputacion, tipoConsumo, Integer.parseInt(peso.getDatosString().get(2)),
                 Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2));
+        unaOrganizacion.agregarConsumo(consumoDeOrganizacion);
         EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.persist(unaOrganizacion);
         EntityManagerHelper.persist(actividadConsumo);
         EntityManagerHelper.persist(tipoConsumo);
         EntityManagerHelper.persist(periodoDeImputacion);

@@ -10,17 +10,17 @@ public abstract class Consumo {
     @Id
     @GeneratedValue
     @Column(name = "consumo_id")
-    private Integer id;
+    private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "actividad_id")
     protected Actividad actividad;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "periodo_imputacion_id")
     protected PeriodoDeImputacion periodicidad;
     @Column(name = "proxima_acreditacion")
     protected int proximaAcreditacionConsumo;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "tipo_consumo_id")
     protected TipoConsumo tipoConsumo;
 
