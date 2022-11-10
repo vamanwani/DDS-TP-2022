@@ -121,12 +121,12 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <select id="valueMedioTransporte" class="form-select tipoTransporte" aria-label="Default select example">
+                                        <select id="valueMedioTransporte" class="form-select tipoTransporte" aria-label="Default select example" name= "medio_transporte">
                                             <option selected value="">TIPO DE TRANSPORTE</option>
-                                            <option value="Vehiculo Particular">Vehiculo Particular</option>
-                                            <option value="Transporte Publico">Transporte Publico</option>
-                                            <option value="Servicio Contratado">Servicio Contratado</option>
-                                            <option value="Transporte Analógico">Transporte Analógico</option>
+                                            <option value="particular">Vehiculo Particular</option>
+                                            <option value="publico">Transporte Publico</option>
+                                            <option value="contratado">Servicio Contratado</option>
+                                            <option value="analogico">Transporte Analógico</option>
                                         </select>
                                         <br><br>
                                         <div id="contenidoTransporteElegido">
@@ -169,13 +169,13 @@
             let tipo = this.value
             let html = ``;
             switch(tipo){
-              case "Vehiculo Particular":{
+              case "particular":{
                 html+=`
                 <select name = "tipo_vehiculo" id="valueVehiculo" class="form-select" aria-label="Default select example">
                     <option selected value="">Tipo Vehiculo</option>
-                    <option value="Moto">Moto</option>
-                    <option value="Auto">Auto</option>
-                    <option value="Camioneta">Camioneta</option>
+                    <option value="MOTO">Moto</option>
+                    <option value="AUTO">Auto</option>
+                    <option value="CAMIONETA">Camioneta</option>
                 </select>
 
                 <select id="valueCombustible" class="form-select" aria-label="Default select example" name ="tipo_combustible">
@@ -189,7 +189,7 @@
                 `
                 break;
               }
-              case "Transporte Publico":{
+              case "publico":{
                 html+=`
                 Para transporte público:
                 <select name = "tipo_transporte_publico" id="valueTransportePublico" class="form-select tipoPublico" aria-label="Default select example">
@@ -202,14 +202,14 @@
                 `
                 break;
               }
-              case "Servicio Contratado":{
+              case "contratado":{
                 html+=`
                 Para servicio contratado:
                     <input name = "tipo_servicio_contratado" id="valueServicio" type="text" class="form-control" id="tipoServicioContratado" placeholder="Tipo servicio">
                 `
                 break;
               }
-              case "Transporte Analógico":{
+              case "analogico":{
                 html+=`
                 Para transporte analógico:
                                   <select name= "tipo_transporte_analogico" id="valueTransporteAnalogico" class="form-select" aria-label="Default select example">

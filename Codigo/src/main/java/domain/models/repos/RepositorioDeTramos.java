@@ -7,7 +7,7 @@ public class RepositorioDeTramos {
     public Tramo buscar(Integer id){
         return (Tramo) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("FROM " + Tramo.class.getName() + " WHERE tramo_id = '"+id)
+                .createQuery("FROM " + Tramo.class.getName() + " WHERE id_tramo = "+id)
                 .getSingleResult();
     }
 

@@ -82,10 +82,12 @@ public class TrayectoController {
         return response;
     }
 
-    public ModelAndView mostrarTramo(Request request, Response response){
+    public ModelAndView editarTramo(Request request, Response response){
         Tramo tramo = this.repositorioDeTramos.buscar(Integer.valueOf(request.params("id_tramo")));
         return new ModelAndView(new HashMap<String, Object>(){{
             put("tramo",tramo );
+            put("miembro_id", request.params("id"));
+            put("trayecto_id", request.params("id_trayecto"));
         }}, "/Miembro/editarTramo.hbs");
     }
 
@@ -131,14 +133,8 @@ public class TrayectoController {
         return response;
     }
 
-
-    public Response editarTramo(Request request, Response response){
-//        Tramo tramo = this.repositorioDeTramos.buscar(Integer.valueOf(request.params("id_tramo")));
-//
-//        this.repositorioDeTramos.guardar(tramo);
-//        response.redirect("/miembro/"+ request.params("id") +"/trayectos" + request.params("id_trayecto") + "/editar");
-        response.redirect("funciona");
+    public Response actualizarTramo(Request request, Response response) {
+        response.redirect("acutalziar");
         return response;
     }
-
 }
