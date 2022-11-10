@@ -5,11 +5,11 @@ import java.util.List;
 
 public class FilaConsumo {
     private List<String> datosString;
-    public void FilaConsumo(){
+    public FilaConsumo(){
         this.datosString = new ArrayList<>();
     }
     public void setDatosString(List<String> listaAAgregar){
-        this.datosString = listaAAgregar;
+        this.datosString.addAll(listaAAgregar);
     }
 
     public List<String> getDatosString() {

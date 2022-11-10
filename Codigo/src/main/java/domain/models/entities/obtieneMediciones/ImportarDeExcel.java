@@ -3,6 +3,7 @@ package domain.models.entities.obtieneMediciones;
 import domain.models.entities.consumo.*;
 import domain.models.entities.consumo.*;
 import domain.models.entities.organizacion.Organizacion;
+import domain.services.dbManager.EntityManagerHelper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -10,11 +11,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 public class ImportarDeExcel {
-    public static void main(String[] args) {
-        try {
+    public void importar(String nombreExcel, Organizacion unaOrganizacion) throws IOException {
             File file = new File(".\\ddsExcelv2.xlsx");   //creating a new file instance
             FileInputStream fis = new FileInputStream(file);   //obtaining bytes from the file
 //creating Workbook instance that refers to .xlsx file
@@ -85,15 +86,13 @@ public class ImportarDeExcel {
                 datosFila.clear();
                 System.out.println("");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            instanciasConsumosParaOrganizacion(filaDeConsumos,unaOrganizacion);
     }
 
     public void instanciasConsumosParaOrganizacion(List<FilaConsumo> listaDeFilaConsumo, Organizacion organizacion) {
         for (int i = 0; i < listaDeFilaConsumo.size() ; i++) {
             FilaConsumo fila = listaDeFilaConsumo.get(i);
-            if (fila.getDatosString().get(1).toLowerCase(Locale.ROOT) == "categoria" ){
+            if (fila.getDatosString().get(1).toLowerCase(Locale.ROOT).contains("categoria") ){
                 FilaConsumo medio = listaDeFilaConsumo.get(i+1);
                 FilaConsumo  distancia= listaDeFilaConsumo.get(i+2);
                 FilaConsumo  peso= listaDeFilaConsumo.get(i+3);
@@ -112,6 +111,12 @@ public class ImportarDeExcel {
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
         Consumo consumoDeOrganizacion = new ConsumoLogistica(actividadConsumo, periodoDeImputacion, tipoConsumo, Integer.parseInt(peso.getDatosString().get(2)),
                 Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2));
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.persist(actividadConsumo);
+        EntityManagerHelper.persist(tipoConsumo);
+        EntityManagerHelper.persist(periodoDeImputacion);
+        EntityManagerHelper.persist(consumoDeOrganizacion);
+        EntityManagerHelper.commit();
         return consumoDeOrganizacion;
     }
 
