@@ -13,6 +13,9 @@ public class Localidad {
     @Column(name = "nombre")
     private String nombre;
 
+    public Localidad() {
+    }
+
     public Localidad(String nombre) {
         this.nombre = nombre;
     }

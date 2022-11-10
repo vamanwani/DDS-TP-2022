@@ -137,4 +137,8 @@ public class TrayectoController {
         response.redirect("acutalziar");
         return response;
     }
+
+    public void agregarTramo(Request request, Response response) {
+        //TODO
+    }
 }

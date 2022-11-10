@@ -1,10 +1,14 @@
 package dbtest;
 
+import domain.models.entities.sectorTerritorial.Localidad;
 import domain.models.entities.transporte.*;
+import domain.models.entities.ubicacion.Parada;
+import domain.models.entities.ubicacion.Ubicacion;
 import domain.services.dbManager.EntityManagerHelper;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class MediosTransporteInit {
 
@@ -52,5 +56,29 @@ public class MediosTransporteInit {
         EntityManagerHelper.persist(bici);
         EntityManagerHelper.commit();
     }
+
+    @Test
+    public void instanciarLineaD() throws IOException {
+        Localidad localidadInicial = new Localidad("San Nicolas");
+        Localidad localidadFinal = new Localidad("Belgrano");
+        Ubicacion ubicacionInicial = new Ubicacion("San Martin", 1, localidadInicial);
+        Ubicacion ubicacionFinal = new Ubicacion("Avenida Cabildo", 2800, localidadFinal);
+        Parada paradaInicial = new Parada(ubicacionInicial);
+        Parada paradaFinal = new Parada(ubicacionFinal);
+        TransportePublico lineaD = new TransportePublico("D", TipoTransportePublico.lineaSubte, paradaInicial, paradaFinal);
+
+        EntityManagerHelper.beginTransaction();
+//        EntityManagerHelper.persist(localidadInicial);
+//        EntityManagerHelper.persist(localidadFinal);
+//        EntityManagerHelper.persist(ubicacionInicial);
+//        EntityManagerHelper.persist(ubicacionInicial);
+//        EntityManagerHelper.commit();
+        EntityManagerHelper.persist(paradaInicial);
+        EntityManagerHelper.persist(paradaFinal);
+        EntityManagerHelper.persist(lineaD);
+        EntityManagerHelper.commit();
+
+    }
+
 
 }
