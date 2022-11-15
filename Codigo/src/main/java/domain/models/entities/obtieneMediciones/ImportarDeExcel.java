@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 public class ImportarDeExcel {
     public void importar(String nombreExcel, Organizacion unaOrganizacion) throws IOException {
-            File file = new File(".\\ddsExcelv2.xlsx");   //creating a new file instance
+            File file = new File("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\" + nombreExcel);   //creating a new file instance
             FileInputStream fis = new FileInputStream(file);   //obtaining bytes from the file
 //creating Workbook instance that refers to .xlsx file
             XSSFWorkbook wb = new XSSFWorkbook(fis);
@@ -78,6 +78,8 @@ public class ImportarDeExcel {
                 }
                 //SE INSTANCIA LA CLASE FILACONSUMO
                 System.out.println(datosFila);
+//                InstanciadorConsumos instanciadorConsumos = new InstanciadorConsumos();
+//                instanciadorConsumos.setDatos(datosFila);
                 FilaConsumo filaConsumoInstancia = new FilaConsumo();
                 //Agrega datos Fila a una instancia de FilaConsumo
                 filaConsumoInstancia.setDatosString(datosFila);
@@ -92,38 +94,40 @@ public class ImportarDeExcel {
     public void instanciasConsumosParaOrganizacion(List<FilaConsumo> listaDeFilaConsumo, Organizacion organizacion) {
         for (int i = 0; i < listaDeFilaConsumo.size() ; i++) {
             FilaConsumo fila = listaDeFilaConsumo.get(i);
+            Consumo consumo;
             if (fila.getDatosString().get(1).toLowerCase(Locale.ROOT).contains("categoria") ){
                 FilaConsumo medio = listaDeFilaConsumo.get(i+1);
                 FilaConsumo  distancia= listaDeFilaConsumo.get(i+2);
                 FilaConsumo  peso= listaDeFilaConsumo.get(i+3);
-                instaciarConsumoLogistica(fila, medio, distancia, peso,organizacion); // por fila se refiere a categoria
+                consumo = instaciarConsumoLogistica(fila, medio, distancia, peso,organizacion); // por fila se refiere a categoria
                 i += 3; // te saltea las proximas tres filas de una
             } else {
-                organizacion.agregarConsumo(instanciarOtroConsumo(listaDeFilaConsumo.get(i)));
+                consumo = instanciarOtroConsumo(listaDeFilaConsumo.get(i), organizacion);
             }
+            organizacion.agregarConsumo(consumo);
+            EntityManagerHelper.beginTransaction();
+            EntityManagerHelper.persist(organizacion);
+            EntityManagerHelper.persist(consumo.getActividad());
+            EntityManagerHelper.persist(consumo.getTipoConsumo());
+            EntityManagerHelper.persist(consumo.getPeriodicidad());
+            EntityManagerHelper.persist(consumo);
+            EntityManagerHelper.commit();
         }
     }
 
-    public Consumo instaciarConsumoLogistica(FilaConsumo categoria, FilaConsumo medio, FilaConsumo distancia, FilaConsumo peso, Organizacion unaOrganizacion){
+
+    public Consumo instaciarConsumoLogistica(FilaConsumo categoria, FilaConsumo medio, FilaConsumo distancia, FilaConsumo peso, Organizacion unaOrganizacion) {
         List<String> df = categoria.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
         Consumo consumoDeOrganizacion = new ConsumoLogistica(actividadConsumo, periodoDeImputacion, tipoConsumo, Integer.parseInt(peso.getDatosString().get(2)),
                 Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2));
-        unaOrganizacion.agregarConsumo(consumoDeOrganizacion);
-        EntityManagerHelper.beginTransaction();
-        EntityManagerHelper.persist(unaOrganizacion);
-        EntityManagerHelper.persist(actividadConsumo);
-        EntityManagerHelper.persist(tipoConsumo);
-        EntityManagerHelper.persist(periodoDeImputacion);
-        EntityManagerHelper.persist(consumoDeOrganizacion);
-        EntityManagerHelper.commit();
         return consumoDeOrganizacion;
     }
 
 
-    public Consumo instanciarOtroConsumo(FilaConsumo filaConsumo) {
+    public Consumo instanciarOtroConsumo(FilaConsumo filaConsumo, Organizacion unaOrganizacion) {
         List<String> df = filaConsumo.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));

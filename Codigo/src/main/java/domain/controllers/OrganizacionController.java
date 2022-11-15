@@ -4,6 +4,7 @@ import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.EstadoSolicitud;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
+import domain.models.entities.obtieneMediciones.ImportarDeExcel;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.organizacion.Sector;
 import domain.models.entities.reporte.Reporte;
@@ -11,6 +12,7 @@ import domain.models.repos.RepositorioDeMiembros;
 import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.models.repos.RepositorioDeSolicitudes;
 import domain.services.dbManager.EntityManagerHelper;
+import org.apache.xmlbeans.impl.xb.xsdschema.ImportDocument;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -76,6 +78,31 @@ public class OrganizacionController {
         }
     }
 
+//    public Response registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
+////        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads");
+////        request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+////        final Part uploadedFile = request.raw().getPart("file");
+////        final Path path = Paths.get("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\'"+ request.params("id") +"'.xlsx");
+////        try (final InputStream in = uploadedFile.getInputStream()) {
+////            Files.copy(in, path);
+////        }
+//
+//        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads");
+//        request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
+//        final Part uploadedFile = request.raw().getPart("file");
+//        final Path path = Paths.get("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\'"+ request.params("id") +"'.xlsx");
+//        try (final InputStream in = uploadedFile.getInputStream()) {
+//            Files.copy(in, path);
+//        }
+//
+//
+////        ImportarDeExcel importarDeExcel = new ImportarDeExcel();
+////        Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
+////        importarDeExcel.importar("'"+ request.params("id") +"'.xlsx", organizacion);
+//        response.redirect("/organizaciones/" + request.params("id"));
+//        return response;
+//    }
+
     public Response registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads");
         request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
@@ -85,11 +112,15 @@ public class OrganizacionController {
             Files.copy(in, path);
         }
 
+        ImportarDeExcel importador = new ImportarDeExcel();
+        Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
+        importador.importar("'" + request.params("id") + "'.xlsx", organizacion);
+
         response.redirect("/organizaciones/" + request.params("id"));
         return response;
     }
 
-    public ModelAndView mostrarSolicitantes(spark.Request request, spark.Response response) {
+    public ModelAndView mostrarSolicitantes(Request request, Response response) {
         try {
             String idOrganizacion = request.params("id");
             List<SolicitudVinculacion> solicitudes = this.repositorioDeSolicitudes.buscarSolicitudesPendientesDeOrg(new Integer(idOrganizacion));
@@ -103,7 +134,7 @@ public class OrganizacionController {
 
     }
 
-    public Response actualizarMiembros(spark.Request request, spark.Response response) {
+    public Response actualizarMiembros(Request request, Response response) {
         String idmiembroNuevo=request.params("idmiembro");
         Miembro miembro=repositorioDeMiembros.buscar(new Integer(idmiembroNuevo));
         Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
@@ -112,7 +143,7 @@ public class OrganizacionController {
         return response;
     }
 
-    public ModelAndView mostrarHC(spark.Request request, Response response) throws IOException {
+    public ModelAndView mostrarHC(Request request, Response response) throws IOException {
         Organizacion organizacion = EntityManagerHelper
                 .getEntityManager()
                 .find(Organizacion.class, request.params("id"));

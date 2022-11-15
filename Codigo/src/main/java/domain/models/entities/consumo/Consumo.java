@@ -47,4 +47,16 @@ public abstract class Consumo {
     public double calcularHC(){
         return 1;
     };
+
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    public int getProximaAcreditacionConsumo() {
+        return proximaAcreditacionConsumo;
+    }
+
+    public TipoConsumo getTipoConsumo() {
+        return tipoConsumo;
+    }
 }
