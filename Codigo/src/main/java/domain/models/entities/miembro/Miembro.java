@@ -31,8 +31,7 @@ public class Miembro {
     @Column(name = "tipoDoc")
     private String tipoDeDocumento;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sector_id")
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Sector> trabajos;
 
     public List<Sector> getTrabajos() {

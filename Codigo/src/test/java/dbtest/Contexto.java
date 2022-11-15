@@ -37,21 +37,25 @@ public class Contexto {
         organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
         organizacion.setUsuario(usuarioOrg);
 
-        Sector rrhh = new Sector();
-        organizacion.agregarSectores(rrhh);
-
         Usuario usuarioAgSec = new Usuario("agsec", "agente", "agsec@gmail.com", "45062020", TipoUsuario.AGENTESECTORIAL);
         AgenteSectorial agenteSectorial = new AgenteSectorial("agente", usuarioAgSec);
+
+        Sector sector1 = new Sector("RR.HH");
+        Sector sector2 = new Sector("Finanzas");
+        sector1.setOrganizacion(organizacion);
+        sector2.setOrganizacion(organizacion);
 
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().persist(usuario);
         EntityManagerHelper.getEntityManager().persist(miembro);
         EntityManagerHelper.getEntityManager().persist(usuarioOrg);
         EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
-        EntityManagerHelper.getEntityManager().persist(rrhh);
+//        EntityManagerHelper.getEntityManager().persist(rrhh);
         EntityManagerHelper.getEntityManager().persist(organizacion);
         EntityManagerHelper.getEntityManager().persist(usuarioAgSec);
         EntityManagerHelper.getEntityManager().persist(agenteSectorial);
+        EntityManagerHelper.getEntityManager().persist(sector1);
+        EntityManagerHelper.getEntityManager().persist(sector2);
         EntityManagerHelper.commit();
 
         // ahora con un miembro para probar las fk
@@ -70,20 +74,22 @@ public class Contexto {
         EntityManagerHelper.getEntityManager().persist(organizacion);
         EntityManagerHelper.commit();
     }
+//
+//    @Test
+//    public void persistirOrg1(){
+//        Organizacion organizacion = new Organizacion();
+//        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
+//        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Educacion");
+//        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
+//        organizacion.setRazonSocial("UBA");
+//        Usuario usuarioOrg = new Usuario("orga", "password", "fasdf@sdfsa.com", "12345434", TipoUsuario.ORGANIZACION);
+//        organizacion.setUsuario(usuarioOrg);
+//        EntityManagerHelper.beginTransaction();
+//        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
+//        EntityManagerHelper.getEntityManager().persist(organizacion);
+//        EntityManagerHelper.getEntityManager().persist(usuarioOrg);
+//        EntityManagerHelper.commit();
+//    }
 
-    @Test
-    public void persistirOrg1(){
-        Organizacion organizacion = new Organizacion();
-        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
-        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Educacion");
-        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
-        organizacion.setRazonSocial("UBA");
-        Usuario usuarioOrg = new Usuario("orga", "password", "fasdf@sdfsa.com", "12345434", TipoUsuario.ORGANIZACION);
-        organizacion.setUsuario(usuarioOrg);
-        EntityManagerHelper.beginTransaction();
-        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
-        EntityManagerHelper.getEntityManager().persist(organizacion);
-        EntityManagerHelper.getEntityManager().persist(usuarioOrg);
-        EntityManagerHelper.commit();
-    }
+
 }

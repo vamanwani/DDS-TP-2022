@@ -14,12 +14,11 @@ public class SolicitudVinculacion {
     @Column(name = "id_solicitud")
     private int id;
 
-
     @ManyToOne
-    @JoinColumn(name = "miembro_miembro_id")
+    @JoinColumn(name = "miembro_id")
     private Miembro miembro;
     @ManyToOne
-    @JoinColumn(name = "organizacion_id_organizacion")
+    @JoinColumn(name = "organizacion_id")
     private Organizacion organizacion;
 
     @ManyToOne
@@ -69,6 +68,7 @@ public class SolicitudVinculacion {
     public String getMail(){return getMiembro().getMail();}
     public String getTelefono(){return getMiembro().getTelefono();}
     public String getNombre(){return getMiembro().getNombreYApellido();}
+
 
     public int getId() {
         return id;

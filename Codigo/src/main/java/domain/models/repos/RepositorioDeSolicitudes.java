@@ -23,14 +23,14 @@ public class RepositorioDeSolicitudes {
     public List<SolicitudVinculacion> buscarSolicitudesPendientesDeOrg(Integer idOrg) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id_organizacion = " + idOrg + " and estado_solicitud = 'PENDIENTE'")
+                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id = " + idOrg + " and estado_solicitud = 'PENDIENTE'")
                 .getResultList();
     }
 
     public List<SolicitudVinculacion> buscarSolicitudesDeOrg(Integer idOrg) {
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id_organizacion = " + idOrg)
+                .createQuery("from "+ SolicitudVinculacion.class.getName() +" where organizacion_id = " + idOrg)
                 .getResultList();
     }
 }

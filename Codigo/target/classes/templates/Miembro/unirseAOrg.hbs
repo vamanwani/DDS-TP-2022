@@ -54,6 +54,7 @@
                 <th>Razon social</th>
                 <th>Tipo</th>
                 <th>Clasificacion</th>
+                <th>Sector</th>
             </tr>
             {{#each organizaciones}}
                 <tr style="margin-top: 15px"  class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
@@ -61,6 +62,14 @@
                   <th>{{razon}}</th>
                   <th>{{tipo}}</th>
                   <th>{{clasificacion}}</th>
+                  <th>
+                   <select class="form-select" aria-label="Default select example" name= "sector_id">
+                        <option selected value="">Sector</option>
+                        {{#each sectores}}
+                        <option value={{id}}>{{nombre}}</option>
+                        {{/each}}
+                   </select>
+                  </th>
                   <td><button type="submit" class="btn btn-primary">Solicitar unirse</button></td>
                   </form>
                 </tr>

@@ -53,8 +53,9 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Teléfono</th>
-                    <th>BOTON ACEPTAR</th>
-                    <th>BOTON RECHAZAR</th>
+                    <th>Sector</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,6 +65,7 @@
                     <td>{{nombre}}</td>
                     <td>{{mail}}</td>
                     <td>{{telefono}}</td>
+                    <td>{{sector.nombre}}</td>
                     <form method = "post" action = "aceptar_vinculacion/{{id}}/aceptar">
                     <td> <button type="submit" class="btn btn-success btn-lg">Aceptar</button></td>
                     </form>

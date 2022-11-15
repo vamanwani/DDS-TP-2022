@@ -14,8 +14,7 @@ public class Sector {
     @Column(name = "id_sector")
     private int id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "miembro_id")
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Miembro> miembros;
 
     @Column(name = "nombre")
@@ -75,4 +74,7 @@ public class Sector {
         return this.calcularHCSector() / miembros.size();
     }
 
+    public int getId() {
+        return id;
+    }
 }

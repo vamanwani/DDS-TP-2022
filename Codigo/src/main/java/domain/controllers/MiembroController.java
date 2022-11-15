@@ -14,6 +14,7 @@ import spark.Request;
 import spark.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,11 +44,23 @@ public class MiembroController {
             List<Organizacion> organizaciones = this.repo.mostrarOrganizaciones();
             Miembro miembro = this.repo.buscar(Integer.valueOf(request.params("id")));
             List<Sector> sectores = miembro.getTrabajos();
-            List<Organizacion> orgsDelMiembro = (List<Organizacion>) sectores.stream().map(s -> s.getOrganizacion());
-            organizaciones.stream().filter(o -> !orgsDelMiembro.contains(o));
-            return new ModelAndView(new HashMap<String, Object>(){{
-                put("organizaciones", organizaciones);
-            }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
+            if(sectores.isEmpty()){
+                return new ModelAndView(new HashMap<String, Object>(){{
+                    put("organizaciones", organizaciones);
+                }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
+            } else {
+                List<Organizacion> organizacionesDisponibles = new ArrayList<>();
+                for(Organizacion org : organizaciones){
+                    for (Sector sector : sectores) {
+                        if (!org.getSectores().contains(sector)) {
+                            organizacionesDisponibles.add(org);
+                        }
+                    }
+                }
+                return new ModelAndView(new HashMap<String, Object>(){{
+                    put("organizaciones", organizacionesDisponibles);
+                }}, "/Miembro/unirseAOrg.hbs");
+            }
         } catch (Exception ex){
             return new ModelAndView (null, "/Miembro/unirseAOrg.hbs");
         }
@@ -55,11 +68,10 @@ public class MiembroController {
 
     public Response vincularAOrg(Request request, Response response){
         Miembro miembro = this.repo.buscar(Integer.valueOf(request.params("id")));
-        Organizacion organizacionAVincular = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
-        Sector sectorAVincular = this.respositorioDeSectores.buscar(request.params("id_sector"));
+        Sector sectorAVincular = this.respositorioDeSectores.buscar(Integer.parseInt(request.queryParams("sector_id")));
         SolicitudVinculacion solicitudVinculacion = miembro.generarSolicitud(sectorAVincular);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
-        response.redirect("" ); // TODO arreglar path
+        response.redirect("/miembro/" + miembro.getId() + "/organizaciones" ); // TODO arreglar path
         return response;
     }
 

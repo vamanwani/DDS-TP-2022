@@ -138,12 +138,14 @@ public class OrganizacionController {
 
     public Response aceptarSolicitud(Request request, Response response){
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
+        System.out.println(solicitudVinculacion);
         Miembro miembro = solicitudVinculacion.getMiembro();
         miembro.agregarTrabajo(solicitudVinculacion.getSector());
         Sector sector = solicitudVinculacion.getSector();
         sector.agregarMiembro(miembro);
         solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
+//        this.repositorioDeMiembros.guardar(miembro);
         response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");
         return response;
     }
