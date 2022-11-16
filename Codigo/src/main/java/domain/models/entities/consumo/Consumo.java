@@ -10,7 +10,7 @@ public abstract class Consumo {
     @Id
     @GeneratedValue
     @Column(name = "consumo_id")
-    private Long id;
+    private int id;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "actividad_id")

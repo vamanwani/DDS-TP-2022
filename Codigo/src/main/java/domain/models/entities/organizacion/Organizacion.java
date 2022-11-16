@@ -66,7 +66,7 @@ public class Organizacion {
     private Usuario usuario;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "consumo_id")
+    @JoinColumn(name = "organizacion_id")
     private List<Consumo> consumos;
 
     @OneToMany(fetch = FetchType.LAZY)
