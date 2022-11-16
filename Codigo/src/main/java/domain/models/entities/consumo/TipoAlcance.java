@@ -1,0 +1,5 @@
+package domain.models.entities.consumo;
+
+public enum TipoAlcance {
+    EMISIONESDIRECTAS,EMISIONESINDIRECTASELECTRICIDAD,EMISIONESINDIRECTASNOCONTROLADAS
+}
