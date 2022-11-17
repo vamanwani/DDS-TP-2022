@@ -1,5 +1,6 @@
 package domain.models.repos;
 
+import domain.models.entities.consumo.Consumo;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.organizacion.Organizacion;
 import domain.services.dbManager.EntityManagerHelper;
@@ -11,6 +12,12 @@ public class RepositorioDeOrganizaciones {
         return EntityManagerHelper
                 .getEntityManager()
                 .createQuery("select miembro_miembro_id " + "from solicitud_vinculacion where organizacion_id_organizacion =" + idOrganizacion)
+                .getResultList();
+    }
+    public List<Consumo> buscarTodosLosConsumos(int idOrganizacion){
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from "+ Consumo.class.getName() +" where organizacion_id = "+ idOrganizacion)
                 .getResultList();
     }
 

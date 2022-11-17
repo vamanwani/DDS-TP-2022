@@ -4,6 +4,7 @@ import domain.models.entities.consumo.Consumo;
 import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.consumo.TipoPeriodicidad;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ public class CalculadoraHCOrganizacion {
     //hc de lo filtrado;
 
     public double calcularHC(List<Consumo> consumos, PeriodoDeImputacion periodoACalcular) {
-        List<Consumo> auxiliar = null;
+        List<Consumo> auxiliar = new ArrayList<>();
 
         if (periodoACalcular.getPeriodicidad() == TipoPeriodicidad.ANUAL) {
             auxiliar = consumos.stream().filter(consumo -> consumo.getPeriodicidad().getAnio() == periodoACalcular.getAnio()).collect(Collectors.toList());

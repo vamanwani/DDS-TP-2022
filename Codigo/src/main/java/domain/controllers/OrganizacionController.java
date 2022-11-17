@@ -1,5 +1,7 @@
 package domain.controllers;
 
+import domain.models.entities.calculoHC.CalculadoraHCOrganizacion;
+import domain.models.entities.consumo.Consumo;
 import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.EstadoSolicitud;
 import domain.models.entities.miembro.Miembro;
@@ -104,10 +106,10 @@ public class OrganizacionController {
 //    }
 
     public Response registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
-        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads");
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/src/main/resources/uploads");
         request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
         final Part uploadedFile = request.raw().getPart("file");
-        final Path path = Paths.get("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\'"+ request.params("id") +"'.xlsx");
+        final Path path = Paths.get("src/main/resources/uploads'"+ request.params("id") +"'.xlsx");
         try (final InputStream in = uploadedFile.getInputStream()) {
             Files.copy(in, path);
         }
@@ -146,8 +148,8 @@ public class OrganizacionController {
     public ModelAndView mostrarHC(Request request, Response response) throws IOException {
         Organizacion organizacion = EntityManagerHelper
                 .getEntityManager()
-                .find(Organizacion.class, request.params("id"));
-        PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(request.queryParams("periodo_imputacion"));
+                .find(Organizacion.class, new Integer(request.params("id")));
+
         return new ModelAndView(null, "/Organizacion/hcOrganizacion.hbs");
     }
 
@@ -169,7 +171,7 @@ public class OrganizacionController {
 
     public Response aceptarSolicitud(Request request, Response response){
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
-        System.out.println(solicitudVinculacion);
+        //System.out.println("prueba" + solicitudVinculacion);
         Miembro miembro = solicitudVinculacion.getMiembro();
         miembro.agregarTrabajo(solicitudVinculacion.getSector());
         Sector sector = solicitudVinculacion.getSector();
@@ -187,6 +189,22 @@ public class OrganizacionController {
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
         response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");
         return response;
+    }
+
+    public ModelAndView calcularHC(Request request, Response response){
+        String mes = request.queryParams("mes_periodo");
+        String anio = request.queryParams("anio_periodo");
+        String tipoPeriodicidad = request.queryParams("tipo_periodicidad");
+        PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(mes),Integer.valueOf(anio),tipoPeriodicidad);
+        CalculadoraHCOrganizacion calculadoraParaOrganizacion = new CalculadoraHCOrganizacion();
+        List<Consumo> consumos = this.repo.buscarTodosLosConsumos(Integer.valueOf(request.params("id")));
+        calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion);
+        //response.redirect(String.valueOf(calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion)));
+
+        /*return new ModelAndView(new HashMap<String, Object>(){{
+            put("hcOrganizacion", String.valueOf(calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion)));
+        }}, "/Organizacion/hcOrganizacion.hbs"); //TODO MOSTRAR LA PAGINA DE HC CON EL VALOR*/
+        return null;  
     }
 
 }

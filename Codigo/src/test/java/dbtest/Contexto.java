@@ -74,6 +74,31 @@ public class Contexto {
         EntityManagerHelper.getEntityManager().persist(organizacion);
         EntityManagerHelper.commit();
     }
+
+    @Test
+    public void persistirOrgConSector(){
+        Organizacion organizacion = new Organizacion();
+        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Empresa);
+        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Organizacion con Sector");
+        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
+        organizacion.setRazonSocial("razonSocial");
+        Sector unSector = new Sector("sector cualquiera");
+        Sector segundoSector = new Sector("sector cualquiera segundo");
+        Sector tercerSector = new Sector("sector cualquiera tercero");
+        unSector.setOrganizacion(organizacion);
+        segundoSector.setOrganizacion(organizacion);
+        tercerSector.setOrganizacion(organizacion);
+        organizacion.agregarSectores(unSector);
+        organizacion.agregarSectores(segundoSector);
+        organizacion.agregarSectores(tercerSector);
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
+        EntityManagerHelper.getEntityManager().persist(organizacion);
+        EntityManagerHelper.getEntityManager().persist(unSector);
+        EntityManagerHelper.getEntityManager().persist(segundoSector);
+        EntityManagerHelper.getEntityManager().persist(tercerSector);
+        EntityManagerHelper.commit();
+    }
 //
 //    @Test
 //    public void persistirOrg1(){

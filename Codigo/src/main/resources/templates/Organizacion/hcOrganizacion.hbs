@@ -45,6 +45,31 @@
     </header>
     <main style="background-color: #873ab9;">
         <h1>VALOR DE SU HUELLA DE CARBONO</h1>
+        <form method = "post" action = "hc">
+                <select class="form-select" aria-label="Default select example" name= "mes_periodo">
+                                                         <option selected value="">Mes</option>
+                                                         <option value="1">Enero</option>
+                                                         <option value="2">Febrero</option>
+                                                         <option value="3">Marzo</option>
+                                                         <option value="4">Abril</option>
+                                                         <option value="5">Mayo</option>
+                                                         <option value="6">Junio</option>
+                                                         <option value="7">Julio</option>
+                                                         <option value="8">Agosto</option>
+                                                         <option value="9">Septiembre</option>
+                                                         <option value="10">Octubre</option>
+                                                         <option value="11">Noviembre</option>
+                                                         <option value="12">Diciembre</option>
+                </select>
+                 <input class="form-control" type="text" placeholder="Año" name = "anio_periodo">
+                 <select class="form-select" aria-label="Default select example" name= "tipo_periodicidad">
+                                         <option selected value="">Tipo Periodicidad</option>
+                                         <option value="ANUAL">Anual</option>
+                                         <option value="MENSUAL">Mensual</option>
+                 </select>
+                 <button type="submit" class="btn btn-light btn-lg">CALCULAR HC</button>
+
+        </form>
         <h1>{{hcOrganizacion}}</h1>
     </main>
     <footer style="background-color: black;">

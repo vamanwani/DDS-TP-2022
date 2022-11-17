@@ -37,6 +37,17 @@ public class PeriodoDeImputacion {
         }
     }
 
+    public PeriodoDeImputacion(int mes, int anio, String periodicidad){
+        this.mes = mes;
+        this.anio = anio;
+        if (periodicidad.contains("ANUAL"))
+        {
+            setPeriodicidad(TipoPeriodicidad.ANUAL);
+        }else {
+            setPeriodicidad(TipoPeriodicidad.MENSUAL);
+        }
+    }
+
     public void setPeriodicidad(TipoPeriodicidad periodicidad) {
         this.periodicidad = periodicidad;
     }

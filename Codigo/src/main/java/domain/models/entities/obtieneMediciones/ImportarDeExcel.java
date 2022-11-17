@@ -16,8 +16,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 public class ImportarDeExcel {
     public void importar(String nombreExcel, Organizacion unaOrganizacion) throws IOException {
-            File file = new File("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\" + nombreExcel);   //creating a new file instance
-            FileInputStream fis = new FileInputStream(file);   //obtaining bytes from the file
+            File file = new File("src/main/resources/uploads" + nombreExcel); //TODO RUTA DE VIG
+        // creating a new file instance
+        //File file = new File("C:\\Users\\Adrian\\Documents\\Facultad\\Diseño\\9-11\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\" + nombreExcel);//TODO RUTA DE ADRIAN
+        //C:\Users\Adrian\Documents\Facultad\Diseño\9-11\2022-ma-ma-mama-grupo-05\Codigo
+        FileInputStream fis = new FileInputStream(file);   //obtaining bytes from the file
 //creating Workbook instance that refers to .xlsx file
             XSSFWorkbook wb = new XSSFWorkbook(fis);
             XSSFSheet sheet = wb.getSheetAt(0);     //creating a Sheet object to retrieve object
