@@ -97,6 +97,18 @@
                         <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_calle" placeholder="Ingrese calle...">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_altura" placeholder="Ingrese altura...">
+                            <select id="valueMedioTransporte" class="form-select tipoTransporte" aria-label="Default select example" name= "localidad">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each localidades}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                            <select class="form-select" aria-label="Default select example" name= "provincia">
+                                <option selected value="">PROVINCIA</option>
+                                {{#each provincias}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                     <div class="ptoDestino">

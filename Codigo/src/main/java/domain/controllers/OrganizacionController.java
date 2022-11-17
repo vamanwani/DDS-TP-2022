@@ -80,31 +80,6 @@ public class OrganizacionController {
         }
     }
 
-//    public Response registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
-////        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads");
-////        request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-////        final Part uploadedFile = request.raw().getPart("file");
-////        final Path path = Paths.get("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\'"+ request.params("id") +"'.xlsx");
-////        try (final InputStream in = uploadedFile.getInputStream()) {
-////            Files.copy(in, path);
-////        }
-//
-//        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads");
-//        request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
-//        final Part uploadedFile = request.raw().getPart("file");
-//        final Path path = Paths.get("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\'"+ request.params("id") +"'.xlsx");
-//        try (final InputStream in = uploadedFile.getInputStream()) {
-//            Files.copy(in, path);
-//        }
-//
-//
-////        ImportarDeExcel importarDeExcel = new ImportarDeExcel();
-////        Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
-////        importarDeExcel.importar("'"+ request.params("id") +"'.xlsx", organizacion);
-//        response.redirect("/organizaciones/" + request.params("id"));
-//        return response;
-//    }
-
     public Response registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/src/main/resources/uploads");
         request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
@@ -191,20 +166,28 @@ public class OrganizacionController {
         return response;
     }
 
-    public ModelAndView calcularHC(Request request, Response response){
+    public ModelAndView calcularHC(Request request, Response response) throws IOException {
+        Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
         String mes = request.queryParams("mes_periodo");
         String anio = request.queryParams("anio_periodo");
         String tipoPeriodicidad = request.queryParams("tipo_periodicidad");
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(mes),Integer.valueOf(anio),tipoPeriodicidad);
         CalculadoraHCOrganizacion calculadoraParaOrganizacion = new CalculadoraHCOrganizacion();
         List<Consumo> consumos = this.repo.buscarTodosLosConsumos(Integer.valueOf(request.params("id")));
-        calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion);
+        Double hcOrg = calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion);
+        Double hcDeMiembrosDeOrg = organizacion.hcMiembrosOrganizacion();
+        Double hcTotal = hcOrg + hcDeMiembrosDeOrg;
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("hc", hcTotal);
+        }}, "/Organizacion/hcOrganizacion.hbs"); // CORREGIR PLANTILLA QUE CORRESPONDA
+
         //response.redirect(String.valueOf(calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion)));
 
         /*return new ModelAndView(new HashMap<String, Object>(){{
             put("hcOrganizacion", String.valueOf(calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion)));
         }}, "/Organizacion/hcOrganizacion.hbs"); //TODO MOSTRAR LA PAGINA DE HC CON EL VALOR*/
-        return null;  
+//        return null;
     }
 
 }

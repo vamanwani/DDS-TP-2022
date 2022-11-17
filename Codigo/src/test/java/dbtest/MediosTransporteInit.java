@@ -1,6 +1,7 @@
 package dbtest;
 
 import domain.models.entities.sectorTerritorial.Localidad;
+import domain.models.entities.sectorTerritorial.Provincia;
 import domain.models.entities.transporte.*;
 import domain.models.entities.ubicacion.Parada;
 import domain.models.entities.ubicacion.Ubicacion;
@@ -59,8 +60,9 @@ public class MediosTransporteInit {
 
     @Test
     public void instanciarLineaD() throws IOException {
-        Localidad localidadInicial = new Localidad("San Nicolas");
-        Localidad localidadFinal = new Localidad("Belgrano");
+        Provincia provincia = new Provincia("Buenos Aires");
+        Localidad localidadInicial = new Localidad("San Nicolas", provincia);
+        Localidad localidadFinal = new Localidad("Belgrano", provincia);
         Ubicacion ubicacionInicial = new Ubicacion("San Martin", 1, localidadInicial);
         Ubicacion ubicacionFinal = new Ubicacion("Avenida Cabildo", 2800, localidadFinal);
         Parada paradaInicial = new Parada(ubicacionInicial);

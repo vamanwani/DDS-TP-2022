@@ -2,6 +2,8 @@ package domain.controllers;
 
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
+import domain.models.entities.sectorTerritorial.Localidad;
+import domain.models.entities.sectorTerritorial.Provincia;
 import domain.models.entities.transporte.*;
 import domain.models.entities.ubicacion.Ubicacion;
 import domain.models.repos.*;
@@ -25,6 +27,7 @@ public class TrayectoController {
     RepositorioDeTramos repositorioDeTramos = new RepositorioDeTramos();
     RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
     RepositoriosDeTransporte repositoriosDeTransporte = new RepositoriosDeTransporte();
+    RepositorioDeLocalidades repositorioDeLocalidades = new RepositorioDeLocalidades();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
         try{
@@ -58,10 +61,14 @@ public class TrayectoController {
 
     public ModelAndView agregarTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        List<Provincia> provincias = this.repositorioDeLocalidades.retornarProvincias();
+        List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
         return new ModelAndView(new HashMap<String,Object>(){{
             put("miembro_id", request.params("id"));
             put("trayecto_id", trayecto.getId());
             put("tramos", trayecto.getTramos());
+            put("provincias", provincias);
+            put("localidades", localidades);
         }}, "/Miembro/agregarTrayecto.hbs");
     }
 

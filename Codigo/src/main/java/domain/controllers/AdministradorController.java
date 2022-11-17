@@ -9,19 +9,23 @@ import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.models.entities.sectorTerritorial.Localidad;
 import domain.models.entities.ubicacion.Ubicacion;
 import domain.models.repos.RepositorioDeAgentesSectoriales;
+import domain.models.repos.RepositorioDeLocalidades;
 import domain.models.repos.RepositorioDeOrganizaciones;
 import spark.Request;
 import spark.Response;
 
 public class AdministradorController {
     RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+    RepositorioDeLocalidades repositorioDeLocalidades = new RepositorioDeLocalidades();
     RepositorioDeAgentesSectoriales repositorioDeAgentesSectoriales = new RepositorioDeAgentesSectoriales();
 
     public Response generar_org(Request request, Response response) {
         TipoDeOrganizacion tipoDeOrganizacion = TipoDeOrganizacion.valueOf(request.queryParams("tipo_org"));
         ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg(request.queryParams("clasificacion"));
         String razonSocial = request.queryParams("razon_social");
-        Ubicacion ubicacion = new Ubicacion(request.queryParams("calle"), Integer.valueOf(request.queryParams("altura")), new Localidad(request.queryParams("localidad")));
+        String localidadId = request.queryParams("localidad_id");
+        Localidad localidad = this.repositorioDeLocalidades.buscar(Integer.valueOf(localidadId));
+        Ubicacion ubicacion = new Ubicacion(request.queryParams("calle"), Integer.valueOf(request.queryParams("altura")), localidad);
         Usuario usuario = new Usuario(request.queryParams("nombre_usuario"),
                 request.queryParams("contrasenia"), request.queryParams("email"),
                 request.queryParams("telfono"), TipoUsuario.ORGANIZACION);

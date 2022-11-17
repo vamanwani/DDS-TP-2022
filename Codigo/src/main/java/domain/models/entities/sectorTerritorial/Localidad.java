@@ -13,11 +13,16 @@ public class Localidad {
     @Column(name = "nombre")
     private String nombre;
 
+    @OneToMany
+    @JoinColumn(name = "provincia_id")
+    private Provincia provincia;
+
     public Localidad() {
     }
 
-    public Localidad(String nombre) {
+    public Localidad(String nombre, Provincia provincia) {
         this.nombre = nombre;
+        this.provincia = provincia;
     }
 
     public Integer getId() {
