@@ -7,9 +7,18 @@ import domain.models.entities.organizacion.ClasificaciónDeOrg;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.organizacion.Sector;
 import domain.models.entities.organizacion.TipoDeOrganizacion;
+import domain.models.entities.recorridos.Tramo;
+import domain.models.entities.recorridos.Trayecto;
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
+import domain.models.entities.sectorTerritorial.Localidad;
+import domain.models.entities.transporte.Transporte;
+import domain.models.entities.ubicacion.Ubicacion;
+import domain.models.repos.RepositorioDeMiembros;
+import domain.models.repos.RepositoriosDeTransporte;
 import domain.services.dbManager.EntityManagerHelper;
 import org.junit.Test;
+
+import java.time.LocalDate;
 
 import static domain.services.dbManager.EntityManagerHelper.*;
 import static org.junit.Assert.assertNotNull;
@@ -116,5 +125,27 @@ public class Contexto {
 //        EntityManagerHelper.commit();
 //    }
 
+
+//    @Test
+//    public void persistirTrayecto(){
+//        RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
+//        RepositoriosDeTransporte repositoriosDeTransporte = new RepositoriosDeTransporte();
+//        Miembro miembro = repositorioDeMiembros.buscar(1);
+//        Transporte transporte = repositoriosDeTransporte.buscarAnalogico("PIE");
+//        Localidad localidad = new Localidad("CABA", null);
+//        Ubicacion ubicacionIniical = new Ubicacion("Medrano", 951, localidad);
+//        Ubicacion ubicacionFin = new Ubicacion("Mozart", 951, localidad);
+//        Tramo tramo1 = new Tramo(transporte, ubicacionFin, ubicacionIniical);
+//        Trayecto trayecto = new Trayecto(tramo1);
+//        trayecto.setMiembro(miembro);
+//        EntityManagerHelper.beginTransaction();
+//        EntityManagerHelper.persist(localidad);
+//        EntityManagerHelper.persist(ubicacionFin);
+//        EntityManagerHelper.persist(ubicacionIniical);
+//        EntityManagerHelper.persist(tramo1);
+//        EntityManagerHelper.persist(trayecto);
+//        EntityManagerHelper.persist(miembro);
+//        EntityManagerHelper.commit();
+//    }
 
 }

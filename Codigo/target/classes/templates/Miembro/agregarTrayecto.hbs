@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,13 +98,13 @@
                         <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_calle" placeholder="Ingrese calle...">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_altura" placeholder="Ingrese altura...">
-                            <select id="valueMedioTransporte" class="form-select tipoTransporte" aria-label="Default select example" name= "localidad">
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
                                 <option selected value="">LOCALIDAD</option>
                                 {{#each localidades}}
                                     <option value={{id}}>{{nombre}}</option>
                                 {{/each}}
                             </select>
-                            <select class="form-select" aria-label="Default select example" name= "provincia">
+                            <select class="form-select" aria-label="Default select example" name= "provincia_inicio">
                                 <option selected value="">PROVINCIA</option>
                                 {{#each provincias}}
                                     <option value={{id}}>{{nombre}}</option>
@@ -116,7 +117,18 @@
                         <div style="height: 40px; background-color: rgb(42, 219, 66);">
                             <input type="text" class="form-control" id="valuePuntoDestino" name = "punto_fin_calle" placeholder="Ingrese calle...">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_fin_altura" placeholder="Ingrese altura...">
-
+                            <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each localidades}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                            <select class="form-select" aria-label="Default select example" name= "provincia_fin">
+                                <option selected value="">PROVINCIA</option>
+                                {{#each provincias}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                     <div class="medioTransporte">
@@ -173,9 +185,7 @@
     <!-- JavaScript Bundle with Popper -->
     <script>
           let tiposTransporte = document.querySelector(".tipoTransporte")
-
           tiposTransporte.addEventListener("change", cambiarTipoTransporte)
-
           function cambiarTipoTransporte(e){
             e.preventDefault()
             let tipo = this.value
@@ -189,7 +199,6 @@
                     <option value="AUTO">Auto</option>
                     <option value="CAMIONETA">Camioneta</option>
                 </select>
-
                 <select id="valueCombustible" class="form-select" aria-label="Default select example" name ="tipo_combustible">
                     <option selected value="">Tipo Combustible</option>
                     <option value="GNC">GNC</option>
@@ -197,7 +206,6 @@
                     <option value="Electrico">Eléctrico</option>
                     <option value="Gasoil">Gasoil</option>
                 </select>
-
                 `
                 break;
               }
@@ -237,11 +245,9 @@
             document.querySelector("#contenidoTransporteElegido").innerHTML = html;
             document.querySelector(".scriptPublico").innerHTML = `
                   let tipoPublico = document.querySelector(".tipoPublico")
-
                   tipoPublico.addEventListener("change", cambiarTipoPubico)
             `
           }
-
           function cambiarTipoPubico(e){
             e.preventDefault()
             console.log("entro")
@@ -252,7 +258,6 @@
                 html+= `
                 <select name = "linea" class="form-select" aria-label="Default select example">
                   <option value="" selected>Linea (LF)</option>
-
                 </select>
                 `
                 break;
@@ -261,7 +266,6 @@
                 html+= `
                 <select name = "linea" class="form-select" aria-label="Default select example">
                   <option value="" selected>Linea (LS)</option>
-
                 </select>
                 `
                 break;
@@ -270,7 +274,6 @@
                 html+= `
                 <select name = "linea" class="form-select" aria-label="Default select example">
                   <option value="" selected>Linea (C)</option>
-
                 </select>
                 `
                 break;

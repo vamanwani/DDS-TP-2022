@@ -174,20 +174,18 @@ public class OrganizacionController {
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(mes),Integer.valueOf(anio),tipoPeriodicidad);
         CalculadoraHCOrganizacion calculadoraParaOrganizacion = new CalculadoraHCOrganizacion();
         List<Consumo> consumos = this.repo.buscarTodosLosConsumos(Integer.valueOf(request.params("id")));
+
         Double hcOrg = calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion);
         Double hcDeMiembrosDeOrg = organizacion.hcMiembrosOrganizacion();
         Double hcTotal = hcOrg + hcDeMiembrosDeOrg;
 
-        return new ModelAndView(new HashMap<String, Object>(){{
-            put("hc", hcTotal);
-        }}, "/Organizacion/hcOrganizacion.hbs"); // CORREGIR PLANTILLA QUE CORRESPONDA
+        response.redirect(String.valueOf(hcTotal));
+        return null;
 
-        //response.redirect(String.valueOf(calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion)));
-
-        /*return new ModelAndView(new HashMap<String, Object>(){{
-            put("hcOrganizacion", String.valueOf(calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion)));
-        }}, "/Organizacion/hcOrganizacion.hbs"); //TODO MOSTRAR LA PAGINA DE HC CON EL VALOR*/
-//        return null;
+//        return new ModelAndView(new HashMap<String, Object>(){{
+//            put("hc", hcTotal);
+//        }}, "/Organizacion/hcOrganizacion.hbs"); // CORREGIR PLANTILLA QUE CORRESPONDA
+//
     }
 
 }

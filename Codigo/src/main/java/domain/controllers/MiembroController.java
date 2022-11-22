@@ -46,6 +46,7 @@ public class MiembroController {
             List<Sector> sectores = miembro.getTrabajos();
             if(sectores.isEmpty()){
                 return new ModelAndView(new HashMap<String, Object>(){{
+                    put("miembro", miembro);
                     put("organizaciones", organizaciones);
                 }}, "/Miembro/unirseAOrg.hbs"); // MODIFICAR ESTO
             } else {
@@ -58,6 +59,7 @@ public class MiembroController {
                     }
                 }
                 return new ModelAndView(new HashMap<String, Object>(){{
+                    put("miembro", miembro);
                     put("organizaciones", organizacionesDisponibles);
                 }}, "/Miembro/unirseAOrg.hbs");
             }
@@ -79,7 +81,10 @@ public class MiembroController {
         Miembro miembro = EntityManagerHelper
                 .getEntityManager()
                 .find(Miembro.class, Long.valueOf(request.params("id")));
-        return new ModelAndView(null, "/Miembro/hcMiembro.hbs");
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("hcMiembro", miembro.calcularHCMiembro());
+            put("miembro", miembro);
+        }}, "/Miembro/hcMiembro.hbs");
     }
 
     public ModelAndView mostrarReportes(Request request, Response response){

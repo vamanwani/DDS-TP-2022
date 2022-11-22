@@ -1,5 +1,6 @@
 package domain.controllers;
 
+import domain.models.entities.miembro.Miembro;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 import domain.models.entities.sectorTerritorial.Localidad;
@@ -101,9 +102,13 @@ public class TrayectoController {
 
     public Response crearTramo(Request request, Response response) throws IOException {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Tramo tramo = new Tramo();
+
         Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
         Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
+//        Localidad localidadInicio = repositorioDeLocalidades.buscar
+//        Localidad localidadFin TODO
         Integer transporteN;
         String medio_transporte= request.queryParams("medio_transporte");
         if(medio_transporte.equals("particular")){

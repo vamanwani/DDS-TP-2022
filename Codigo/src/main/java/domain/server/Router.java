@@ -70,7 +70,7 @@ public class Router {
             //Spark.before("/*", AuthMiddleware::verificarSesion);
             Spark.get("", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA
-            Spark.get("/hc", miembroController::mostrarHC);
+            Spark.get("/hc", miembroController::mostrarHC, engine);
             Spark.post("/organizaciones/:id_organizacion/unirse", miembroController::vincularAOrg);
 
 

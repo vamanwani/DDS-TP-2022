@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 //import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
 @Entity
-@Table(name = "periodo_imputacion")
+@Table(name = "periodoDeImputacion")
 public class PeriodoDeImputacion {
     @Id
     @GeneratedValue

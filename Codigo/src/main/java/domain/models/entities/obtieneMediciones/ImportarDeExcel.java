@@ -3,6 +3,8 @@ package domain.models.entities.obtieneMediciones;
 import domain.models.entities.consumo.*;
 import domain.models.entities.consumo.*;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.repos.RepositorioDeConsumos;
+import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.services.dbManager.EntityManagerHelper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -15,6 +17,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 public class ImportarDeExcel {
+
+    RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
+    RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+
     public void importar(String nombreExcel, Organizacion unaOrganizacion) throws IOException {
             File file = new File("src/main/resources/uploads" + nombreExcel); //TODO RUTA DE VIG
         // creating a new file instance
@@ -107,14 +113,13 @@ public class ImportarDeExcel {
             } else {
                 consumo = instanciarOtroConsumo(listaDeFilaConsumo.get(i), organizacion);
             }
+
             organizacion.agregarConsumo(consumo);
-            EntityManagerHelper.beginTransaction();
-            EntityManagerHelper.persist(organizacion);
-            EntityManagerHelper.persist(consumo.getActividad());
-            EntityManagerHelper.persist(consumo.getTipoConsumo());
-            EntityManagerHelper.persist(consumo.getPeriodicidad());
-            EntityManagerHelper.persist(consumo);
-            EntityManagerHelper.commit();
+            this.repositorioDeOrganizaciones.guardar(organizacion);
+            this.repositorioDeConsumos.guardarSiNoExisteTipoConsumo(consumo.getTipoConsumo());
+            this.repositorioDeConsumos.guardarSiNoExisteActividad(consumo.getActividad());
+            this.repositorioDeConsumos.guardarSiNoExistePeriodicidad(consumo.getPeriodicidad());
+            this.repositorioDeConsumos.guardar(consumo);
         }
     }
 
@@ -122,8 +127,10 @@ public class ImportarDeExcel {
     public Consumo instaciarConsumoLogistica(FilaConsumo categoria, FilaConsumo medio, FilaConsumo distancia, FilaConsumo peso, Organizacion unaOrganizacion) {
         List<String> df = categoria.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
+
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
+
         Consumo consumoDeOrganizacion = new ConsumoLogistica(actividadConsumo, periodoDeImputacion, tipoConsumo, Integer.parseInt(peso.getDatosString().get(2)),
                 Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2));
         return consumoDeOrganizacion;
@@ -135,6 +142,7 @@ public class ImportarDeExcel {
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
+
         Consumo consumoDeOrganizacion = new OtroConsumo(actividadConsumo, periodoDeImputacion, tipoConsumo, Double.parseDouble(df.get(2)));
         return consumoDeOrganizacion;
     }

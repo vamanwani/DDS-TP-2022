@@ -7,7 +7,7 @@ public class RepositorioDeUbicaciones {
     public Ubicacion buscar(String calle, int altura){
         return (Ubicacion) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("FROM " + Ubicacion.class.getName() + " WHERE calle = "+calle+" AND altura = " + altura)
+                .createQuery("FROM " + Ubicacion.class.getName() + " WHERE calle = '"+calle+"' AND altura = " + altura)
                 .getSingleResult();
     }
 

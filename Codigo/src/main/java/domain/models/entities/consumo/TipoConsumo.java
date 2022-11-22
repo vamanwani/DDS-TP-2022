@@ -4,7 +4,7 @@ package domain.models.entities.consumo;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tipo_consumo")
+@Table(name = "tipoConsumo")
 public class TipoConsumo implements AsignableFE{
     @Id
     @GeneratedValue

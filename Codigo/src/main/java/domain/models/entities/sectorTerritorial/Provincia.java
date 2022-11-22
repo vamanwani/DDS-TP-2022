@@ -10,7 +10,7 @@ public class Provincia {
 
     @Id
     @GeneratedValue
-    @Column(name = "provincia_id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "nombre")
@@ -34,5 +34,13 @@ public class Provincia {
 
     public void setLocalidades(List<Localidad> localidades) {
         this.localidades = localidades;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 }

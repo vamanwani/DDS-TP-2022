@@ -32,16 +32,18 @@ public class Tramo {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
-    private List<Miembro> miembrosMismoTransporte;
+    private List<Miembro> miembrosMismoTransporte; //TODO
 
     public Tramo() {
+        this.miembrosMismoTransporte = new ArrayList<>();
+
     }
 
     public Tramo(Transporte medioDeTransporte, Ubicacion puntoFin, Ubicacion puntoInicio) {
         this.medioDeTransporte = medioDeTransporte;
         this.puntoFin = puntoFin;
         this.puntoInicio = puntoInicio;
-        this.miembrosMismoTransporte = new ArrayList<Miembro>();
+        this.miembrosMismoTransporte = new ArrayList<>();
     }
 
     public void agregarMiembroAlTramo(Miembro miembro){
@@ -92,7 +94,5 @@ public class Tramo {
     }
 
     public String getMedioTransporteNombre(){return this.medioDeTransporte.getNombre();}
-
-
 
 }
