@@ -82,7 +82,7 @@ public class MiembroController {
                 .getEntityManager()
                 .find(Miembro.class, Long.valueOf(request.params("id")));
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("hcMiembro", miembro.calcularHCMiembro());
+            put("hcMiembro", miembro.calcularHCHistorico());
             put("miembro", miembro);
         }}, "/Miembro/hcMiembro.hbs");
     }

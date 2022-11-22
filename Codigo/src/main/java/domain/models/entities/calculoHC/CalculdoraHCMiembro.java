@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CalculdoraHCMiembro {
 
-    private FactorDeEmision fe = new FactorDeEmision();
+//    private FactorDeEmision fe = new FactorDeEmision();
 
     public double calcularHC(List<Trayecto> trayectos) throws IOException {
         double HC = 0;
@@ -18,7 +18,7 @@ public class CalculdoraHCMiembro {
                 if (tramo.getMedioDeTransporte().getId() == "Transporte analogico") {
                     HC += 0;
                 } else {
-                    HC += (tramo.distanciaTramo() * fe.getValorFE()) / tramo.getMiembrosMismoTransporte().size();
+                    HC += (tramo.distanciaTramo() * tramo.getMedioDeTransporte().getFactorDeEmision().getValorFE()) / tramo.getMiembrosMismoTransporte().size();
                 }
             }
         }

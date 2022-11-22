@@ -1,6 +1,8 @@
 package domain.controllers;
 
+import domain.models.entities.consumo.FactorDeEmision;
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.miembro.Usuario;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 import domain.models.entities.sectorTerritorial.Localidad;
@@ -29,6 +31,7 @@ public class TrayectoController {
     RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
     RepositoriosDeTransporte repositoriosDeTransporte = new RepositoriosDeTransporte();
     RepositorioDeLocalidades repositorioDeLocalidades = new RepositorioDeLocalidades();
+    RepositorioDeUsuarios repositorioDeUsuarios = new RepositorioDeUsuarios();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
         try{
@@ -61,20 +64,26 @@ public class TrayectoController {
     }
 
     public ModelAndView agregarTrayecto(Request request, Response response){
+        Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         List<Provincia> provincias = this.repositorioDeLocalidades.retornarProvincias();
         List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
+        List<Miembro> miembros = this.repositorioDeMiembros.retornarMiembros();
+        miembros.remove(miembro);
         return new ModelAndView(new HashMap<String,Object>(){{
             put("miembro_id", request.params("id"));
             put("trayecto_id", trayecto.getId());
             put("tramos", trayecto.getTramos());
             put("provincias", provincias);
             put("localidades", localidades);
+            put("miembros", miembros);
         }}, "/Miembro/agregarTrayecto.hbs");
     }
 
     public Response crearTrayecto(Request request, Response response){
+        Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Trayecto nuevoTrayecto = new Trayecto();
+        miembro.agregarTrayecto(nuevoTrayecto);
         this.repo.guardar(nuevoTrayecto);
         response.redirect("" + nuevoTrayecto.getId() + "/agregar");// Pantalla de gestion de trayectos
         return response;
@@ -104,12 +113,10 @@ public class TrayectoController {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Tramo tramo = new Tramo();
-
         Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
         Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
 //        Localidad localidadInicio = repositorioDeLocalidades.buscar
 //        Localidad localidadFin TODO
-        Integer transporteN;
         String medio_transporte= request.queryParams("medio_transporte");
         if(medio_transporte.equals("particular")){
             String tipoVehiculo = request.queryParams("tipo_vehiculo");
@@ -122,8 +129,9 @@ public class TrayectoController {
             TransportePublico transporte= this.repositoriosDeTransporte.buscarTransportePublico(linea, tipoTransportePublico);
             tramo.setMedioDeTransporte(transporte);
         } else if (medio_transporte.equals("contratado")){
+            FactorDeEmision fe = new FactorDeEmision(1.00);
             String servicioContratado=request.queryParams("tipo_servicio_contratado");
-            ServicioContratado transporte = new ServicioContratado(servicioContratado);
+            ServicioContratado transporte = new ServicioContratado(servicioContratado, fe);
             this.repositoriosDeTransporte.guardarSiNoExisteContratado(transporte);
             tramo.setMedioDeTransporte(transporte);
         } else if (medio_transporte.equals("analogico")){
@@ -132,6 +140,14 @@ public class TrayectoController {
             tramo.setMedioDeTransporte(transporte);
         }
 
+        try {
+            Miembro acompaniante = this.repositorioDeMiembros.buscar(Integer.valueOf(request.queryParams("acompaniante_id")));
+            tramo.agregarMiembroAlTramo(acompaniante);
+        } catch (Exception e){
+            System.out.println("pincho");
+        }
+
+        tramo.agregarMiembroAlTramo(miembro);
         repositorioDeUbicaciones.guardarSiNoExiste(puntoInicio);
         repositorioDeUbicaciones.guardarSiNoExiste(puntoFin);
         Ubicacion ubicacion = repositorioDeUbicaciones.buscar(puntoInicio.getCalle(), puntoInicio.getAltura());

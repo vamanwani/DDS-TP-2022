@@ -1,5 +1,6 @@
 package domain.models.entities.transporte;
 
+import domain.models.entities.consumo.FactorDeEmision;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -15,10 +16,11 @@ public class ServicioContratado extends Transporte{
     public void registrarConsumoDeCombustible(){
         //TODO
     }
-    public ServicioContratado(String tipoServicio) throws IOException {
+    public ServicioContratado(String tipoServicio, FactorDeEmision fe) throws IOException {
         this.setDistanciaAPI();
         this.setNombre("Servicio Contratado");
         this.tipoServicio = tipoServicio;
+        this.setFactorDeEmision(fe);
     }
 
     public String getTipoServicio() {

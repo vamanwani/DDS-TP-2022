@@ -1,6 +1,7 @@
 package domain.models.entities.organizacion;
 
 import domain.models.entities.calculoHC.CalculadoraHCSector;
+import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.Miembro;
 
 import javax.persistence.*;
@@ -69,10 +70,10 @@ public class Sector {
     public double calcularHCSector() {
         return new CalculadoraHCSector().calcularHC(miembros);
     }
-
-    public double HCPorCantMiembros(){
-        return this.calcularHCSector() / miembros.size();
-    }
+//
+//    public double HCPorCantMiembros(){
+//        return this.calcularHCSector() / miembros.size();
+//    }
 
     public int getId() {
         return id;

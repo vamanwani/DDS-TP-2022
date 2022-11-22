@@ -13,6 +13,12 @@ public class FactorDeEmision{
     @Column(name = "valor_fe")
     private double valorFE;
 
+    public FactorDeEmision() {
+    }
+
+    public FactorDeEmision(double valorFE) {
+        this.valorFE = valorFE;
+    }
 
     //borramos metodos calcularFE, calcularFETransporte
 

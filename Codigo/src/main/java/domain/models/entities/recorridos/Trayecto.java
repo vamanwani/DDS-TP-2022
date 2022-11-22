@@ -1,4 +1,5 @@
 package domain.models.entities.recorridos;
+import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.Miembro;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +29,10 @@ public class Trayecto {
     @ManyToOne
     @JoinColumn(name = "miembro_id")
     private Miembro miembro;
+
+    @ManyToOne
+    @JoinColumn(name = "periodo_imputacion_id")
+    private PeriodoDeImputacion periodoDeImputacion;
 
     public Trayecto() {
     }
@@ -86,5 +91,13 @@ public class Trayecto {
 
     public void setMiembro(Miembro miembro) {
         this.miembro = miembro;
+    }
+
+    public void setPeriodoDeImputacion(PeriodoDeImputacion periodoDeImputacion) {
+        this.periodoDeImputacion = periodoDeImputacion;
+    }
+
+    public PeriodoDeImputacion getPeriodoDeImputacion() {
+        return periodoDeImputacion;
     }
 }

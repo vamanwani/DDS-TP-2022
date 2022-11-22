@@ -1,5 +1,6 @@
 package domain.models.entities.calculoHC;
 
+import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.Miembro;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ public class CalculadoraHCSector {
     public double calcularHC(List<Miembro> miembros){
         return miembros.stream().mapToDouble( m -> {
             try {
-                return m.calcularHCMiembro();
+                return m.calcularHCMiembro(null);
             } catch (IOException e) {
                 e.printStackTrace();
             }

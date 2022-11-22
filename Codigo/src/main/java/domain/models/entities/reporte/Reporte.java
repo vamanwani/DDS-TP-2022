@@ -1,7 +1,6 @@
 package domain.models.entities.reporte;
 
 import domain.models.entities.consumo.PeriodoDeImputacion;
-import domain.models.entities.organizacion.ClasificaciónDeOrg;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.sectorTerritorial.Pais;
 import domain.models.entities.sectorTerritorial.SectorTerritorial;

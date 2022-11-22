@@ -1,5 +1,6 @@
 package domain.models.entities.transporte;
 
+import domain.models.entities.consumo.FactorDeEmision;
 import domain.models.entities.ubicacion.Parada;
 import domain.models.entities.ubicacion.Ubicacion;
 import lombok.NoArgsConstructor;
@@ -38,7 +39,8 @@ public class TransportePublico extends Transporte {
     public TransportePublico(String linea,
                              TipoTransportePublico transporte,
                              Parada paradaInicial,
-                             Parada paradaFinal) throws IOException {
+                             Parada paradaFinal,
+                             FactorDeEmision fe) throws IOException {
         this.linea = linea;
         this.transporte = transporte;
         this.paradas = new ArrayList<>();
@@ -46,6 +48,7 @@ public class TransportePublico extends Transporte {
         this.paradaFinal = paradaFinal;
         this.setDistanciaAPI();
         this.setNombre("Transporte Publico");
+        this.setFactorDeEmision(fe);
     }
 
     public void setParadas(List<Parada> paradas) {

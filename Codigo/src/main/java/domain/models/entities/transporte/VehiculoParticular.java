@@ -1,5 +1,6 @@
 package domain.models.entities.transporte;
 
+import domain.models.entities.consumo.FactorDeEmision;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -16,10 +17,11 @@ public class VehiculoParticular extends Transporte{
     @Column(name = "tipo_combustible")
     private TipoCombustible combustible;
 
-    public VehiculoParticular(TipoVehiculoParticular vehiculo, TipoCombustible combustible) {
+    public VehiculoParticular(TipoVehiculoParticular vehiculo, TipoCombustible combustible, FactorDeEmision factorDeEmision) {
         this.vehiculo = vehiculo;
         this.combustible = combustible;
         this.setNombre("Vehiculo Particular");
+        this.setFactorDeEmision(factorDeEmision);
     }
     public void registrarConsumoDeCombustible(){
         //TODO

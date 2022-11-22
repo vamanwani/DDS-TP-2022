@@ -52,4 +52,10 @@ public class RepositorioDeMiembros {
                 .createQuery("from " + Organizacion.class.getName())
                 .getResultList();
     }
+
+    public List<Miembro> retornarMiembros() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("from " + Miembro.class.getName())
+                .getResultList();
+    }
 }

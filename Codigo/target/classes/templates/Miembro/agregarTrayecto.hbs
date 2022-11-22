@@ -165,6 +165,17 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">MIEMBRO AOCMPA</h4>
+                        <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
+                            <select class="form-select" aria-label="Default select example" name= "acompaniante_id">
+                                <option selected value="">MIEMBRO ACOMPAñANTE (OPCIONAL)</option>
+                                {{#each miembros}}
+                                    <option value={{id}}>{{usuario.nombre}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 </section>
                 <section style="width: 100%; display: flex; justify-content: space-evenly;">

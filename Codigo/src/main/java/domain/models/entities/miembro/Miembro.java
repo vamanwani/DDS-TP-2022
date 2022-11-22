@@ -42,10 +42,6 @@ public class Miembro {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    public List<Trayecto> getTrayectos() {
-        return trayectos;
-    }
-
     @OneToMany
     @JoinColumn(name = "trayecto_id")
     private List<Trayecto> trayectos;
@@ -88,6 +84,8 @@ public class Miembro {
         return this.usuario;
     }
 
+    public void agregarTrayecto(Trayecto trayecto) {this.trayectos.add(trayecto);}
+
     public void setTrayectos(List<Trayecto> trayectos) {
         this.trayectos = trayectos;
     }
@@ -113,16 +111,22 @@ public class Miembro {
         this.linkRecomendacion = link;
     }
 
-    public double calcularHCMiembro() throws IOException {
+    public double calcularHCMiembro(PeriodoDeImputacion periodoDeImputacion) throws IOException {
+        List<Trayecto> trayectos = (List<Trayecto>) this.getTrayectos().stream().filter(t -> t.getPeriodoDeImputacion().equals(periodoDeImputacion));
         return new CalculdoraHCMiembro().calcularHC(trayectos);
+    }
+
+    public double calcularHCHistorico() throws IOException {
+        return new CalculdoraHCMiembro().calcularHC(this.getTrayectos());
     }
 
     public String getLinkRecomendacion(){
         return linkRecomendacion;
     }
+
     public double impactoEnOrganizacion(Organizacion organizacion) throws IOException {
         PeriodoDeImputacion periodoDeImputacion = null;
-        return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion(periodoDeImputacion);
+        return this.calcularHCMiembro(periodoDeImputacion)/organizacion.calcularHCOrganizacion(periodoDeImputacion);
     }
 
     public SolicitudVinculacion generarSolicitud(Sector sector){
@@ -170,4 +174,9 @@ public class Miembro {
     public String getTelefono(){return this.getUsuario().getTelefono();}
 
     public void agregarTrabajo(Sector sector){trabajos.add(sector);}
+
+    public List<Trayecto> getTrayectos() {
+        return trayectos;
+    }
+
 }
