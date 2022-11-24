@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class MediosTransporteInit {
 
     @Test
-    public void instanciarVehiculosParticulares(){
+    public void instanciarVehiculosParticulares() throws IOException {
         FactorDeEmision fe = new FactorDeEmision(2.00);
         VehiculoParticular autoGNC = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.GNC, fe);
         VehiculoParticular autoGasoil = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.Gasoil, fe);

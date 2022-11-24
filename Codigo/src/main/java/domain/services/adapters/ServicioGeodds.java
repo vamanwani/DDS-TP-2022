@@ -24,8 +24,8 @@ public class ServicioGeodds {
         return llaveAutorizacion;
     }
 
-    public ServicioGeodds() {
-        //this.adapter = new ServicioGeoDdsRetrofitAdapter();
+    public ServicioGeodds() throws IOException{
+        this.adapter = new ServicioGeoDdsRetrofitAdapter();
     }
 
     public static void setAdapter(GeoddsServceAdapter adapter) {

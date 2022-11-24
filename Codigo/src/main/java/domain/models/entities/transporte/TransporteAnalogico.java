@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.IOException;
 @Entity
-@NoArgsConstructor
 @DiscriminatorValue("Analogico")
 public class TransporteAnalogico extends Transporte{
 
@@ -19,6 +18,10 @@ public class TransporteAnalogico extends Transporte{
         this.setDistanciaAPI();
         this.setNombre("Transporte Analogico");
         this.setFactorDeEmision(fe);
+    }
+    public TransporteAnalogico() throws IOException
+    {
+        setDistanciaAPI();
     }
     public void registrarConsumoDeCombustible(){
         //TODO
