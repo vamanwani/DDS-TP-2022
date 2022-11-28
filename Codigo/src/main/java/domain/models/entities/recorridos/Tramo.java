@@ -31,11 +31,10 @@ public class Tramo {
     private Transporte medioDeTransporte;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "miembro_id")
-    private List<Miembro> miembrosMismoTransporte; //TODO
+    private List<Miembro> miembros;
 
     public Tramo() {
-        this.miembrosMismoTransporte = new ArrayList<>();
+        this.miembros = new ArrayList<>();
 
     }
 
@@ -43,18 +42,18 @@ public class Tramo {
         this.medioDeTransporte = medioDeTransporte;
         this.puntoFin = puntoFin;
         this.puntoInicio = puntoInicio;
-        this.miembrosMismoTransporte = new ArrayList<>();
+        this.miembros = new ArrayList<>();
     }
 
     public void agregarMiembroAlTramo(Miembro miembro){
-        this.miembrosMismoTransporte.add(miembro);
+        this.miembros.add(miembro);
     }
     public List<Miembro> getMiembrosMismoTransporte() {
-        return miembrosMismoTransporte;
+        return miembros;
     }
 
     public boolean esCompartido(){
-        return miembrosMismoTransporte.size() > 1;
+        return miembros.size() > 1;
     }
 
     public double distanciaTramo() throws IOException {
@@ -95,4 +94,7 @@ public class Tramo {
 
     public String getMedioTransporteNombre(){return this.medioDeTransporte.getNombre();}
 
+    public List<Miembro> getMiembros() {
+        return miembros;
+    }
 }

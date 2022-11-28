@@ -69,6 +69,7 @@ public class TrayectoController {
         List<Provincia> provincias = this.repositorioDeLocalidades.retornarProvincias();
         List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
         List<Miembro> miembros = this.repositorioDeMiembros.retornarMiembros();
+        List<Tramo> tramosExistentes = this.repositorioDeTramos.buscarTodosLosTramosDelMiembro(Math.toIntExact(miembro.getId()));
         miembros.remove(miembro);
         return new ModelAndView(new HashMap<String,Object>(){{
             put("miembro_id", request.params("id"));
@@ -77,6 +78,7 @@ public class TrayectoController {
             put("provincias", provincias);
             put("localidades", localidades);
             put("miembros", miembros);
+            put("tramosExistentes", tramosExistentes);
         }}, "/Miembro/agregarTrayecto.hbs");
     }
 
@@ -168,5 +170,15 @@ public class TrayectoController {
 
     public void agregarTramo(Request request, Response response) {
         //TODO
+    }
+
+    public Response agregarTramoExistente(Request request, Response response) {
+        Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
+        Tramo tramo = this.repositorioDeTramos.buscar(Integer.valueOf(request.params("id_tramo")));
+        trayecto.agregarTramo(tramo);
+        this.repo.guardar(trayecto);
+        response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/agregar");
+        return response;
     }
 }

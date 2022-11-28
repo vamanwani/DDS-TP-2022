@@ -18,9 +18,8 @@ public class TipoConsumo implements AsignableFE{
     @Column(name = "unidad")
     private Unidad unidad;
 
-    @OneToOne
-    @JoinColumn(name = "fe_id")
-    private FactorDeEmision fe;
+    @Column(name = "factor_emision")
+    private double fe;
 
     public Long getId() {
         return id;
@@ -47,10 +46,10 @@ public class TipoConsumo implements AsignableFE{
     }
 
     public double getValorParaFE() {
-        return fe.getValorFE();
+        return fe;
     }
 
-    public void setFe(FactorDeEmision fe) {
+    public void setFe(double fe) {
         this.fe = fe;
     }
 

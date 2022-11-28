@@ -140,9 +140,12 @@ public class ImportarDeExcel {
     public Consumo instanciarOtroConsumo(FilaConsumo filaConsumo, Organizacion unaOrganizacion) {
         List<String> df = filaConsumo.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
-        TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
+        TipoConsumo tipoConsumoViejo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
+        TipoConsumo tipoConsumo = (TipoConsumo) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TipoConsumo.class.getName() + " where nombre = '" + df.get(1) + "'")
+                .getSingleResult();
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
-
         Consumo consumoDeOrganizacion = new OtroConsumo(actividadConsumo, periodoDeImputacion, tipoConsumo, Double.parseDouble(df.get(2)));
         return consumoDeOrganizacion;
     }

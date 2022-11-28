@@ -56,7 +56,57 @@
             <form method="post", action ="/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}">
                 <label for="exampleFormControlInput1" class="form-label">NOMBRE TRAYECTO</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" name= "nombre">
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Descripcion" name= "descripcion">
+                <input type="text" class="form-control" id="" placeholder="Descripcion" name= "descripcion">
+                <select id="valueDia" class="form-select" aria-label="Default select example" name ="dia_periodo">
+                                    <option selected value="">Dia</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                </select>
+                <select id="valueMes" class="form-select" aria-label="Default select example" name ="mes_periodo">
+                                                    <option selected value="">Mes</option>
+                                                    <option value="1">Enero</option>
+                                                    <option value="2">Febrero</option>
+                                                    <option value="3">Marzo</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Mayo</option>
+                                                    <option value="6">Junio</option>
+                                                    <option value="7">Julio</option>
+                                                    <option value="8">Agosto</option>
+                                                    <option value="9">Septiembre</option>
+                                                    <option value="10">Octubre</option>
+                                                    <option value="11">Noviembre</option>
+                                                    <option value="12">Diciembre</option>
+                </select>
+            <input type="number" class="form-control" id="" placeholder="Año" name= "anio_periodo">
             </div>
             <section>
                 <h3 style="background-color: rgb(175, 174, 174); margin-bottom: 0;">LISTADO DE TRAMOS</h3>
@@ -166,7 +216,7 @@
                         </div>
                     </div>
                     <div>
-                        <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">MIEMBRO AOCMPA</h4>
+                        <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">ACOMPAÑANTE</h4>
                         <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
                             <select class="form-select" aria-label="Default select example" name= "acompaniante_id">
                                 <option selected value="">MIEMBRO ACOMPAñANTE (OPCIONAL)</option>
@@ -178,6 +228,9 @@
                     </div>
                 </div>
                 </section>
+                <section>
+
+                </section>
                 <section style="width: 100%; display: flex; justify-content: space-evenly;">
                     <button id="btnVolver" type="button" class="btn btn-lg"
                         style="background-color: rgb(21, 165, 201); margin-top: 1rem;">VOLVER</button>
@@ -187,6 +240,35 @@
                 </section>
             </form>
 
+ <h3 style="background-color: rgb(175, 174, 174); margin-bottom: 0;">TRAMOS EXISTENTES</h3>
+                <div style="background-color: white; height: 300px;">
+                <table id="listaOrganizaciones" style="width: 100%;">
+                    <tr style="border-bottom: 2px solid black;">
+                        <th>PTO INICIO</th>
+                        <th>PTO FIN</th>
+                        <th>MEDIO TRANSPORTW</th>
+                        <th>MIEMBROS ACOMPAÑANTES</th>
+                    </tr>
+                    {{#each tramosExistentes}}
+                        <tr style="margin-top: 15px"  class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
+                        <form method = "post" action = "/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}/tramos/agregar_tramo_existente/{{id}}">
+                                <td>{{puntoInicio.direc}}</td>
+                                <td>{{puntoFin.direc}}</td>
+                                <td>{{medioTransporteNombre}}</td>
+                            <th>
+                                <select class="form-select" aria-label="Default select example" name= "miembro_id">
+                                    <option selected value="">Miembro</option>
+                                    {{#each miembros}}
+                                        <option value={{id}}>{{usuario.nombre}}</option>
+                                    {{/each}}
+                                </select>
+                            </th>
+                            <td><button type="submit" class="btn btn-primary">Agregar tramo</button></td>
+                            </form>
+                            </tr>
+                        {{/each}}
+                        </table>
+                    </div>
 
         </section>
     </main>

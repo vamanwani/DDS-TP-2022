@@ -88,6 +88,7 @@ public class Router {
 
                 Spark.get("/:id_trayecto/tramos", trayectoController::mostrarTramosDeTrayecto, engine);
                 Spark.post("/:id_trayecto/tramos/agregar_tramo", trayectoController::crearTramo);
+                Spark.post("/:id_trayecto/tramos/agregar_tramo_existente/:id_tramo", trayectoController::agregarTramoExistente);
                 Spark.get("/:id_trayecto/tramos/:id_tramo/editar_tramo", trayectoController::editarTramo, engine);
                 Spark.post("/:id_trayecto/tramos/:id_tramo/editar_tramo", trayectoController::actualizarTramo);
 //                Spark.get("/:id_trayecto/tramos/:id_tramo/agregar_tramo", trayectoController::agregarTramo, engine);
