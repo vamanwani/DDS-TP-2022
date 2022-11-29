@@ -1,5 +1,6 @@
 package dbtest;
 
+import domain.models.entities.miembro.Adminisitrador;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.TipoUsuario;
 import domain.models.entities.miembro.Usuario;
@@ -148,5 +149,16 @@ public class Contexto {
 //        EntityManagerHelper.commit();
 //    }
 
+    @Test
+    public void instanciarAdmin(){
+        Usuario usuario = new Usuario("admin", "admin", "admin@administrados.com", "1122334455", TipoUsuario.ADMIN);
+        Adminisitrador adminisitrador = new Adminisitrador(usuario);
+
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.persist(usuario);
+        EntityManagerHelper.persist(adminisitrador);
+        EntityManagerHelper.commit();
+
+    }
 
 }

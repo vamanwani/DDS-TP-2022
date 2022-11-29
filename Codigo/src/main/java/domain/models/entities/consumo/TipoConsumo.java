@@ -57,4 +57,12 @@ public class TipoConsumo implements AsignableFE{
     public void setValorParaFE(double valor) {
 
     }
+
+    public double getFe() {
+        return fe;
+    }
+
+    public String getUnidad() {
+        return String.valueOf(unidad);
+    }
 }

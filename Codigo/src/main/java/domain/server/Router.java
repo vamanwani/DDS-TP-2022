@@ -104,8 +104,11 @@ public class Router {
         });
 
         Spark.path("/administrador/:id", () -> {
+            Spark.get("", administradorController::mostrarMenu, engine);
             Spark.post("/generar_org", administradorController::generar_org);
             Spark.post("/generar_agente", administradorController::generar_agente);
+            Spark.get("/gestionar_fe", administradorController::gestionarFE, engine);
+            Spark.post("/actualizar_fe/:id_tipo", administradorController::actualizarFE);
         });
 
         Spark.path("/prohibido",()->{
