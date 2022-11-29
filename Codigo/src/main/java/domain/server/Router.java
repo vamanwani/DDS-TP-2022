@@ -92,6 +92,7 @@ public class Router {
                 Spark.get("/:id_trayecto/tramos/:id_tramo/editar_tramo", trayectoController::editarTramo, engine);
                 Spark.post("/:id_trayecto/tramos/:id_tramo/editar_tramo", trayectoController::actualizarTramo);
                 Spark.get("/:id_trayecto/agregar_tramo", trayectoController::agregarTramo, engine);
+                Spark.post("/:id_trayecto/tramos/:id_tramo/cambiar_a_existente/:id", trayectoController::cambiarTramoAExistente);
             });
         });
 

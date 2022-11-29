@@ -177,8 +177,14 @@ public class TrayectoController {
         return response;
     }
 
+    //TODO Hacer que los tramos se editen, para que cambie a otro tramo nuevo o uno ya existente
     public Response actualizarTramo(Request request, Response response) {
-        response.redirect("acutalziar");
+        response.redirect("acutalizar");
+        return response;
+    }
+
+    public Response cambiarTramoAExistente(Request request, Response response){
+        response.redirect("cambiarAExistente");
         return response;
     }
 

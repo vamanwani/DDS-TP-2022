@@ -48,112 +48,244 @@
 <main style="background-color: #b854b8; display: flex; flex-direction: column; align-items: center;">
     <section style="width: 90%; height: 400px;">
         <h1>AGREGAR TRAMO</h1>
-        <section>
-        <form method = "post" action = "/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}/agregar_tramo" style="display: flex; justify-content:space-around; width:100%">
-            <div class="ptoInicio">
-                <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">PUNTO DE INICIO</h4>
-                <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
-                    <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_calle" placeholder="Ingrese calle...">
-                    <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_altura" placeholder="Ingrese altura...">
-                </div>
-            </div>
-            <div class="ptoDestino">
-                <h4 style="background-color: rgb(39, 167, 56); margin-bottom: 0;">PUNTO DESTINO</h4>
-                <div style="height: 40px; background-color: rgb(42, 219, 66);">
-                    <input type="text" class="form-control" id="valuePuntoDestino" name = "punto_fin_calle" placeholder="Ingrese calle...">
-                    <input type="text" class="form-control" id="valuePuntoInicio" name="punto_fin_altura" placeholder="Ingrese altura...">
-                </div>
-            </div>
-            <div class="medioTransporte">
-                <h4 style="background-color: rgb(184, 181, 12); margin-bottom: 0">MEDIO DE TRANSPORTE</h4>
-                <div style="height: 40px; background-color: rgb(236, 234, 68);">
-                    <button type="button" style="background-color: white;" class="btn" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        Ingresar Acá
-                    </button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Medio de Transporte</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <select id="valueMedioTransporte" class="form-select"
-                                        aria-label="Default select example">
-                                        <option selected value="">TIPO DE TRANSPORTE</option>
-                                        <option value="Vehiculo Particular">Vehiculo Particular</option>
-                                        <option value="Transporte Publico">Transporte Publico</option>
-                                        <option value="Servicio Contratado">Servicio Contratado</option>
-                                        <option value="Transporte Analógico">Transporte Analógico</option>
+        <section style="width: 90%; height: 400px;" class="bloqueAgregarTramo">
+                    <h1>AGREGAR TRAMO</h1>
+                    <form method="POST" action="/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}/tramos/agregar_tramo" class="formul">
+                        <section style="display: flex; justify-content:space-around; width:100%">
+                        <div class="ptoInicio">
+                                <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">PUNTO DE INICIO</h4>
+                                <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
+                                    <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_calle" placeholder="Ingrese calle...">
+                                    <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_altura" placeholder="Ingrese altura...">
+                                    <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                        <option selected value="">LOCALIDAD</option>
+                                        {{#each localidades}}
+                                            <option value={{id}}>{{nombre}}</option>
+                                        {{/each}}
                                     </select>
-                                    <br><br>
-                                    Para vehiculo particular:
-                                    <select id="valueVehiculo" class="form-select" aria-label="Default select example">
-                                        <option selected value="">Tipo Vehiculo</option>
-                                        <option value="Moto">Moto</option>
-                                        <option value="Auto">Auto</option>
-                                        <option value="Camioneta">Camioneta</option>
-                                    </select>
-                                    <select id="valueCombustible" class="form-select"
-                                        aria-label="Default select example">
-                                        <option selected value="">Tipo Combustible</option>
-                                        <option value="GNC">GNC</option>
-                                        <option value="Nafta">Nafta</option>
-                                        <option value="Electrico">Eléctrico</option>
-                                        <option value="Gasoil">Gasoil</option>
-                                    </select>
-                                    <br><br>
-                                    Para transporte público:
-                                    <input id="valueLinea" type="text" class="form-control" id="linea"
-                                        placeholder="Linea">
-                                    <select id="valueTransportePublico" class="form-select"
-                                        aria-label="Default select example">
-                                        <option value="" selected>Tipo Transporte</option>
-                                        <option value="Linea Ferrea">Línea Férrea</option>
-                                        <option value="Linea Subterraneo">Línea Subterráneo</option>
-                                        <option value="Colectivo">Colectivo</option>
-                                    </select>
-                                    <br><br>
-                                    Para servicio contratado:
-                                    <input id="valueServicio" type="text" class="form-control"
-                                        id="tipoServicioContratado" placeholder="Tipo servicio">
-                                    <br><br>
-                                    Para transporte analógico:
-                                    <select id="valueTransporteAnalogico" class="form-select"
-                                        aria-label="Default select example">
-                                        <option value="" selected>Tipo Transporte</option>
-                                        <option value="Bicicleta">Bicicleta</option>
-                                        <option value="Pie">Pie</option>
+                                    <select class="form-select" aria-label="Default select example" name= "provincia_inicio">
+                                        <option selected value="">PROVINCIA</option>
+                                        {{#each provincias}}
+                                            <option value={{id}}>{{nombre}}</option>
+                                        {{/each}}
                                     </select>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cerrar</button>
-                                    <button id="btnGuardarCambios" type="button" class="btn btn-primary">Guardar
-                                        Cambios</button>
+                            </div>
+                            <div class="ptoDestino">
+                                <h4 style="background-color: rgb(39, 167, 56); margin-bottom: 0;">PUNTO DESTINO</h4>
+                                <div style="height: 40px; background-color: rgb(42, 219, 66);">
+                                    <input type="text" class="form-control" id="valuePuntoDestino" name = "punto_fin_calle" placeholder="Ingrese calle...">
+                                    <input type="text" class="form-control" id="valuePuntoInicio" name="punto_fin_altura" placeholder="Ingrese altura...">
+                                    <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                        <option selected value="">LOCALIDAD</option>
+                                        {{#each localidades}}
+                                            <option value={{id}}>{{nombre}}</option>
+                                        {{/each}}
+                                    </select>
+                                    <select class="form-select" aria-label="Default select example" name= "provincia_fin">
+                                        <option selected value="">PROVINCIA</option>
+                                        {{#each provincias}}
+                                            <option value={{id}}>{{nombre}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="medioTransporte">
+                                <h4 style="background-color: rgb(184, 181, 12); margin-bottom: 0">MEDIO DE TRANSPORTE</h4>
+                                <div style="height: 40px; background-color: rgb(236, 234, 68);">
+                                <button type="button" style="background-color: white;" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Ingresar Acá
+                                </button>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Medio de Transporte</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <select id="valueMedioTransporte" class="form-select tipoTransporte" aria-label="Default select example" name= "medio_transporte">
+                                                    <option selected value="">TIPO DE TRANSPORTE</option>
+                                                    <option value="particular">Vehiculo Particular</option>
+                                                    <option value="publico">Transporte Publico</option>
+                                                    <option value="contratado">Servicio Contratado</option>
+                                                    <option value="analogico">Transporte Analógico</option>
+                                                </select>
+                                                <br><br>
+                                                <div id="contenidoTransporteElegido">
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button id="btnGuardarCambios" type="button" class="btn btn-primary">Guardar Cambios</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="background-color: rgb(158, 38, 38); margin-bottom: 0">ACOMPAÑANTE</h4>
+                                <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
+                                    <select class="form-select" aria-label="Default select example" name= "acompaniante_id">
+                                        <option selected value="">MIEMBRO ACOMPAñANTE (OPCIONAL)</option>
+                                        {{#each miembros}}
+                                            <option value={{id}}>{{usuario.nombre}}</option>
+                                        {{/each}}
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section style="width: 100%; display: flex; justify-content: space-evenly;">
-            <button id="btnVolver" type="button" class="btn btn-lg" href=""
-                style="background-color: rgb(21, 165, 201); margin-top: 1rem;">VOLVER</button>
-            <button id="btnConfirmarTramo" type="submit" class="btn btn-lg"
-                style="background-color: rgb(4, 197, 45); margin-top: 1rem;">APLICAR CAMBIOS</button>
-        </section>
-        </form>
+                        </section>
+                        <section>
+
+                        </section>
+                        <section style="width: 100%; display: flex; justify-content: space-evenly;">
+                            <button id="btnVolver" type="button" class="btn btn-lg"
+                                style="background-color: rgb(21, 165, 201); margin-top: 1rem;">VOLVER</button>
+                            <button class="btn btn-lg"
+                                style="background-color: rgb(4, 197, 45); margin-top: 1rem;"
+                                type="submit">CONFIRMAR TRAMO</button>
+                        </section>
+                    </form>
+
+         <h3 style="background-color: rgb(175, 174, 174); margin-bottom: 0;">TRAMOS EXISTENTES</h3>
+                        <div style="background-color: white; height: 300px;">
+                        <table id="listaOrganizaciones" style="width: 100%;">
+                            <tr style="border-bottom: 2px solid black;">
+                                <th>PTO INICIO</th>
+                                <th>PTO FIN</th>
+                                <th>MEDIO TRANSPORTW</th>
+                                <th>MIEMBROS ACOMPAÑANTES</th>
+                            </tr>
+                            {{#each tramosExistentes}}
+                                <tr style="margin-top: 15px"  class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
+                                <form method = "post" action = "/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}/tramos/agregar_tramo_existente/{{id}}">
+                                        <td>{{puntoInicio.direc}}</td>
+                                        <td>{{puntoFin.direc}}</td>
+                                        <td>{{medioTransporteNombre}}</td>
+                                    <th>
+                                        <select class="form-select" aria-label="Default select example" name= "miembro_id">
+                                            <option selected value="">Miembro</option>
+                                            {{#each miembros}}
+                                                <option value={{id}}>{{usuario.nombre}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </th>
+                                    <td><button type="submit" class="btn btn-primary">Agregar tramo</button></td>
+                                    </form>
+                                    </tr>
+                                {{/each}}
+                                </table>
+                            </div>
+
+                </section>
     </section>
 </main>
 <footer style="background-color: black;">
     <p style="color: white;">@2022 Todos los derechos reservados</p>
 </footer>
 <!-- JavaScript Bundle with Popper -->
+ <script>
+          let tiposTransporte = document.querySelector(".tipoTransporte")
+          tiposTransporte.addEventListener("change", cambiarTipoTransporte)
+          function cambiarTipoTransporte(e){
+            e.preventDefault()
+            let tipo = this.value
+            let html = ``;
+            switch(tipo){
+              case "particular":{
+                html+=`
+                <select name = "tipo_vehiculo" id="valueVehiculo" class="form-select" aria-label="Default select example">
+                    <option selected value="">Tipo Vehiculo</option>
+                    <option value="MOTO">Moto</option>
+                    <option value="AUTO">Auto</option>
+                    <option value="CAMIONETA">Camioneta</option>
+                </select>
+                <select id="valueCombustible" class="form-select" aria-label="Default select example" name ="tipo_combustible">
+                    <option selected value="">Tipo Combustible</option>
+                    <option value="GNC">GNC</option>
+                    <option value="Nafta">Nafta</option>
+                    <option value="Electrico">Eléctrico</option>
+                    <option value="Gasoil">Gasoil</option>
+                </select>
+                `
+                break;
+              }
+              case "publico":{
+                html+=`
+                Para transporte público:
+                <select name = "tipo_transporte_publico" id="valueTransportePublico" class="form-select tipoPublico" aria-label="Default select example">
+                    <option value="" selected>Tipo Transporte</option>
+                    <option value="Linea Ferrea">Línea Férrea</option>
+                    <option value="Linea Subterraneo">Línea Subterráneo</option>
+                    <option value="Colectivo">Colectivo</option>
+                </select>
+                <div class="contenidoLinea"></div>
+                `
+                break;
+              }
+              case "contratado":{
+                html+=`
+                Para servicio contratado:
+                    <input name = "tipo_servicio_contratado" id="valueServicio" type="text" class="form-control" id="tipoServicioContratado" placeholder="Tipo servicio">
+                `
+                break;
+              }
+              case "analogico":{
+                html+=`
+                Para transporte analógico:
+                                  <select name= "tipo_transporte_analogico" id="valueTransporteAnalogico" class="form-select" aria-label="Default select example">
+                                    <option value="" selected>Tipo Transporte</option>
+                                    <option value="Bicicleta">Bicicleta</option>
+                                    <option value="Pie">Pie</option>
+                                  </select>
+                `
+                break;
+              }
+              default: break;
+            }
+            document.querySelector("#contenidoTransporteElegido").innerHTML = html;
+            document.querySelector(".scriptPublico").innerHTML = `
+                  let tipoPublico = document.querySelector(".tipoPublico")
+                  tipoPublico.addEventListener("change", cambiarTipoPubico)
+            `
+          }
+          function cambiarTipoPubico(e){
+            e.preventDefault()
+            console.log("entro")
+            let tipo = this.value
+            let html = ``;
+            switch(tipo){
+              case "Linea Ferrea":{
+                html+= `
+                <select name = "linea" class="form-select" aria-label="Default select example">
+                  <option value="" selected>Linea (LF)</option>
+                </select>
+                `
+                break;
+              }
+              case "Linea Subterraneo":{
+                html+= `
+                <select name = "linea" class="form-select" aria-label="Default select example">
+                  <option value="" selected>Linea (LS)</option>
+                </select>
+                `
+                break;
+              }
+              case "Colectivo":{
+                html+= `
+                <select name = "linea" class="form-select" aria-label="Default select example">
+                  <option value="" selected>Linea (C)</option>
+                </select>
+                `
+                break;
+              }
+              default: break;
+            }
+            document.querySelector(".contenidoLinea").innerHTML=html;
+          }
+        </script>
 <script src="/miembro/editarTrayecto.js"></script>
 <script src="/navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
