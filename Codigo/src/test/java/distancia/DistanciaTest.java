@@ -98,7 +98,7 @@ public class DistanciaTest {
     public void distanciaTransporte() throws IOException
     {
         Localidad unaLocalidad = new Localidad("Barracas", new Provincia("BUENOS AIRES"));
-        unaLocalidad.setId(5336);
+        unaLocalidad.setId(1);
         Ubicacion unaUbicacion = new Ubicacion("Patricios", 300, unaLocalidad);
         Ubicacion otraUbicacion = new Ubicacion("Patricios", 400, unaLocalidad);
         TransporteAnalogico transporte = new TransporteAnalogico();
