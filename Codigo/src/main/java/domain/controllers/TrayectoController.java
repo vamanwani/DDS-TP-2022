@@ -110,6 +110,11 @@ public class TrayectoController {
         }}, "/Miembro/editarTramo.hbs");
     }
 
+    public ModelAndView agregarTramo(Request request, Response response){
+        return new ModelAndView(new HashMap<String, Object>(){{
+        }}, "/Miembro/agregarTramo.hbs");
+    }
+
 
     public Response crearTramo(Request request, Response response) throws IOException {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
@@ -168,9 +173,6 @@ public class TrayectoController {
         return response;
     }
 
-    public void agregarTramo(Request request, Response response) {
-        //TODO
-    }
 
     public Response agregarTramoExistente(Request request, Response response) {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
