@@ -84,13 +84,17 @@ public class OrganizacionController {
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/src/main/resources/uploads");
         request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
         final Part uploadedFile = request.raw().getPart("file");
-        final Path path = Paths.get("src/main/resources/uploads'"+ request.params("id") +"'.xlsx");
+        final Path path = Paths.get("src/main/resources/uploads/'"+ request.params("id") +"'.xlsx");
         try (final InputStream in = uploadedFile.getInputStream()) {
             Files.copy(in, path);
         }
 
+
         ImportarDeExcel importador = new ImportarDeExcel();
         Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
+
+        importador.run();
+
         importador.importar("'" + request.params("id") + "'.xlsx", organizacion);
 
         response.redirect("/organizaciones/" + request.params("id"));

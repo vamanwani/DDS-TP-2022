@@ -16,13 +16,24 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-public class ImportarDeExcel {
+public class ImportarDeExcel implements Runnable {
 
     RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
     RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
 
-    public void importar(String nombreExcel, Organizacion unaOrganizacion) throws IOException {
-            File file = new File("src/main/resources/uploads" + nombreExcel); //TODO RUTA DE VIG
+//    String nombreDeExcel;
+//    Organizacion organizacion;
+
+//    public void setNombreDeExcel(String nombreDeExcel) {
+//        this.nombreDeExcel = nombreDeExcel;
+//    }
+//
+//    public void setOrganizacion(Organizacion organizacion) {
+//        this.organizacion = organizacion;
+//    }
+
+    public void importar(String nombreDeExcel, Organizacion organizacion) throws IOException {
+            File file = new File("src/main/resources/uploads/" + nombreDeExcel); //TODO RUTA DE VIG
         // creating a new file instance
         //File file = new File("C:\\Users\\Adrian\\Documents\\Facultad\\Diseño\\9-11\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\" + nombreExcel);//TODO RUTA DE ADRIAN
         //C:\Users\Adrian\Documents\Facultad\Diseño\9-11\2022-ma-ma-mama-grupo-05\Codigo
@@ -97,7 +108,8 @@ public class ImportarDeExcel {
                 datosFila.clear();
                 System.out.println("");
             }
-            instanciasConsumosParaOrganizacion(filaDeConsumos,unaOrganizacion);
+            instanciasConsumosParaOrganizacion(filaDeConsumos,organizacion);
+
     }
 
     public void instanciasConsumosParaOrganizacion(List<FilaConsumo> listaDeFilaConsumo, Organizacion organizacion) {
@@ -175,6 +187,11 @@ public class ImportarDeExcel {
             return Unidad.KM;
         }
         return null;
+    }
+
+    @Override
+    public void run() {
+
     }
 }
 
