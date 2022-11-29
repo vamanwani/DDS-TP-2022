@@ -12,7 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class MediosTransporteInit {
+    public class MediosTransporteInit {
 
     @Test
     public void instanciarVehiculosParticulares() throws IOException {

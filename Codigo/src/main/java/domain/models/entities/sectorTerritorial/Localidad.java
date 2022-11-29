@@ -23,7 +23,10 @@ public class Localidad {
     public Localidad(String nombre, Provincia provincia) {
         this.nombre = nombre;
     }
+    public void setearLocalidad(String Localidad)
+    {
 
+    }
     public Integer getId() {
         return id;
     }

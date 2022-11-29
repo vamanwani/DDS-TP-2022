@@ -110,15 +110,28 @@ public class TrayectoController {
         }}, "/Miembro/editarTramo.hbs");
     }
 
+    public ModelAndView agregarTramo(Request request, Response response){
+        return new ModelAndView(new HashMap<String, Object>(){{
+        }}, "/Miembro/agregarTramo.hbs");
+    }
+
 
     public Response crearTramo(Request request, Response response) throws IOException {
+        //Transporte transport = new TransporteAnalogico();
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Tramo tramo = new Tramo();
+
+        //TODO intentamos usar el metodo de distancia pero rompe antes de mostrar el resultado, no llega al redirect final
+        //Localidad localidadInicio = repositorioDeLocalidades.buscar(Integer.valueOf(request.queryParams("localidad_inicio")));
+        //localidadInicio.setId(24);
+        //Localidad localidadFin = repositorioDeLocalidades.buscar(Integer.valueOf(request.queryParams("localidad_fin")));
+        //localidadFin.setId(25);
+//        TODO, para la distancia con la API
         Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
         Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
-//        Localidad localidadInicio = repositorioDeLocalidades.buscar
-//        Localidad localidadFin TODO
+        //double distancia = transport.distancia(puntoInicio, puntoFin);
+
         String medio_transporte= request.queryParams("medio_transporte");
         if(medio_transporte.equals("particular")){
             String tipoVehiculo = request.queryParams("tipo_vehiculo");
@@ -160,6 +173,7 @@ public class TrayectoController {
         trayecto.agregarTramo(tramo);
         repo.guardar(trayecto);
         response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/agregar");//Pantalla de agregar tramos
+        //response.redirect(("/" + distancia));
         return response;
     }
 
@@ -168,9 +182,6 @@ public class TrayectoController {
         return response;
     }
 
-    public void agregarTramo(Request request, Response response) {
-        //TODO
-    }
 
     public Response agregarTramoExistente(Request request, Response response) {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
