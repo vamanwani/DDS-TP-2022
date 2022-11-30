@@ -19,9 +19,8 @@ public abstract class Transporte {
     @GeneratedValue
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "fe_id")
-    private FactorDeEmision factorDeEmision;
+    @Column(name = "fe")
+    private double factorDeEmision;
 
     @Column(name = "nombre")
     private String nombre;
@@ -50,11 +49,18 @@ public abstract class Transporte {
         this.nombre = nombre;
     }
 
-    public FactorDeEmision getFactorDeEmision() {
+    public double getFe() {
         return factorDeEmision;
     }
 
-    public void setFactorDeEmision(FactorDeEmision factorDeEmision) {
+    public String getModelo(){
+
+        return null;
+    }
+
+
+
+    public void setFactorDeEmision(double factorDeEmision) {
         this.factorDeEmision = factorDeEmision;
     }
 }

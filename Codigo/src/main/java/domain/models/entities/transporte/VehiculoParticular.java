@@ -19,14 +19,18 @@ public class VehiculoParticular extends Transporte{
     @Column(name = "tipo_combustible")
     private TipoCombustible combustible;
 
-    public VehiculoParticular(TipoVehiculoParticular vehiculo, TipoCombustible combustible, FactorDeEmision factorDeEmision) throws IOException {
+    public VehiculoParticular(TipoVehiculoParticular vehiculo, TipoCombustible combustible) throws IOException {
         this.vehiculo = vehiculo;
         this.combustible = combustible;
         this.setNombre("Vehiculo Particular");
-        this.setFactorDeEmision(factorDeEmision);
         this.setDistanciaAPI();
     }
     public void registrarConsumoDeCombustible(){
         //TODO
+    }
+
+    @Override
+    public String getModelo() {
+        return vehiculo + " " + combustible;
     }
 }

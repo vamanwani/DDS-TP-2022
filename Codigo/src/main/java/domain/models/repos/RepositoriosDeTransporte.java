@@ -1,5 +1,6 @@
 package domain.models.repos;
 
+import domain.models.entities.consumo.TipoConsumo;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
@@ -7,12 +8,20 @@ import domain.models.entities.transporte.*;
 import domain.models.entities.ubicacion.Ubicacion;
 import domain.services.dbManager.EntityManagerHelper;
 
+import java.util.List;
+
 public class RepositoriosDeTransporte {
 
     public Transporte buscar(Integer id) {
         return EntityManagerHelper
                 .getEntityManager()
                 .find(Transporte.class, id);
+    }
+
+    public List<Transporte> buscarTodos() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("from " + Transporte.class.getName())
+                .getResultList();
     }
 
     public TransportePublico buscarTransportePublico(String linea, String tipo) {

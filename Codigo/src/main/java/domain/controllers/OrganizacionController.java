@@ -133,17 +133,23 @@ public class OrganizacionController {
     }
 
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
+        //TODO REPORTES
+        //HC POR CLASIFICACION
+        //COMPOSICION ORG (SECTORES)
+        //EVOLUCION ORG (HISTORICO)
         Organizacion organizacion = EntityManagerHelper
                 .getEntityManager()
                 .find(Organizacion.class, Integer.valueOf(request.params(("id"))));
-        List<HashMap> reportes = new ArrayList<>();
+        //List<HashMap> reportes = new ArrayList<>();
+        List<String> nombresSectores = new ArrayList<>();
+        List<Double> hcSectores = new ArrayList<>();
         Reporte reporte = new Reporte();
 
 //        if (evolucion) else if (composicion)
-        reportes.add(reporte.contenidoReporteEvolucionOrganizacion(organizacion));
-        reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
-        return new ModelAndView(new HashMap<String, HashMap>(){{
-            //put("reportes", reportes);
+//        reportes.add(reporte.contenidoReporteEvolucionOrganizacion(organizacion));
+//        reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
+        return new ModelAndView(new HashMap<String, String>(){{
+            put("reportes", "UnString");
         }}, "/Organizacion/reportesOrg.hbs");
     }
 

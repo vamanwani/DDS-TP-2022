@@ -160,7 +160,7 @@ public class TrayectoController {
         } else if (medio_transporte.equals("contratado")){
             FactorDeEmision fe = new FactorDeEmision(1.00);
             String servicioContratado=request.queryParams("tipo_servicio_contratado");
-            ServicioContratado transporte = new ServicioContratado(servicioContratado, fe);
+            ServicioContratado transporte = new ServicioContratado(servicioContratado);
             this.repositoriosDeTransporte.guardarSiNoExisteContratado(transporte);
             tramo.setMedioDeTransporte(transporte);
         } else if (medio_transporte.equals("analogico")){

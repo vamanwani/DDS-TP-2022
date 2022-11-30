@@ -18,7 +18,7 @@ public class CalculdoraHCMiembro {
                 if (tramo.getMedioDeTransporte().getId() == "Transporte analogico") {
                     HC += 0;
                 } else {
-                    HC += (tramo.distanciaTramo() * tramo.getMedioDeTransporte().getFactorDeEmision().getValorFE()) / tramo.getMiembrosMismoTransporte().size();
+                    HC += (tramo.distanciaTramo() * tramo.getMedioDeTransporte().getFe()) / tramo.getMiembrosMismoTransporte().size();
                 }
             }
         }

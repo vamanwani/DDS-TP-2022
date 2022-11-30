@@ -13,14 +13,15 @@ public class ServicioContratado extends Transporte{
     @Column(name = "servicio")
     private String tipoServicio;
 
+    public String getModelo(){return "-";}
+
     public void registrarConsumoDeCombustible(){
         //TODO
     }
-    public ServicioContratado(String tipoServicio, FactorDeEmision fe) throws IOException {
+    public ServicioContratado(String tipoServicio) throws IOException {
         this.setDistanciaAPI();
         this.setNombre("Servicio Contratado");
         this.tipoServicio = tipoServicio;
-        this.setFactorDeEmision(fe);
     }
 
     public String getTipoServicio() {

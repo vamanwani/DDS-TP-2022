@@ -17,20 +17,20 @@ import java.time.LocalDate;
     @Test
     public void instanciarVehiculosParticulares() throws IOException {
         FactorDeEmision fe = new FactorDeEmision(2.00);
-        VehiculoParticular autoGNC = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.GNC, fe);
-        VehiculoParticular autoGasoil = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.Gasoil, fe);
-        VehiculoParticular autoNafta = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.Nafta, fe);
-        VehiculoParticular autoElectrico = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.Electrico, fe);
+        VehiculoParticular autoGNC = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.GNC);
+        VehiculoParticular autoGasoil = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.Gasoil);
+        VehiculoParticular autoNafta = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.Nafta);
+        VehiculoParticular autoElectrico = new VehiculoParticular(TipoVehiculoParticular.AUTO, TipoCombustible.Electrico);
 
-        VehiculoParticular motoGNC = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.GNC, fe);
-        VehiculoParticular motoGasoil = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.Gasoil, fe);
-        VehiculoParticular motoNafta = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.Nafta, fe);
-        VehiculoParticular motoElectrico = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.Electrico, fe);
+        VehiculoParticular motoGNC = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.GNC);
+        VehiculoParticular motoGasoil = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.Gasoil);
+        VehiculoParticular motoNafta = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.Nafta);
+        VehiculoParticular motoElectrico = new VehiculoParticular(TipoVehiculoParticular.MOTO, TipoCombustible.Electrico);
 
-        VehiculoParticular camionetaGNC = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.GNC, fe);
-        VehiculoParticular camionetaGasoil = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.Gasoil, fe);
-        VehiculoParticular camionetaNafta = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.Nafta, fe);
-        VehiculoParticular camionetaElectrico = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.Electrico, fe);
+        VehiculoParticular camionetaGNC = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.GNC);
+        VehiculoParticular camionetaGasoil = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.Gasoil);
+        VehiculoParticular camionetaNafta = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.Nafta);
+        VehiculoParticular camionetaElectrico = new VehiculoParticular(TipoVehiculoParticular.CAMIONETA, TipoCombustible.Electrico);
 
 
         EntityManagerHelper.beginTransaction();
@@ -53,8 +53,8 @@ import java.time.LocalDate;
     @Test
     public void instanciarTransportesAnalogicos() throws IOException {
         FactorDeEmision fe = new FactorDeEmision(0.00);
-        TransporteAnalogico pie = new TransporteAnalogico(TipoTransporteAnalogico.PIE, fe);
-        TransporteAnalogico bici = new TransporteAnalogico(TipoTransporteAnalogico.BICICLETA, fe);
+        TransporteAnalogico pie = new TransporteAnalogico(TipoTransporteAnalogico.PIE);
+        TransporteAnalogico bici = new TransporteAnalogico(TipoTransporteAnalogico.BICICLETA);
 
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.persist(fe);
@@ -73,7 +73,7 @@ import java.time.LocalDate;
         Ubicacion ubicacionFinal = new Ubicacion("Avenida Cabildo", 2800, localidadFinal);
         Parada paradaInicial = new Parada(ubicacionInicial);
         Parada paradaFinal = new Parada(ubicacionFinal);
-        TransportePublico lineaD = new TransportePublico("D", TipoTransportePublico.lineaSubte, paradaInicial, paradaFinal, fe);
+        TransportePublico lineaD = new TransportePublico("D", TipoTransportePublico.Subte, paradaInicial, paradaFinal);
 
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.persist(fe);

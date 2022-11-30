@@ -35,12 +35,16 @@ public class TransportePublico extends Transporte {
     @JoinColumn(name = "paradaFinal_id")
     private Parada paradaFinal;
 
+    @Override
+    public String getModelo(){
+        return String.valueOf(transporte);
+    }
+
 
     public TransportePublico(String linea,
                              TipoTransportePublico transporte,
                              Parada paradaInicial,
-                             Parada paradaFinal,
-                             FactorDeEmision fe) throws IOException {
+                             Parada paradaFinal) throws IOException {
         this.linea = linea;
         this.transporte = transporte;
         this.paradas = new ArrayList<>();
@@ -48,7 +52,6 @@ public class TransportePublico extends Transporte {
         this.paradaFinal = paradaFinal;
         this.setDistanciaAPI();
         this.setNombre("Transporte Publico");
-        this.setFactorDeEmision(fe);
     }
 
     public void setParadas(List<Parada> paradas) {

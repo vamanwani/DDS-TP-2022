@@ -8,6 +8,8 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import domain.spark.BooleanHelper;
 import domain.spark.HandlebarsTemplateEngineBuilder;
 
+import java.nio.channels.spi.SelectorProvider;
+
 public class Router {
     private static HandlebarsTemplateEngine engine;
 
@@ -106,10 +108,14 @@ public class Router {
 
         Spark.path("/administrador/:id", () -> {
             Spark.get("", administradorController::mostrarMenu, engine);
+            Spark.get("/crear_agente", administradorController::crearAgente, engine);
+            Spark.get("/crear_org", administradorController::crearOrg, engine);
             Spark.post("/generar_org", administradorController::generar_org);
             Spark.post("/generar_agente", administradorController::generar_agente);
-            Spark.get("/gestionar_fe", administradorController::gestionarFE, engine);
+            Spark.get("/gestionar_fe_tipos_consumo", administradorController::gestionarFETiposConsumo, engine);
+            Spark.get("/gestionar_fe_transportes", administradorController::gestionarFETransportes, engine);
             Spark.post("/actualizar_fe/:id_tipo", administradorController::actualizarFE);
+            Spark.post("/actualizar_fe_transporte/:id_transporte", administradorController::actualizarFETransporte);
         });
 
         Spark.path("/prohibido",()->{

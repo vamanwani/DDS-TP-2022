@@ -13,11 +13,12 @@ public class TransporteAnalogico extends Transporte{
     @Column(name = "tipo_transporte")
     private TipoTransporteAnalogico transporte;
 
-    public TransporteAnalogico(TipoTransporteAnalogico transporte, FactorDeEmision fe) throws IOException {
+    public String getModelo(){return "-";}
+
+    public TransporteAnalogico(TipoTransporteAnalogico transporte) throws IOException {
         this.transporte = transporte;
         this.setDistanciaAPI();
         this.setNombre("Transporte Analogico");
-        this.setFactorDeEmision(fe);
     }
     public TransporteAnalogico() throws IOException
     {

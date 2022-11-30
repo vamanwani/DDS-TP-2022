@@ -43,7 +43,7 @@
                 </div>
               </nav>
         </header>
-        <main style="background-color: #873ab9; height: 1000px">
+        <main style="background-color: #873ab9; height: 2000px;">
             <h1>REPORTES</h1>
             <div>
             <select id="valueTipoReporte" class="form-select" aria-label="Default select example" name ="tipo_reporte">
@@ -53,10 +53,11 @@
                                                     <option value="evolucion">Evolucion</option>
             </select>
             </div>
+<div id="valueBack">{{reportes}}</div>
             <h1>GRAFICO COMPOSICION</h1>
                 <div style="width: 50%; background-color: white;">
 
-                    <canvas id="grafica"></canvas>
+                    <canvas id="graficaComp"></canvas>
                 </div>
                 <h1>GRAFICO EVOLUCION</h1>
                                 <div style="width: 50%; background-color: white;">
@@ -69,18 +70,19 @@
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
-                let grafica = document.getElementById("grafica");
+                let grafica = document.getElementById("graficaComp");
 
+              valor = document.getElementById("valueBack").value;
 
                 const data = {
                     labels: [
-                        'Red',
+                        `${valor}`,
                         'Blue',
                         'Yellow'
-                    ],
+                    ],//NOMBRES DE LOS SECTORES
                     datasets: [{
                         label: 'Huella de Carbono',
-                        data: [300, 50, 100],
+                        data: [300, 50, 100],//VALORES DE HC DE LOS SECTORES
                         backgroundColor: [
                         'rgb(255, 99, 132)',
                         'rgb(54, 162, 235)',
@@ -118,6 +120,9 @@
 
                         var chart2 = new Chart(graficaEv, configEv)
             </script>
+
+
+
         <script>
             let tiposTransporte = document.querySelector("#valueTipoReporte")
                       tiposTransporte.addEventListener("change", cambiarTipoReporte)

@@ -14,6 +14,7 @@ public class Reporte {
 
     public HashMap contenidoReporteComposicionOrganizacion(Organizacion organizacion){
         //Diccionario que tenga una lista con los componentes de la organizacion(sectores) y su valor de HC
+        //TODO DIAGRAMA DE PORCENTAJE DEL HC DE CADA SECTOR, QUE VA A SER EL HC RESULTANTE DE SUS MIEMBROS
         HashMap<String, Double> map = new HashMap<String, Double>();
         for (int i = 0; i < organizacion.getSectores().size(); i ++){
             map.put(organizacion.getSectores().get(i).getNombre(), organizacion.getSectores().get(i).calcularHCSector());
@@ -21,6 +22,7 @@ public class Reporte {
         return map;
     }
     public HashMap contenidoReporteComposicionPais(Pais pais) throws IOException{
+        //TODO DIAGRAMA DE PORCENTAJE DEL HC DE PROVINCIA, QUE VA A SER EL HC RESULTANTE DE SUS ORGS
         HashMap<String, Double> map = new HashMap<String, Double>();
         for (SectorTerritorial sector : pais.getSectoresTerritoriales()){
             if (sector.esProvincia()){
@@ -30,6 +32,7 @@ public class Reporte {
         return map;
     }
     public HashMap contenidoReporteComposicionSectorTerritorial(SectorTerritorial sectorTerritorial) throws IOException {
+        //TODO DIAGRAMA DE PORCENTAJE DEL HC DE CADA ORG
         HashMap<String,Double> map = new HashMap<String, Double>();
         for(int i=0; i< sectorTerritorial.getOrganizaciones().size(); i++){
             map.put(sectorTerritorial.getOrganizaciones().get(i).getRazonSocial(), sectorTerritorial.getOrganizaciones().get(i).calcularHCOrgHistorico());
@@ -39,6 +42,7 @@ public class Reporte {
 
     public HashMap contenidoReporteEvolucionOrganizacion(Organizacion organizacion) throws IOException{
         //Diccionario que tenga actualizaciones con mes, año y valor de HC de una organizacion
+        //TODO DIAGRAMA LINEA-TIEMPO QUE MUESTRE EL HC EVOLUTIVO DE UNA ORG
         HashMap<String, Double> map = new HashMap<String, Double>();
         List<PeriodoDeImputacion> periododesDeImputacionDeLaOrganicacion = new ArrayList<>();
 
@@ -57,6 +61,7 @@ public class Reporte {
     }
 
     public HashMap contenidoReporteEvolucionSectorTerritorial(SectorTerritorial sectorTerritorial){
+        //TODO DIAGRAMA LINEA-TIEMPO QUE MUESTRE EL HC EVOLUTIVO DE UN SECTOR TERRITORIAL, QUE ES EL HC RESULTANTE DE TODAS SUS ORGS.
         HashMap<String, Double> map = new HashMap<String, Double>();
         List<PeriodoDeImputacion> periododesDeImputacionDelSectorT = new ArrayList<>();
 
@@ -79,6 +84,7 @@ public class Reporte {
     //Organizaciones->contenidoReporteHCOrganizacion(this.clasificacion, [this])
     //AgenteSecorial->contenidoReporteHCOrganizacion(unaClasificacion, this.organizaciones)
         public HashMap contenidoReporteHCOrganizacion(String clasificaciónDeOrg, List<Organizacion> organizacionList) throws IOException {
+        //TODO SEGUN LA CLASIFICACION QUE ELIJAS EN EL DESPLEGABLE, TE DEVUELVE EL HC DE TODAS LAS ORGS DE ESA CLASIFICACION
         HashMap<String, Double> map = new HashMap<String, Double>();
             double hcDeLaClasificacion = 0;
             for (int j = 0; j < organizacionList.size(); j++){
@@ -87,11 +93,11 @@ public class Reporte {
                 }
             }
             map.put(clasificaciónDeOrg, hcDeLaClasificacion);
-
         return map;
     }
 
     public Double contenidoReporteHCSectorTerritorial(SectorTerritorial sectorTerritorial) throws IOException{
+        //TODO TE DEVUELVE EL HC DE TODAS LAS ORGS SUMADOS
         //Sumatoria de las hc de cada organizacion (usando calculadora para c/u)
             return sectorTerritorial.calcularHCSectorHistorico();
     }
