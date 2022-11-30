@@ -30,8 +30,11 @@
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./editarTrayectos.hbs">Editar Trayectos</a></li>
-                      <li><a class="dropdown-item" href="./unirseAOrg.hbs">Unirse a Organización</a></li>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/hc">Calculadora HC</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/reportes">Vizualizar reportes</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">

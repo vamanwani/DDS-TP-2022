@@ -23,15 +23,17 @@
                         <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
                     </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                     <a class="nav-link active" aria-current="page" href="/miembro/{{miembro.id}}">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./editarTrayectos.hbs">Editar Trayectos</a></li>
-                      <li><a class="dropdown-item" href="./unirseAOrg.hbs">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/hc">Calculadora HC</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/reportes">Vizualizar reportes</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">

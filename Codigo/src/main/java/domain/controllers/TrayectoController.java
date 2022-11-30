@@ -1,6 +1,8 @@
 package domain.controllers;
 
 import domain.models.entities.consumo.FactorDeEmision;
+import domain.models.entities.consumo.PeriodoDeImputacion;
+import domain.models.entities.consumo.TipoPeriodicidad;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.recorridos.Tramo;
@@ -17,6 +19,7 @@ import spark.Response;
 
 import javax.persistence.Entity;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -32,12 +35,15 @@ public class TrayectoController {
     RepositoriosDeTransporte repositoriosDeTransporte = new RepositoriosDeTransporte();
     RepositorioDeLocalidades repositorioDeLocalidades = new RepositorioDeLocalidades();
     RepositorioDeUsuarios repositorioDeUsuarios = new RepositorioDeUsuarios();
+    RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
 
     public ModelAndView mostrarTrayectos(Request request, Response response){
         try{
             String idMimebro = request.params("id");
+            Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
             List<Trayecto> trayectos = this.repo.buscarTodos(new Integer(idMimebro));
             return new ModelAndView(new HashMap<String, Object>(){{
+                put("miembro", miembro);
                 put("trayectos", trayectos);
             }}, "/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
         } catch (Exception ex){
@@ -47,9 +53,11 @@ public class TrayectoController {
 
     public ModelAndView mostarTrayecto(Request request, Response response){
         try{
+            Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
             String idTrayecto = request.params("id_trayecto");
             Trayecto trayecto = this.repo.buscar(Integer.valueOf(idTrayecto));
             return new ModelAndView(new HashMap<String, Object>(){{
+                put("miembro", miembro);
                 put("trayecto", trayecto);
                 put("tramos", trayecto.getTramos());
             }}, "/Miembro/editarTrayecto.hbs");
@@ -72,6 +80,7 @@ public class TrayectoController {
         List<Tramo> tramosExistentes = this.repositorioDeTramos.buscarTodosLosTramosDelMiembro(Math.toIntExact(miembro.getId()));
         miembros.remove(miembro);
         return new ModelAndView(new HashMap<String,Object>(){{
+            put("miembro", miembro);
             put("miembro_id", request.params("id"));
             put("trayecto_id", trayecto.getId());
             put("tramos", trayecto.getTramos());
@@ -93,9 +102,14 @@ public class TrayectoController {
 
     public Response definirTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        trayecto.setFecha(LocalDate.of(Integer.valueOf(request.queryParams("anio_periodo")), Integer.valueOf(request.queryParams("mes_periodo")),
+                Integer.valueOf(request.queryParams("dia_periodo"))));
+        PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(trayecto.getFecha().getMonthValue(), trayecto.getFecha().getYear(), "MENSUAL");
         trayecto.setNombre(request.queryParams("nombre"));
         trayecto.setDescripcion(request.queryParams("descripcion"));
         trayecto.setMiembro(this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id"))));
+        trayecto.setPeriodoDeImputacion(periodoDeImputacion);
+        this.repositorioDeConsumos.guardarSiNoExistePeriodicidad(periodoDeImputacion);
         this.repo.guardar(trayecto);
         response.redirect("/miembro/"+ request.params("id") +"/trayectos");
         return response;

@@ -22,20 +22,22 @@
             <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
+                        <h3 id="nombreUsuario">{{miembro.nombre}}</h3>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./indexMiembro.hbs">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/miembro/{{miembro.id}}">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Acciones
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Editar Trayectos</a></li>
-                            <li><a class="dropdown-item" href="./unirseAOrg.hbs">Unirse a Organización</a></li>
-                        </ul>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/hc">Calculadora HC</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/reportes">Vizualizar reportes</a></li>
+                    </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Login/login.hbs">Cerrar sesión</a>
@@ -58,6 +60,7 @@
                     <tr>
                         <td>Nombre</td>
                         <td>Descripcion</td>
+                        <td>Fecha (AAAA-MM-DD)</td>
                         <td>Cantidad de tramos</td>
                     </tr>
                 </thead>
@@ -66,6 +69,7 @@
                     <tr>
                         <td>{{nombre}}</td>
                         <td>{{descripcion}}</td>
+                        <td>{{fecha}}</td>
                         <td>{{cantidadTramos}}</td>
                         <td>
                         <a type="button" class="btn btn-lg" href="trayectos/{{id}}/editar"
