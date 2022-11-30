@@ -135,7 +135,7 @@ public class OrganizacionController {
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
         Organizacion organizacion = EntityManagerHelper
                 .getEntityManager()
-                .find(Organizacion.class, request.params("id"));
+                .find(Organizacion.class, Integer.valueOf(request.params(("id"))));
         List<HashMap> reportes = new ArrayList<>();
         Reporte reporte = new Reporte();
 
@@ -144,7 +144,7 @@ public class OrganizacionController {
         reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
         return new ModelAndView(new HashMap<String, HashMap>(){{
             //put("reportes", reportes);
-        }}, "");
+        }}, "/Organizacion/reportesOrg.hbs");
     }
 
 

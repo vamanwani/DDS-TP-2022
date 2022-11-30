@@ -62,7 +62,7 @@ public class Router {
             Spark.post("/hc", organizacionController::calcularHC);
 
             // REPORTE
-            Spark.get("/reporte", organizacionController::mostrarReportes, engine);
+            Spark.get("/reportes", organizacionController::mostrarReportes, engine);
         });
 
         Spark.path("/miembro/:id", () -> {
