@@ -9,7 +9,6 @@ import java.util.List;
 public class Provincia {
 
     @Id
-    @GeneratedValue
     @Column(name = "id")
     private int id;
 

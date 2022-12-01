@@ -1,6 +1,7 @@
 package dbtest;
 
 import domain.models.entities.sectorTerritorial.LocalidadesJson;
+import domain.models.entities.sectorTerritorial.ProvinciaJson;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -15,5 +16,10 @@ public class LocalidadesTest {
     }
 
     @Test
-    public void testDeProvincias()
+    public void testDeProvincias() throws FileNotFoundException{
+        ProvinciaJson provinciasAPersistir = new ProvinciaJson("src/main/resources/ProvinciasArgentinas.json");
+        provinciasAPersistir.instanciarProvincias();
+        provinciasAPersistir.persistirProvincias();
+
+    }
 }

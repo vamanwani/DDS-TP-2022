@@ -17,11 +17,11 @@ public class ProvinciaJson {
     private Object archivoJsonObjeto;
     private JsonArray archivoJson;
 
-    public ProvinciaJson(String ruta)
+    public ProvinciaJson(String ruta) throws FileNotFoundException
     {
         this.provincias = new ArrayList<>();
         parser = new JsonParser();
-        //archivoJsonObjeto = parser.parse(new FileReader(ruta));
+        archivoJsonObjeto = parser.parse(new FileReader(ruta));
         archivoJson = (JsonArray) archivoJsonObjeto;
     }
 
