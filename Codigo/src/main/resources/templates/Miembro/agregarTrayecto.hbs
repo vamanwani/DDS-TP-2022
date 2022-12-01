@@ -310,8 +310,8 @@
                 Para transporte público:
                 <select name = "tipo_transporte_publico" id="valueTransportePublico" class="form-select tipoPublico" aria-label="Default select example">
                     <option value="" selected>Tipo Transporte</option>
-                    <option value="Linea Ferrea">Línea Férrea</option>
-                    <option value="Linea Subterraneo">Línea Subterráneo</option>
+                    <option value="Tren">Línea Férrea</option>
+                    <option value="Subte">Línea Subterráneo</option>
                     <option value="Colectivo">Colectivo</option>
                 </select>
                 <div class="contenidoLinea"></div>
@@ -350,18 +350,22 @@
             let tipo = this.value
             let html = ``;
             switch(tipo){
-              case "Linea Ferrea":{
+              case "Tren":{
                 html+= `
                 <select name = "linea" class="form-select" aria-label="Default select example">
-                  <option value="" selected>Linea (LF)</option>
+                    {{#each trenes}}
+                        <option value="id" selected>{{linea}}</option>
+                    {{/each}}
                 </select>
                 `
                 break;
               }
-              case "Linea Subterraneo":{
+              case "Subte":{
                 html+= `
                 <select name = "linea" class="form-select" aria-label="Default select example">
-                  <option value="" selected>Linea (LS)</option>
+                    {{#each subtes}}
+                        <option value={{linea}} selected>{{linea}}</option>
+                    {{/each}}
                 </select>
                 `
                 break;
@@ -369,7 +373,9 @@
               case "Colectivo":{
                 html+= `
                 <select name = "linea" class="form-select" aria-label="Default select example">
-                  <option value="" selected>Linea (C)</option>
+                    {{#each colectivos}}
+                        <option value="id" selected>{{linea}}</option>
+                    {{/each}}
                 </select>
                 `
                 break;

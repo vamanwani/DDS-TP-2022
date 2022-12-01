@@ -47,6 +47,15 @@ public class AdministradorController {
         }}, "Admin/registroOrg.hbs");
     }
 
+    public ModelAndView crearTransportePublico(Request request, Response response){
+        Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
+        List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("administrador", adminisitrador);
+            put("localidades", localidades);
+        }}, "Admin/registroTransPub.hbs");
+    }
+
     public Response generar_org(Request request, Response response) {
         TipoDeOrganizacion tipoDeOrganizacion = TipoDeOrganizacion.valueOf(request.queryParams("tipo_org"));
         ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg(request.queryParams("clasificacion"));

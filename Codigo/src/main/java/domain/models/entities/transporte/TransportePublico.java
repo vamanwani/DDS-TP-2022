@@ -54,6 +54,8 @@ public class TransportePublico extends Transporte {
         this.setNombre("Transporte Publico");
     }
 
+
+
     public void setParadas(List<Parada> paradas) {
         this.paradas = paradas;
     }
@@ -97,5 +99,9 @@ public class TransportePublico extends Transporte {
         } else {
             return this.distancia(puntoFin, puntoInicio);
         }
+    }
+
+    public String getLinea() {
+        return linea;
     }
 }

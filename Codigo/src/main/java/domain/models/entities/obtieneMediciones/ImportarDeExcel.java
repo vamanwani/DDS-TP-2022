@@ -5,6 +5,7 @@ import domain.models.entities.consumo.*;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.repos.RepositorioDeConsumos;
 import domain.models.repos.RepositorioDeOrganizaciones;
+import domain.models.repos.RepositorioDeTiposConsumo;
 import domain.services.dbManager.EntityManagerHelper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,6 +21,7 @@ public class ImportarDeExcel implements Runnable {
 
     RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
     RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+    RepositorioDeTiposConsumo repositorioDeTiposConsumo = new RepositorioDeTiposConsumo();
 
 //    String nombreDeExcel;
 //    Organizacion organizacion;
@@ -121,6 +123,7 @@ public class ImportarDeExcel implements Runnable {
                 FilaConsumo  distancia= listaDeFilaConsumo.get(i+2);
                 FilaConsumo  peso= listaDeFilaConsumo.get(i+3);
                 consumo = instaciarConsumoLogistica(fila, medio, distancia, peso,organizacion); // por fila se refiere a categoria
+                consumo.setTipoConsumo(this.repositorioDeTiposConsumo.buscarLogistica());
                 i += 3; // te saltea las proximas tres filas de una
             } else {
                 consumo = instanciarOtroConsumo(listaDeFilaConsumo.get(i), organizacion);

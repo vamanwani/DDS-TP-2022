@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class TrayectoController {
     // Mostrar trayectos "miembros/:id/trayectos"
@@ -74,12 +75,20 @@ public class TrayectoController {
     public ModelAndView agregarTrayecto(Request request, Response response){
         Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        List<Transporte> transportes = this.repositoriosDeTransporte.buscarTodos();
         List<Provincia> provincias = this.repositorioDeLocalidades.retornarProvincias();
         List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
         List<Miembro> miembros = this.repositorioDeMiembros.retornarMiembros();
         List<Tramo> tramosExistentes = this.repositorioDeTramos.buscarTodosLosTramosDelMiembro(Math.toIntExact(miembro.getId()));
+        List<Transporte> subtes = this.repositoriosDeTransporte.buscarTodosLosSubtes();
+        List<Transporte> colectivos = this.repositoriosDeTransporte.buscarTodosLosColectivos();
+        List<Transporte> trenes = this.repositoriosDeTransporte.buscarTodosLosTrenes();
+
         miembros.remove(miembro);
         return new ModelAndView(new HashMap<String,Object>(){{
+            put("subtes", subtes);
+            put("colectivo", colectivos);
+            put("trenes", trenes);
             put("miembro", miembro);
             put("miembro_id", request.params("id"));
             put("trayecto_id", trayecto.getId());
@@ -210,6 +219,15 @@ public class TrayectoController {
         trayecto.agregarTramo(tramo);
         this.repo.guardar(trayecto);
         response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/agregar");
+        return response;
+    }
+
+    public Response eliminarParada(Request request, Response response){
+        Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
+        Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
+        trayecto.setEstado(false);
+        this.repo.guardar(trayecto);
+        response.redirect("/miembro/"+ miembro.getId()+"/trayectos");
         return response;
     }
 }

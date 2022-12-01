@@ -42,6 +42,15 @@ public class TipoConsumosIinit {
         EntityManagerHelper.commit();
     }
 
+    @Test
+    public void initCamionDeCarga(){
+        TipoConsumo logistica = new TipoConsumo("LOGISITICA", Unidad.M3);
+
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.persist(logistica);
+        EntityManagerHelper.commit();
+    }
+
 //    @Test
 //    public void instanciarTipoConsumo(){
 ////        FactorDeEmision feGasNatural = new FactorDeEmision(2.00);

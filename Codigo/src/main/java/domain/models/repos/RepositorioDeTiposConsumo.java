@@ -25,4 +25,11 @@ public class RepositorioDeTiposConsumo {
                 .createQuery("from " + TipoConsumo.class.getName())
                 .getResultList();
     }
+
+    public TipoConsumo buscarLogistica() {
+        return (TipoConsumo) EntityManagerHelper.getEntityManager()
+                .createQuery("from " + TipoConsumo.class.getName() + " where nombre = 'LOGISITICA'")
+                .getSingleResult();
+
+    }
 }

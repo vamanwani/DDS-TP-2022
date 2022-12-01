@@ -14,6 +14,13 @@ public class RepositorioDeLocalidades {
                 .find(Localidad.class, id);
     }
 
+    public Localidad buscarNombre(String nombre){
+        return (Localidad) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Localidad.class.getName() + " where nombre = '" + nombre + "'")
+                .getSingleResult();
+    }
+
     public List<Localidad> retornarLocalidades(){
         return EntityManagerHelper
                 .getEntityManager()

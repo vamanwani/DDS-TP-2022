@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "localidad")
 public class Localidad {
     @Id
-    @GeneratedValue //TODO no tiene que ser un valor autogenerado, tiene que instanciarse una vez en la BBDD y despues recuperarlo
+    //@GeneratedValue //TODO no tiene que ser un valor autogenerado, tiene que instanciarse una vez en la BBDD y despues recuperarlo
     @Column(name = "id")
     private Integer id;
 
@@ -18,6 +18,9 @@ public class Localidad {
     }
 
     public Localidad() {
+    }
+    public Localidad(String nombre) {
+        this.nombre = nombre;
     }
 
     public Localidad(String nombre, Provincia provincia) {

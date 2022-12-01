@@ -39,6 +39,8 @@ public class Provincia {
     public int getId() {
         return id;
     }
+    
+    public void setId(int unId) {this.id = unId;}
 
     public String getNombre() {
         return nombre;

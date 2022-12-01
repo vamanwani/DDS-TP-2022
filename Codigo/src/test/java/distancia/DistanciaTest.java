@@ -99,8 +99,10 @@ public class DistanciaTest {
     {
         Localidad unaLocalidad = new Localidad("Barracas", new Provincia("BUENOS AIRES"));
         unaLocalidad.setId(1);
+        Localidad otraLocalidad = new Localidad("Barracas", new Provincia("BUENOS AIRES"));
+        otraLocalidad.setId(5);
         Ubicacion unaUbicacion = new Ubicacion("Patricios", 300, unaLocalidad);
-        Ubicacion otraUbicacion = new Ubicacion("Patricios", 400, unaLocalidad);
+        Ubicacion otraUbicacion = new Ubicacion("Patricios", 400, otraLocalidad);
         TransporteAnalogico transporte = new TransporteAnalogico();
 
         Assert.assertEquals(transporte.distancia(unaUbicacion,otraUbicacion),0.0,0.0);

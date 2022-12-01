@@ -87,6 +87,7 @@ public class Router {
                 Spark.get("/:id_trayecto/agregar", trayectoController::agregarTrayecto, engine);
                 Spark.get("/:id_trayecto/editar", trayectoController::mostarTrayecto, engine);
                 Spark.post("/:id_trayecto", trayectoController::definirTrayecto);
+                Spark.post("/:id_trayecto/eliminar", trayectoController::eliminarParada);
 
                 Spark.get("/:id_trayecto/tramos", trayectoController::mostrarTramosDeTrayecto, engine);
                 Spark.post("/:id_trayecto/tramos/agregar_tramo", trayectoController::crearTramo);
@@ -116,6 +117,8 @@ public class Router {
             Spark.get("/gestionar_fe_transportes", administradorController::gestionarFETransportes, engine);
             Spark.post("/actualizar_fe/:id_tipo", administradorController::actualizarFE);
             Spark.post("/actualizar_fe_transporte/:id_transporte", administradorController::actualizarFETransporte);
+            Spark.get("/crear_transporte_publico", administradorController::crearTransportePublico, engine);
+            //Spark.post("/crear_transporte_publico", administradorController::actualizarFETransporte);
         });
 
         Spark.path("/prohibido",()->{

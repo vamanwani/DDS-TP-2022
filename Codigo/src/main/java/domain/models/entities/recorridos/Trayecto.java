@@ -31,6 +31,9 @@ public class Trayecto {
     @JoinColumn(name = "miembro_id")
     private Miembro miembro;
 
+    @Column(name = "estado")
+    private boolean estado = true;
+
     @ManyToOne
     @JoinColumn(name = "periodo_imputacion_id")
     private PeriodoDeImputacion periodoDeImputacion;
@@ -65,6 +68,9 @@ public class Trayecto {
         }).sum();
     }
 
+    public void setEstado(boolean bool){
+        this.estado = bool;
+    }
     public List<Tramo> getTramos() {
         return tramos;
     }

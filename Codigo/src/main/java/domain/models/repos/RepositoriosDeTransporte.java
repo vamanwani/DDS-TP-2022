@@ -27,7 +27,7 @@ public class RepositoriosDeTransporte {
     public TransportePublico buscarTransportePublico(String linea, String tipo) {
         return (TransportePublico) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Transporte.class.getName() + " where linea= '" + linea + "' and transporte = '" + tipo + "'")
+                .createQuery("from " + TransportePublico.class.getName() + " where linea= '" + linea + "' and transporte = '" + tipo + "'")
                 .getSingleResult();
     }
 
@@ -74,5 +74,26 @@ public class RepositoriosDeTransporte {
         } catch (Exception e){
             this.guardar(transporte);
         }
+    }
+
+    public List<Transporte> buscarTodosLosSubtes() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TransportePublico.class.getName() + " where transporte = 'Subte'")
+                .getResultList();
+    }
+
+    public List<Transporte> buscarTodosLosColectivos() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TransportePublico.class.getName() + " where transporte = 'Colectivo'")
+                .getResultList();
+    }
+
+    public List<Transporte> buscarTodosLosTrenes() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TransportePublico.class.getName() + " where transporte = 'Tren'")
+                .getResultList();
     }
 }
