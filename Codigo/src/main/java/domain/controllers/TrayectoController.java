@@ -146,13 +146,17 @@ public class TrayectoController {
         Tramo tramo = new Tramo();
 
         //TODO intentamos usar el metodo de distancia pero rompe antes de mostrar el resultado, no llega al redirect final
-        //Localidad localidadInicio = repositorioDeLocalidades.buscar(Integer.valueOf(request.queryParams("localidad_inicio")));
+        Localidad localidadInicio = repositorioDeLocalidades.buscar(Integer.valueOf(request.queryParams("localidad_inicio")));
         //localidadInicio.setId(24);
-        //Localidad localidadFin = repositorioDeLocalidades.buscar(Integer.valueOf(request.queryParams("localidad_fin")));
+        Localidad localidadFin = repositorioDeLocalidades.buscar(Integer.valueOf(request.queryParams("localidad_fin")));
         //localidadFin.setId(25);
 //        TODO, para la distancia con la API
-        Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"), Integer.valueOf(request.queryParams("punto_inicio_altura")), null);
-        Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"), Integer.valueOf(request.queryParams("punto_fin_altura")), null);
+        Ubicacion puntoInicio = new Ubicacion(request.queryParams("punto_inicio_calle"),
+                Integer.valueOf(request.queryParams("punto_inicio_altura")),
+                localidadInicio);
+        Ubicacion puntoFin = new Ubicacion(request.queryParams("punto_fin_calle"),
+                Integer.valueOf(request.queryParams("punto_fin_altura")),
+                localidadFin);
         //double distancia = transport.distancia(puntoInicio, puntoFin);
 
         String medio_transporte= request.queryParams("medio_transporte");

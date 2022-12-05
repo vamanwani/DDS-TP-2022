@@ -18,4 +18,7 @@ public class Distancia {
         return Double.parseDouble(this.valor);
     }
 
+    public Double getValor() {
+        return Double.parseDouble(valor);
+    }
 }

@@ -38,7 +38,8 @@ public abstract class Transporte {
     }
 
     public double distancia(Ubicacion puntoInicio, Ubicacion puntoFin) throws IOException {
-        return distanciaAPI.distancia(puntoInicio,puntoFin).distancia();
+        distanciaAPI = ServicioGeodds.getInstance();
+        return distanciaAPI.distancia(puntoInicio,puntoFin).getValor();
     }
 
     public String getNombre() {

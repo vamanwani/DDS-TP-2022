@@ -36,7 +36,7 @@ public class ServicioGeodds {
         if(instancia == null){
             instancia = new ServicioGeodds();
         }
-        return instancia;
+        return new ServicioGeodds();
     }
     public Distancia distancia(Ubicacion origen, Ubicacion destino) throws IOException {
         return adapter.distancia(origen,destino);

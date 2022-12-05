@@ -21,7 +21,7 @@ public class Ubicacion extends PadreDeUbicacion{
     private int altura;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "localidad_id")
+    @JoinColumn(name = "localidad")
     private Localidad nombreLocalidad;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -15,9 +15,10 @@ public class RepositorioDeTrayectos {
                 .getResultList();
     }
     public Trayecto buscar(Integer idTrayecto) {
-        return EntityManagerHelper
+        return (Trayecto) EntityManagerHelper
                 .getEntityManager()
-                .find(Trayecto.class, idTrayecto);
+                .createQuery("from " + Trayecto.class.getName() + " where id_trayecto = " + idTrayecto)
+                .getSingleResult();
     }
     public void guardar(Trayecto trayecto) {
         EntityManagerHelper.beginTransaction();
