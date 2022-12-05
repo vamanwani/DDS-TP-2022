@@ -117,7 +117,10 @@ public class Router {
             Spark.get("/gestionar_fe_transportes", administradorController::gestionarFETransportes, engine);
             Spark.post("/actualizar_fe/:id_tipo", administradorController::actualizarFE);
             Spark.post("/actualizar_fe_transporte/:id_transporte", administradorController::actualizarFETransporte);
-            Spark.get("/crear_transporte_publico", administradorController::crearTransportePublico, engine);
+            Spark.post("/crear_transporte_publico", administradorController::crearTransportePublico);
+            Spark.get("/crear_transporte_publico/:id_transporte", administradorController::gestionNuevoTransporte, engine);
+            Spark.post("/crear_transporte_publico/:id_transporte", administradorController::definirDatosTransporte);
+            Spark.post("/crear_transporte_publico/:id_transporte/agregar_parada", administradorController::agregarParada);
             //Spark.post("/crear_transporte_publico", administradorController::actualizarFETransporte);
         });
 

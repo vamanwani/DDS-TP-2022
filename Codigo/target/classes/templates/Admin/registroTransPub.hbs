@@ -43,15 +43,15 @@
     </header>
     <main style="background-color: #3ab94f;">
         <h1>REGISTRAR TRANSPORTE PUBLICO</h1>
-        <form method = "post" action = "/administrador/{{admin.id}}/crear_transporte_publico" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
+{{!--         <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;"> --}}
             <h4>Introduzca los siguientes datos</h4>
-
                 <select name="tipo_transporte_publico" id="selectTransPub" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">
                     <option value="" selected>Tipo Transporte Publico</option>
                     <option value="Tren">Tren</option>
                     <option value="Subte">Subte</option>
                     <option value="Colectivo">Colectivo</option>
                 </select>
+                <input name = "linea" placeholder = "Linea">
                 <div style="display:flex; justify-content:center; align-items:center">
                     <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         AGREGAR PARADA
@@ -64,12 +64,13 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                            <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}/agregar_parada" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
                                 <input name="calle_parada" id="calle" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Calle">
                                 <input name="altura_parada" id="altura" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Altura">
                                 <select name="localidad_parada" id="localidad" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">
-                                    <option value="" selected>Localidad</option>
+                                    <option selected>Localidad</option>
                                     {{#each localidades}}
-                                        <option value="{{nombre}}">{{nombre}}</option>
+                                        <option value="{{id}}">{{nombre}}</option>
                                     {{/each}}
                                 </select>
                               <div style="display: none; justify-content:center" id="bloqueSectores">
@@ -79,8 +80,10 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button id="btnAgregarParadas" type="button" class="btn btn-primary">Agregar</button>
+
+                              <button type="submit">Agregar</button>
                             </div>
+                            </form>
                           </div>
                         </div>
                       </div>

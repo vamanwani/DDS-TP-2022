@@ -35,6 +35,10 @@ public class TransportePublico extends Transporte {
     @JoinColumn(name = "paradaFinal_id")
     private Parada paradaFinal;
 
+    public TransportePublico(String linea, TipoTransportePublico tipoTransportePublicoEnum) {
+        super();
+    }
+
     @Override
     public String getModelo(){
         return String.valueOf(transporte);
@@ -99,6 +103,10 @@ public class TransportePublico extends Transporte {
         } else {
             return this.distancia(puntoFin, puntoInicio);
         }
+    }
+
+    public void agregarParada(Parada parada){
+        this.paradas.add(parada);
     }
 
     public String getLinea() {

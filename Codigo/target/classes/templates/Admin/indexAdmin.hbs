@@ -48,7 +48,9 @@
         <div class="d-grid gap-2 col-6 mx-auto">
             <a href="/administrador/{{admin.id}}/crear_agente" class="btn botonMain" type="button" style="background-color: #e3f2fd;">REGISTRAR AGENTE SECTORIAL</a>
             <a href="/administrador/{{admin.id}}/crear_org" class="btn botonMain" type="button" style="background-color: #e3f2fd;">REGISTRAR ORGANIZACION</a>
-            <a href="/administrador/{{admin.id}}/crear_transporte_publico" class="btn botonMain" type="button" style="background-color: #e3f2fd;">REGISTRAR TRANSPORTE PUBLICO</a>
+            <form method = "post" action = "/administrador/{{admin.id}}/crear_transporte_publico">
+            <button class="btn botonMain" type="submit" style="background-color: #e3f2fd;">REGISTRAR TRANSPORTE PUBLICO</a>
+            </form>
             <a href="/administrador/{{admin.id}}/gestionar_fe_tipos_consumo" class="btn botonMain" type="button" >TRANSPORTE PUBLICOONAR VALORES DE FACTOR DE EMISIÓN PARA LOS TIPOS DE CONSUMO</a>
             <a href="/administrador/{{admin.id}}/gestionar_fe_transportes" class="btn botonMain" type="button" style="background-color: #e3f2fd;">GESTIONAR VALORES DE FACTOR DE EMISIÓN PARA LOS MEDIOS DE TRANSPORTE</a>
         </div>

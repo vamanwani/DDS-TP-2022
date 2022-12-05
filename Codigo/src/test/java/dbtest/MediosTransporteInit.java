@@ -75,6 +75,10 @@ public class MediosTransporteInit {
         Localidad recoleta = this.repositorioDeLocalidades.buscarNombre("RECOLETA");
         Localidad belgrano = this.repositorioDeLocalidades.buscarNombre("BELGRANO");
 
+        System.out.println(san_nicolas.getNombre());
+        System.out.println(recoleta.getNombre());
+        System.out.println(belgrano.getNombre());
+
         Ubicacion ubicacionInicial = new Ubicacion("San Martin", 1, san_nicolas);
         Parada paradaInicial = new Parada(ubicacionInicial);
         paradas.add(paradaInicial);
@@ -160,23 +164,23 @@ public class MediosTransporteInit {
         EntityManagerHelper.persist(joseHernandez);
         EntityManagerHelper.persist(juramento);
         EntityManagerHelper.persist(ubicacionFinal);
-//
-//        EntityManagerHelper.persist(paradaInicial);
-//        EntityManagerHelper.persist(nueveDeJulioParada);
-//        EntityManagerHelper.persist(tribunalesParada);
-//        EntityManagerHelper.persist(callaoParada);
-//        EntityManagerHelper.persist(facultadParada);
-//        EntityManagerHelper.persist(pueyrredonParada);
-//        EntityManagerHelper.persist(agueroParada);
-//        EntityManagerHelper.persist(bulnesParada);
-//        EntityManagerHelper.persist(scalabriniParada);
-//        EntityManagerHelper.persist(plazaItaliaParada);
-//        EntityManagerHelper.persist(palermoParada);
-//        EntityManagerHelper.persist(ministroCarranzaParada);
-//        EntityManagerHelper.persist(ollerosParada);
-//        EntityManagerHelper.persist(joseHernandezParada);
-//        EntityManagerHelper.persist(juramentoParada);
-//        EntityManagerHelper.persist(paradaFinal);
+
+        EntityManagerHelper.persist(paradaInicial);
+        EntityManagerHelper.persist(nueveDeJulioParada);
+        EntityManagerHelper.persist(tribunalesParada);
+        EntityManagerHelper.persist(callaoParada);
+        EntityManagerHelper.persist(facultadParada);
+        EntityManagerHelper.persist(pueyrredonParada);
+        EntityManagerHelper.persist(agueroParada);
+        EntityManagerHelper.persist(bulnesParada);
+        EntityManagerHelper.persist(scalabriniParada);
+        EntityManagerHelper.persist(plazaItaliaParada);
+        EntityManagerHelper.persist(palermoParada);
+        EntityManagerHelper.persist(ministroCarranzaParada);
+        EntityManagerHelper.persist(ollerosParada);
+        EntityManagerHelper.persist(joseHernandezParada);
+        EntityManagerHelper.persist(juramentoParada);
+        EntityManagerHelper.persist(paradaFinal);
 
         EntityManagerHelper.persist(lineaD);
         EntityManagerHelper.commit();
