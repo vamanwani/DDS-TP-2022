@@ -36,7 +36,7 @@ public class Router {
         TrayectoController trayectoController = new TrayectoController();
         AdministradorController administradorController = new AdministradorController();
 
-        Spark.path("/login", () -> {
+        Spark.path("/login", () -> { //TODO cambiar a /inicio_sesion o similar para que no rompa en heroku
             Spark.get("", loginController::pantallaDeLogin, engine);
             Spark.post("", loginController::login);
             Spark.post("/signup", loginController::signup);
