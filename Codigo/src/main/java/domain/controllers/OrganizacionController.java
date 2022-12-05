@@ -129,7 +129,12 @@ public class OrganizacionController {
                 .getEntityManager()
                 .find(Organizacion.class, new Integer(request.params("id")));
 
-        return new ModelAndView(null, "/Organizacion/hcOrganizacion.hbs");
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("hcMiembro", organizacion.calcularHCOrgHistorico());
+            put("organizacion", organizacion);
+        }}, "/Organizacion/hcOrganizacion.hbs");
+
     }
 
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
@@ -188,9 +193,11 @@ public class OrganizacionController {
         Double hcOrg = calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion);
         Double hcDeMiembrosDeOrg = organizacion.hcMiembrosOrganizacion();
         Double hcTotal = hcOrg + hcDeMiembrosDeOrg;
-
+        //TODO MOSTRARLO POR PANTALLA
         response.redirect(String.valueOf(hcTotal));
+
         return null;
+
 
 //        return new ModelAndView(new HashMap<String, Object>(){{
 //            put("hc", hcTotal);
