@@ -13,9 +13,10 @@ import java.util.List;
 public class RepositoriosDeTransporte {
 
     public Transporte buscar(Integer id) {
-        return EntityManagerHelper
+        return (Transporte) EntityManagerHelper
                 .getEntityManager()
-                .find(Transporte.class, id);
+                .createQuery("from " + Transporte.class.getName() + " where id = " + id)
+                .getSingleResult();
     }
 
     public List<Transporte> buscarTodos() {

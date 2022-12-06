@@ -43,7 +43,7 @@
     </header>
     <main style="background-color: #3ab94f;">
         <h1>REGISTRAR TRANSPORTE PUBLICO</h1>
-{{!--         <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;"> --}}
+        <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
             <h4>Introduzca los siguientes datos</h4>
                 <select name="tipo_transporte_publico" id="selectTransPub" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">
                     <option value="" selected>Tipo Transporte Publico</option>
@@ -56,42 +56,44 @@
                     <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         AGREGAR PARADA
                       </button>
-                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalLabel">Sectores</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                            <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}/agregar_parada" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
-                                <input name="calle_parada" id="calle" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Calle">
-                                <input name="altura_parada" id="altura" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Altura">
-                                <select name="localidad_parada" id="localidad" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">
-                                    <option selected>Localidad</option>
-                                    {{#each localidades}}
-                                        <option value="{{id}}">{{nombre}}</option>
-                                    {{/each}}
-                                </select>
-                              <div style="display: none; justify-content:center" id="bloqueSectores">
-                                <div id="sectores" style="display: flex; flex-direction:column "></div>
-                                <button id="btnVolverCant" type="button" class="btn btn-dark">Volver</button>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                              <button type="submit">Agregar</button>
-                            </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
                 </div>
 
             <button type="submit" class="btn btn-lg" style="background-color: rgb(0, 0, 0); margin-top: 4rem; color: white;">REGISTRAR TRANSPORTE PUBLICO</button>
+           </form>
             <div class="paradas"></div>
-        </form>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h1 class="modal-title fs-5" id="exampleModalLabel">Sectores</h1>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}/agregar_parada" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
+                                            <input name="calle_parada" id="calle" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Calle">
+                                            <input name="altura_parada" id="altura" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Altura">
+                                            <select name="localidad_parada" id="localidad" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">
+                                                <option selected>Localidad</option>
+                                                {{#each localidades}}
+                                                    <option value="{{id}}">{{nombre}}</option>
+                                                {{/each}}
+                                            </select>
+                                          <div style="display: none; justify-content:center" id="bloqueSectores">
+                                            <div id="sectores" style="display: flex; flex-direction:column "></div>
+                                            <button id="btnVolverCant" type="button" class="btn btn-dark">Volver</button>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                          <button type="submit">Agregar</button>
+                                        </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
     </main>
     <footer style="background-color: black;">
         <p style="color: white;">@2022 Todos los derechos reservados</p>

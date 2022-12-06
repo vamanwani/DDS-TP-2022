@@ -29,6 +29,9 @@ public class AdministradorController {
     RepositorioDeTiposConsumo repositorioDeTiposConsumo = new RepositorioDeTiposConsumo();
     RepositorioDeAdministradores repositorioDeAdministradores = new RepositorioDeAdministradores();
     RepositoriosDeTransporte repositoriosDeTransporte = new RepositoriosDeTransporte();
+    RepositorioDeUbicaciones repositorioDeUbicaciones = new RepositorioDeUbicaciones();
+    RepositorioDeParadas repositorioDeParadas = new RepositorioDeParadas();
+
     public ModelAndView mostrarMenu(spark.Request request, spark.Response response){
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
         return new ModelAndView(new HashMap<String, Object>(){{
@@ -62,7 +65,7 @@ public class AdministradorController {
     public ModelAndView gestionNuevoTransporte(Request request, Response response){
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
         List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
-        Transporte transporte = new TransportePublico();
+        Transporte transporte = this.repositoriosDeTransporte.buscar(Integer.valueOf(request.params("id_transporte")));
         this.repositoriosDeTransporte.guardar(transporte);
         return new ModelAndView(new HashMap<String, Object>(){{
             put("administrador", adminisitrador);
@@ -73,15 +76,16 @@ public class AdministradorController {
 
     public Response definirDatosTransporte(Request request, Response response){
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
-        Transporte transporte = this.repositoriosDeTransporte.buscar(Integer.valueOf((request.params("id_transporte"))));
+        TransportePublico transporte = (TransportePublico) this.repositoriosDeTransporte.buscar(Integer.valueOf((request.params("id_transporte"))));
         String tipoTransportePublico = request.queryParams("tipo_transporte_publico");
         TipoTransportePublico tipoTransportePublicoEnum = null;
         if (tipoTransportePublico.equals("Tren")) {tipoTransportePublicoEnum = TipoTransportePublico.Tren;}
         else if (tipoTransportePublico.equals("Subte")){tipoTransportePublicoEnum = TipoTransportePublico.Subte;}
         else if (tipoTransportePublico.equals("Colectivo")){tipoTransportePublicoEnum = TipoTransportePublico.Colectivo;}
-        transporte = new TransportePublico(request.queryParams("linea"), tipoTransportePublicoEnum);
+        transporte.setLinea(request.queryParams("linea"));
+        transporte.setTransporte(tipoTransportePublicoEnum);
         this.repositoriosDeTransporte.guardar(transporte);
-
+        response.redirect("/administrador/" + adminisitrador.getId());
         return response;
     }
 
@@ -94,6 +98,10 @@ public class AdministradorController {
                 localidad);
         Parada parada = new Parada(ubicacion);
         transporte.agregarParada(parada);
+        this.repositorioDeUbicaciones.guardarSiNoExiste(ubicacion);
+        this.repositorioDeParadas.guardar(parada);
+        this.repositoriosDeTransporte.guardar(transporte);
+        response.redirect("/administrador/" + adminisitrador.getId() + "/crear_transporte_publico/" + transporte.getId());
         return response;
     }
 

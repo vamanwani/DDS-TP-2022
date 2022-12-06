@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Entity
-@NoArgsConstructor
 @DiscriminatorValue("Publico")
 public class TransportePublico extends Transporte {
 
@@ -23,7 +22,7 @@ public class TransportePublico extends Transporte {
     @Column(name = "transporte")
     private TipoTransportePublico transporte;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "paradas_id")
     private List<Parada> paradas;
 
@@ -56,6 +55,10 @@ public class TransportePublico extends Transporte {
         this.paradaFinal = paradaFinal;
         this.setDistanciaAPI();
         this.setNombre("Transporte Publico");
+    }
+
+    public TransportePublico(){
+        this.paradas = new ArrayList<>();
     }
 
 
@@ -111,5 +114,13 @@ public class TransportePublico extends Transporte {
 
     public String getLinea() {
         return linea;
+    }
+
+    public void setLinea(String linea) {
+        this.linea = linea;
+    }
+
+    public void setTransporte(TipoTransportePublico transporte) {
+        this.transporte = transporte;
     }
 }
