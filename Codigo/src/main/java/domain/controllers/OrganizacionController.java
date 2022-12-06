@@ -34,12 +34,6 @@ import java.util.stream.Collectors;
 
 public class OrganizacionController {
 
-    //
-    // MOSTRAR TRABAJADORES
-    // GENERAR REPORTES
-    // REGISTRAR MEDICIONES pantalla del excel
-    // ACEPTAR VINCULACION
-    // VER SUGERENCIAS
     private RepositorioDeOrganizaciones repo;
     private RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
     private RepositorioDeSolicitudes repositorioDeSolicitudes = new RepositorioDeSolicitudes();
@@ -131,7 +125,7 @@ public class OrganizacionController {
 
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("hcMiembro", organizacion.calcularHCOrgHistorico());
+            put("hcOrganizacion", organizacion.calcularHCOrgHistorico());
             put("organizacion", organizacion);
         }}, "/Organizacion/hcOrganizacion.hbs");
 
@@ -161,14 +155,12 @@ public class OrganizacionController {
 
     public Response aceptarSolicitud(Request request, Response response){
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
-        //System.out.println("prueba" + solicitudVinculacion);
         Miembro miembro = solicitudVinculacion.getMiembro();
         miembro.agregarTrabajo(solicitudVinculacion.getSector());
         Sector sector = solicitudVinculacion.getSector();
         sector.agregarMiembro(miembro);
         solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
-//        this.repositorioDeMiembros.guardar(miembro);
         response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");
         return response;
     }
@@ -193,16 +185,11 @@ public class OrganizacionController {
         Double hcOrg = calculadoraParaOrganizacion.calcularHC(consumos, periodoDeImputacion);
         Double hcDeMiembrosDeOrg = organizacion.hcMiembrosOrganizacion();
         Double hcTotal = hcOrg + hcDeMiembrosDeOrg;
-        //TODO MOSTRARLO POR PANTALLA
-        response.redirect(String.valueOf(hcTotal));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("hcOrganizacion", hcTotal);
+            put("organizacion", organizacion);
+        }}, "/Organizacion/hcOrganizacion.hbs");
 
-        return null;
-
-
-//        return new ModelAndView(new HashMap<String, Object>(){{
-//            put("hc", hcTotal);
-//        }}, "/Organizacion/hcOrganizacion.hbs"); // CORREGIR PLANTILLA QUE CORRESPONDA
-//
     }
 
 }

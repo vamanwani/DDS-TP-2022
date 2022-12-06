@@ -59,9 +59,10 @@ public class Router {
             Spark.put("/aceptar_vinculacion", organizacionController :: actualizarMiembros);
             Spark.get("/recomendaciones", organizacionController::mostrarRecomendaciones, engine);
             Spark.get("/hc", organizacionController::mostrarHC,engine);
+            Spark.get("/hc/:valor", organizacionController::mostrarHC,engine);
             Spark.post("/aceptar_vinculacion/:id_solicitud/aceptar", organizacionController::aceptarSolicitud);
             Spark.post("/aceptar_vinculacion/:id_solicitud/rechazar", organizacionController::rechazarSolicitud);
-            Spark.post("/hc", organizacionController::calcularHC);
+            Spark.post("/hc", organizacionController::calcularHC,engine);
 
             // REPORTE
             Spark.get("/reportes", organizacionController::mostrarReportes, engine);
