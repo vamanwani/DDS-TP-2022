@@ -32,7 +32,7 @@ public class Organizacion {
     @JoinColumn(name = "solicitud_vinculacion_id")
     private List<SolicitudVinculacion> solicitudes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "clasificacion_org_id")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
@@ -57,7 +57,7 @@ public class Organizacion {
     @Column(name = "razon_social")
     private String razonSocial;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
 

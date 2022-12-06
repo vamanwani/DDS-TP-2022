@@ -44,45 +44,50 @@
     </header>
     <main style="background-color: #3ab94f;">
         <h1>REGISTRAR ORGANIZACION</h1>
-        <form action="" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
+        <form method = "post" action="/administrador/{{administrador.id}}/crear_org/{{organizacion.id}}" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
             <h4>Introduzca los siguientes datos</h4>
             <div class="clase1">
-
+            <input name = "nombre_usuario" placeholder = "Nombre de usuario">
+            <input name = "contrasenia" placeholder = "Contraseña" type = "password">
+            <input name = "email" placeholder = "Email">
+            <input name = "telefono" placeholder = "Telefono">
             </div>
-            <input style="width: 75%;" class="form-control" type="text" placeholder="Razón social">
+            <input style="width: 75%;" class="form-control" type="text" placeholder="Razón social" name = "razon_social">
             <div style="display: flex; flex-direction:row; margin-top: 1rem;">
-                <select style="margin-right: 3rem;" class="form-select" aria-label="Default select example">
+                <select style="margin-right: 3rem;" class="form-select" aria-label="Default select example" name = "tipo_org">
                     <option value="" selected>Tipo Organización</option>
                     <option value="Gubernamental">Gubernamental</option>
                     <option value="ONG">ONG</option>
                     <option value="Empresa">Empresa</option>
                     <option value="Institucion">Institucion</option>
                   </select>
-                <input style="margin-left: 10%;" class="form-control" type="text" placeholder="Clasificación">
+                <input style="margin-left: 10%;" class="form-control" type="text" placeholder="Clasificación" name = "clasificacion">
             </div>
             <div style="display: flex; flex-direction:row; margin-top: 1rem;">
                 <div style="margin-right: 5rem;">
-                    <input type="text" class="form-control" placeholder="Calle">
-                    <input type="text" class="form-control" placeholder="Altura">
+                    <input type="text" class="form-control" placeholder="Calle" name = "calle">
+                    <input type="text" class="form-control" placeholder="Altura" name = "altura">
                 </div>
                 <div>
 
-
-                  <select class="form-select" id="selectProvincia" aria-label="Default select example">
+                  <select class="form-select" id="selectProvincia" aria-label="Default select example" name = "provincia">
                     <option value="" selected>Provincia</option>
                     {{#each provincias}}
                     <option class="" value="{{id}}">{{nombre}}</option>
                     {{/each}}
                   </select>
-                  <select class="form-select localidades" aria-label="Default select example">
+                  <select class="form-select localidades" aria-label="Default select example" name = "localidad">
                     <option value="" selected>Localidad</option>
                     {{#each localidades}}
                     <option class="" value="{{id}}">{{nombre}}</option>
                     {{/each}}
 
                   </select>
+                    <button type="submit" class="btn btn-lg" style="background-color: rgb(0, 0, 0); margin-top: 4rem; color: white;">REGISTRAR ORG</button>
 
+                </form>
                 </div>
+
                 <div style="display:flex; justify-content:center; align-items:center">
                     <button type="button" class="btn btn-lg btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         SECTORES
@@ -95,12 +100,13 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            <form method = "post" action = "/administrador/{{administrador.id}}/crear_org/{{organizacion.id}}/agregar_sector">
                               <div id="bloqueCantSectores" style="display: flex;">
+                                <form method = "post" action = "/administrador/{{administrador.id}}/crear_org/{{organizacion.id}}/agregar_sector">
                                 <input id="cantidad" type="text" class="form-control" name = "nombre_sector" placeholder="Nombre Sector">
-                                <button type="submit" >OK</button>
+                                <button type="submit" class="btn btn-primary">OK</button>
+                                </form>
+
                               </div>
-                            </form>
                               <div style="display: none; justify-content:center" id="bloqueSectores">
                                 <div id="sectores" style="display: flex; flex-direction:column "></div>
                                 <button id="btnVolverCant" type="button" class="btn btn-dark">Volver</button>
@@ -115,8 +121,6 @@
                       </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-lg" style="background-color: rgb(0, 0, 0); margin-top: 4rem; color: white;">REGISTRAR ORG</button>
-        </form>
     </main>
     <footer style="background-color: black;">
         <p style="color: white;">@2022 Todos los derechos reservados</p>

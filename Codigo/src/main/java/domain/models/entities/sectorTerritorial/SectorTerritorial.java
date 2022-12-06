@@ -21,6 +21,9 @@ public class SectorTerritorial {
     @JoinColumn(name = "agente_sectorial_id")
     private AgenteSectorial agenteSectorial;
 
+    public void setAgenteSectorial(AgenteSectorial agenteSectorial) {
+        this.agenteSectorial = agenteSectorial;
+    }
 
     @Column(name = "link_recomendacion")
     private String link_recomendacion;
@@ -69,7 +72,7 @@ public class SectorTerritorial {
     }
 
     public Boolean esProvincia(){
-        return this.tipoSector == TipoSectorTerritorial.PROCVINCIAS;
+        return this.tipoSector == TipoSectorTerritorial.PROVINCIAS;
     }
 
     public double calcularHCSectorTerritorial(PeriodoDeImputacion periodoDeImputacion){

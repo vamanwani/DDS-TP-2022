@@ -1,6 +1,7 @@
 package domain.models.entities.sectorTerritorial;
 
 import domain.models.entities.miembro.Usuario;
+import org.bouncycastle.jcajce.provider.symmetric.CAST5;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ public class AgenteSectorial {
     @Column(name = "nombreAgente")
     private String nombre;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

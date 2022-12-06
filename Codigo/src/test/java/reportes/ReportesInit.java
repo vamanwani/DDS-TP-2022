@@ -132,11 +132,11 @@ public class ReportesInit {
 
         primerST = new SectorTerritorial("buenos aires");
         primerST.setOrganizaciones(unaOrganizacion);
-        primerST.setTipoSector(TipoSectorTerritorial.PROCVINCIAS);
+        primerST.setTipoSector(TipoSectorTerritorial.PROVINCIAS);
 
         segundoST = new SectorTerritorial();
         segundoST.setOrganizaciones(otraOrganizacion);
-        segundoST.setTipoSector(TipoSectorTerritorial.PROCVINCIAS);
+        segundoST.setTipoSector(TipoSectorTerritorial.PROVINCIAS);
 
         pais = new Pais();
         Set<SectorTerritorial> sectorTerritorialSet = new HashSet<SectorTerritorial>();

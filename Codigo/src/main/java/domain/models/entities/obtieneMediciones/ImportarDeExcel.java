@@ -111,6 +111,10 @@ public class ImportarDeExcel implements Runnable {
                 System.out.println("");
             }
             instanciasConsumosParaOrganizacion(filaDeConsumos,organizacion);
+
+            wb.close();
+            fis.close();
+
             file.delete();
     }
 

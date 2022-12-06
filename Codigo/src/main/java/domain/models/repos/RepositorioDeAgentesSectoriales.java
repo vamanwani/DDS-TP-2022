@@ -1,6 +1,7 @@
 package domain.models.repos;
 
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
+import domain.models.entities.sectorTerritorial.SectorTerritorial;
 import domain.services.dbManager.EntityManagerHelper;
 
 public class RepositorioDeAgentesSectoriales {
@@ -24,6 +25,12 @@ public class RepositorioDeAgentesSectoriales {
     public void guardar(AgenteSectorial agenteSectorial) {
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().persist(agenteSectorial);
+        EntityManagerHelper.commit();
+    }
+
+    public void guardarSector(SectorTerritorial sectorTerritorial) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(sectorTerritorial);
         EntityManagerHelper.commit();
     }
 }

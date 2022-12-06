@@ -8,9 +8,7 @@ import domain.models.entities.organizacion.ClasificaciónDeOrg;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.organizacion.Sector;
 import domain.models.entities.organizacion.TipoDeOrganizacion;
-import domain.models.entities.sectorTerritorial.AgenteSectorial;
-import domain.models.entities.sectorTerritorial.Localidad;
-import domain.models.entities.sectorTerritorial.Provincia;
+import domain.models.entities.sectorTerritorial.*;
 import domain.models.entities.transporte.TipoTransportePublico;
 import domain.models.entities.transporte.Transporte;
 import domain.models.entities.transporte.TransportePublico;
@@ -33,6 +31,7 @@ public class AdministradorController {
     RepositoriosDeTransporte repositoriosDeTransporte = new RepositoriosDeTransporte();
     RepositorioDeUbicaciones repositorioDeUbicaciones = new RepositorioDeUbicaciones();
     RepositorioDeParadas repositorioDeParadas = new RepositorioDeParadas();
+    RepositorioDeUsuarios repositorioDeUsuarios = new RepositorioDeUsuarios();
 
     public ModelAndView mostrarMenu(spark.Request request, spark.Response response){
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
@@ -60,7 +59,7 @@ public class AdministradorController {
     public ModelAndView gestionarOrgNueva(Request request, Response response){
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
         List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
-        Organizacion organizacion = new Organizacion();
+        Organizacion organizacion = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
         //        List<Provincia> provincias = this.repos
         this.repositorioDeOrganizaciones.guardar(organizacion);
         return new ModelAndView(new HashMap<String, Object>(){{
@@ -126,26 +125,43 @@ public class AdministradorController {
         TipoDeOrganizacion tipoDeOrganizacion = TipoDeOrganizacion.valueOf(request.queryParams("tipo_org"));
         ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg(request.queryParams("clasificacion"));
         String razonSocial = request.queryParams("razon_social");
-        String localidadId = request.queryParams("localidad_id");
+        String localidadId = request.queryParams("localidad");
         Localidad localidad = this.repositorioDeLocalidades.buscar(Integer.valueOf(localidadId));
         Ubicacion ubicacion = new Ubicacion(request.queryParams("calle"), Integer.valueOf(request.queryParams("altura")), localidad);
         Usuario usuario = new Usuario(request.queryParams("nombre_usuario"),
                 request.queryParams("contrasenia"), request.queryParams("email"),
                 request.queryParams("telfono"), TipoUsuario.ORGANIZACION);
-        Organizacion nueva_org = new Organizacion(tipoDeOrganizacion, clasificaciónDeOrg, razonSocial, ubicacion, usuario);
-        repositorioDeOrganizaciones.guardar(nueva_org);
-        response.redirect("");//TODO
+        Organizacion org = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
+        org.setClasificacionDeOrg(clasificaciónDeOrg);
+        org.setTipoDeOrganizacion(tipoDeOrganizacion);
+        org.setRazonSocial(razonSocial);
+        org.setUbicacion(ubicacion);
+        org.setUsuario(usuario);
+        repositorioDeUsuarios.guardar(usuario);
+        repositorioDeUbicaciones.guardarSiNoExiste(ubicacion);
+        repositorioDeOrganizaciones.guardarClasificacion(clasificaciónDeOrg);
+        repositorioDeOrganizaciones.guardar(org);
+        response.redirect("/administrador/" + request.params("id"));
         return response;
     }
 
     public Response generar_agente(Request request, Response response) {
-        String nombre = request.queryParams("nombre");
+        Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
+        String nombreAgente = request.queryParams("nombre_agente");
+        String nombreSector = request.queryParams("nombre_sector");
         Usuario usuario = new Usuario(request.queryParams("nombre_usuario"),
                 request.queryParams("contrasenia"), request.queryParams("email"),
                 request.queryParams("telfono"), TipoUsuario.AGENTESECTORIAL);
-        AgenteSectorial agenteSectorial = new AgenteSectorial(nombre, usuario);
+        TipoSectorTerritorial tipoSectorTerritorial = TipoSectorTerritorial.valueOf(request.queryParams("tipo_sector"));
+
+        AgenteSectorial agenteSectorial = new AgenteSectorial(nombreAgente, usuario);
+        SectorTerritorial sectorTerritorial = new SectorTerritorial(nombreSector);
+        sectorTerritorial.setTipoSector(tipoSectorTerritorial);
+        sectorTerritorial.setAgenteSectorial(agenteSectorial);
         repositorioDeAgentesSectoriales.guardar(agenteSectorial);
-        response.redirect("");//TODO
+        repositorioDeUsuarios.guardar(usuario);
+        repositorioDeAgentesSectoriales.guardarSector(sectorTerritorial);
+        response.redirect("/administrador/" + adminisitrador.getId());
         return response;
     }
 
@@ -201,9 +217,11 @@ public class AdministradorController {
         Organizacion organizacion = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
         Sector sector = new Sector(request.queryParams("nombre_sector"));
         organizacion.agregarSectores(sector);
+        sector.setOrganizacion(organizacion);
         this.repositorioDeOrganizaciones.guardarSector(sector);
         this.repositorioDeOrganizaciones.guardar(organizacion);
-        response.redirect("/adminisitrador/"+ adminisitrador.getId());
+
+        response.redirect("/administrador/"+ adminisitrador.getId() + "/crear_org/" + organizacion.getId());
         return null;
     }
 }
