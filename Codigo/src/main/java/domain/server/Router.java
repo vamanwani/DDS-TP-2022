@@ -111,7 +111,9 @@ public class Router {
         Spark.path("/administrador/:id", () -> {
             Spark.get("", administradorController::mostrarMenu, engine);
             Spark.get("/crear_agente", administradorController::crearAgente, engine);
-            Spark.get("/crear_org", administradorController::crearOrg, engine);
+            Spark.post("/crear_org", administradorController::crearOrg);
+            Spark.get("/crear_org/:id_organizacion", administradorController::gestionarOrgNueva, engine);
+            Spark.post("/crear_org/:id_organizacion/agregar_sector", administradorController::agregarSector);
             Spark.post("/generar_org", administradorController::generar_org);
             Spark.post("/generar_agente", administradorController::generar_agente);
             Spark.get("/gestionar_fe_tipos_consumo", administradorController::gestionarFETiposConsumo, engine);

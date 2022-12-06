@@ -6,9 +6,11 @@ import domain.models.entities.miembro.TipoUsuario;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.organizacion.ClasificaciónDeOrg;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
 import domain.models.entities.organizacion.TipoDeOrganizacion;
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.models.entities.sectorTerritorial.Localidad;
+import domain.models.entities.sectorTerritorial.Provincia;
 import domain.models.entities.transporte.TipoTransportePublico;
 import domain.models.entities.transporte.Transporte;
 import domain.models.entities.transporte.TransportePublico;
@@ -46,10 +48,25 @@ public class AdministradorController {
         }}, "Admin/registroAgSec.hbs");
     }
 
-    public ModelAndView crearOrg(Request request, Response response){
+    public Response crearOrg(Request request, Response response) {
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
+        List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
+        Organizacion organizacion = new Organizacion();
+        this.repositorioDeOrganizaciones.guardar(organizacion);
+        response.redirect("/administrador/" + adminisitrador.getId()+ "/crear_org/" + organizacion.getId());
+        return response;
+    }
+
+    public ModelAndView gestionarOrgNueva(Request request, Response response){
+        Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
+        List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
+        Organizacion organizacion = new Organizacion();
+        //        List<Provincia> provincias = this.repos
+        this.repositorioDeOrganizaciones.guardar(organizacion);
         return new ModelAndView(new HashMap<String, Object>(){{
             put("administrador", adminisitrador);
+            put("localidades", localidades);
+            put("organizacion", organizacion);
         }}, "Admin/registroOrg.hbs");
     }
 
@@ -177,5 +194,16 @@ public class AdministradorController {
 
         response.redirect("/administrador/"+adminisitrador.getId()+"");
         return response;
+    }
+
+    public Response agregarSector(Request request, Response response) {
+        Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
+        Organizacion organizacion = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
+        Sector sector = new Sector(request.queryParams("nombre_sector"));
+        organizacion.agregarSectores(sector);
+        this.repositorioDeOrganizaciones.guardarSector(sector);
+        this.repositorioDeOrganizaciones.guardar(organizacion);
+        response.redirect("/adminisitrador/"+ adminisitrador.getId());
+        return null;
     }
 }

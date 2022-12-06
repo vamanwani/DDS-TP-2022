@@ -111,7 +111,7 @@ public class ImportarDeExcel implements Runnable {
                 System.out.println("");
             }
             instanciasConsumosParaOrganizacion(filaDeConsumos,organizacion);
-
+            file.delete();
     }
 
     public void instanciasConsumosParaOrganizacion(List<FilaConsumo> listaDeFilaConsumo, Organizacion organizacion) {

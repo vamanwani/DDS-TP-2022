@@ -70,12 +70,15 @@
 
                   <select class="form-select" id="selectProvincia" aria-label="Default select example">
                     <option value="" selected>Provincia</option>
-                    <option class="optionLocalidades" value="CABA">CABA</option>
-                    <option class="optionLocalidades" value="Buenos Aires">Buenos Aires</option>
-                    <option class="optionLocalidades" value="Cordoba">Cordoba</option>
+                    {{#each provincias}}
+                    <option class="" value="{{id}}">{{nombre}}</option>
+                    {{/each}}
                   </select>
                   <select class="form-select localidades" aria-label="Default select example">
-
+                    <option value="" selected>Localidad</option>
+                    {{#each localidades}}
+                    <option class="" value="{{id}}">{{nombre}}</option>
+                    {{/each}}
 
                   </select>
 
@@ -92,10 +95,12 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                            <form method = "post" action = "/administrador/{{administrador.id}}/crear_org/{{organizacion.id}}/agregar_sector">
                               <div id="bloqueCantSectores" style="display: flex;">
-                                <input id="cantidad" type="number" class="form-control" placeholder="Cantidad">
-                                <button id="btnOkCant" type="button" class="btn btn-dark">OK</button>
+                                <input id="cantidad" type="text" class="form-control" name = "nombre_sector" placeholder="Nombre Sector">
+                                <button type="submit" >OK</button>
                               </div>
+                            </form>
                               <div style="display: none; justify-content:center" id="bloqueSectores">
                                 <div id="sectores" style="display: flex; flex-direction:column "></div>
                                 <button id="btnVolverCant" type="button" class="btn btn-dark">Volver</button>

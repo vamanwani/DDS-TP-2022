@@ -3,6 +3,7 @@ package domain.models.repos;
 import domain.models.entities.consumo.Consumo;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
 import domain.services.dbManager.EntityManagerHelper;
 
 import java.util.List;
@@ -44,6 +45,14 @@ public class RepositorioDeOrganizaciones {
         EntityManagerHelper.getEntityManager().persist(organizacion);
         EntityManagerHelper.commit();
     }
+
+
+    public void guardarSector(Sector organizacion) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(organizacion);
+        EntityManagerHelper.commit();
+    }
+
 
     public void eliminar(Organizacion organizacion) {
         EntityManagerHelper.beginTransaction();
