@@ -13,10 +13,10 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 200vh;
+    height: 85.8vh;
 }
 .palevioletred{
-    background-color: palevioletred;
+    background-image: linear-gradient(to left, rgb(150, 42, 78), rgb(211, 60, 60)) ;
 }
 .flexColumn{
     display: flex;
@@ -26,7 +26,7 @@ main{
 }
 .bordeForm{
     width: 450px;
-    background-color: yellow;
+    background-image: linear-gradient(to right, rgb(252, 252, 13), rgb(140, 201, 28));
     border-radius: 2rem;
     padding-top: 1rem;
     display: flex;
@@ -116,7 +116,6 @@ main{
 .botonConfirmacion{
     width: 70%;
     padding: 10px 20px;
-    background-color: orange;
     border-radius: 1rem;
     border: 1px solid black;
     margin-bottom: 1rem;
