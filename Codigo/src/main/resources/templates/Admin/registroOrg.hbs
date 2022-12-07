@@ -46,12 +46,11 @@
         <h1>REGISTRAR ORGANIZACION</h1>
         <form method = "post" action="/administrador/{{administrador.id}}/crear_org/{{organizacion.id}}" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
             <h4>Introduzca los siguientes datos</h4>
-            <div class="clase1">
-            <input name = "nombre_usuario" placeholder = "Nombre de usuario">
-            <input name = "contrasenia" placeholder = "Contraseña" type = "password">
-            <input name = "email" placeholder = "Email">
-            <input name = "telefono" placeholder = "Telefono">
-            </div>
+
+            <input style="width: 75%;" class="form-control" name = "nombre_usuario" placeholder = "Nombre de usuario">
+            <input style="width: 75%;" class="form-control" name = "contrasenia" placeholder = "Contraseña" type = "password">
+            <input style="width: 75%;" class="form-control" name = "email" placeholder = "Email">
+            <input style="width: 75%;" class="form-control" name = "telefono" placeholder = "Telefono">
             <input style="width: 75%;" class="form-control" type="text" placeholder="Razón social" name = "razon_social">
             <div style="display: flex; flex-direction:row; margin-top: 1rem;">
                 <select style="margin-right: 3rem;" class="form-select" aria-label="Default select example" name = "tipo_org">

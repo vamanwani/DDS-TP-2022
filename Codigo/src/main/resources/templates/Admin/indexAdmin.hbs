@@ -20,7 +20,7 @@
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">--NOMBRE USUARIO--</h3>
+                        <h3 id="nombreUsuario">{{admin}}</h3>
                     </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -53,7 +53,7 @@
             <form method = "post" action = "/administrador/{{admin.id}}/crear_transporte_publico">
             <button class="btn botonMain" type="submit" style="background-color: #e3f2fd;">REGISTRAR TRANSPORTE PUBLICO</button>
             </form>
-            <a href="/administrador/{{admin.id}}/gestionar_fe_tipos_consumo" class="btn botonMain" type="button" >TRANSPORTE PUBLICOONAR VALORES DE FACTOR DE EMISIÓN PARA LOS TIPOS DE CONSUMO</a>
+            <a href="/administrador/{{admin.id}}/gestionar_fe_tipos_consumo" class="btn botonMain" type="button" style="background-color: #e3f2fd;" >TRANSPORTE PUBLICOONAR VALORES DE FACTOR DE EMISIÓN PARA LOS TIPOS DE CONSUMO</a>
             <a href="/administrador/{{admin.id}}/gestionar_fe_transportes" class="btn botonMain" type="button" style="background-color: #e3f2fd;">GESTIONAR VALORES DE FACTOR DE EMISIÓN PARA LOS MEDIOS DE TRANSPORTE</a>
         </div>
     </main>

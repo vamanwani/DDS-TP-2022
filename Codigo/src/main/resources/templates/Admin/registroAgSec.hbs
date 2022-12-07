@@ -46,8 +46,8 @@
         <h1>REGISTRAR AGENTE SECTORIAL</h1>
         <form method = "post" action="/administrador/{{administrador.id}}/crear_agente" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
             <h4>Introduzca los siguientes datos</h4>
-                        <input name = "nombre_usuario" placeholder = "Nombre de usuario">
-                        <input name = "contrasenia" placeholder = "Contraseña" type = "password">
+            <input name = "nombre_usuario" placeholder = "Nombre de usuario" style="width: 75%; margin-top: 1rem;" class="form-control">
+            <input name = "contrasenia" style="width: 75%; margin-top: 1rem;" class="form-control" placeholder = "Contraseña" type = "password">
             <input name = "nombre_agente"style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Nombre Agente">
             <input name = "nombre_sector" style="width: 70%; margin-top: 2rem;" class="form-control" type="text" placeholder="Nombre Sector">
                 <select name = "tipo_sector" id="selectTipoSector" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">

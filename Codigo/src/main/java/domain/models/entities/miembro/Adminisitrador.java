@@ -25,4 +25,6 @@ public class Adminisitrador {
     public int getId() {
         return id;
     }
+
+
 }
