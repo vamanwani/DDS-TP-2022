@@ -134,21 +134,47 @@ public class OrganizacionController {
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
         //TODO REPORTES
         //HC POR CLASIFICACION
-        //COMPOSICION ORG (SECTORES)
+        //COMPOSICION ORG (SECTORES), el grafico muestra todos los sectores de la org con sus HC
         //EVOLUCION ORG (HISTORICO)
+
         Organizacion organizacion = EntityManagerHelper
                 .getEntityManager()
                 .find(Organizacion.class, Integer.valueOf(request.params(("id"))));
+
+        List<Sector> sectores = new ArrayList<>();
+        sectores = organizacion.getSectores();
+
         //List<HashMap> reportes = new ArrayList<>();
         List<String> nombresSectores = new ArrayList<>();
         List<Double> hcSectores = new ArrayList<>();
+
+        for(Sector s : sectores){
+            nombresSectores.add(s.getNombre());
+            hcSectores.add(s.calcularHCSector());
+        }
+
+        List<Consumo> consumos = new ArrayList<>();//No estoy seguro si se extraen los periodos con una lista de consumos
+        consumos = organizacion.getConsumos();
+
+        List<PeriodoDeImputacion> periodosImputacion = new ArrayList<>();
+        List<Double> hcPeriodos = new ArrayList<>();
+
+        for(Consumo c : consumos){
+            periodosImputacion.add(c.getPeriodicidad());
+            hcPeriodos.add(organizacion.calcularHCOrganizacion(c.getPeriodicidad()));
+        }
+
+
         Reporte reporte = new Reporte();
 
 //        if (evolucion) else if (composicion)
 //        reportes.add(reporte.contenidoReporteEvolucionOrganizacion(organizacion));
 //        reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
         return new ModelAndView(new HashMap<String, String>(){{
-            put("reportes", "UnString");
+            put("nombresSectores", String.valueOf(nombresSectores));
+            put("hcSectores", String.valueOf(hcSectores));
+            put("periodosImputacion", String.valueOf(periodosImputacion));
+            put("hcPeriodos", String.valueOf(hcPeriodos));
         }}, "/Organizacion/reportesOrg.hbs");
     }
 

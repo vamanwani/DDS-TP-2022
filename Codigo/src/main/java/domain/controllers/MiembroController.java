@@ -1,5 +1,7 @@
 package domain.controllers;
 
+import domain.models.entities.consumo.Consumo;
+import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
 import domain.models.entities.organizacion.Organizacion;
@@ -87,8 +89,39 @@ public class MiembroController {
         }}, "/Miembro/hcMiembro.hbs");
     }
 
-    public ModelAndView mostrarReportes(Request request, Response response){
-        return new ModelAndView(null, "/Miembro/reportesMiembro.hbs");
+    public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
+        Organizacion orgDelMiembro = this.repo.mostrarOrganizaciones().get(0);//Traigo la primera org del miembro en su BDD
+
+
+        List<String> nombresSectores = new ArrayList<>();
+        List<Double> hcSectores = new ArrayList<>();
+
+        List<Sector> sectores = new ArrayList<>();
+        sectores = orgDelMiembro.getSectores();
+
+        for(Sector s : sectores){
+            nombresSectores.add(s.getNombre());
+            hcSectores.add(s.calcularHCSector());
+        }
+
+        List<Consumo> consumos = new ArrayList<>();//No estoy seguro si se extraen los periodos con una lista de consumos
+        consumos = orgDelMiembro.getConsumos();
+
+        List<PeriodoDeImputacion> periodosImputacion = new ArrayList<>();
+        List<Double> hcPeriodos = new ArrayList<>();
+
+        for(Consumo c : consumos){
+            periodosImputacion.add(c.getPeriodicidad());
+            hcPeriodos.add(orgDelMiembro.calcularHCOrganizacion(c.getPeriodicidad()));
+        }
+
+
+        return new ModelAndView(new HashMap<String, String>(){{
+            put("nombresSectores", String.valueOf(nombresSectores));
+            put("hcSectores", String.valueOf(hcSectores));
+            put("periodosImputacion", String.valueOf(periodosImputacion));
+            put("hcPeriodos", String.valueOf(hcPeriodos));
+        }}, "/Miembro/reportesMiembro.hbs");
     }
 
 }
