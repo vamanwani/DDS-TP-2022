@@ -45,6 +45,27 @@
     <main style="background-color: #33a5c2;">
         <h1>REPORTES</h1>
         <div>
+        <select id="valueMes" class="form-select" aria-label="Default select example" name ="mes">
+                                                                    <option selected value="">Mes</option>
+                                                                    <option value="1">Enero</option>
+                                                                    <option value="2">Febrero</option>
+                                                                    <option value="3">Marzo</option>
+                                                                    <option value="4">Abril</option>
+                                                                    <option value="5">Mayo</option>
+                                                                    <option value="6">Junio</option>
+                                                                    <option value="7">Julio</option>
+                                                                    <option value="8">Agosto</option>
+                                                                    <option value="9">Septiembre</option>
+                                                                    <option value="10">Octubre</option>
+                                                                    <option value="11">Noviembre</option>
+                                                                    <option value="12">Diciembre</option>
+                                </select>
+                            <input type="number" class="form-control" id="" placeholder="Año" name= "anio">
+                            <select id="valueTipoReporte" class="form-select" aria-label="Default select example" name ="tipo_periodicidad">
+                                                                                <option selected value="">Mes</option>
+                                                                                <option value="mensual">Mensual</option>
+                                                                                <option value="anual">Anual</option>
+                                        </select>
             {{reportesAgSec}}
         </div>
     </main>

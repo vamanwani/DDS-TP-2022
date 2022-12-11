@@ -47,12 +47,16 @@
     </header>
     <main style="background-image: linear-gradient(to left, #b368b3, #6e256e);">
         <h1>VALOR DE SU HUELLA DE CARBONO</h1>
-        <h1>{{hcMiembro}}</h1>
+        <h1 class="hcMiembro">{{hcMiembro}} kg𝑪𝑶𝟐eq</h1>
     </main>
     <footer style="background-color: black;">
         <p style="color: white;">@2022 Todos los derechos reservados</p>
     </footer>
     <!-- JavaScript Bundle with Popper -->
+    <script>
+        let conDecimal = document.querySelector(".hcMiembro").value.toFixed(2);
+        document.querySelector(".hcMiembro").innerHTML = conDecimal;
+    </script>
     <script src="../../Public/navbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>

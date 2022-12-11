@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "miembro")
@@ -43,7 +44,7 @@ public class Miembro {
     private Usuario usuario;
 
     @OneToMany
-    @JoinColumn(name = "trayecto_id")
+    @JoinColumn(name = "miembro_id")
     private List<Trayecto> trayectos;
 
     @Column(name = "mail")
@@ -112,7 +113,7 @@ public class Miembro {
     }
 
     public double calcularHCMiembro(PeriodoDeImputacion periodoDeImputacion) throws IOException {
-        List<Trayecto> trayectos = (List<Trayecto>) this.getTrayectos().stream().filter(t -> t.getPeriodoDeImputacion().equals(periodoDeImputacion));
+        List<Trayecto> trayectos = (List<Trayecto>) this.getTrayectos().stream().filter(t -> t.getPeriodoDeImputacion().equals(periodoDeImputacion)).collect(Collectors.toList());
         return new CalculdoraHCMiembro().calcularHC(trayectos);
     }
 

@@ -74,11 +74,23 @@
                                         <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}/agregar_parada" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">
                                             <input name="calle_parada" id="calle" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Calle">
                                             <input name="altura_parada" id="altura" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Altura">
+
+
                                             <select name="localidad_parada" id="localidad" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">
                                                 <option selected>Localidad</option>
                                                 {{#each localidades}}
                                                     <option value="{{id}}">{{nombre}}</option>
                                                 {{/each}}
+                                            </select>
+                                            <input name="dist_parada_ant" id="altura" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Distnacia a parada anterior">
+                                            <input name="dist_parada_sig" id="altura" style="width: 75%; margin-top: 1rem;" class="form-control" type="text" placeholder="Distnacia a parada siguiente">
+
+                                            <select name = "tipo_parada" style="margin-right: 2rem; width: 50%; margin-top: 3rem;" class="form-select" aria-label="Default select example">
+                                                <option selected> Tipo de parada </option>
+                                                <option value = "inicial"> Inicial </option>
+                                                <option value = "final"> Final </option>
+                                                <option value = "medio"> Intermedia </option>
+
                                             </select>
                                           <div style="display: none; justify-content:center" id="bloqueSectores">
                                             <div id="sectores" style="display: flex; flex-direction:column "></div>

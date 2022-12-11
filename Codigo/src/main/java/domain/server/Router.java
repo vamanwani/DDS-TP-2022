@@ -3,6 +3,9 @@ package domain.server;
 
 import domain.controllers.*;
 
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import domain.spark.BooleanHelper;
@@ -63,6 +66,8 @@ public class Router {
             Spark.post("/aceptar_vinculacion/:id_solicitud/aceptar", organizacionController::aceptarSolicitud);
             Spark.post("/aceptar_vinculacion/:id_solicitud/rechazar", organizacionController::rechazarSolicitud);
             Spark.post("/hc", organizacionController::calcularHC,engine);
+            Spark.post("/reportes", organizacionController::obtenerReportes,engine);
+
 
             // REPORTE
             Spark.get("/reportes", organizacionController::mostrarReportes, engine);
@@ -79,6 +84,7 @@ public class Router {
 
             // REPORTE
             Spark.get("/reporte", miembroController::mostrarReportes, engine);//MUESTRA
+            //Spark.post("/reportes", miembroController::obtenerReportes,engine);
 
             // MANIPULACION DE TRAYECTOS -> SIENDO TRAYECTO UN RECURSO ANIDADO
             Spark.path("/trayectos",() -> {
@@ -106,6 +112,7 @@ public class Router {
             Spark.get("", agenteSectorialController::mostrarMenu, engine); // MENU AGENTE
             Spark.get("/recomendaciones", agenteSectorialController::mostrarRecomendaciones, engine);
             Spark.get("/reporte", agenteSectorialController::mostrarReportes, engine); // REPORTE
+            //Spark.post("/reportes", agenteSectorialController::obtenerReportes,engine);
         });
 
         Spark.path("/administrador/:id", () -> {
@@ -141,4 +148,6 @@ public class Router {
     private static void metodosDePrueba() {
 
     }
+
+
 }

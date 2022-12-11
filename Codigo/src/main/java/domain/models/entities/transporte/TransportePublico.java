@@ -123,4 +123,12 @@ public class TransportePublico extends Transporte {
     public void setTransporte(TipoTransportePublico transporte) {
         this.transporte = transporte;
     }
+
+    public void setParadaInicial(Parada paradaInicial) {
+        this.paradaInicial = paradaInicial;
+    }
+
+    public void setParadaFinal(Parada paradaFinal) {
+        this.paradaFinal = paradaFinal;
+    }
 }

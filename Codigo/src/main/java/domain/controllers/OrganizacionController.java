@@ -1,8 +1,10 @@
 package domain.controllers;
 
 import domain.models.entities.calculoHC.CalculadoraHCOrganizacion;
+import domain.models.entities.calculoHC.CalculadoraHCSector;
 import domain.models.entities.consumo.Consumo;
 import domain.models.entities.consumo.PeriodoDeImputacion;
+import domain.models.entities.consumo.TipoPeriodicidad;
 import domain.models.entities.miembro.EstadoSolicitud;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
@@ -27,9 +29,11 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OrganizacionController {
@@ -37,6 +41,7 @@ public class OrganizacionController {
     private RepositorioDeOrganizaciones repo;
     private RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
     private RepositorioDeSolicitudes repositorioDeSolicitudes = new RepositorioDeSolicitudes();
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public OrganizacionController(){
         this.repo = new RepositorioDeOrganizaciones();
@@ -125,7 +130,7 @@ public class OrganizacionController {
 
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("hcOrganizacion", organizacion.calcularHCOrgHistorico());
+            put("hcOrganizacion", df.format(organizacion.calcularHCOrgHistorico()));
             put("organizacion", organizacion);
         }}, "/Organizacion/hcOrganizacion.hbs");
 
@@ -141,43 +146,9 @@ public class OrganizacionController {
                 .getEntityManager()
                 .find(Organizacion.class, Integer.valueOf(request.params(("id"))));
 
-        List<Sector> sectores = new ArrayList<>();
-        sectores = organizacion.getSectores();
-
-        //List<HashMap> reportes = new ArrayList<>();
-        List<String> nombresSectores = new ArrayList<>();
-        List<Double> hcSectores = new ArrayList<>();
-
-        for(Sector s : sectores){
-            nombresSectores.add(s.getNombre());
-            hcSectores.add(s.calcularHCSector());
-        }
-
-        List<Consumo> consumos = new ArrayList<>();//No estoy seguro si se extraen los periodos con una lista de consumos
-        consumos = organizacion.getConsumos();
-
-        List<PeriodoDeImputacion> periodosImputacion = new ArrayList<>();
-        List<Double> hcPeriodos = new ArrayList<>();
-
-        for(Consumo c : consumos){
-            periodosImputacion.add(c.getPeriodicidad());
-            hcPeriodos.add(organizacion.calcularHCOrganizacion(c.getPeriodicidad()));
-        }
-
-
-        Reporte reporte = new Reporte();
-
-//        if (evolucion) else if (composicion)
-//        reportes.add(reporte.contenidoReporteEvolucionOrganizacion(organizacion));
-//        reportes.add(reporte.contenidoReporteComposicionOrganizacion(organizacion));
         return new ModelAndView(new HashMap<String, String>(){{
-            put("nombresSectores", String.valueOf(nombresSectores));
-            put("hcSectores", String.valueOf(hcSectores));
-            put("periodosImputacion", String.valueOf(periodosImputacion));
-            put("hcPeriodos", String.valueOf(hcPeriodos));
         }}, "/Organizacion/reportesOrg.hbs");
     }
-
 
     public Response aceptarSolicitud(Request request, Response response){
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
@@ -216,6 +187,30 @@ public class OrganizacionController {
             put("organizacion", organizacion);
         }}, "/Organizacion/hcOrganizacion.hbs");
 
+    }
+
+    public ModelAndView obtenerReportes (Request request, Response response) throws IOException {
+        Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
+
+        String tipoReporte = request.queryParams("tipo_reporte");
+        Reporte reporte = new Reporte();
+        HashMap datos = null;
+        if(tipoReporte.equals("composicion")){
+            String mes = request.queryParams("mes");
+            String anio = request.queryParams("anio");
+            String tipoPeriodicidad = request.queryParams("tipo_periodicidad");
+            PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(mes),Integer.valueOf(anio),tipoPeriodicidad);
+           datos = reporte.contenidoReporteComposicionOrganizacion(organizacion, periodoDeImputacion);
+        } else if (tipoReporte.equals("evolucion")) {
+            datos = reporte.contenidoReporteEvolucionOrganizacion(organizacion);
+        }
+
+        HashMap finalDatos = datos;
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("nombres", finalDatos.keySet());
+            put("valores", finalDatos.values());
+        }}, "/Organizacion/reportesOrg.hbs");
     }
 
 }

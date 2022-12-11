@@ -16,6 +16,7 @@ import spark.Request;
 import spark.Response;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,8 @@ public class MiembroController {
     private RepositorioDeSolicitudes repositorioDeSolicitudes = new RepositorioDeSolicitudes();
     private RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
     private RespositorioDeSectores respositorioDeSectores = new RespositorioDeSectores();
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
 
     public MiembroController() {
         this.repo = new RepositorioDeMiembros();
@@ -84,14 +87,14 @@ public class MiembroController {
                 .getEntityManager()
                 .find(Miembro.class, Long.valueOf(request.params("id")));
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("hcMiembro", miembro.calcularHCHistorico());
+            put("hcMiembro", df.format(miembro.calcularHCHistorico()));
             put("miembro", miembro);
         }}, "/Miembro/hcMiembro.hbs");
     }
 
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
         Organizacion orgDelMiembro = this.repo.mostrarOrganizaciones().get(0);//Traigo la primera org del miembro en su BDD
-
+        PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(request.queryParams("mes")), Integer.valueOf(request.queryParams("anio")), request.queryParams("tipo_periodicidad"));
 
         List<String> nombresSectores = new ArrayList<>();
         List<Double> hcSectores = new ArrayList<>();
@@ -101,7 +104,7 @@ public class MiembroController {
 
         for(Sector s : sectores){
             nombresSectores.add(s.getNombre());
-            hcSectores.add(s.calcularHCSector());
+            hcSectores.add(s.calcularHCSector(periodoDeImputacion));
         }
 
         List<Consumo> consumos = new ArrayList<>();//No estoy seguro si se extraen los periodos con una lista de consumos
@@ -114,7 +117,6 @@ public class MiembroController {
             periodosImputacion.add(c.getPeriodicidad());
             hcPeriodos.add(orgDelMiembro.calcularHCOrganizacion(c.getPeriodicidad()));
         }
-
 
         return new ModelAndView(new HashMap<String, String>(){{
             put("nombresSectores", String.valueOf(nombresSectores));

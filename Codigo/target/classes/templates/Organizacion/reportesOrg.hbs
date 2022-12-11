@@ -43,27 +43,53 @@
                 </div>
               </nav>
         </header>
-        <main style="background-color: #873ab9; height: 2000px;">
+        <main style="background-image: linear-gradient(to left, #3aa6b9, #1647e9); height: 2000px;">
             <h1>REPORTES</h1>
             <div>
+            <form method = "post" action = "reportes">
             <select id="valueTipoReporte" class="form-select" aria-label="Default select example" name ="tipo_reporte">
-                                                    <option selected value="">Mes</option>
-                                                    <option value="hc">HC por clasificacion</option>
+                                                    <option selected value="">Tipo Reporte</option>
                                                     <option value="composicion">Composicion</option>
                                                     <option value="evolucion">Evolucion</option>
             </select>
+            <select id="valueMes" class="form-select" aria-label="Default select example" name ="mes">
+                                                                        <option selected value="">Mes</option>
+                                                                        <option value="1">Enero</option>
+                                                                        <option value="2">Febrero</option>
+                                                                        <option value="3">Marzo</option>
+                                                                        <option value="4">Abril</option>
+                                                                        <option value="5">Mayo</option>
+                                                                        <option value="6">Junio</option>
+                                                                        <option value="7">Julio</option>
+                                                                        <option value="8">Agosto</option>
+                                                                        <option value="9">Septiembre</option>
+                                                                        <option value="10">Octubre</option>
+                                                                        <option value="11">Noviembre</option>
+                                                                        <option value="12">Diciembre</option>
+                                    </select>
+                                <input type="number" class="form-control" id="" placeholder="Año" name= "anio">
+                                <select id="valueTipoReporte" class="form-select" aria-label="Default select example" name ="tipo_periodicidad">
+                                                                                    <option selected value="">Tipo Periodicidad</option>
+                                                                                    <option value="MENSUAL">Mensual</option>
+                                                                                    <option value="ANUAL">Anual</option>
+                                            </select>
+                             <button type="submit" class="btn btn-light btn-lg">Obtener reporte</button>
+
+            </form>
             </div>
-<div id="valueBack">{{reportes}}</div>
+            <div id="nombres">{{nombres}}</div>
+            <div id="valores">{{valores}}</div>
+{{!-- <div id="valueBack">{{reportes}}</div> --}}
             <h1>GRAFICO COMPOSICION</h1>
-                <div style="width: 50%; background-color: white;">
+                 <div style="width: 50%; background-color: white;">
 
                     <canvas id="graficaComp"></canvas>
                 </div>
-                <h1>GRAFICO EVOLUCION</h1>
-                                <div style="width: 50%; background-color: white;">
+                 <h1>GRAFICO EVOLUCION</h1>
+                                 <div style="width: 50%; background-color: white;">
 
-                                    <canvas id="graficaEv"></canvas>
-                                </div>
+                                     <canvas id="graficaEv"></canvas>
+                              </div>
         </main>
         <footer style="background-color: black;">
             <p style="color: white;">@2022 Todos los derechos reservados</p>
@@ -76,13 +102,11 @@
 
                 const data = {
                     labels: [
-                        `${valor}`,
-                        'Blue',
-                        'Yellow'
+                        {{nombres}}
                     ],//NOMBRES DE LOS SECTORES
                     datasets: [{
                         label: 'Huella de Carbono',
-                        data: [300, 50, 100],//VALORES DE HC DE LOS SECTORES
+                        data: {{valores}},//VALORES DE HC DE LOS SECTORES
                         backgroundColor: [
                         'rgb(255, 99, 132)',
                         'rgb(54, 162, 235)',
@@ -99,14 +123,16 @@
 
                 var chart = new Chart(grafica, config)
 
+                let listaNombres = JSON.parse(document.getElementById("nombres").innerHTML);
+                let listaValores = JSON.parse(document.getElementById("valores").innerHTML);
 
                 let graficaEv = document.getElementById("graficaEv");
 
                         const dataEv = {
-                        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+                        labels: ["uno", "dos"],
                         datasets: [{
                             label: 'Huella de Carbono',
-                            data: [65, 59, 80, 81, 56, 55, 40],
+                            data: [1, 2],
                             fill: false,
                             borderColor: 'rgb(75, 192, 192)',
                             tension: 0.1

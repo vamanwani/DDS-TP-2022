@@ -100,6 +100,7 @@ public class AdministradorController {
         else if (tipoTransportePublico.equals("Colectivo")){tipoTransportePublicoEnum = TipoTransportePublico.Colectivo;}
         transporte.setLinea(request.queryParams("linea"));
         transporte.setTransporte(tipoTransportePublicoEnum);
+        transporte.setNombre("Transporte Publico");
         this.repositoriosDeTransporte.guardar(transporte);
         response.redirect("/administrador/" + adminisitrador.getId());
         return response;
@@ -112,8 +113,18 @@ public class AdministradorController {
         Ubicacion ubicacion = new Ubicacion(request.queryParams("calle_parada"),
                 Integer.valueOf(request.queryParams("altura_parada")),
                 localidad);
+        double distAnterior = Double.parseDouble(request.queryParams("dist_parada_ant"));
+        double distPost = Double.parseDouble(request.queryParams("dist_parada_sig"));
         Parada parada = new Parada(ubicacion);
         transporte.agregarParada(parada);
+        parada.setDistanciaParadaAnterior(distAnterior);
+        parada.setDistanciaParadaSiguiente(distPost);
+        String tipoParada = request.queryParams("tipo_parada");
+        if (tipoParada.equals("inicial")){
+            transporte.setParadaInicial(parada);
+        } else if (tipoParada.equals("final")){
+            transporte.setParadaFinal(parada);
+        }
         this.repositorioDeUbicaciones.guardarSiNoExiste(ubicacion);
         this.repositorioDeParadas.guardar(parada);
         this.repositoriosDeTransporte.guardar(transporte);

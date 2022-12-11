@@ -161,13 +161,13 @@ public class ReportesInit {
         Assert.assertEquals(hash.size(), 0);
     } // BIEN
 
-    @Test
-    public void pruebaContenidoReporteComposicionOrganizacion(){
-        Reporte unReporte = new Reporte();
-        HashMap<String,Double> hasheo= unReporte.contenidoReporteComposicionOrganizacion(unaOrganizacion);
-        System.out.println(hasheo);
-        Assert.assertEquals(hasheo.size(),0);
-    }
+//    @Test
+//    public void pruebaContenidoReporteComposicionOrganizacion(){
+//        Reporte unReporte = new Reporte();
+//        HashMap<String,Double> hasheo= unReporte.contenidoReporteComposicionOrganizacion(unaOrganizacion);
+//        System.out.println(hasheo);
+//        Assert.assertEquals(hasheo.size(),0);
+//    }
 
     @Test
     public void pruebaComposicionPais() throws IOException{ //TODO revisar

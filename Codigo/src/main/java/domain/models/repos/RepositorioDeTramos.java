@@ -9,10 +9,9 @@ import java.util.stream.Collectors;
 
 public class RepositorioDeTramos {
     public Tramo buscar(Integer id){
-        return (Tramo) EntityManagerHelper
+        return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("FROM " + Tramo.class.getName() + " WHERE id_tramo = "+id)
-                .getSingleResult();
+                .find(Tramo.class, id);
     }
 
     public List<Tramo> buscarTodos(){

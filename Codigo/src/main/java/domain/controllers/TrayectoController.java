@@ -140,7 +140,6 @@ public class TrayectoController {
 
 
     public Response crearTramo(Request request, Response response) throws IOException {
-        //Transporte transport = new TransporteAnalogico();
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Tramo tramo = new Tramo();
