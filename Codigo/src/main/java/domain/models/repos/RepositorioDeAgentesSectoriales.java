@@ -5,6 +5,7 @@ import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.models.entities.sectorTerritorial.SectorTerritorial;
 import domain.services.dbManager.EntityManagerHelper;
 
+import java.util.List;
 import java.util.Set;
 
 public class RepositorioDeAgentesSectoriales {
@@ -48,6 +49,11 @@ public class RepositorioDeAgentesSectoriales {
         return (Set<SectorTerritorial>) EntityManagerHelper
                 .getEntityManager()
                 .createQuery(" from " + SectorTerritorial.class.getName() + " where pais_id = " + id)
+                .getResultList();
+    }
+
+    public List<SectorTerritorial> buscarTodosLosSectores(){
+        return EntityManagerHelper.getEntityManager().createQuery("from " + SectorTerritorial.class.getName())
                 .getResultList();
     }
 }

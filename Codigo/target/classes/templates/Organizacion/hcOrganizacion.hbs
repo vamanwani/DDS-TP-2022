@@ -9,7 +9,7 @@
     <link href="/organizacion/styleOrganizacion.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<header>
+    <header>
         <h1>MI IMPACTO AMBIENTAL</h1>
         <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
             <div class="container-fluid">
@@ -18,28 +18,30 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
-                    </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Acciones
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./registrarMediciones.html">Registrar medición</a></li>
-                      <li><a class="dropdown-item" href="./aceptarVinculaciones.html">Aceptar vinculación</a></li>
-                      <li><a class="dropdown-item" href="./recomendaciones.html">Ver recomendaciones</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../login/login.html">Cerrar sesión</a>
-                  </li>
-                </ul>
-              </div>
+                              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                  <li class="nav-item">
+                                      <h3 id="nombreUsuario">{{organizacion.nombre}}</h3>
+                                  </li>
+                                <li class="nav-item">
+                                     <a class="nav-link active" aria-current="page" href="/organizaciones/{{organizacion.id}}">Home</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Acciones
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/registro_mediciones">Registrar medición</a></li>
+                                    <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/aceptar_vinculacion">Aceptar vinculación</a></li>
+                                    <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/recomendaciones">Ver recomendaciones</a></li>
+                                    <li><a href="/organizaciones/{{organizacion.id}}/hc" class="dropdown-item">Calculadora HC</a></li>
+                                    <li><a href="/organizaciones/{{organizacion.id}}/reportes" class="dropdown-item">Visualizar reportes</a></li>
+                                  </ul>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="../login/login.html">Cerrar sesión</a>
+                                </li>
+                              </ul>
+                            </div>
             </div>
           </nav>
     </header>

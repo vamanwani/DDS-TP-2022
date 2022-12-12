@@ -43,6 +43,7 @@ public class AgenteSectorialController {
                 .getSingleResult();
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("linkRecomendacionesAgSec", sectorTerritorial.getLink_recomendacion());
+                put("agSec", agenteSectorial);
             }}, "/AgenteSectorial/recomendacionesAgSec.hbs");}
         catch(Exception exception){
             return new ModelAndView(null, "/AgenteSectorial/recomendacionesAgSec.hbs");}
@@ -50,7 +51,10 @@ public class AgenteSectorialController {
     }
 
     public ModelAndView mostrarReportes(Request request, Response response){
-        return new ModelAndView(null, "/AgenteSectorial/reportesAgSec.hbs");
+        AgenteSectorial agenteSectorial = this.repo.buscar(Integer.valueOf(request.params("id")));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("agSec", agenteSectorial);
+        }}, "/AgenteSectorial/reportesAgSec.hbs");
     }
 
     public ModelAndView obtenerReporte(Request request, Response response) throws IOException {
@@ -89,6 +93,8 @@ public class AgenteSectorialController {
         return new ModelAndView(new HashMap<String, Object>(){{
             put("nombres", finalDatos.keySet());
             put("valores", finalDatos.values());
+            put("agSec", agenteSectorial);
+            put("tipo_reporte", tipoReporte);
         }}, "/AgenteSectorial/reportesAgSec.hbs");
     }
 }

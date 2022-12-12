@@ -185,7 +185,7 @@ public class Organizacion {
         return tipoDeOrganizacion;
     }
 
-    public String getRazon() {
+    public String getNombre() {
         return razonSocial;
     }
 

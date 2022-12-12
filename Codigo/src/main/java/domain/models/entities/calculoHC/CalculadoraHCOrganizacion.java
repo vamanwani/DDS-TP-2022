@@ -4,11 +4,14 @@ import domain.models.entities.consumo.Consumo;
 import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.consumo.TipoPeriodicidad;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculadoraHCOrganizacion {
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
 
     //if (tipo periodicidad == mes)

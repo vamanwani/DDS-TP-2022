@@ -20,18 +20,18 @@
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
+                        <h3 id="nombreUsuario">{{agSec.nombre}}</h3>
                     </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./indexAgSec.hbs">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/agente_sectorial/{{agSec.id}}">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Visualizar reportes</a></li>
-                      <li><a class="dropdown-item" href="./recomendacionesAgSec.hbs">Ver recomendaciones</a></li>
+                      <li><a class="dropdown-item" href="/agente_sectorial/{{agSec.id}}/reporte">Visualizar reportes</a></li>
+                      <li><a class="dropdown-item" href="/agente_sectorial/{{agSec.id}}/recomendaciones">Ver recomendaciones</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">

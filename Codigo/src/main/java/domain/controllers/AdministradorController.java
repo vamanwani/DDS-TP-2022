@@ -50,6 +50,7 @@ public class AdministradorController {
     public Response crearOrg(Request request, Response response) {
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
         List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
+        List<SectorTerritorial> sectorTerritorials = this.repositorioDeAgentesSectoriales.buscarTodosLosSectores();
         Organizacion organizacion = new Organizacion();
         this.repositorioDeOrganizaciones.guardar(organizacion);
         response.redirect("/administrador/" + adminisitrador.getId()+ "/crear_org/" + organizacion.getId());
@@ -60,12 +61,14 @@ public class AdministradorController {
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
         List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
         Organizacion organizacion = this.repositorioDeOrganizaciones.buscar(Integer.valueOf(request.params("id_organizacion")));
+        List<SectorTerritorial> sectorTerritorials = this.repositorioDeAgentesSectoriales.buscarTodosLosSectores();
         //        List<Provincia> provincias = this.repos
         this.repositorioDeOrganizaciones.guardar(organizacion);
         return new ModelAndView(new HashMap<String, Object>(){{
             put("administrador", adminisitrador);
             put("localidades", localidades);
             put("organizacion", organizacion);
+            put("sectorterritorial", sectorTerritorials);
         }}, "Admin/registroOrg.hbs");
     }
 

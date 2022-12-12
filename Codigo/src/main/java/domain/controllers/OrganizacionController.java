@@ -56,10 +56,11 @@ public class OrganizacionController {
     }
 
     public ModelAndView mostrarRecomendaciones(spark.Request request, spark.Response response){
+        Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
         try{
-            Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("linkRecomendacionesOrg", organizacion.getLinkRecomendacion());
+                put("organizacion", organizacion);
             }}, "/Organizacion/recomendaciones.hbs");
         } catch (Exception ex){
             //TODO si no hay link de recomendaciones
@@ -101,11 +102,15 @@ public class OrganizacionController {
     }
 
     public ModelAndView mostrarSolicitantes(Request request, Response response) {
+        Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
+
         try {
+
             String idOrganizacion = request.params("id");
             List<SolicitudVinculacion> solicitudes = this.repositorioDeSolicitudes.buscarSolicitudesPendientesDeOrg(new Integer(idOrganizacion));
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("solicitudes", solicitudes);
+                put("organizacion", organizacion);
             }}, "/Organizacion/aceptarVinculaciones.hbs");
         } catch (Exception ex){
             //TODO si no hay solicitantes
@@ -146,7 +151,8 @@ public class OrganizacionController {
                 .getEntityManager()
                 .find(Organizacion.class, Integer.valueOf(request.params(("id"))));
 
-        return new ModelAndView(new HashMap<String, String>(){{
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("organizacion", organizacion);
         }}, "/Organizacion/reportesOrg.hbs");
     }
 
@@ -210,6 +216,7 @@ public class OrganizacionController {
         return new ModelAndView(new HashMap<String, Object>(){{
             put("nombres", finalDatos.keySet());
             put("valores", finalDatos.values());
+            put("organizacion", organizacion);
         }}, "/Organizacion/reportesOrg.hbs");
     }
 

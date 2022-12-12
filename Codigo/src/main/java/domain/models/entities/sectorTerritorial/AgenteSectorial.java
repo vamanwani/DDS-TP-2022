@@ -40,4 +40,8 @@ public class AgenteSectorial {
     public int getId() {
         return id;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

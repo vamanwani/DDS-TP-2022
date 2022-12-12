@@ -17,29 +17,31 @@
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
-                        </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Acciones
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="./registrarMediciones.html">Registrar medición</a></li>
-                          <li><a class="dropdown-item" href="./aceptarVinculaciones.html">Aceptar vinculación</a></li>
-                          <li><a class="dropdown-item" href="./recomendaciones.html">Ver recomendaciones</a></li>
-                        </ul>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="../login/login.html">Cerrar sesión</a>
-                      </li>
-                    </ul>
-                  </div>
+                 <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
+                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                     <li class="nav-item">
+                                         <h3 id="nombreUsuario">{{organizacion.nombre}}</h3>
+                                     </li>
+                                   <li class="nav-item">
+                                     <a class="nav-link active" aria-current="page" href="/organizaciones/{{organizacion.id}}">Home</a>
+                                   </li>
+                                   <li class="nav-item dropdown">
+                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                       Acciones
+                                     </a>
+                                     <ul class="dropdown-menu">
+                                       <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/registro_mediciones">Registrar medición</a></li>
+                                       <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/aceptar_vinculacion">Aceptar vinculación</a></li>
+                                       <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/recomendaciones">Ver recomendaciones</a></li>
+                                       <li><a href="/organizaciones/{{organizacion.id}}/hc" class="dropdown-item">Calculadora HC</a></li>
+                                       <li><a href="/organizaciones/{{organizacion.id}}/reportes" class="dropdown-item">Visualizar reportes</a></li>
+                                     </ul>
+                                   </li>
+                                   <li class="nav-item">
+                                     <a class="nav-link" href="../login/login.html">Cerrar sesión</a>
+                                   </li>
+                                 </ul>
+                               </div>
                 </div>
               </nav>
         </header>
@@ -52,33 +54,16 @@
                                                     <option value="composicion">Composicion</option>
                                                     <option value="evolucion">Evolucion</option>
             </select>
-            <select id="valueMes" class="form-select" aria-label="Default select example" name ="mes">
-                                                                        <option selected value="">Mes</option>
-                                                                        <option value="1">Enero</option>
-                                                                        <option value="2">Febrero</option>
-                                                                        <option value="3">Marzo</option>
-                                                                        <option value="4">Abril</option>
-                                                                        <option value="5">Mayo</option>
-                                                                        <option value="6">Junio</option>
-                                                                        <option value="7">Julio</option>
-                                                                        <option value="8">Agosto</option>
-                                                                        <option value="9">Septiembre</option>
-                                                                        <option value="10">Octubre</option>
-                                                                        <option value="11">Noviembre</option>
-                                                                        <option value="12">Diciembre</option>
-                                    </select>
-                                <input type="number" class="form-control" id="" placeholder="Año" name= "anio">
-                                <select id="valueTipoReporte" class="form-select" aria-label="Default select example" name ="tipo_periodicidad">
-                                                                                    <option selected value="">Tipo Periodicidad</option>
-                                                                                    <option value="MENSUAL">Mensual</option>
-                                                                                    <option value="ANUAL">Anual</option>
-                                            </select>
+            <div id="formPeriodo">
+
+            </div>
+
                              <button type="submit" class="btn btn-light btn-lg">Obtener reporte</button>
 
             </form>
             </div>
-            <div id="nombres">{{nombres}}</div>
-            <div id="valores">{{valores}}</div>
+            <p id="nombres">{{nombres}}</p>
+            <p id="valores">{{valores}}</p>
 {{!-- <div id="valueBack">{{reportes}}</div> --}}
             <h1>GRAFICO COMPOSICION</h1>
                  <div style="width: 50%; background-color: white;">
@@ -96,43 +81,57 @@
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
-                let grafica = document.getElementById("graficaComp");
+                let nombres = JSON.parse(document.getElementById("nombres").innerHTML);
+                        let valores = JSON.parse(document.getElementById("valores").innerHTML);
 
-              valor = document.getElementById("valueBack").value;
+                        let graficaComp = document.getElementById("graficaComp");
 
-                const data = {
-                    labels: [
-                        {{nombres}}
-                    ],//NOMBRES DE LOS SECTORES
-                    datasets: [{
-                        label: 'Huella de Carbono',
-                        data: {{valores}},//VALORES DE HC DE LOS SECTORES
-                        backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                    }]
-                };
 
-                const config = {
-                    type: 'doughnut',
-                    data: data,
-                };
+                                const dataComp = {
+                                    labels: nombres,//NOMBRES DE LOS SECTORES
+                                    datasets: [{
+                                        label: 'Huella de Carbono',
+                                        data: valores,//VALORES DE HC DE LOS SECTORES
+                                        backgroundColor: [
+                                        'rgb(206, 24, 24)',
+                                                               'rgb(20, 20, 216)',
+                                                                'rgb(213, 216, 20)',
+                                                                "rgb(20, 216, 30)",
+                                                                "rgb(183, 20, 216)",
+                                                                "rgb(20, 193, 216)",
+                                                                "rgb(216, 131, 20)",
+                                                                "rgb(162, 226, 11)",
+                                                                "rgb(122, 11, 226)",
+                                                                "rgb(12, 58, 0)",
+                                                                "rgb(56, 5, 5)",
+                                                                "rgb(65, 65, 90)",
+                                                                "tomato",
+                                                                "teal",
+                                                                "cornflowerblue",
+                                                                "navy"
+                                        ],
+                                        hoverOffset: 4
+                                    }]
+                                };
+                                const configComp = {
+                                    type: 'doughnut',
+                                    data: dataComp,
+                                };
+                                var chartComp = new Chart(graficaComp, configComp)
 
-                var chart = new Chart(grafica, config)
 
-                let listaNombres = JSON.parse(document.getElementById("nombres").innerHTML);
-                let listaValores = JSON.parse(document.getElementById("valores").innerHTML);
 
-                let graficaEv = document.getElementById("graficaEv");
+
+                        let graficaEv = document.getElementById("graficaEv");
+
+                        console.log(nombres)
+                        console.log(valores)
 
                         const dataEv = {
-                        labels: ["uno", "dos"],
+                        labels: nombres,
                         datasets: [{
-                            label: 'Huella de Carbono',
-                            data: [1, 2],
+                            label: 'My First Dataset',
+                            data: valores,
                             fill: false,
                             borderColor: 'rgb(75, 192, 192)',
                             tension: 0.1
@@ -144,7 +143,7 @@
                             data: dataEv,
                         };
 
-                        var chart2 = new Chart(graficaEv, configEv)
+                        var chartEv = new Chart(graficaEv, configEv)
             </script>
 
 
@@ -154,7 +153,7 @@
                       tiposTransporte.addEventListener("change", cambiarTipoReporte)
                       function cambiarPeriodicidad(e){
                         e.preventDefault()
-                        let tipo = this.value
+                        let tipo = document.querySelector("#valueTipoReporte").value
                         let html = ``;
                         switch(tipo){
                           case "hc":{
@@ -165,9 +164,31 @@
                           }
                           case "composicion":{
                             html+=`
-
+<select id="valueMes" class="form-select" aria-label="Default select example" name ="mes">
+                                                                                    <option selected value="">Mes</option>
+                                                                                    <option value="1">Enero</option>
+                                                                                    <option value="2">Febrero</option>
+                                                                                    <option value="3">Marzo</option>
+                                                                                    <option value="4">Abril</option>
+                                                                                    <option value="5">Mayo</option>
+                                                                                    <option value="6">Junio</option>
+                                                                                    <option value="7">Julio</option>
+                                                                                    <option value="8">Agosto</option>
+                                                                                    <option value="9">Septiembre</option>
+                                                                                    <option value="10">Octubre</option>
+                                                                                    <option value="11">Noviembre</option>
+                                                                                    <option value="12">Diciembre</option>
+                                                </select>
+                                            <input type="number" class="form-control" id="" placeholder="Año" name= "anio">
+                                            <select id="valueTipoReporte" class="form-select" aria-label="Default select example" name ="tipo_periodicidad">
+                                                                                                <option selected value="">Tipo Periodicidad</option>
+                                                                                                <option value="MENSUAL">Mensual</option>
+                                                                                                <option value="ANUAL">Anual</option>
+                                                        </select>
                             `
+                            document.querySelector("#formPeriodo").innerHTML = html;
                             break;
+
                           }
                           case "evolucion":{
                                                       html+=`
@@ -177,7 +198,7 @@
                                                     }
                           default: break;
                         }
-                        document.querySelector("#contenidoTransporteElegido").innerHTML = html;
+
                       }
         </script>
 

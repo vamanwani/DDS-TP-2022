@@ -8,6 +8,7 @@ import domain.models.entities.sectorTerritorial.Pais;
 import domain.models.entities.sectorTerritorial.SectorTerritorial;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +17,13 @@ import java.util.Set;
 public class Reporte {
 
     CalculadoraHCSector calculadoraHCSector = new CalculadoraHCSector();
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public HashMap contenidoReporteComposicionOrganizacion(Organizacion organizacion, PeriodoDeImputacion periodoDeImputacion) throws IOException {
         //TODO DIAGRAMA DE PORCENTAJE DEL HC DE CADA SECTOR, QUE VA A SER EL HC RESULTANTE DE SUS MIEMBROS
         HashMap<String, Double> map = new HashMap<String, Double>();
         for(Sector sector : organizacion.getSectores()){
-            map.put('"'+ sector.getNombre() + '"', sector.calcularHCSector(periodoDeImputacion));
+            map.put('"'+ sector.getNombre() + '"', Double.valueOf(df.format(sector.calcularHCSector(periodoDeImputacion))));
         }
         return map;
     }
@@ -30,7 +32,7 @@ public class Reporte {
         HashMap<String, Double> map = new HashMap<String, Double>();
         for (SectorTerritorial sector : sectores){
             if (sector.esProvincia()){
-                map.put('"' + sector.getNombre() + '"', sector.calcularHCSectorHistorico());
+                map.put('"' + sector.getNombre() + '"', Double.valueOf(df.format(sector.calcularHCSectorHistorico())));
             }
         }
         return map;
@@ -39,7 +41,7 @@ public class Reporte {
         //TODO DIAGRAMA DE PORCENTAJE DEL HC DE CADA ORG
         HashMap<String,Double> map = new HashMap<String, Double>();
         for(int i=0; i< sectorTerritorial.getOrganizaciones().size(); i++){
-            map.put('"' + sectorTerritorial.getOrganizaciones().get(i).getRazonSocial() + '"', sectorTerritorial.getOrganizaciones().get(i).calcularHCOrgHistorico());
+            map.put('"' + sectorTerritorial.getOrganizaciones().get(i).getRazonSocial() + '"', Double.valueOf(df.format(sectorTerritorial.getOrganizaciones().get(i).calcularHCOrgHistorico())));
         }
         return map;
     }
@@ -57,7 +59,7 @@ public class Reporte {
         }
 
         for (int j = 0; j < periododesDeImputacionDeLaOrganicacion.size(); j++){ // LLENAR EL HASMAP CON LOS HC DE CADA PERIODO
-            double hc = organizacion.calcularHCOrganizacion(periododesDeImputacionDeLaOrganicacion.get(j));
+            double hc = Double.parseDouble(df.format(organizacion.calcularHCOrganizacion(periododesDeImputacionDeLaOrganicacion.get(j))));
             map.put('"' + Integer.toString(periododesDeImputacionDeLaOrganicacion.get(j).getMes()) + "/" + Integer.toString(periododesDeImputacionDeLaOrganicacion.get(j).getAnio()) + '"', hc);
         }
 
@@ -77,7 +79,7 @@ public class Reporte {
             }
         }
         for (int j = 0; j < periododesDeImputacionDelSectorT.size(); j++){ // LLENAR EL HASMAP CON LOS HC DE CADA PERIODO
-            double hc = sectorTerritorial.calcularHCSectorTerritorial(periododesDeImputacionDelSectorT.get(j));
+            double hc = Double.parseDouble(df.format(sectorTerritorial.calcularHCSectorTerritorial(periododesDeImputacionDelSectorT.get(j))));
             map.put('"' + Integer.toString(periododesDeImputacionDelSectorT.get(j).getMes()) + "/" + Integer.toString(periododesDeImputacionDelSectorT.get(j).getAnio()) + '"', hc);
         }
 
@@ -93,7 +95,7 @@ public class Reporte {
             double hcDeLaClasificacion = 0;
             for (int j = 0; j < organizacionList.size(); j++){
                 if (organizacionList.get(j).getTipo().toString().equals(tipoOrg)) {
-                    hcDeLaClasificacion += organizacionList.get(j).calcularHCOrgHistorico();
+                    hcDeLaClasificacion += Double.valueOf(df.format(organizacionList.get(j).calcularHCOrgHistorico()));
                 }
             }
             map.put('"' + tipoOrg + '"', hcDeLaClasificacion);
@@ -104,7 +106,7 @@ public class Reporte {
         //TODO TE DEVUELVE EL HC DE TODAS LAS ORGS SUMADOS
         //Sumatoria de las hc de cada organizacion (usando calculadora para c/u)
         HashMap<String, Double> map = new HashMap<>();
-        map.put("HC TOTAL", sectorTerritorial.calcularHCSectorHistorico());
+        map.put("HC TOTAL", Double.valueOf(df.format(sectorTerritorial.calcularHCSectorHistorico())));
         return map;
     }
 

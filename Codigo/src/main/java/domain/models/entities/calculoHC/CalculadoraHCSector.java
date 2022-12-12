@@ -7,10 +7,13 @@ import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculadoraHCSector {
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public double calcularHCMensual(List<Miembro> miembros, PeriodoDeImputacion periodoDeImputacion) throws IOException {
         Double hc = Double.valueOf(0);
