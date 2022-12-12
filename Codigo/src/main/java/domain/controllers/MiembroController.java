@@ -93,36 +93,9 @@ public class MiembroController {
     }
 
     public ModelAndView mostrarReportes(Request request, Response response) throws IOException {
-        Organizacion orgDelMiembro = this.repo.mostrarOrganizaciones().get(0);//Traigo la primera org del miembro en su BDD
-        PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(request.queryParams("mes")), Integer.valueOf(request.queryParams("anio")), request.queryParams("tipo_periodicidad"));
-
-        List<String> nombresSectores = new ArrayList<>();
-        List<Double> hcSectores = new ArrayList<>();
-
-        List<Sector> sectores = new ArrayList<>();
-        sectores = orgDelMiembro.getSectores();
-
-        for(Sector s : sectores){
-            nombresSectores.add(s.getNombre());
-            hcSectores.add(s.calcularHCSector(periodoDeImputacion));
-        }
-
-        List<Consumo> consumos = new ArrayList<>();//No estoy seguro si se extraen los periodos con una lista de consumos
-        consumos = orgDelMiembro.getConsumos();
-
-        List<PeriodoDeImputacion> periodosImputacion = new ArrayList<>();
-        List<Double> hcPeriodos = new ArrayList<>();
-
-        for(Consumo c : consumos){
-            periodosImputacion.add(c.getPeriodicidad());
-            hcPeriodos.add(orgDelMiembro.calcularHCOrganizacion(c.getPeriodicidad()));
-        }
-
-        return new ModelAndView(new HashMap<String, String>(){{
-            put("nombresSectores", String.valueOf(nombresSectores));
-            put("hcSectores", String.valueOf(hcSectores));
-            put("periodosImputacion", String.valueOf(periodosImputacion));
-            put("hcPeriodos", String.valueOf(hcPeriodos));
+        Miembro miembro = this.repo.buscar(Integer.valueOf(request.params("id")));
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("miembro", miembro);
         }}, "/Miembro/reportesMiembro.hbs");
     }
 

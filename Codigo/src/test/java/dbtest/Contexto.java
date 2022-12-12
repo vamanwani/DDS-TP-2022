@@ -12,9 +12,13 @@ import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.models.entities.sectorTerritorial.Localidad;
+import domain.models.entities.sectorTerritorial.Pais;
+import domain.models.entities.sectorTerritorial.SectorTerritorial;
 import domain.models.entities.transporte.Transporte;
 import domain.models.entities.ubicacion.Ubicacion;
+import domain.models.repos.RepositorioDeAgentesSectoriales;
 import domain.models.repos.RepositorioDeMiembros;
+import domain.models.repos.RepositorioDeOrganizaciones;
 import domain.models.repos.RepositoriosDeTransporte;
 import domain.services.dbManager.EntityManagerHelper;
 import org.junit.Test;
@@ -47,8 +51,13 @@ public class Contexto {
         organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
         organizacion.setUsuario(usuarioOrg);
 
+        Pais pais = new Pais("Argentina");
         Usuario usuarioAgSec = new Usuario("agsec", "agente", "agsec@gmail.com", "45062020", TipoUsuario.AGENTESECTORIAL);
         AgenteSectorial agenteSectorial = new AgenteSectorial("agente", usuarioAgSec);
+        SectorTerritorial sectorTerritorial = new SectorTerritorial("SectorA");
+        sectorTerritorial.setAgenteSectorial(agenteSectorial);
+        sectorTerritorial.setOrganizaciones(organizacion);
+        sectorTerritorial.setPais(pais);
 
         Sector sector1 = new Sector("RR.HH");
         Sector sector2 = new Sector("Finanzas");
@@ -66,6 +75,8 @@ public class Contexto {
         EntityManagerHelper.getEntityManager().persist(agenteSectorial);
         EntityManagerHelper.getEntityManager().persist(sector1);
         EntityManagerHelper.getEntityManager().persist(sector2);
+        EntityManagerHelper.getEntityManager().persist(pais);
+        EntityManagerHelper.getEntityManager().persist(sectorTerritorial);
         EntityManagerHelper.commit();
 
         // ahora con un miembro para probar las fk
@@ -75,10 +86,13 @@ public class Contexto {
     @Test
     public void persistirOrg(){
         Organizacion organizacion = new Organizacion();
-        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Empresa);
-        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("fasdfsa");
+        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
+        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("nuevaClasif");
         organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
-        organizacion.setRazonSocial("razonSocial");
+        organizacion.setRazonSocial("UBA");
+        RepositorioDeAgentesSectoriales repositorioDeAgentesSectoriales = new RepositorioDeAgentesSectoriales();
+        SectorTerritorial sectorTerritorial = repositorioDeAgentesSectoriales.buscarSectorSegunAgente(1);
+        sectorTerritorial.setOrganizaciones(organizacion);
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
         EntityManagerHelper.getEntityManager().persist(organizacion);

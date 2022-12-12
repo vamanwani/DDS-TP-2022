@@ -1,5 +1,6 @@
 package domain.models.repos;
 
+
 import domain.models.entities.consumo.Consumo;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.organizacion.ClasificaciónDeOrg;
@@ -37,6 +38,13 @@ public class RepositorioDeOrganizaciones {
                 .getSingleResult();
     }
 
+    public List<Organizacion> buscarSegunTipOrg(String tipoOrg){
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Organizacion.class.getName() + " where tipo_org = '" + tipoOrg  + "'")
+                .getResultList();
+    }
+
     public void modificar(Organizacion servicio) {
         this.guardar(servicio);
     }
@@ -65,6 +73,12 @@ public class RepositorioDeOrganizaciones {
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().remove(organizacion);
         EntityManagerHelper.commit();
+    }
+
+    public List<Organizacion> buscarTodas() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("from " + Organizacion.class.getName())
+                .getResultList();
     }
 
     /*public List<Tramo> buscarTodosLosTramos(Integer idTrayecto) {

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class Reporte {
 
@@ -24,10 +25,10 @@ public class Reporte {
         }
         return map;
     }
-    public HashMap contenidoReporteComposicionPais(Pais pais) throws IOException{
+    public HashMap contenidoReporteComposicionPais(Set<SectorTerritorial> sectores, PeriodoDeImputacion periodoDeImputacion) throws IOException{
         //TODO DIAGRAMA DE PORCENTAJE DEL HC DE PROVINCIA, QUE VA A SER EL HC RESULTANTE DE SUS ORGS
         HashMap<String, Double> map = new HashMap<String, Double>();
-        for (SectorTerritorial sector : pais.getSectoresTerritoriales()){
+        for (SectorTerritorial sector : sectores){
             if (sector.esProvincia()){
                 map.put('"' + sector.getNombre() + '"', sector.calcularHCSectorHistorico());
             }
@@ -86,23 +87,25 @@ public class Reporte {
     //TODO ESTE REPORTE NO PUEDEN GENERARLO LOS MIEMBROS.
     //Organizaciones->contenidoReporteHCOrganizacion(this.clasificacion, [this])
     //AgenteSecorial->contenidoReporteHCOrganizacion(unaClasificacion, this.organizaciones)
-        public HashMap contenidoReporteHCOrganizacion(String clasificaciónDeOrg, List<Organizacion> organizacionList) throws IOException {
+        public HashMap contenidoReporteHCOrganizacion(String tipoOrg, List<Organizacion> organizacionList) throws IOException {
         //TODO SEGUN LA CLASIFICACION QUE ELIJAS EN EL DESPLEGABLE, TE DEVUELVE EL HC DE TODAS LAS ORGS DE ESA CLASIFICACION
         HashMap<String, Double> map = new HashMap<String, Double>();
             double hcDeLaClasificacion = 0;
             for (int j = 0; j < organizacionList.size(); j++){
-                if (organizacionList.get(j).getClasificacionDeOrg().getNombre() == clasificaciónDeOrg) {
+                if (organizacionList.get(j).getTipo().toString().equals(tipoOrg)) {
                     hcDeLaClasificacion += organizacionList.get(j).calcularHCOrgHistorico();
                 }
             }
-            map.put('"' + clasificaciónDeOrg + '"', hcDeLaClasificacion);
+            map.put('"' + tipoOrg + '"', hcDeLaClasificacion);
         return map;
     }
 
-    public Double contenidoReporteHCSectorTerritorial(SectorTerritorial sectorTerritorial) throws IOException{
+    public HashMap contenidoReporteHCSectorTerritorial(SectorTerritorial sectorTerritorial) throws IOException{
         //TODO TE DEVUELVE EL HC DE TODAS LAS ORGS SUMADOS
         //Sumatoria de las hc de cada organizacion (usando calculadora para c/u)
-            return sectorTerritorial.calcularHCSectorHistorico();
+        HashMap<String, Double> map = new HashMap<>();
+        map.put("HC TOTAL", sectorTerritorial.calcularHCSectorHistorico());
+        return map;
     }
 
 }

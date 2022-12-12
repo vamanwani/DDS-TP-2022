@@ -83,8 +83,8 @@ public class Router {
 
 
             // REPORTE
-            Spark.get("/reporte", miembroController::mostrarReportes, engine);//MUESTRA
-            //Spark.post("/reportes", miembroController::obtenerReportes,engine);
+            Spark.get("/reportes", miembroController::mostrarReportes, engine);//MUESTRA
+//            Spark.post("/reportes", miembroController::obtenerReportes,engine);
 
             // MANIPULACION DE TRAYECTOS -> SIENDO TRAYECTO UN RECURSO ANIDADO
             Spark.path("/trayectos",() -> {
@@ -112,7 +112,7 @@ public class Router {
             Spark.get("", agenteSectorialController::mostrarMenu, engine); // MENU AGENTE
             Spark.get("/recomendaciones", agenteSectorialController::mostrarRecomendaciones, engine);
             Spark.get("/reporte", agenteSectorialController::mostrarReportes, engine); // REPORTE
-            //Spark.post("/reportes", agenteSectorialController::obtenerReportes,engine);
+            Spark.post("/reportes", agenteSectorialController::obtenerReporte,engine);
         });
 
         Spark.path("/administrador/:id", () -> {
