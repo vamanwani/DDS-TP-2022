@@ -77,8 +77,8 @@
 
             </form>
             </div>
-            <div id="nombres">{{nombres}}</div>
-            <div id="valores">{{valores}}</div>
+            <p id="nombres">{{nombres}}</p>
+            <p id="valores">{{valores}}</p>
 {{!-- <div id="valueBack">{{reportes}}</div> --}}
             <h1>GRAFICO COMPOSICION</h1>
                  <div style="width: 50%; background-color: white;">
@@ -96,43 +96,57 @@
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
-                let grafica = document.getElementById("graficaComp");
+                let nombres = JSON.parse(document.getElementById("nombres").innerHTML);
+                        let valores = JSON.parse(document.getElementById("valores").innerHTML);
 
-              valor = document.getElementById("valueBack").value;
+                        let graficaComp = document.getElementById("graficaComp");
 
-                const data = {
-                    labels: [
-                        {{nombres}}
-                    ],//NOMBRES DE LOS SECTORES
-                    datasets: [{
-                        label: 'Huella de Carbono',
-                        data: {{valores}},//VALORES DE HC DE LOS SECTORES
-                        backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                    }]
-                };
 
-                const config = {
-                    type: 'doughnut',
-                    data: data,
-                };
+                                const dataComp = {
+                                    labels: nombres,//NOMBRES DE LOS SECTORES
+                                    datasets: [{
+                                        label: 'Huella de Carbono',
+                                        data: valores,//VALORES DE HC DE LOS SECTORES
+                                        backgroundColor: [
+                                        'rgb(206, 24, 24)',
+                                                               'rgb(20, 20, 216)',
+                                                                'rgb(213, 216, 20)',
+                                                                "rgb(20, 216, 30)",
+                                                                "rgb(183, 20, 216)",
+                                                                "rgb(20, 193, 216)",
+                                                                "rgb(216, 131, 20)",
+                                                                "rgb(162, 226, 11)",
+                                                                "rgb(122, 11, 226)",
+                                                                "rgb(12, 58, 0)",
+                                                                "rgb(56, 5, 5)",
+                                                                "rgb(65, 65, 90)",
+                                                                "tomato",
+                                                                "teal",
+                                                                "cornflowerblue",
+                                                                "navy"
+                                        ],
+                                        hoverOffset: 4
+                                    }]
+                                };
+                                const configComp = {
+                                    type: 'doughnut',
+                                    data: dataComp,
+                                };
+                                var chartComp = new Chart(graficaComp, configComp)
 
-                var chart = new Chart(grafica, config)
 
-                let listaNombres = JSON.parse(document.getElementById("nombres").innerHTML);
-                let listaValores = JSON.parse(document.getElementById("valores").innerHTML);
 
-                let graficaEv = document.getElementById("graficaEv");
+
+                        let graficaEv = document.getElementById("graficaEv");
+
+                        console.log(nombres)
+                        console.log(valores)
 
                         const dataEv = {
-                        labels: ["uno", "dos"],
+                        labels: nombres,
                         datasets: [{
-                            label: 'Huella de Carbono',
-                            data: [1, 2],
+                            label: 'My First Dataset',
+                            data: valores,
                             fill: false,
                             borderColor: 'rgb(75, 192, 192)',
                             tension: 0.1
@@ -144,7 +158,7 @@
                             data: dataEv,
                         };
 
-                        var chart2 = new Chart(graficaEv, configEv)
+                        var chartEv = new Chart(graficaEv, configEv)
             </script>
 
 
