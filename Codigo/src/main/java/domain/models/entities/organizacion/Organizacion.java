@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "organizacion")
@@ -102,8 +103,8 @@ public class Organizacion {
         this.contactos.forEach(contacto -> contacto.recibirRecomendacion(link));
     }
 
-    public Set<Miembro> listarMiembros(){
-        Set<Miembro> miembroSet = new HashSet<>();
+    public List<Miembro> listarMiembros(){
+        List<Miembro> miembroSet = new ArrayList<>();
         for (Sector unSector : this.sectores)
         {
             for(Miembro unMiembro : unSector.getMiembros())
@@ -112,7 +113,7 @@ public class Organizacion {
             }
         }
         //miembroList=  this.sectores.stream().map(sector -> sector.getMiembros()).collect(Collectors.toList());
-        return miembroSet;
+        return (List<Miembro>) miembroSet;
     }
   public void setTipoDeOrganizacion(TipoDeOrganizacion tipoDeOrganizacion) {
       this.tipoDeOrganizacion = tipoDeOrganizacion;
@@ -133,9 +134,16 @@ public class Organizacion {
     }
 
     public double calcularHCOrganizacion(PeriodoDeImputacion periodoACalcular) throws IOException {
-        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular) + hcMiembrosOrganizacion();
-
+        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular) + calcularHCMiembrosSegunPeriodo(periodoACalcular);
         //+ sectores.stream().mapToDouble(sector -> sector.calcularHCSector()).sum();
+    }
+
+    private double calcularHCMiembrosSegunPeriodo(PeriodoDeImputacion periodoACalcular) throws IOException {
+        double hc = 0;
+        for(Miembro miembro : listarMiembros()){
+            hc += miembro.calcularHCMiembro(periodoACalcular);
+        }
+        return hc;
     }
 
     public double calcularHCOrgHistorico() throws IOException{

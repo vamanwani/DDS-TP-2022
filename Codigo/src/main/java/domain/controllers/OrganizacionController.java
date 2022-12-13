@@ -217,6 +217,7 @@ public class OrganizacionController {
             put("nombres", finalDatos.keySet());
             put("valores", finalDatos.values());
             put("organizacion", organizacion);
+            put("tipo_reporte", tipoReporte);
         }}, "/Organizacion/reportesOrg.hbs");
     }
 

@@ -2,6 +2,7 @@ package domain.models.entities.reporte;
 
 import domain.models.entities.calculoHC.CalculadoraHCSector;
 import domain.models.entities.consumo.PeriodoDeImputacion;
+import domain.models.entities.miembro.Miembro;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.organizacion.Sector;
 import domain.models.entities.sectorTerritorial.Pais;
@@ -9,10 +10,7 @@ import domain.models.entities.sectorTerritorial.SectorTerritorial;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Reporte {
 
@@ -58,6 +56,15 @@ public class Reporte {
             }
         }
 
+        for (int l = 0; l < organizacion.listarMiembros().size(); l++){
+            Miembro miembro = organizacion.listarMiembros().get(l);
+            for(int k = 0; k < miembro.getTrayectos().size(); k++){
+                if(!periododesDeImputacionDeLaOrganicacion.contains(miembro.getTrayectos().get(k).getPeriodoDeImputacion())){
+                    periododesDeImputacionDeLaOrganicacion.add(miembro.getTrayectos().get(k).getPeriodoDeImputacion());
+                }
+            }
+        }
+
         for (int j = 0; j < periododesDeImputacionDeLaOrganicacion.size(); j++){ // LLENAR EL HASMAP CON LOS HC DE CADA PERIODO
             double hc = Double.parseDouble(df.format(organizacion.calcularHCOrganizacion(periododesDeImputacionDeLaOrganicacion.get(j))));
             map.put('"' + Integer.toString(periododesDeImputacionDeLaOrganicacion.get(j).getMes()) + "/" + Integer.toString(periododesDeImputacionDeLaOrganicacion.get(j).getAnio()) + '"', hc);
@@ -79,6 +86,18 @@ public class Reporte {
             }
         }
 
+
+        for(int t = 0; t < sectorTerritorial.getOrganizaciones().size(); t++){
+            Organizacion organizacion = sectorTerritorial.getOrganizaciones().get(t);
+            for (int l = 0; l < organizacion.listarMiembros().size(); l++){
+                Miembro miembro = organizacion.listarMiembros().get(l);
+                for(int k = 0; k < miembro.getTrayectos().size(); k++){
+                    if(!periododesDeImputacionDelSectorT.contains(miembro.getTrayectos().get(k).getPeriodoDeImputacion())){
+                        periododesDeImputacionDelSectorT.add(miembro.getTrayectos().get(k).getPeriodoDeImputacion());
+                    }
+                }
+            }
+        }
 
         for (int j = 0; j < periododesDeImputacionDelSectorT.size(); j++){ // LLENAR EL HASMAP CON LOS HC DE CADA PERIODO
             double hc = Double.parseDouble(df.format(sectorTerritorial.calcularHCSectorTerritorial(periododesDeImputacionDelSectorT.get(j))));

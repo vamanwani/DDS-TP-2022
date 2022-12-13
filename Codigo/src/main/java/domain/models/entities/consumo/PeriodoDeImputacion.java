@@ -63,4 +63,10 @@ public class PeriodoDeImputacion {
     public int getMes() {
         return mes;
     }
+
+    public boolean periodoMayor(PeriodoDeImputacion p1, PeriodoDeImputacion p2){
+        if (p1.getMes() > p2.getMes() && p1.getAnio() > p2.getAnio()) return true;
+        else  return false;
+    }
+
 }
