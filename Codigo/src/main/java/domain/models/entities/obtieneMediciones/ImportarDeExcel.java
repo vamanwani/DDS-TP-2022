@@ -128,6 +128,7 @@ public class ImportarDeExcel implements Runnable {
                 FilaConsumo  peso= listaDeFilaConsumo.get(i+3);
                 consumo = instaciarConsumoLogistica(fila, medio, distancia, peso,organizacion); // por fila se refiere a categoria
                 consumo.setTipoConsumo(this.repositorioDeTiposConsumo.buscarLogistica());
+
                 i += 3; // te saltea las proximas tres filas de una
             } else {
                 consumo = instanciarOtroConsumo(listaDeFilaConsumo.get(i), organizacion);

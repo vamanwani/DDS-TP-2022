@@ -1,15 +1,13 @@
 package domain.controllers;
 
+import domain.models.entities.miembro.Adminisitrador;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.miembro.TipoUsuario;
 import domain.models.entities.organizacion.Organizacion;
 import domain.models.entities.sectorTerritorial.AgenteSectorial;
 import domain.models.entities.verificadorContasenia.Validador;
-import domain.models.repos.RepositorioDeAgentesSectoriales;
-import domain.models.repos.RepositorioDeMiembros;
-import domain.models.repos.RepositorioDeOrganizaciones;
-import domain.models.repos.RepositorioDeUsuarios;
+import domain.models.repos.*;
 import domain.services.dbManager.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
@@ -23,6 +21,7 @@ public class LoginController {
     RepositorioDeAgentesSectoriales repositorioDeAgentesSectoriales = new RepositorioDeAgentesSectoriales();
     RepositorioDeMiembros repositorioDeMiembros = new RepositorioDeMiembros();
     RepositorioDeUsuarios repositorioDeUsuarios = new RepositorioDeUsuarios();
+    private RepositorioDeAdministradores repositorioDeAdministradores = new RepositorioDeAdministradores();
 
     // LOGIN
     // LOGUT
@@ -55,6 +54,10 @@ public class LoginController {
                     System.out.println("usuario id: " + usuario.getId());
                     AgenteSectorial agenteSectorial = this.repositorioDeAgentesSectoriales.buscarSegunUsuarioId(usuario.getId());
                     response.redirect("/agente_sectorial/"+agenteSectorial.getId()); // CONSULTAR
+                }
+                else if (usuario.getTipoUsuario() == TipoUsuario.ADMIN) {
+                    Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscarSegunUsuarioId(usuario.getId());
+                    response.redirect("administrador/" + adminisitrador.getId());
                 }
             }
             else {

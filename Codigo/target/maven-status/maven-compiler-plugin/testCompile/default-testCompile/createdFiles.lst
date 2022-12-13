@@ -1,0 +1,17 @@
+dbtest\LocalidadesTest.class
+dbtest\Contexto.class
+calculadoraHC\HCTestMiembro.class
+calculadoraHC\HCTestConsumoLogistica.class
+calculadoraHC\HCTestOtroConsumo.class
+reportes\ReportesInit.class
+TestNotificador\NotificadorTest.class
+importador\ImportadorTest.class
+tipoAdmin\Admin.class
+calculadoraHC\HCTestOrganizacion.class
+dbtest\MediosTransporteInit.class
+dbtest\TipoConsumosIinit.class
+reportes\persistenciaDeOrganizaciones.class
+Validador\ValidadorTest.class
+distancia\DistanciaTest.class
+distancia\DistanciaTransportePublicoTest.class
+Validador\ValidadorIntegradorTest.class

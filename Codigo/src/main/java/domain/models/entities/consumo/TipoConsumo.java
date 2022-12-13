@@ -30,11 +30,13 @@ public class TipoConsumo implements AsignableFE{
     }
 
     public TipoConsumo() {
+        fe = 1.0;
     }
 
     public TipoConsumo(String nombre, Unidad unidad) {
         this.nombre = nombre;
         this.unidad = unidad;
+        fe = 1.0;
     }
 
 //    public void setValorParaFE(double valorParaFE) {

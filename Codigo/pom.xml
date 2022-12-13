@@ -135,6 +135,11 @@
             <artifactId>json</artifactId>
             <version>20090211</version>
         </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.29.2-GA</version>
+        </dependency>
 
 
     </dependencies>
@@ -171,6 +176,7 @@
             <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.6</version>
                 <configuration>
                     <jdkVersion>1.8</jdkVersion>
                     <!-- Use your own application name -->
@@ -185,6 +191,7 @@
 
         </plugins>
     </build>
+
 
 
 

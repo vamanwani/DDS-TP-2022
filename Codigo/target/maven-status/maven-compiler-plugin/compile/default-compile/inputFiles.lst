@@ -78,6 +78,7 @@ C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\mai
 C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\main\java\domain\controllers\LoginController.java
 C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\main\java\domain\models\entities\consumo\TipoPeriodicidad.java
 C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\main\java\domain\models\entities\miembro\Miembro.java
+C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\main\java\domain\models\repos\RepositorioDeParadas.java
 C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\main\java\domain\models\repos\RespositorioDeSectores.java
 C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\main\java\domain\models\entities\obtieneMediciones\ImportarDeExcel.java
 C:\Users\Adrian\Documents\Facultad\TpDds\2022-ma-ma-mama-grupo-05\Codigo\src\main\java\domain\models\entities\sugerencias\Notificador.java
