@@ -38,7 +38,7 @@
                                      </ul>
                                    </li>
                                    <li class="nav-item">
-                                     <a class="nav-link" href="../login/login.html">Cerrar sesión</a>
+                                     <a class="nav-link" href="/logout">Cerrar sesión</a>
                                    </li>
                                  </ul>
                                </div>
@@ -64,14 +64,14 @@
             <p id="nombres" style="display: none;">{{nombres}}</p>
             <p id="valores" style="display: none;">{{valores}}</p>
 {{!-- <div id="valueBack">{{reportes}}</div> --}}
-            <h1>GRAFICO COMPOSICION</h1>
-                 <div style="width: 50%; background-color: white;">
 
+                 <div style="width: 50%; background-color: white;" id="grafCOMP">
+<h1>GRAFICO COMPOSICION</h1>
                     <canvas id="graficaComp"></canvas>
                 </div>
-                 <h1>GRAFICO EVOLUCION</h1>
-                                 <div style="width: 50%; background-color: white;">
 
+                                 <div style="width: 50%; background-color: white;" id="grafEV">
+<h1>GRAFICO EVOLUCION</h1>
                                      <canvas id="graficaEv"></canvas>
                               </div>
         </main>
@@ -144,7 +144,18 @@
 
                         var chartEv = new Chart(graficaEv, configEv)
             </script>
+        <script>
+                        let rep = document.querySelector("#tipoReporte").innerHTML
+                        if(rep == "composicion"){
+                            document.getElementById("grafEV").style.display="none";
+                            document.getElementById("grafCOMP").style.display="none";
+                        }
+                        else if(rep == "evolucion"){
+                            document.getElementById("grafEV").style.display="block";
+                            document.getElementById("grafCOMP").style.display="none";
+                        }
 
+                       </script>
         <script>
             let tiposReporte = document.querySelector(".tipoReporte")
             tiposReporte.addEventListener("change", cambiarTipoReporte)

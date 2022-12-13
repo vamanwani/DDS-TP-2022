@@ -69,7 +69,7 @@ public class LoginController {
 
     public Response logout(Request request, Response response) {
         request.session().invalidate();
-        response.redirect("/login");
+        response.redirect("/");
         return response;
     }
 
@@ -121,7 +121,7 @@ public class LoginController {
                     response.redirect("/contraNoValida");
                 }
             }
-                response.redirect("/login");
+                response.redirect("/");
         }
         catch (Exception ex) {
             response.redirect("/login/login.hbs");
