@@ -8,39 +8,40 @@
     <link href="/organizacion/styleOrganizacion.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <header>
-        <h1>MI IMPACTO AMBIENTAL</h1>
-        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Administrador</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <h3 id="nombreUsuario">--NOMBRE USUARIO--</h3>
-                    </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./indexAdmin.html">Home</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Acciones
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Registrar agente sectorial</a></li>
-                      <li><a class="dropdown-item" href="./registroOrg.html">Registrar organización</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/logout">Cerrar sesión</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-    </header>
+   <header>
+           <h1>MI IMPACTO AMBIENTAL</h1>
+           <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+               <div class="container-fluid">
+                 <a class="navbar-brand" href="#">Administrador</a>
+                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon"></span>
+                 </button>
+                 <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
+                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                       <li class="nav-item">
+
+                       </li>
+                     <li class="nav-item">
+                       <a class="nav-link active" aria-current="page" href="/administrador/{{administrador.id}}">Home</a>
+                     </li>
+                     <li class="nav-item dropdown">
+                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         Acciones
+                       </a>
+                       <ul class="dropdown-menu">
+                           <a href="/administrador/{{administrador.id}}/gestionar_fe_tipos_consumo" class="dropdown-item" >Gestionar FE tipos consumo</a>
+                           <a href="/administrador/{{administrador.id}}/gestionar_fe_transportes" class="dropdown-item">Gestionar FE transportes</a>
+                       </ul>
+                     </li>
+                     <li class="nav-item">
+                       <a class="nav-link" href="/logout">Cerrar sesión</a>
+
+                     </li>
+                   </ul>
+                 </div>
+               </div>
+             </nav>
+       </header>
     <main style="background-image: linear-gradient(to left, #5b8362, #34f03e);">
         <h1>REGISTRAR TRANSPORTE PUBLICO</h1>
         <form method = "post" action = "/administrador/{{administrador.id}}/crear_transporte_publico/{{transporte.id}}" style="display: flex; flex-direction:column; align-items:center; margin-top: 3rem;">

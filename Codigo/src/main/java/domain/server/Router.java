@@ -43,8 +43,8 @@ public class Router {
 
         Spark.path("/", () -> { //TODO cambiar a /inicio_sesion o similar para que no rompa en heroku
             Spark.get("", loginController::pantallaDeLogin, engine);
-            Spark.post("/login", loginController::login);
-            Spark.post("/login/signup", loginController::signup);
+            Spark.post("/log_in", loginController::login);
+            Spark.post("/log_in/signup", loginController::signup);
             // PARA LO DE CREAR LA CUENTA HAY QUE HACER LO DEL VALIDADOR DE CONTRASENIAS
         });
 

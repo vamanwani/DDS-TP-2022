@@ -20,18 +20,18 @@
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">--NOMBRE USUARIO--</h3>
+
                     </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/administrador/{{administrador.id}}">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./registroAgSec.html">Registrar agente sectorial</a></li>
-                      <li><a class="dropdown-item" href="./registroOrg.html">Registrar organización</a></li>
+            <a href="/administrador/{{administrador.id}}/gestionar_fe_tipos_consumo" class="dropdown-item" >Gestionar FE tipos consumo</a>
+            <a href="/administrador/{{administrador.id}}/gestionar_fe_transportes" class="dropdown-item">Gestionar FE transportes</a>
                     </ul>
                   </li>
                   <li class="nav-item">
@@ -57,7 +57,7 @@
             </tr>
             {{#each tipos}}
                 <tr style="margin-top: 15px"  class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
-                <form method = "post" action = "/administrador/{{admin.id}}/actualizar_fe/{{id}}">
+                <form method = "post" action = "/administrador/{{administrador.id}}/actualizar_fe/{{id}}">
                   <th>{{nombre}}</th>
                   <th>{{unidad}}</th>
                   <th>{{fe}}</th>

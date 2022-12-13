@@ -56,4 +56,10 @@ public class RepositorioDeAgentesSectoriales {
         return EntityManagerHelper.getEntityManager().createQuery("from " + SectorTerritorial.class.getName())
                 .getResultList();
     }
+
+    public SectorTerritorial buscarSector(Integer sector_territorial_id) {
+        return EntityManagerHelper
+                .getEntityManager()
+                .find(SectorTerritorial.class, sector_territorial_id);
+    }
 }

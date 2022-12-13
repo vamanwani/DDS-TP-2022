@@ -13,7 +13,7 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 1000px;
+    height: 1200px;
 }
 .palevioletred{
     background-image: linear-gradient(to left, rgb(150, 42, 78), rgb(211, 60, 60)) ;

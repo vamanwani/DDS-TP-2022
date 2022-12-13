@@ -112,4 +112,8 @@ public class SectorTerritorial {
     public void setPais(Pais pais) {
         this.pais = pais;
     }
+
+    public Integer getId() {
+        return id;
+    }
 }

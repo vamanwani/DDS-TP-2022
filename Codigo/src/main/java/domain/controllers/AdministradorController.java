@@ -36,7 +36,7 @@ public class AdministradorController {
     public ModelAndView mostrarMenu(spark.Request request, spark.Response response){
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("admin", adminisitrador);
+            put("administrador", adminisitrador);
         }} , "/Admin/indexAdmin.hbs");// el viewname que sea igual al home de organizacion
     }
 
@@ -138,6 +138,7 @@ public class AdministradorController {
     public Response generar_org(Request request, Response response) {
         TipoDeOrganizacion tipoDeOrganizacion = TipoDeOrganizacion.valueOf(request.queryParams("tipo_org"));
         ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg(request.queryParams("clasificacion"));
+        SectorTerritorial sectorTerritorial = this.repositorioDeAgentesSectoriales.buscarSector(Integer.valueOf(request.queryParams("sector_territorial_id")));
         String razonSocial = request.queryParams("razon_social");
         String localidadId = request.queryParams("localidad");
         Localidad localidad = this.repositorioDeLocalidades.buscar(Integer.valueOf(localidadId));
@@ -151,7 +152,9 @@ public class AdministradorController {
         org.setRazonSocial(razonSocial);
         org.setUbicacion(ubicacion);
         org.setUsuario(usuario);
+        sectorTerritorial.setOrganizaciones(org);
         repositorioDeUsuarios.guardar(usuario);
+        repositorioDeAgentesSectoriales.guardarSector(sectorTerritorial);
         repositorioDeUbicaciones.guardarSiNoExiste(ubicacion);
         repositorioDeOrganizaciones.guardarClasificacion(clasificaciónDeOrg);
         repositorioDeOrganizaciones.guardar(org);
@@ -183,7 +186,7 @@ public class AdministradorController {
         Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscar(Integer.valueOf(request.params("id")));
         List<TipoConsumo> tiposConsumos = this.repositorioDeTiposConsumo.buscarTodos();
         return new ModelAndView(new HashMap<String,Object>(){{
-            put("admin", adminisitrador);
+            put("administrador", adminisitrador);
             put("tipos", tiposConsumos);
         }}, "/Admin/gestionFE.hbs");
     }
@@ -198,7 +201,7 @@ public class AdministradorController {
             }
         }
         return new ModelAndView(new HashMap<String,Object>(){{
-            put("admin", adminisitrador);
+            put("administrador", adminisitrador);
             put("transportes", transporteList);//cambiar a transportesFiltrados
         }}, "/Admin/gestionFETransportes.hbs");
     }
