@@ -29,10 +29,19 @@ public class CalculadoraHCSector {
     public double calcularHCAnual(List<Miembro> miembros, PeriodoDeImputacion periodoDeImputacion) throws IOException {
         Double hc = Double.valueOf(0);
         for (Miembro m : miembros) {
-            List<Trayecto> trayectos = (List<Trayecto>) m.getTrayectos().stream().
-                    filter(t -> (t.getPeriodoDeImputacion().getAnio() == periodoDeImputacion.getAnio())).
-                    collect(Collectors.toList());
-            hc += new CalculdoraHCMiembro().calcularHC(trayectos);
+            if(m.getTrayectos().isEmpty()) {
+                break;
+            } else {
+                try{
+                    List<Trayecto> trayectos = (List<Trayecto>) m.getTrayectos().stream().
+                            filter(t -> (t.getPeriodoDeImputacion().getAnio() == periodoDeImputacion.getAnio())).
+                            collect(Collectors.toList());
+                    hc += new CalculdoraHCMiembro().calcularHC(trayectos);
+                } catch (Exception e){
+
+                }
+
+            }
         }
         return hc;
     }

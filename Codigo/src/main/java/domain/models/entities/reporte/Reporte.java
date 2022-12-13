@@ -78,6 +78,8 @@ public class Reporte {
                 }
             }
         }
+
+
         for (int j = 0; j < periododesDeImputacionDelSectorT.size(); j++){ // LLENAR EL HASMAP CON LOS HC DE CADA PERIODO
             double hc = Double.parseDouble(df.format(sectorTerritorial.calcularHCSectorTerritorial(periododesDeImputacionDelSectorT.get(j))));
             map.put('"' + Integer.toString(periododesDeImputacionDelSectorT.get(j).getMes()) + "/" + Integer.toString(periododesDeImputacionDelSectorT.get(j).getAnio()) + '"', hc);
