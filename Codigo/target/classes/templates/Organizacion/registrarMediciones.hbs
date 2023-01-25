@@ -47,6 +47,12 @@
     </header>
     <main style="background-image: linear-gradient(to left, #3aa6b9, #1647e9);">
         <h1>REGISTRAR MEDICIONES</h1>
+        {{#if autor}}
+        <div class="alert alert-success" role="alert">
+          Se ha subido el archivo correctamente!
+        </div>
+        {{/if}}
+
         <form action = "registrar_mediciones" method='post' enctype='multipart/form-data'>
           <h4 style="background-color: rgb(161, 161, 161); margin-bottom: 0;">Cargar planilla con datos de las actividades</h4>
           <div class="input-group mb-3 cargarPlanilla">

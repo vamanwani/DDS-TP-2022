@@ -8,18 +8,15 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-
         <class></class>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
 
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:mysql://cgalumqev5gh9g43:tlbi6fse7k0n4wob@r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/huhkmguoxnw7otwz" />
-            <property name="hibernate.connection.username" value="cgalumqev5gh9g43" />
-            <property name="hibernate.connection.password" value="tlbi6fse7k0n4wob" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tpanualdds" />
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value="password" />
 
             <property name="hibernate.show_sql" value="true" />
             <!-- Enable the logging of all the generated SQL statements to the console -->
@@ -31,7 +28,6 @@
             <!-- Hibernate will put comments inside all generated SQL statements to hint what’s the generated SQL trying to do -->
 
             <property name="hibernate.hbm2ddl.auto" value="update" />
-
             <!--
                 - validate: validate the schema, makes no changes to the database.
                 - update: update the schema.

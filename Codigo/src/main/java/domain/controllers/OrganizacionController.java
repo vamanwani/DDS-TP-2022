@@ -80,7 +80,7 @@ public class OrganizacionController {
         }
     }
 
-    public Response registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
+    public ModelAndView registrarMediciones(spark.Request request, spark.Response response) throws ServletException, IOException {
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/src/main/resources/uploads");
         request.raw().setAttribute("org.eclipse.jetty.multipartConfig", multipartConfigElement);
         final Part uploadedFile = request.raw().getPart("file");
@@ -93,12 +93,18 @@ public class OrganizacionController {
         ImportarDeExcel importador = new ImportarDeExcel();
         Organizacion organizacion = this.repo.buscar(Integer.valueOf(request.params("id")));
 
-        importador.run();
+        importador.setOrganizacion(organizacion);
+        importador.setNombreDeExcel("'" + request.params("id") + "'.xlsx");
 
-        importador.importar("'" + request.params("id") + "'.xlsx", organizacion);
+        importador.start();
 
-        response.redirect("/organizaciones/" + request.params("id"));
-        return response;
+//        importador.importar("'" + request.params("id") + "'.xlsx", organizacion);
+
+//        response.redirect("/organizaciones/" + request.params("id"));
+//        return response;
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("autor", true);
+        }}, "Organizacion/registrarMediciones.hbs");
     }
 
     public ModelAndView mostrarSolicitantes(Request request, Response response) {

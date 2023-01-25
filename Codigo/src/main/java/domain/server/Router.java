@@ -59,7 +59,7 @@ public class Router {
 
             Spark.get("", organizacionController::mostrarMenu, engine); // MENU ORG
             Spark.get("/registro_mediciones", organizacionController::registroMediciones, engine);
-            Spark.post("/registrar_mediciones", organizacionController::registrarMediciones); // TODO VINCULAR EL ARCHIVO EXCEL
+            Spark.post("/registrar_mediciones", organizacionController::registrarMediciones, engine); // TODO VINCULAR EL ARCHIVO EXCEL
             Spark.get("/aceptar_vinculacion", organizacionController::mostrarSolicitantes, engine);
             Spark.put("/aceptar_vinculacion", organizacionController :: actualizarMiembros);
             Spark.get("/recomendaciones", organizacionController::mostrarRecomendaciones, engine);

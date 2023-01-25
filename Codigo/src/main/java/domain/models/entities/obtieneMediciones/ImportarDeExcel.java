@@ -14,14 +14,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-public class ImportarDeExcel implements Runnable {
+public class ImportarDeExcel extends Thread {
 
     RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
     RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
     RepositorioDeTiposConsumo repositorioDeTiposConsumo = new RepositorioDeTiposConsumo();
+
+    Organizacion organizacion;
+    String nombreDeExcel;
 
 //    String nombreDeExcel;
 //    Organizacion organizacion;
@@ -34,15 +38,26 @@ public class ImportarDeExcel implements Runnable {
 //        this.organizacion = organizacion;
 //    }
 
-    public void importar(String nombreDeExcel, Organizacion organizacion) throws IOException {
+    @Override
+    public void run() {
             File file = new File("src/main/resources/uploads/" + nombreDeExcel); //TODO RUTA DE VIG
         // creating a new file instance
         //File file = new File("C:\\Users\\Adrian\\Documents\\Facultad\\Diseño\\9-11\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\" + nombreExcel);//TODO RUTA DE ADRIAN
         //C:\Users\Adrian\Documents\Facultad\Diseño\9-11\2022-ma-ma-mama-grupo-05\Codigo
-        FileInputStream fis = new FileInputStream(file);   //obtaining bytes from the file
+        FileInputStream fis = null;   //obtaining bytes from the file
+        try {
+            fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 //creating Workbook instance that refers to .xlsx file
-            XSSFWorkbook wb = new XSSFWorkbook(fis);
-            XSSFSheet sheet = wb.getSheetAt(0);     //creating a Sheet object to retrieve object
+        XSSFWorkbook wb = null;
+        try {
+            wb = new XSSFWorkbook(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        XSSFSheet sheet = wb.getSheetAt(0);     //creating a Sheet object to retrieve object
             Iterator<Row> itr = sheet.iterator();    //iterating over excel file
             Row row = itr.next();
             SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
@@ -112,10 +127,18 @@ public class ImportarDeExcel implements Runnable {
             }
             instanciasConsumosParaOrganizacion(filaDeConsumos,organizacion);
 
+        try {
             wb.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
             fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            file.delete();
+        file.delete();
     }
 
     public void instanciasConsumosParaOrganizacion(List<FilaConsumo> listaDeFilaConsumo, Organizacion organizacion) {
@@ -197,9 +220,12 @@ public class ImportarDeExcel implements Runnable {
         return null;
     }
 
-    @Override
-    public void run() {
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
+    }
 
+    public void setNombreDeExcel(String nombreDeExcel) {
+        this.nombreDeExcel = nombreDeExcel;
     }
 }
 
