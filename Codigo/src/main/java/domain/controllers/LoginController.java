@@ -14,6 +14,7 @@ import spark.Request;
 import spark.Response;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 public class LoginController {
 
@@ -61,11 +62,11 @@ public class LoginController {
                 }
             }
             else {
-                response.redirect("/SeMeteAlElse");
+                response.redirect("/log_in/fail");
             }
         }
         catch (Exception ex) {
-            response.redirect("/seMeteAlCatch");
+            response.redirect("/log_in/fail");
         }
         return response;
     }
@@ -130,5 +131,13 @@ public class LoginController {
             response.redirect("/login/login.hbs");
         }
         return response;
+    }
+
+    public ModelAndView fail(Request request, Response response){
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("fail", true);
+        }}, "/Login/login.hbs");
+
+
     }
 }

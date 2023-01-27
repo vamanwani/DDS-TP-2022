@@ -5,6 +5,7 @@ import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.consumo.TipoPeriodicidad;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
+import domain.models.entities.organizacion.Sector;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
 import domain.models.entities.sectorTerritorial.Localidad;
@@ -20,6 +21,7 @@ import spark.Response;
 import javax.persistence.Entity;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +48,21 @@ public class TrayectoController {
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("miembro", miembro);
                 put("trayectos", trayectos);
+            }}, "/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
+        } catch (Exception ex){
+            return new ModelAndView(null, "/Miembro/editarTrayectos.hbs");
+        }
+    }
+
+    public ModelAndView mostrarTrayectosEliminated(Request request, Response response){
+        try{
+            String idMimebro = request.params("id");
+            Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
+            List<Trayecto> trayectos = this.repo.buscarTodos(new Integer(idMimebro));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("miembro", miembro);
+                put("trayectos", trayectos);
+                put("eliminated", true);
             }}, "/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
         } catch (Exception ex){
             return new ModelAndView(null, "/Miembro/editarTrayectos.hbs");
@@ -85,6 +102,15 @@ public class TrayectoController {
         List<Transporte> trenes = this.repositoriosDeTransporte.buscarTodosLosTrenes();
 
         miembros.remove(miembro);
+        List<Miembro> miembrosMismoTrabajo = new ArrayList<>();
+
+        for(Miembro miem : miembros){
+            for(Sector sector : miem.getTrabajos()){
+                if(miembro.getTrabajos().contains(sector)){
+                    miembrosMismoTrabajo.add(miem);
+                }
+            }
+        }
         return new ModelAndView(new HashMap<String,Object>(){{
             put("subtes", subtes);
             put("colectivo", colectivos);
@@ -95,7 +121,7 @@ public class TrayectoController {
             put("tramos", trayecto.getTramos());
             put("provincias", provincias);
             put("localidades", localidades);
-            put("miembros", miembros);
+            put("miembros", miembrosMismoTrabajo);
             put("tramosExistentes", tramosExistentes);
         }}, "/Miembro/agregarTrayecto.hbs");
     }
@@ -225,12 +251,12 @@ public class TrayectoController {
         return response;
     }
 
-    public Response eliminarParada(Request request, Response response){
+    public Response eliminarTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         trayecto.setEstado(false);
         this.repo.guardar(trayecto);
-        response.redirect("/miembro/"+ miembro.getId()+"/trayectos");
+        response.redirect("/miembro/"+ miembro.getId()+"/trayectos/eliminated");
         return response;
     }
 }

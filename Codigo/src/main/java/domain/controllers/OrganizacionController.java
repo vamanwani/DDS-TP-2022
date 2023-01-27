@@ -103,7 +103,7 @@ public class OrganizacionController {
 //        response.redirect("/organizaciones/" + request.params("id"));
 //        return response;
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("autor", true);
+            put("success", true);
         }}, "Organizacion/registrarMediciones.hbs");
     }
 
@@ -117,6 +117,44 @@ public class OrganizacionController {
             return new ModelAndView(new HashMap<String, Object>(){{
                 put("solicitudes", solicitudes);
                 put("organizacion", organizacion);
+            }}, "/Organizacion/aceptarVinculaciones.hbs");
+        } catch (Exception ex){
+            //TODO si no hay solicitantes
+            return new ModelAndView(null,"/Organizacion/aceptarVinculaciones.hbs");
+        }
+
+    }
+
+    public ModelAndView mostrarSolicitantesSuccess(Request request, Response response) {
+        Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
+
+        try {
+
+            String idOrganizacion = request.params("id");
+            List<SolicitudVinculacion> solicitudes = this.repositorioDeSolicitudes.buscarSolicitudesPendientesDeOrg(new Integer(idOrganizacion));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("solicitudes", solicitudes);
+                put("organizacion", organizacion);
+                put("success", true);
+            }}, "/Organizacion/aceptarVinculaciones.hbs");
+        } catch (Exception ex){
+            //TODO si no hay solicitantes
+            return new ModelAndView(null,"/Organizacion/aceptarVinculaciones.hbs");
+        }
+
+    }
+
+    public ModelAndView mostrarSolicitantesFail(Request request, Response response) {
+        Organizacion organizacion=repo.buscar(new Integer(request.params("id")));
+
+        try {
+
+            String idOrganizacion = request.params("id");
+            List<SolicitudVinculacion> solicitudes = this.repositorioDeSolicitudes.buscarSolicitudesPendientesDeOrg(new Integer(idOrganizacion));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("solicitudes", solicitudes);
+                put("organizacion", organizacion);
+                put("fail", true);
             }}, "/Organizacion/aceptarVinculaciones.hbs");
         } catch (Exception ex){
             //TODO si no hay solicitantes
@@ -170,7 +208,7 @@ public class OrganizacionController {
         sector.agregarMiembro(miembro);
         solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.ACEPTADA);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
-        response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");
+        response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion/success");
         return response;
     }
 
@@ -178,7 +216,7 @@ public class OrganizacionController {
         SolicitudVinculacion solicitudVinculacion = this.repositorioDeSolicitudes.buscar(Integer.valueOf(request.params("id_solicitud")));
         solicitudVinculacion.setEstadoSolicitud(EstadoSolicitud.RECHAZADA);
         this.repositorioDeSolicitudes.guardar(solicitudVinculacion);
-        response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion");
+        response.redirect("/organizaciones/"+ solicitudVinculacion.getOrganizacion().getId() + "/aceptar_vinculacion/fail");
         return response;
     }
 

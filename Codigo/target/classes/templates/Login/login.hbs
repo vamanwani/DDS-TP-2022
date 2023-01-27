@@ -10,11 +10,18 @@
     <link href="login/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
     <header>
         <h1>MI IMPACTO AMBIENTAL</h1>
     </header>
+            {{#if fail}}
+                <div class="alert alert-danger" role="alert">
+                  El nombre de usuario o contraseña son incorrectos, intente nuevamente!
+                </div>
+            {{/if}}
     <main class="main palevioletred">
         <section id="login">
+
             <h1>LOG-IN</h1>
             <form method="POST" action="/log_in" {{!--id="formularioLogin" --}} class="formul">
                 <div class="bordeForm">

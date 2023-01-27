@@ -49,7 +49,13 @@
     </nav>
 </header>
 <main style="background-image: linear-gradient(to left, #b368b3, #6e256e);">
+
     <h1>UNIRSE A ORGANIZACION</h1>
+    {{#if success}}
+    <div class="alert alert-success" role="alert">
+      Se ha enviado su solicitud con exito, aguarde a que la organizacion confirme su vinculacion!
+    </div>
+    {{/if}}
     <h3 style="background-color: rgb(175, 174, 174); margin-bottom: 0;">LISTADO DE ORGANIZACIONES</h3>
     <div style="background-color: white; height: 300px;">
         <table id="listaOrganizaciones" style="width: 100%;">

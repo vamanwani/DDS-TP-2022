@@ -48,6 +48,18 @@
     </header>
     <main style="background-image: linear-gradient(to left, #3aa6b9, #1647e9); display: flex; flex-direction: column; align-items: center;">
         <h1>ACEPTAR VINCULACIÓN DE TRABAJADORES</h1>
+        {{#if success}}
+        <div class="alert alert-success" role="alert">
+          Se ha aceptado la solicitud con exito!
+        </div>
+        {{/if}}
+
+                {{#if fail}}
+                <div class="alert alert-success" role="alert">
+                  Se ha rechazado la solicitud con exito!
+                </div>
+                {{/if}}
+
         <h4 style="background-color: rgb(161, 161, 161); margin-bottom: 0; width: 85%;">Listado de solicitantes</h4>
         <section style="background-color: white; height: 300px; width: 85%;">
             <table id="listaSolicitantes" style="width: 100%;">

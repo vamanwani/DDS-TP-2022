@@ -45,6 +45,7 @@ public class Router {
             Spark.get("", loginController::pantallaDeLogin, engine);
             Spark.post("/log_in", loginController::login);
             Spark.post("/log_in/signup", loginController::signup);
+            Spark.get("/log_in/fail", loginController::fail, engine);
             // PARA LO DE CREAR LA CUENTA HAY QUE HACER LO DEL VALIDADOR DE CONTRASENIAS
         });
 
@@ -61,6 +62,8 @@ public class Router {
             Spark.get("/registro_mediciones", organizacionController::registroMediciones, engine);
             Spark.post("/registrar_mediciones", organizacionController::registrarMediciones, engine); // TODO VINCULAR EL ARCHIVO EXCEL
             Spark.get("/aceptar_vinculacion", organizacionController::mostrarSolicitantes, engine);
+            Spark.get("/aceptar_vinculacion/success", organizacionController::mostrarSolicitantesSuccess, engine);
+            Spark.get("/aceptar_vinculacion/fail", organizacionController::mostrarSolicitantesFail, engine);
             Spark.put("/aceptar_vinculacion", organizacionController :: actualizarMiembros);
             Spark.get("/recomendaciones", organizacionController::mostrarRecomendaciones, engine);
             Spark.get("/hc", organizacionController::mostrarHC,engine);
@@ -80,6 +83,7 @@ public class Router {
             //Spark.before("/*", AuthMiddleware::verificarSesion);
             Spark.get("", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA
+            Spark.get("/organizaciones/solicitada", miembroController::mostrarOrganizacionesS, engine);
             Spark.get("/hc", miembroController::mostrarHC, engine);
             Spark.post("/organizaciones/:id_organizacion/unirse", miembroController::vincularAOrg);
 
@@ -92,11 +96,12 @@ public class Router {
             Spark.path("/trayectos",() -> {
                 Spark.get("", trayectoController::mostrarTrayectos, engine);
                 Spark.get("/", trayectoController::mostrarTrayectos, engine);
+                Spark.get("/eliminated", trayectoController::mostrarTrayectosEliminated, engine);
                 Spark.get("/agregar", trayectoController::crearTrayecto);
                 Spark.get("/:id_trayecto/agregar", trayectoController::agregarTrayecto, engine);
                 Spark.get("/:id_trayecto/editar", trayectoController::mostarTrayecto, engine);
                 Spark.post("/:id_trayecto", trayectoController::definirTrayecto);
-                Spark.post("/:id_trayecto/eliminar", trayectoController::eliminarParada);
+                Spark.post("/:id_trayecto/eliminar", trayectoController::eliminarTrayecto);
 
                 Spark.get("/:id_trayecto/tramos", trayectoController::mostrarTramosDeTrayecto, engine);
                 Spark.post("/:id_trayecto/tramos/agregar_tramo", trayectoController::crearTramo);
