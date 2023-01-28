@@ -4,7 +4,10 @@ import domain.models.entities.consumo.Actividad;
 import domain.models.entities.consumo.Consumo;
 import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.consumo.TipoConsumo;
+import domain.models.entities.organizacion.Organizacion;
 import domain.services.dbManager.EntityManagerHelper;
+
+import java.util.List;
 
 public class RepositorioDeConsumos {
     public Consumo buscar(Integer id) {
@@ -60,6 +63,13 @@ public class RepositorioDeConsumos {
                         + " and mes = " + periodoDeImputacion.getMes()
                         + " and periodicidad = " + periodoDeImputacion.getPeriodicidad())
                 .getSingleResult();
+    }
+
+    public List<Consumo> buscarConsumosDeOrg(Organizacion organizacion){
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Consumo.class.getName() + " where organizacion_id = " + organizacion.getId())
+                .getResultList();
     }
 
 

@@ -157,8 +157,9 @@ public class ImportarDeExcel extends Thread {
                 consumo = instanciarOtroConsumo(listaDeFilaConsumo.get(i), organizacion);
             }
 
-            organizacion.agregarConsumo(consumo);
-            this.repositorioDeOrganizaciones.guardar(organizacion);
+//            organizacion.agregarConsumo(consumo);
+            consumo.setOrganizacion(organizacion);
+//            this.repositorioDeOrganizaciones.guardar(organizacion);
             this.repositorioDeConsumos.guardarSiNoExisteTipoConsumo(consumo.getTipoConsumo());
             this.repositorioDeConsumos.guardarSiNoExisteActividad(consumo.getActividad());
             this.repositorioDeConsumos.guardarSiNoExistePeriodicidad(consumo.getPeriodicidad());

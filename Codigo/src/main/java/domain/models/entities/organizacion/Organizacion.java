@@ -8,6 +8,7 @@ import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.ubicacion.Ubicacion;
+import domain.models.repos.RepositorioDeConsumos;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "organizacion")
 public class Organizacion {
+    @Transient
+    RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
+
     @Id
     @GeneratedValue
     @Column(name = "id_organizacion")
@@ -45,7 +49,7 @@ public class Organizacion {
         this.usuario = usuario;
         this.contactos = new HashSet<>();
         this.sectores = new ArrayList<>();
-        this.consumos = new ArrayList<>();
+//        this.consumos = new ArrayList<>();
     }
 
     public ClasificaciónDeOrg getClasificacionDeOrg() {
@@ -66,9 +70,9 @@ public class Organizacion {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "organizacion_id")
-    private List<Consumo> consumos;
+//    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "organizacion_id")
+//    private List<Consumo> consumos;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
@@ -83,7 +87,7 @@ public class Organizacion {
 
 
     public List<Consumo> getConsumos() {
-        return consumos;
+        return repositorioDeConsumos.buscarConsumosDeOrg(this);
     }
 
     public Ubicacion getUbicacion() {
@@ -92,7 +96,7 @@ public class Organizacion {
     public Organizacion() {
         this.contactos = new HashSet<>();
         this.sectores = new ArrayList<>();
-        this.consumos = new ArrayList<>();
+//        this.consumos = new ArrayList<>();
     }
 
     public void agregarContacto(Miembro nuevoContacto){
@@ -126,7 +130,7 @@ public class Organizacion {
     }
 
     public void agregarConsumo(Consumo consumo){
-        this.consumos.add(consumo);
+//        this.consumos.add(consumo);
   }
 
     public void agregarSectores(Sector sector){
@@ -148,8 +152,8 @@ public class Organizacion {
 
     public double calcularHCOrgHistorico() throws IOException{
         double hc = 0;
-        for (int i = 0; i < consumos.size(); i++){
-            hc += this.calcularHCOrganizacion(consumos.get(i).getPeriodicidad());
+        for (int i = 0; i < getConsumos().size(); i++){
+            hc += this.calcularHCOrganizacion(getConsumos().get(i).getPeriodicidad());
         }
         return hc;
     }
