@@ -44,4 +44,8 @@ public class Provincia {
     public String getNombre() {
         return nombre;
     }
+
+    public void agregarLocalidad(Localidad unaLocalidad) {
+        localidades.add(unaLocalidad);
+    }
 }
