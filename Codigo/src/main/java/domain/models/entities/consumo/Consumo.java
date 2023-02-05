@@ -26,7 +26,7 @@ public abstract class Consumo {
     @JoinColumn(name = "tipo_consumo_id")
     protected TipoConsumo tipoConsumo;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "organizacion_id")
     protected Organizacion organizacion;
 
