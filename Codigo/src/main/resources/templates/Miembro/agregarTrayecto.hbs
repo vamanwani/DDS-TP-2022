@@ -152,18 +152,16 @@
                         <div style="height: 40px; background-color: rgb(224, 53, 53); width: 100%;">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_calle" placeholder="Ingrese calle...">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_inicio_altura" placeholder="Ingrese altura...">
-                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
-                                <option selected value="">LOCALIDAD</option>
-                                {{#each localidades}}
-                                    <option value={{id}}>{{nombre}}</option>
-                                {{/each}}
-                            </select>
-                            <select class="form-select" aria-label="Default select example" name= "provincia_inicio">
+
+                            <select class="form-select provincia_inicio" aria-label="Default select example" name= "provincia_inicio">
                                 <option selected value="">PROVINCIA</option>
                                 {{#each provincias}}
                                     <option value={{id}}>{{nombre}}</option>
                                 {{/each}}
                             </select>
+                            <div id = "localidades_inicio">
+
+                            </div>
                         </div>
                     </div>
                     <div class="ptoDestino">
@@ -171,18 +169,15 @@
                         <div style="height: 40px; background-color: rgb(42, 219, 66);">
                             <input type="text" class="form-control" id="valuePuntoDestino" name = "punto_fin_calle" placeholder="Ingrese calle...">
                             <input type="text" class="form-control" id="valuePuntoInicio" name="punto_fin_altura" placeholder="Ingrese altura...">
-                            <select class="form-select" aria-label="Default select example" name= "localidad_fin">
-                                <option selected value="">LOCALIDAD</option>
-                                {{#each localidades}}
-                                    <option value={{id}}>{{nombre}}</option>
-                                {{/each}}
-                            </select>
-                            <select class="form-select" aria-label="Default select example" name= "provincia_fin">
+                            <select class="form-select provincia_fin" aria-label="Default select example" name= "provincia_fin">
                                 <option selected value="">PROVINCIA</option>
                                 {{#each provincias}}
                                     <option value={{id}}>{{nombre}}</option>
                                 {{/each}}
                             </select>
+                            <div id = "localidades_fin">
+
+                            </div>
                         </div>
                     </div>
                     <div class="medioTransporte">
@@ -385,10 +380,591 @@
             }
             document.querySelector(".contenidoLinea").innerHTML=html;
           }
+
+
+          let provinciaInicio = document.querySelector(".provincia_inicio")
+          provinciaInicio.addEventListener("change", cambiarLocalidadInicio)
+          function cambiarLocalidadInicio(e){
+            e.preventDefault()
+            let html = ``;
+            let tipo = this.value
+//             html += `El tipo es: ` + tipo;
+            switch(tipo){
+              case `168`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_bsas}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `169`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_catamarca}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `170`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_chaco}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `171`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_chubut}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `172`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_cordoba}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `173`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_corrientes}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `174`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_caba}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `175`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_entre_rios}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `176`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_formosa}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `177`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_jujuy}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `178`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_la_pampa}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `179`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_la_rioja}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `180`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_mendoza}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `181`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_misiones}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `182`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_neuquen}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `183`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_rio_negro}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `184`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_salta}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `185`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_san_juan}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `186`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_san_luis}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `187`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_santa_cruz}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `188`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_santa_fe}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `189`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_santiago_del_estero}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `190`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_tierra_del_fuego}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              case `191`:{
+                html+=`
+                            <select class="form-select" aria-label="Default select example" name= "localidad_inicio">
+                                <option selected value="">LOCALIDAD</option>
+                                {{#each loc_tucuman}}
+                                    <option value={{id}}>{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                `;
+                break;
+              }
+              default:break;
+            }
+
+            document.querySelector("#localidades_inicio").innerHTML = html;
+
+          }
+
+                    let provinciaFin = document.querySelector(".provincia_fin")
+                    provinciaFin.addEventListener("change", cambiarLocalidadFin)
+                    function cambiarLocalidadFin(e){
+                      e.preventDefault()
+                      let html = ``;
+                      let tipo = this.value
+          //             html += `El tipo es: ` + tipo;
+                      switch(tipo){
+                        case `168`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_bsas}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `169`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_catamarca}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `170`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_chaco}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `171`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_chubut}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `172`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_cordoba}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `173`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_corrientes}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `174`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_caba}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `175`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_entre_rios}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `176`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_formosa}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `177`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_jujuy}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `178`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_la_pampa}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `179`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_la_rioja}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `180`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_mendoza}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `181`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_misiones}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `182`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_neuquen}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `183`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_rio_negro}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `184`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_salta}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `185`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_san_juan}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `186`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_san_luis}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `187`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_santa_cruz}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `188`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_santa_fe}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `189`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_santiago_del_estero}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `190`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_tierra_del_fuego}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        case `191`:{
+                          html+=`
+                                      <select class="form-select" aria-label="Default select example" name= "localidad_fin">
+                                          <option selected value="">LOCALIDAD</option>
+                                          {{#each loc_tucuman}}
+                                              <option value={{id}}>{{nombre}}</option>
+                                          {{/each}}
+                                      </select>
+                          `;
+                          break;
+                        }
+                        default:break;
+                      }
+
+                      document.querySelector("#localidades_fin").innerHTML = html;
+
+                    }
+
         </script>
         <script class="scriptPublico"></script>
     <script src="/miembro/agregarTrayecto.js"></script>
     <script src="/navbar.js"></script>
+    <script type = "text/javascript">
+
+    var template = document.getElementById('index').innerHTML;
+
+    var compile = Handlebars.compile(template);
+
+    var data = {};
+
+        Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+          if(v1 === v2) {
+            return options.fn(this);
+          }
+          return options.inverse(this);
+        });
+
+    var compiledHTML = compile(data);
+
+    document.getElementById('action').innerHTML += compiledHTML;
+
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

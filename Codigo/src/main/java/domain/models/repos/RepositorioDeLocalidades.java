@@ -21,6 +21,13 @@ public class RepositorioDeLocalidades {
                 .getSingleResult();
     }
 
+    public Provincia buscarProvNombre(String nombre){
+        return (Provincia) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Provincia.class.getName() + " where nombre = '" + nombre + "'")
+                .getSingleResult();
+    }
+
     public List<Localidad> retornarLocalidades(){
         return EntityManagerHelper
                 .getEntityManager()

@@ -94,12 +94,40 @@ public class TrayectoController {
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         List<Transporte> transportes = this.repositoriosDeTransporte.buscarTodos();
         List<Provincia> provincias = this.repositorioDeLocalidades.retornarProvincias();
-        List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
+//        List<Localidad> localidades = this.repositorioDeLocalidades.retornarLocalidades();
         List<Miembro> miembros = this.repositorioDeMiembros.retornarMiembros();
         List<Tramo> tramosExistentes = this.repositorioDeTramos.buscarTodosLosTramosDelMiembro(Math.toIntExact(miembro.getId()));
         List<Transporte> subtes = this.repositoriosDeTransporte.buscarTodosLosSubtes();
         List<Transporte> colectivos = this.repositoriosDeTransporte.buscarTodosLosColectivos();
         List<Transporte> trenes = this.repositoriosDeTransporte.buscarTodosLosTrenes();
+
+
+        List<Localidad> bsas = this.repositorioDeLocalidades.buscarProvNombre("BUENOS AIRES").getLocalidades();
+        List<Localidad> catamarca = this.repositorioDeLocalidades.buscarProvNombre("CATAMARCA").getLocalidades();
+        List<Localidad> chaco = this.repositorioDeLocalidades.buscarProvNombre("CHACO").getLocalidades();
+        List<Localidad> chubut = this.repositorioDeLocalidades.buscarProvNombre("CHUBUT").getLocalidades();
+        List<Localidad> cordoba = this.repositorioDeLocalidades.buscarProvNombre("CORDOBA").getLocalidades();
+        List<Localidad> corrientes = this.repositorioDeLocalidades.buscarProvNombre("CORRIENTES").getLocalidades();
+        List<Localidad> caba = this.repositorioDeLocalidades.buscarProvNombre("CIUDAD DE BUENOS AIRES").getLocalidades();
+        List<Localidad> entre_rios = this.repositorioDeLocalidades.buscarProvNombre("ENTRE RIOS").getLocalidades();
+        List<Localidad> formosa = this.repositorioDeLocalidades.buscarProvNombre("FORMOSA").getLocalidades();
+        List<Localidad> jujuy = this.repositorioDeLocalidades.buscarProvNombre("JUJUY").getLocalidades();
+        List<Localidad> la_pampa = this.repositorioDeLocalidades.buscarProvNombre("LA PAMPA").getLocalidades();
+        List<Localidad> la_rioja = this.repositorioDeLocalidades.buscarProvNombre("LA RIOJA").getLocalidades();
+        List<Localidad> mendoza = this.repositorioDeLocalidades.buscarProvNombre("MENDOZA").getLocalidades();
+        List<Localidad> misiones = this.repositorioDeLocalidades.buscarProvNombre("MISIONES").getLocalidades();
+        List<Localidad> neuqen = this.repositorioDeLocalidades.buscarProvNombre("NEUQUEN").getLocalidades();
+        List<Localidad> rio_negro = this.repositorioDeLocalidades.buscarProvNombre("RIO NEGRO").getLocalidades();
+        List<Localidad> salta = this.repositorioDeLocalidades.buscarProvNombre("SALTA").getLocalidades();
+        List<Localidad> san_juan = this.repositorioDeLocalidades.buscarProvNombre("SAN JUAN").getLocalidades();
+        List<Localidad> san_luis = this.repositorioDeLocalidades.buscarProvNombre("SAN LUIS").getLocalidades();
+        List<Localidad> santa_cruz = this.repositorioDeLocalidades.buscarProvNombre("SANTA CRUZ").getLocalidades();
+        List<Localidad> santa_fe = this.repositorioDeLocalidades.buscarProvNombre("SANTA FE").getLocalidades();
+        List<Localidad> santiago_del_estero = this.repositorioDeLocalidades.buscarProvNombre("SANTIAGO DEL ESTERO").getLocalidades();
+        List<Localidad> tierra_del_fuego = this.repositorioDeLocalidades.buscarProvNombre("TIERRA DEL FUEGO").getLocalidades();
+        List<Localidad> tucuman = this.repositorioDeLocalidades.buscarProvNombre("TUCUMAN").getLocalidades();
+
+
 
         miembros.remove(miembro);
         List<Miembro> miembrosMismoTrabajo = new ArrayList<>();
@@ -120,7 +148,30 @@ public class TrayectoController {
             put("trayecto_id", trayecto.getId());
             put("tramos", trayecto.getTramos());
             put("provincias", provincias);
-            put("localidades", localidades);
+            put("loc_bsas", bsas);
+            put("loc_catamarca", catamarca);
+            put("loc_chaco", chaco);
+            put("loc_chubut", chubut);
+            put("loc_cordoba", cordoba);
+            put("loc_corrientes", corrientes);
+            put("loc_caba", caba);
+            put("loc_entre_rios", entre_rios);
+            put("loc_formosa", formosa);
+            put("loc_jujuy", jujuy);
+            put("loc_la_pampa", la_pampa);
+            put("loc_la_rioja", la_rioja);
+            put("loc_mendoza", mendoza);
+            put("loc_misiones", misiones);
+            put("loc_neuquen", neuqen);
+            put("loc_rio_negro", rio_negro);
+            put("loc_salta", salta);
+            put("loc_san_juan", san_juan);
+            put("loc_san_luis", san_luis);
+            put("loc_santa_cruz", santa_cruz);
+            put("loc_santa_fe", santa_fe);
+            put("loc_santiago_del_estero", santiago_del_estero);
+            put("loc_tierra_del_fuego", tierra_del_fuego);
+            put("loc_tucuman", tucuman);
             put("miembros", miembrosMismoTrabajo);
             put("tramosExistentes", tramosExistentes);
         }}, "/Miembro/agregarTrayecto.hbs");
