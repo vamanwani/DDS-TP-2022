@@ -49,9 +49,30 @@ public class LocalidadesJson {
         localidades.add(unaLocalidad);
     }
 
+    public void instanciarMunicipio(JsonObject unArchivoJson)
+    {
+        Localidad unaLocalidad = new Localidad((unArchivoJson.get("nombre")).getAsString());
+        unaLocalidad.setId((Integer) unArchivoJson.get("id").getAsInt());
+        JsonObject jsonObject = unArchivoJson.get("provincia").getAsJsonObject();
+        System.out.println(jsonObject);
+        System.out.println(jsonObject.get("id").getAsInt());
+        Provincia provincia = repositorioDeProvinicias.buscarSegunNombre(jsonObject.get("nombre").getAsString());
+        System.out.println(unaLocalidad.getNombre());
+        System.out.println(provincia.getNombre());
+        provincia.agregarLocalidad(unaLocalidad);
+//        Provincia provincia = repositorioDeProvinicias.buscar(jsonObject);
+//        provincia.agregarLocalidad(unaLocalidad);
+//        EntityManagerHelper.persist(provincia);
+        localidades.add(unaLocalidad);
+    }
+
 
     public void instanciarLocalidades() {
         this.archivoJson.forEach(objetoLocalidad -> instanciarLocalidad((JsonObject) objetoLocalidad));
+    }
+
+    public void instanciarMunicipios() {
+        this.archivoJson.forEach(objetoLocalidad -> instanciarMunicipio((JsonObject) objetoLocalidad));
     }
 
     public void persistirLocalidades()
