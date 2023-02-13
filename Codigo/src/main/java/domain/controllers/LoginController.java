@@ -38,10 +38,29 @@ public class LoginController {
 
             Usuario usuario = this.repositorioDeUsuarios.buscar(nombreDeUsuario, contrasenia);
 
+            request.session().attribute("usuario_logueado", null);
+
             if(usuario != null) {
 
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
+
+                request.session().attribute("usuario_logueado", usuario);
+
+                switch (usuario.getTipoUsuario()) {
+                    case MIEMBRO:
+                        request.session().attribute("tipo_usuario", "miembro");
+                        break;
+                    case ORGANIZACION:
+                        request.session().attribute("tipo_usuario", "organizacion");
+                        break;
+                    case ADMIN:
+                        request.session().attribute("tipo_usuario", "administrador");
+                        break;
+                    case AGENTESECTORIAL:
+                        request.session().attribute("tipo_usuario", "agente_sectorial");
+                        break;
+                }
 
                 if (usuario.getTipoUsuario() == TipoUsuario.MIEMBRO){
                     Miembro miembro = this.repositorioDeMiembros.buscarSegunUsuarioId(usuario.getId());
@@ -59,6 +78,23 @@ public class LoginController {
                 else if (usuario.getTipoUsuario() == TipoUsuario.ADMIN) {
                     Adminisitrador adminisitrador = this.repositorioDeAdministradores.buscarSegunUsuarioId(usuario.getId());
                     response.redirect("administrador/" + adminisitrador.getId());
+                }
+
+                request.session().attribute("usuario_logueado", usuario);
+
+                switch (usuario.getTipoUsuario()) {
+                    case MIEMBRO:
+                        request.session().attribute("tipo_usuario", "miembro");
+                        break;
+                    case ORGANIZACION:
+                        request.session().attribute("tipo_usuario", "organizacion");
+                        break;
+                    case ADMIN:
+                        request.session().attribute("tipo_usuario", "administrador");
+                        break;
+                    case AGENTESECTORIAL:
+                        request.session().attribute("tipo_usuario", "agente_sectorial");
+                        break;
                 }
             }
             else {

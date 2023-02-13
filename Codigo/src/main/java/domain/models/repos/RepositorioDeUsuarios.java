@@ -34,4 +34,15 @@ public class RepositorioDeUsuarios {
                         + "'")
                 .getSingleResult();
     }
+
+    public Usuario buscarSegunId(Object id) {
+        return (Usuario) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from "
+                        + Usuario.class.getName()
+                        + " WHERE usuario_id = '"
+                        + id
+                        + "'")
+                .getSingleResult();
+    }
 }

@@ -60,6 +60,9 @@ public class Router {
             Spark.before("/*", AuthMiddleware::verificarSesion);
 
 
+            Spark.before("", AuthMiddleware::verificarTipoOrg);
+            Spark.before("/*",AuthMiddleware::verificarTipoOrg);
+
             Spark.get("", organizacionController::mostrarMenu, engine); // MENU ORG
             Spark.get("/registro_mediciones", organizacionController::registroMediciones, engine);
             Spark.post("/registrar_mediciones", organizacionController::registrarMediciones, engine); // TODO VINCULAR EL ARCHIVO EXCEL
@@ -83,6 +86,10 @@ public class Router {
         Spark.path("/miembro/:id", () -> {
             Spark.before("", AuthMiddleware::verificarSesion);
             Spark.before("/*", AuthMiddleware::verificarSesion);
+
+            Spark.before("", AuthMiddleware::verificarTipoMiembro);
+            Spark.before("/*", AuthMiddleware::verificarTipoMiembro);
+
             Spark.get("", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA
             Spark.get("/organizaciones/solicitada", miembroController::mostrarOrganizacionesS, engine);
@@ -118,6 +125,10 @@ public class Router {
         Spark.path("/agente_sectorial/:id", () -> {
             Spark.before("", AuthMiddleware::verificarSesion);
             Spark.before("/*", AuthMiddleware::verificarSesion);
+
+            Spark.before("", AuthMiddleware::verificarTipoAgente);
+            Spark.before("/*", AuthMiddleware::verificarTipoAgente);
+
             Spark.get("", agenteSectorialController::mostrarMenu, engine); // MENU AGENTE
             Spark.get("/recomendaciones", agenteSectorialController::mostrarRecomendaciones, engine);
             Spark.get("/reporte", agenteSectorialController::mostrarReportes, engine); // REPORTE
