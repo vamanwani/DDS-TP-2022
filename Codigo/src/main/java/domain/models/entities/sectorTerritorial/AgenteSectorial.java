@@ -1,5 +1,6 @@
 package domain.models.entities.sectorTerritorial;
 
+import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.Usuario;
 import org.bouncycastle.jcajce.provider.symmetric.CAST5;
 
@@ -43,5 +44,9 @@ public class AgenteSectorial {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 }

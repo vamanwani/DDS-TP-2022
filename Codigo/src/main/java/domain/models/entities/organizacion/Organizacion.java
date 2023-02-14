@@ -205,4 +205,7 @@ public class Organizacion {
         return clasificacionDeOrg.getNombre();
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
 }

@@ -82,20 +82,6 @@ public class LoginController {
 
                 request.session().attribute("usuario_logueado", usuario);
 
-                switch (usuario.getTipoUsuario()) {
-                    case MIEMBRO:
-                        request.session().attribute("tipo_usuario", "miembro");
-                        break;
-                    case ORGANIZACION:
-                        request.session().attribute("tipo_usuario", "organizacion");
-                        break;
-                    case ADMIN:
-                        request.session().attribute("tipo_usuario", "administrador");
-                        break;
-                    case AGENTESECTORIAL:
-                        request.session().attribute("tipo_usuario", "agente_sectorial");
-                        break;
-                }
             }
             else {
                 response.redirect("/log_in/fail");
@@ -134,7 +120,7 @@ public class LoginController {
 
 
         Validador validador= new Validador();
-        validador.usarTodosLosValidadores();
+       // validador.usarTodosLosValidadores();
 
         try {
             try{
