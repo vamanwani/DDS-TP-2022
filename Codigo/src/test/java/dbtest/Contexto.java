@@ -83,21 +83,21 @@ public class Contexto {
 
     }
 
-    @Test
-    public void persistirOrg(){
-        Organizacion organizacion = new Organizacion();
-        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
-        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("nuevaClasif");
-        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
-        organizacion.setRazonSocial("UBA");
-        RepositorioDeAgentesSectoriales repositorioDeAgentesSectoriales = new RepositorioDeAgentesSectoriales();
-        SectorTerritorial sectorTerritorial = repositorioDeAgentesSectoriales.buscarSectorSegunAgente(1);
-        sectorTerritorial.setOrganizaciones(organizacion);
-        EntityManagerHelper.beginTransaction();
-        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
-        EntityManagerHelper.getEntityManager().persist(organizacion);
-        EntityManagerHelper.commit();
-    }
+//    @Test
+//    public void persistirOrg(){
+//        Organizacion organizacion = new Organizacion();
+//        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
+//        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("nuevaClasif");
+//        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
+//        organizacion.setRazonSocial("UBA");
+//        RepositorioDeAgentesSectoriales repositorioDeAgentesSectoriales = new RepositorioDeAgentesSectoriales();
+//        SectorTerritorial sectorTerritorial = repositorioDeAgentesSectoriales.buscarSectorSegunAgente(1);
+//        sectorTerritorial.setOrganizaciones(organizacion);
+//        EntityManagerHelper.beginTransaction();
+//        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
+//        EntityManagerHelper.getEntityManager().persist(organizacion);
+//        EntityManagerHelper.commit();
+//    }
 
 //    @Test
 //    public void persistirOrgConSector(){
@@ -124,21 +124,21 @@ public class Contexto {
 //        EntityManagerHelper.commit();
 //    }
 //
-//    @Test
-//    public void persistirOrg1(){
-//        Organizacion organizacion = new Organizacion();
-//        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
-//        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Educacion");
-//        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
-//        organizacion.setRazonSocial("UBA");
-//        Usuario usuarioOrg = new Usuario("orga", "password", "fasdf@sdfsa.com", "12345434", TipoUsuario.ORGANIZACION);
-//        organizacion.setUsuario(usuarioOrg);
-//        EntityManagerHelper.beginTransaction();
-//        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
-//        EntityManagerHelper.getEntityManager().persist(organizacion);
-//        EntityManagerHelper.getEntityManager().persist(usuarioOrg);
-//        EntityManagerHelper.commit();
-//    }
+    @Test
+    public void persistirOrg1(){
+        Organizacion organizacion = new Organizacion();
+        organizacion.setTipoDeOrganizacion(TipoDeOrganizacion.Institucion);
+        ClasificaciónDeOrg clasificaciónDeOrg = new ClasificaciónDeOrg("Educacion");
+        organizacion.setClasificacionDeOrg(clasificaciónDeOrg);
+        organizacion.setRazonSocial("UBA");
+        Usuario usuarioOrg = new Usuario("orga", "password", "fasdf@sdfsa.com", "12345434", TipoUsuario.ORGANIZACION);
+        organizacion.setUsuario(usuarioOrg);
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
+        EntityManagerHelper.getEntityManager().persist(organizacion);
+        EntityManagerHelper.getEntityManager().persist(usuarioOrg);
+        EntityManagerHelper.commit();
+    }
 
 
 //    @Test
@@ -173,6 +173,16 @@ public class Contexto {
         EntityManagerHelper.persist(adminisitrador);
         EntityManagerHelper.commit();
 
+    }
+
+    @Test
+    public void instanciarAgSec2(){
+        Usuario usuario = new Usuario("agsec2", "admin", "abc@qwert.com", "12345678", TipoUsuario.AGENTESECTORIAL);
+        AgenteSectorial agenteSectorial = new AgenteSectorial("admin2", usuario);
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.persist(usuario);
+        EntityManagerHelper.persist(agenteSectorial);
+        EntityManagerHelper.commit();
     }
 
 }
