@@ -14,6 +14,7 @@ import spark.Request;
 import spark.Response;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class LoginController {
@@ -141,6 +142,8 @@ public class LoginController {
 
                     repositorioDeUsuarios.guardar(usuario);
                     repositorioDeMiembros.guardar(miembro);
+
+                    response.redirect("/log_in/signup/success"); // /log_in/signup/success
                 } else {
                     //TODO tirar mensaje de que elija otra contrasenia
 
@@ -153,6 +156,12 @@ public class LoginController {
             response.redirect("/login/login.hbs");
         }
         return response;
+    }
+
+    public ModelAndView signupexito(Request request,Response response){
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("signupsuccess", true);
+        }}, "/Login/login.hbs");
     }
 
     public ModelAndView fail(Request request, Response response){

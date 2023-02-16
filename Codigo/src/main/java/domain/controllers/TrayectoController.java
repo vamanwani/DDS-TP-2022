@@ -84,6 +84,23 @@ public class TrayectoController {
         }
     }
 
+
+    public ModelAndView agregarTramoSuccess(Request request, Response response){
+        try{
+            Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
+            String idTrayecto = request.params("id_trayecto");
+            Trayecto trayecto = this.repo.buscar(Integer.valueOf(idTrayecto));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("miembro", miembro);
+                put("trayecto", trayecto);
+                put("tramos", trayecto.getTramos());
+                put("tramosuccess", true);
+            }}, "/Miembro/editarTrayecto.hbs");
+        } catch (Exception ex){
+            return new ModelAndView(null, "");// "no such trayecto"
+        }
+    }
+
     public ModelAndView mostrarTramosDeTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
         return new ModelAndView(null,"/Miembro/editarTrayecto.hbs"); // MODIFICAR ESTO
@@ -177,6 +194,21 @@ public class TrayectoController {
         }}, "/Miembro/agregarTrayecto.hbs");
     }
 
+    public ModelAndView agregarTrayectoSuccess(Request request, Response response){
+        try{
+            String idMimebro = request.params("id");
+            Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
+            List<Trayecto> trayectos = this.repo.buscarTodos(new Integer(idMimebro));
+            return new ModelAndView(new HashMap<String, Object>(){{
+                put("miembro", miembro);
+                put("trayectos", trayectos);
+                put("trayectosuccess", true);
+            }}, "/Miembro/editarTrayectos.hbs"); // MODIFICAR ESTO
+        } catch (Exception ex){
+            return new ModelAndView(null, "/Miembro/editarTrayectos.hbs");
+        }
+    }
+
     public Response crearTrayecto(Request request, Response response){
         Miembro miembro = this.repositorioDeMiembros.buscar(Integer.valueOf(request.params("id")));
         Trayecto nuevoTrayecto = new Trayecto();
@@ -185,6 +217,8 @@ public class TrayectoController {
         response.redirect("" + nuevoTrayecto.getId() + "/agregar");// Pantalla de gestion de trayectos
         return response;
     }
+
+
 
     public Response definirTrayecto(Request request, Response response){
         Trayecto trayecto = this.repo.buscar(Integer.valueOf(request.params("id_trayecto")));
@@ -197,7 +231,7 @@ public class TrayectoController {
         trayecto.setPeriodoDeImputacion(periodoDeImputacion);
         this.repositorioDeConsumos.guardarSiNoExistePeriodicidad(periodoDeImputacion);
         this.repo.guardar(trayecto);
-        response.redirect("/miembro/"+ request.params("id") +"/trayectos");
+        response.redirect("/miembro/"+ request.params("id") +"/trayectos/trayectosuccess");
         return response;
     }
 
@@ -275,6 +309,7 @@ public class TrayectoController {
         repositorioDeTramos.guardarSiNoExiste(tramo);
         trayecto.agregarTramo(tramo);
         repo.guardar(trayecto);
+        response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/tramosuccess");
         response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/agregar");//Pantalla de agregar tramos
         //response.redirect(("/" + distancia));
         return response;

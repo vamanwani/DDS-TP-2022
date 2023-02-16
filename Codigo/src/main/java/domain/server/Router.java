@@ -46,6 +46,7 @@ public class Router {
             Spark.get("", loginController::pantallaDeLogin, engine);
             Spark.post("/log_in", loginController::login);
             Spark.post("/log_in/signup", loginController::signup);
+            Spark.get("/log_in/signup/success", loginController::signupexito, engine);
             Spark.get("/log_in/fail", loginController::fail, engine);
             // PARA LO DE CREAR LA CUENTA HAY QUE HACER LO DEL VALIDADOR DE CONTRASENIAS
         });
@@ -114,7 +115,9 @@ public class Router {
                 Spark.get("/eliminated", trayectoController::mostrarTrayectosEliminated, engine);
                 Spark.get("/agregar", trayectoController::crearTrayecto);
                 Spark.get("/:id_trayecto/agregar", trayectoController::agregarTrayecto, engine);
+                Spark.get("/trayectosuccess", trayectoController::agregarTrayectoSuccess, engine);
                 Spark.get("/:id_trayecto/editar", trayectoController::mostarTrayecto, engine);
+                Spark.get("/:id_trayecto/tramosuccess", trayectoController::agregarTramoSuccess, engine);
                 Spark.post("/:id_trayecto", trayectoController::definirTrayecto);
                 Spark.post("/:id_trayecto/eliminar", trayectoController::eliminarTrayecto);
 
