@@ -95,7 +95,7 @@ public class TrayectoController {
                 put("trayecto", trayecto);
                 put("tramos", trayecto.getTramos());
                 put("tramosuccess", true);
-            }}, "/Miembro/editarTrayecto.hbs");
+            }}, "/Miembro/agregarTrayecto.hbs");
         } catch (Exception ex){
             return new ModelAndView(null, "");// "no such trayecto"
         }
@@ -161,7 +161,7 @@ public class TrayectoController {
             put("colectivo", colectivos);
             put("trenes", trenes);
             put("miembro", miembro);
-            put("miembro_id", request.params("id"));
+            put("miembro_id", miembro.getId());
             put("trayecto_id", trayecto.getId());
             put("tramos", trayecto.getTramos());
             put("provincias", provincias);
@@ -333,7 +333,7 @@ public class TrayectoController {
         Tramo tramo = this.repositorioDeTramos.buscar(Integer.valueOf(request.params("id_tramo")));
         trayecto.agregarTramo(tramo);
         this.repo.guardar(trayecto);
-        response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/agregar");
+        response.redirect("/miembro/"+ request.params("id") +"/trayectos/"+ request.params("id_trayecto") +"/tramosuccess");
         return response;
     }
 

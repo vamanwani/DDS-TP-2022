@@ -88,14 +88,14 @@ public class Router {
         });
 
         Spark.path("/miembro/:id", () -> {
-            Spark.before("", AuthMiddleware::verificarSesion);
-            Spark.before("/*", AuthMiddleware::verificarSesion);
-
-            Spark.before("", AuthMiddleware::verificarTipoMiembro);
-            Spark.before("/*", AuthMiddleware::verificarTipoMiembro);
-
-            Spark.before("", AuthMiddleware::verificarIdMiembro);
-            Spark.before("/*", AuthMiddleware::verificarIdMiembro);
+//            Spark.before("", AuthMiddleware::verificarSesion);
+//            Spark.before("/*", AuthMiddleware::verificarSesion);
+//
+//            Spark.before("", AuthMiddleware::verificarTipoMiembro);
+//            Spark.before("/*", AuthMiddleware::verificarTipoMiembro);
+//
+//            Spark.before("", AuthMiddleware::verificarIdMiembro);
+//            Spark.before("/*", AuthMiddleware::verificarIdMiembro);
 
             Spark.get("", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA

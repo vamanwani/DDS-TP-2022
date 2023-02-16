@@ -55,15 +55,15 @@
     </header>
     <main style="background-image: linear-gradient(to left, #b368b3, #6e256e); display: flex; flex-direction: column; align-items: center;">
         <section style="width: 90%; height: 600px;" class="bloqueAgregarTrayecto">
-        {{#if trayectosuccess}}
+        {{#if tramosuccess}}
             <div class="alert alert-success" role="alert">
-                Se ha agregado el trayecto con exito!
+                Se ha agregado el tramo con exito!
             </div>
         {{/if}}
             <h1>AGREGAR TRAYECTO</h1>
             <div class="mb-3">
-            <form method="post", action ="/miembro/{{miembro_id}}/trayectos/{{trayecto_id}}">
-                <label for="exampleFormControlInput1" class="form-label">NOMBRE TRAYECTO</label>
+            <form method="post", action ="/miembro/{{miembro.id}}/trayectos/{{trayecto.id}}">
+{{!--                 <label for="exampleFormControlInput1" class="form-label">NOMBRE TRAYECTO</label> --}}
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" name= "nombre">
                 <input type="text" class="form-control" id="" placeholder="Descripcion" name= "descripcion">
                 <select id="valueDia" class="form-select" aria-label="Default select example" name ="dia_periodo">

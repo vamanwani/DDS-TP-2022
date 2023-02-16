@@ -14,6 +14,9 @@
     <header>
         <h1>MI IMPACTO AMBIENTAL</h1>
     </header>
+
+    <main class="main palevioletred">
+        <section id="login">
             {{#if fail}}
                 <div class="alert alert-danger" role="alert">
                   El nombre de usuario o contraseña son incorrectos, intente nuevamente!
@@ -24,9 +27,6 @@
                   Se ha creado el usuario con exito!
                 </div>
             {{/if}}
-    <main class="main palevioletred">
-        <section id="login">
-
             <h1>LOG-IN</h1>
             <form method="POST" action="/log_in" {{!--id="formularioLogin" --}} class="formul">
                 <div class="bordeForm">
