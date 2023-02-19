@@ -88,14 +88,14 @@ public class Router {
         });
 
         Spark.path("/miembro/:id", () -> {
-//            Spark.before("", AuthMiddleware::verificarSesion);
-//            Spark.before("/*", AuthMiddleware::verificarSesion);
-//
-//            Spark.before("", AuthMiddleware::verificarTipoMiembro);
-//            Spark.before("/*", AuthMiddleware::verificarTipoMiembro);
-//
-//            Spark.before("", AuthMiddleware::verificarIdMiembro);
-//            Spark.before("/*", AuthMiddleware::verificarIdMiembro);
+            Spark.before("", AuthMiddleware::verificarSesion);
+            Spark.before("/*", AuthMiddleware::verificarSesion);
+
+            Spark.before("", AuthMiddleware::verificarTipoMiembro);
+            Spark.before("/*", AuthMiddleware::verificarTipoMiembro);
+
+            Spark.before("", AuthMiddleware::verificarIdMiembro);
+            Spark.before("/*", AuthMiddleware::verificarIdMiembro);
 
             Spark.get("", miembroController::mostrarMenu, engine); // MENU MIEMBRO, MUESTRA
             Spark.get("/organizaciones", miembroController::mostrarOrganizaciones, engine);//MUESTRA
@@ -112,7 +112,7 @@ public class Router {
             Spark.path("/trayectos",() -> {
                 Spark.get("", trayectoController::mostrarTrayectos, engine);
                 Spark.get("/", trayectoController::mostrarTrayectos, engine);
-                Spark.get("/eliminated", trayectoController::mostrarTrayectosEliminated, engine);
+                Spark.get("/deleted", trayectoController::mostrarTrayectosDeleted, engine);
                 Spark.get("/agregar", trayectoController::crearTrayecto);
                 Spark.get("/:id_trayecto/agregar", trayectoController::agregarTrayecto, engine);
                 Spark.get("/trayectosuccess", trayectoController::agregarTrayectoSuccess, engine);

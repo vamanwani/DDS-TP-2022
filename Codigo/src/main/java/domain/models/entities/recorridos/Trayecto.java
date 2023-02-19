@@ -119,5 +119,7 @@ public class Trayecto {
         return periodoDeImputacion;
     }
 
-
+    public boolean isEstado() {
+        return estado;
+    }
 }

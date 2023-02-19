@@ -152,8 +152,8 @@ public class Organizacion {
 
     public double calcularHCOrgHistorico() throws IOException{
         double hc = 0;
-        for (int i = 0; i < getConsumos().size(); i++){
-            hc += this.calcularHCOrganizacion(getConsumos().get(i).getPeriodicidad());
+        for (int i = 0; i < getPeriodosDeImputacion().size(); i++){
+            hc += this.calcularHCOrganizacion(getPeriodosDeImputacion().get(i));
         }
         return hc;
     }
@@ -208,4 +208,29 @@ public class Organizacion {
     public Usuario getUsuario() {
         return usuario;
     }
+
+    public List<PeriodoDeImputacion> getPeriodosDeImputacion() {
+        List<PeriodoDeImputacion> periodoDeImputacions = new ArrayList<>();
+
+        for (int i = 0; i < this.getConsumos().size(); i++) { // ARMAR UNA LISTA DE LOS PERIODOS DE IMPUTACION
+            if (!periodoDeImputacions.contains(this.getConsumos().get(i).getPeriodicidad())) {
+                periodoDeImputacions.add(this.getConsumos().get(i).getPeriodicidad());
+            }
+        }
+
+
+        for (int l = 0; l < this.listarMiembros().size(); l++) {
+            Miembro miembro = this.listarMiembros().get(l);
+            for (int k = 0; k < miembro.getTrayectosActivos().size(); k++) {
+                if (!periodoDeImputacions.contains(miembro.getTrayectosActivos().get(k).getPeriodoDeImputacion())) {
+                    periodoDeImputacions.add(miembro.getTrayectosActivos().get(k).getPeriodoDeImputacion());
+                }
+            }
+        }
+
+        return periodoDeImputacions;
+
+    }
+
+
 }

@@ -65,19 +65,11 @@ public class AgenteSectorialController {
         Reporte reporte = new Reporte();
         HashMap datos = null;
         if(tipoReporte.equals("composicion_sector")){
-//            String mes = request.queryParams("mes");
-//            String anio = request.queryParams("anio");
-//            String tipoPeriodicidad = request.queryParams("tipo_periodicidad");
-//            PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(mes),Integer.valueOf(anio),tipoPeriodicidad);
             datos = reporte.contenidoReporteComposicionSectorTerritorial(sectorTerritorial);
         } else if (tipoReporte.equals("composicion_pais")){
-            String mes = request.queryParams("mes");
-            String anio = request.queryParams("anio");
-            String tipoPeriodicidad = request.queryParams("tipo_periodicidad");
-            PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(Integer.valueOf(mes),Integer.valueOf(anio),tipoPeriodicidad);
             Pais pais = sectorTerritorial.getPais();
             Set<SectorTerritorial> sectorTerritorialSet = this.repo.buscarSectoresSegunPais(pais.getId());
-            datos = reporte.contenidoReporteComposicionPais(sectorTerritorialSet, periodoDeImputacion);
+            datos = reporte.contenidoReporteComposicionPais(sectorTerritorialSet);
         } else if (tipoReporte.equals("evolucion")) {
             datos = reporte.contenidoReporteEvolucionSectorTerritorial(sectorTerritorial);
         } else if (tipoReporte.equals("total")){

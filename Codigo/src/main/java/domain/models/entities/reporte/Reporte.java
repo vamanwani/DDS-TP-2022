@@ -25,7 +25,7 @@ public class Reporte {
         }
         return map;
     }
-    public HashMap contenidoReporteComposicionPais(Set<SectorTerritorial> sectores, PeriodoDeImputacion periodoDeImputacion) throws IOException{
+    public HashMap contenidoReporteComposicionPais(Set<SectorTerritorial> sectores) throws IOException{
         //TODO DIAGRAMA DE PORCENTAJE DEL HC DE PROVINCIA, QUE VA A SER EL HC RESULTANTE DE SUS ORGS
         HashMap<String, Double> map = new HashMap<String, Double>();
         for (SectorTerritorial sector : sectores){
@@ -74,7 +74,6 @@ public class Reporte {
     }
 
     public HashMap contenidoReporteEvolucionSectorTerritorial(SectorTerritorial sectorTerritorial){
-        //TODO DIAGRAMA LINEA-TIEMPO QUE MUESTRE EL HC EVOLUTIVO DE UN SECTOR TERRITORIAL, QUE ES EL HC RESULTANTE DE TODAS SUS ORGS.
         HashMap<String, Double> map = new HashMap<String, Double>();
         List<PeriodoDeImputacion> periododesDeImputacionDelSectorT = new ArrayList<>();
 
@@ -91,9 +90,9 @@ public class Reporte {
             Organizacion organizacion = sectorTerritorial.getOrganizaciones().get(t);
             for (int l = 0; l < organizacion.listarMiembros().size(); l++){
                 Miembro miembro = organizacion.listarMiembros().get(l);
-                for(int k = 0; k < miembro.getTrayectos().size(); k++){
-                    if(!periododesDeImputacionDelSectorT.contains(miembro.getTrayectos().get(k).getPeriodoDeImputacion())){
-                        periododesDeImputacionDelSectorT.add(miembro.getTrayectos().get(k).getPeriodoDeImputacion());
+                for(int k = 0; k < miembro.getTrayectosActivos().size(); k++){
+                    if(!periododesDeImputacionDelSectorT.contains(miembro.getTrayectosActivos().get(k).getPeriodoDeImputacion())){
+                        periododesDeImputacionDelSectorT.add(miembro.getTrayectosActivos().get(k).getPeriodoDeImputacion());
                     }
                 }
             }
@@ -126,8 +125,11 @@ public class Reporte {
     public HashMap contenidoReporteHCSectorTerritorial(SectorTerritorial sectorTerritorial) throws IOException{
         //TODO TE DEVUELVE EL HC DE TODAS LAS ORGS SUMADOS
         //Sumatoria de las hc de cada organizacion (usando calculadora para c/u)
+
+        double hc = sectorTerritorial.calcularHCSectorHistorico();
+
         HashMap<String, Double> map = new HashMap<>();
-        map.put("HC TOTAL", Double.valueOf(df.format(sectorTerritorial.calcularHCSectorHistorico())));
+        map.put("HC TOTAL", hc);
         return map;
     }
 

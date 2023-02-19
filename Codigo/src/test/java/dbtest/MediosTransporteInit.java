@@ -71,9 +71,9 @@ public class MediosTransporteInit {
     @Test
     public void instanciarLineaD() throws IOException { // TODO 1/12
         List<Parada> paradas = new ArrayList<>();
-        Localidad san_nicolas =  this.repositorioDeLocalidades.buscarNombre("SAN NICOLAS");
+        Localidad san_nicolas =  this.repositorioDeLocalidades.buscar(5364);
         Localidad recoleta = this.repositorioDeLocalidades.buscarNombre("RECOLETA");
-        Localidad belgrano = this.repositorioDeLocalidades.buscarNombre("BELGRANO");
+        Localidad belgrano = this.repositorioDeLocalidades.buscar(5337);
 
         System.out.println(san_nicolas.getNombre());
         System.out.println(recoleta.getNombre());

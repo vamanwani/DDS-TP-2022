@@ -113,7 +113,7 @@ public class Miembro {
     }
 
     public double calcularHCMiembro(PeriodoDeImputacion periodoDeImputacion) throws IOException {
-        List<Trayecto> trayectos = (List<Trayecto>) this.getTrayectos().stream().filter(t -> t.getPeriodoDeImputacion().equals(periodoDeImputacion)).collect(Collectors.toList());
+        List<Trayecto> trayectos = (List<Trayecto>) this.getTrayectosActivos().stream().filter(t -> t.getPeriodoDeImputacion().equals(periodoDeImputacion)).collect(Collectors.toList());
         return new CalculdoraHCMiembro().calcularHC(trayectos);
     }
 
@@ -178,6 +178,11 @@ public class Miembro {
 
     public List<Trayecto> getTrayectos() {
         return trayectos;
+    }
+
+    public List<Trayecto> getTrayectosActivos() {
+        List<Trayecto> trayectos = getTrayectos();
+        return (List<Trayecto>) trayectos.stream().filter(t -> t.isEstado()).collect(Collectors.toList());
     }
 
 }

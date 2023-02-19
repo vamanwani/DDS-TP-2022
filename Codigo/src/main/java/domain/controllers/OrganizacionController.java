@@ -98,12 +98,9 @@ public class OrganizacionController {
 
         importador.start();
 
-//        importador.importar("'" + request.params("id") + "'.xlsx", organizacion);
-
-//        response.redirect("/organizaciones/" + request.params("id"));
-//        return response;
         return new ModelAndView(new HashMap<String, Object>(){{
             put("success", true);
+            put("organizacion", organizacion);
         }}, "Organizacion/registrarMediciones.hbs");
     }
 
