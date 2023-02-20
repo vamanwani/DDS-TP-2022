@@ -168,7 +168,5 @@ public class LoginController {
         return new ModelAndView(new HashMap<String, Object>(){{
             put("fail", true);
         }}, "/Login/login.hbs");
-
-
     }
 }
