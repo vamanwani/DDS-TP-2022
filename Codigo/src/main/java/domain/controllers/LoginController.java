@@ -85,11 +85,11 @@ public class LoginController {
 
             }
             else {
-                response.redirect("/log_in/fail");
+                response.redirect("/fail");
             }
         }
         catch (Exception ex) {
-            response.redirect("/log_in/fail");
+            response.redirect("/fail");
         }
         return response;
     }
@@ -143,7 +143,7 @@ public class LoginController {
                     repositorioDeUsuarios.guardar(usuario);
                     repositorioDeMiembros.guardar(miembro);
 
-                    response.redirect("/log_in/signup/success"); // /log_in/signup/success
+                    response.redirect("/success"); // /log_in/signup/success
                 } else {
                     //TODO tirar mensaje de que elija otra contrasenia
 

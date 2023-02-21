@@ -17,16 +17,16 @@
 
     <main class="main palevioletred">
         <section id="login">
-            {{#if fail}}
-                <div class="alert alert-danger" role="alert">
-                  El nombre de usuario o contraseña son incorrectos, intente nuevamente!
-                </div>
-            {{/if}}
-            {{#if signupsuccess}}
-                <div class="alert alert-success" role="alert">
-                  Se ha creado el usuario con exito!
-                </div>
-            {{/if}}
+                        {{#if fail}}
+                            <div class="alert alert-danger" role="alert">
+                              El nombre de usuario o contraseña son incorrectos, intente nuevamente!
+                            </div>
+                        {{/if}}
+                        {{#if signupsuccess}}
+                            <div class="alert alert-success" role="alert">
+                              Se ha creado el usuario con exito!
+                            </div>
+                        {{/if}}
             <h1>LOG-IN</h1>
             <form method="POST" action="/log_in" {{!--id="formularioLogin" --}} class="formul">
                 <div class="bordeForm">
@@ -35,6 +35,7 @@
                     <h4>Ingrese una contraseña</h4>
                     <input type="password" id="userPassword" class="form-control inputForm" type="text" placeholder="Contraseña Usuario" name="contrasenia">
                 </div>
+
                 <a class="botonCrearCuenta">CREAR CUENTA</a>
                 <button id="btnIngresar" type="submit" class="botonConfirmacion btn btn-lg btn-info">INGRESAR</button>
             </form>
