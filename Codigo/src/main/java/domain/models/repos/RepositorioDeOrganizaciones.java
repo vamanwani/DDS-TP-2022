@@ -1,7 +1,11 @@
 package domain.models.repos;
 
+
+import domain.models.entities.consumo.Consumo;
 import domain.models.entities.miembro.Miembro;
+import domain.models.entities.organizacion.ClasificaciónDeOrg;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.entities.organizacion.Sector;
 import domain.services.dbManager.EntityManagerHelper;
 
 import java.util.List;
@@ -11,6 +15,12 @@ public class RepositorioDeOrganizaciones {
         return EntityManagerHelper
                 .getEntityManager()
                 .createQuery("select miembro_miembro_id " + "from solicitud_vinculacion where organizacion_id_organizacion =" + idOrganizacion)
+                .getResultList();
+    }
+    public List<Consumo> buscarTodosLosConsumos(int idOrganizacion){
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from "+ Consumo.class.getName() +" where organizacion_id = "+ idOrganizacion)
                 .getResultList();
     }
 
@@ -28,6 +38,13 @@ public class RepositorioDeOrganizaciones {
                 .getSingleResult();
     }
 
+    public List<Organizacion> buscarSegunTipOrg(String tipoOrg){
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + Organizacion.class.getName() + " where tipo_org = '" + tipoOrg  + "'")
+                .getResultList();
+    }
+
     public void modificar(Organizacion servicio) {
         this.guardar(servicio);
     }
@@ -38,10 +55,30 @@ public class RepositorioDeOrganizaciones {
         EntityManagerHelper.commit();
     }
 
+
+    public void guardarSector(Sector organizacion) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(organizacion);
+        EntityManagerHelper.commit();
+    }
+
+    public void guardarClasificacion(ClasificaciónDeOrg clasificaciónDeOrg){
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().persist(clasificaciónDeOrg);
+        EntityManagerHelper.commit();
+    }
+
+
     public void eliminar(Organizacion organizacion) {
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().remove(organizacion);
         EntityManagerHelper.commit();
+    }
+
+    public List<Organizacion> buscarTodas() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("from " + Organizacion.class.getName())
+                .getResultList();
     }
 
     /*public List<Tramo> buscarTodosLosTramos(Integer idTrayecto) {

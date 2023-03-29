@@ -8,6 +8,7 @@ import domain.models.entities.miembro.Miembro;
 import domain.models.entities.miembro.SolicitudVinculacion;
 import domain.models.entities.miembro.Usuario;
 import domain.models.entities.ubicacion.Ubicacion;
+import domain.models.repos.RepositorioDeConsumos;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -15,10 +16,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "organizacion")
 public class Organizacion {
+    @Transient
+    RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
+
     @Id
     @GeneratedValue
     @Column(name = "id_organizacion")
@@ -32,7 +37,7 @@ public class Organizacion {
     @JoinColumn(name = "solicitud_vinculacion_id")
     private List<SolicitudVinculacion> solicitudes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "clasificacion_org_id")
     private ClasificaciónDeOrg clasificacionDeOrg;
 
@@ -44,7 +49,7 @@ public class Organizacion {
         this.usuario = usuario;
         this.contactos = new HashSet<>();
         this.sectores = new ArrayList<>();
-        this.consumos = new ArrayList<>();
+//        this.consumos = new ArrayList<>();
     }
 
     public ClasificaciónDeOrg getClasificacionDeOrg() {
@@ -57,7 +62,7 @@ public class Organizacion {
     @Column(name = "razon_social")
     private String razonSocial;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
 
@@ -65,9 +70,9 @@ public class Organizacion {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "organizacion_id")
-    private List<Consumo> consumos;
+//    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "organizacion_id")
+//    private List<Consumo> consumos;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "miembro_id")
@@ -82,7 +87,7 @@ public class Organizacion {
 
 
     public List<Consumo> getConsumos() {
-        return consumos;
+        return repositorioDeConsumos.buscarConsumosDeOrg(this);
     }
 
     public Ubicacion getUbicacion() {
@@ -91,7 +96,7 @@ public class Organizacion {
     public Organizacion() {
         this.contactos = new HashSet<>();
         this.sectores = new ArrayList<>();
-        this.consumos = new ArrayList<>();
+//        this.consumos = new ArrayList<>();
     }
 
     public void agregarContacto(Miembro nuevoContacto){
@@ -102,8 +107,8 @@ public class Organizacion {
         this.contactos.forEach(contacto -> contacto.recibirRecomendacion(link));
     }
 
-    public Set<Miembro> listarMiembros(){
-        Set<Miembro> miembroSet = new HashSet<>();
+    public List<Miembro> listarMiembros(){
+        List<Miembro> miembroSet = new ArrayList<>();
         for (Sector unSector : this.sectores)
         {
             for(Miembro unMiembro : unSector.getMiembros())
@@ -112,7 +117,7 @@ public class Organizacion {
             }
         }
         //miembroList=  this.sectores.stream().map(sector -> sector.getMiembros()).collect(Collectors.toList());
-        return miembroSet;
+        return (List<Miembro>) miembroSet;
     }
   public void setTipoDeOrganizacion(TipoDeOrganizacion tipoDeOrganizacion) {
       this.tipoDeOrganizacion = tipoDeOrganizacion;
@@ -125,7 +130,7 @@ public class Organizacion {
     }
 
     public void agregarConsumo(Consumo consumo){
-        this.consumos.add(consumo);
+//        this.consumos.add(consumo);
   }
 
     public void agregarSectores(Sector sector){
@@ -133,15 +138,22 @@ public class Organizacion {
     }
 
     public double calcularHCOrganizacion(PeriodoDeImputacion periodoACalcular) throws IOException {
-        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular) + hcMiembrosOrganizacion();
-
+        return new CalculadoraHCOrganizacion().calcularHC(getConsumos(), periodoACalcular) + calcularHCMiembrosSegunPeriodo(periodoACalcular);
         //+ sectores.stream().mapToDouble(sector -> sector.calcularHCSector()).sum();
+    }
+
+    private double calcularHCMiembrosSegunPeriodo(PeriodoDeImputacion periodoACalcular) throws IOException {
+        double hc = 0;
+        for(Miembro miembro : listarMiembros()){
+            hc += miembro.calcularHCMiembro(periodoACalcular);
+        }
+        return hc;
     }
 
     public double calcularHCOrgHistorico() throws IOException{
         double hc = 0;
-        for (int i = 0; i < consumos.size(); i++){
-            hc += this.calcularHCOrganizacion(consumos.get(i).getPeriodicidad());
+        for (int i = 0; i < getPeriodosDeImputacion().size(); i++){
+            hc += this.calcularHCOrganizacion(getPeriodosDeImputacion().get(i));
         }
         return hc;
     }
@@ -185,12 +197,40 @@ public class Organizacion {
         return tipoDeOrganizacion;
     }
 
-    public String getRazon() {
+    public String getNombre() {
         return razonSocial;
     }
 
     public String getClasificacion() {
         return clasificacionDeOrg.getNombre();
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public List<PeriodoDeImputacion> getPeriodosDeImputacion() {
+        List<PeriodoDeImputacion> periodoDeImputacions = new ArrayList<>();
+
+        for (int i = 0; i < this.getConsumos().size(); i++) { // ARMAR UNA LISTA DE LOS PERIODOS DE IMPUTACION
+            if (!periodoDeImputacions.contains(this.getConsumos().get(i).getPeriodicidad())) {
+                periodoDeImputacions.add(this.getConsumos().get(i).getPeriodicidad());
+            }
+        }
+
+
+        for (int l = 0; l < this.listarMiembros().size(); l++) {
+            Miembro miembro = this.listarMiembros().get(l);
+            for (int k = 0; k < miembro.getTrayectosActivos().size(); k++) {
+                if (!periodoDeImputacions.contains(miembro.getTrayectosActivos().get(k).getPeriodoDeImputacion())) {
+                    periodoDeImputacions.add(miembro.getTrayectosActivos().get(k).getPeriodoDeImputacion());
+                }
+            }
+        }
+
+        return periodoDeImputacions;
+
+    }
+
 
 }

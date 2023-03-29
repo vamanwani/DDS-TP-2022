@@ -17,10 +17,17 @@ public class SectorTerritorial {
     @Column(name = "nombre")
     private String nombre;
 
+    @ManyToOne
+    @JoinColumn(name = "pais_id")
+    private Pais pais;
+
     @OneToOne
     @JoinColumn(name = "agente_sectorial_id")
     private AgenteSectorial agenteSectorial;
 
+    public void setAgenteSectorial(AgenteSectorial agenteSectorial) {
+        this.agenteSectorial = agenteSectorial;
+    }
 
     @Column(name = "link_recomendacion")
     private String link_recomendacion;
@@ -38,7 +45,7 @@ public class SectorTerritorial {
     }
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organizacion_id")
+    @JoinColumn(name = "sector_id")
     private List<Organizacion> organizaciones;
 
     @Enumerated(EnumType.STRING)
@@ -69,7 +76,7 @@ public class SectorTerritorial {
     }
 
     public Boolean esProvincia(){
-        return this.tipoSector == TipoSectorTerritorial.PROCVINCIAS;
+        return this.tipoSector == TipoSectorTerritorial.PROVINCIAS;
     }
 
     public double calcularHCSectorTerritorial(PeriodoDeImputacion periodoDeImputacion){
@@ -98,4 +105,15 @@ public class SectorTerritorial {
         return link_recomendacion;
     }
 
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 }

@@ -1,9 +1,12 @@
 package domain.models.entities.organizacion;
 
 import domain.models.entities.calculoHC.CalculadoraHCSector;
+import domain.models.entities.consumo.PeriodoDeImputacion;
+import domain.models.entities.consumo.TipoPeriodicidad;
 import domain.models.entities.miembro.Miembro;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.*;
 
 @Entity
@@ -66,15 +69,23 @@ public class Sector {
         return nombre;
     }
 
-    public double calcularHCSector() {
-        return new CalculadoraHCSector().calcularHC(miembros);
+    public double calcularHCSector(PeriodoDeImputacion periodoDeImputacion) throws IOException {
+        if(periodoDeImputacion.getPeriodicidad().equals(TipoPeriodicidad.MENSUAL)){
+            return new CalculadoraHCSector().calcularHCMensual(miembros, periodoDeImputacion);
+        } else {
+            return new CalculadoraHCSector().calcularHCAnual(miembros, periodoDeImputacion);
+        }
     }
 
-    public double HCPorCantMiembros(){
-        return this.calcularHCSector() / miembros.size();
-    }
+
+//
+//    public double HCPorCantMiembros(){
+//        return this.calcularHCSector() / miembros.size();
+//    }
 
     public int getId() {
         return id;
     }
+
+
 }

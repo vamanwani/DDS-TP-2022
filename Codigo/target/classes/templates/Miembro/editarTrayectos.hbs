@@ -22,30 +22,45 @@
             <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
+                        <h3 id="nombreUsuario">{{miembro.nombre}}</h3>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./indexMiembro.hbs">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/miembro/{{miembro.id}}">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Acciones
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Editar Trayectos</a></li>
-                            <li><a class="dropdown-item" href="./unirseAOrg.hbs">Unirse a Organización</a></li>
-                        </ul>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/hc">Calculadora HC</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/reportes">Vizualizar reportes</a></li>
+                    </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Login/login.hbs">Cerrar sesión</a>
+                    <a class="nav-link" href="/logout">Cerrar sesión</a>
+
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-<main style="background-color: #b854b8; display: flex; flex-direction: column; align-items: center;">
+<main style="background-image: linear-gradient(to left, #b368b3, #6e256e); display: flex; flex-direction: column; align-items: center;">
+{{#if eliminated}}
+<div class="alert alert-success" role="alert">
+  Se ha eliminado el trayecto con exito!
+</div>
+{{/if}}
+
+{{#if trayectosuccess}}
+    <div class="alert alert-success" role="alert">
+        Se ha creado el trayecto con exito!
+    </div>
+{{/if}}
+
     <h1>REGISTRO DE TRAYECTOS</h1>
     <section class="bloqueTrayectos">
         <div class="nombreTrayecto" style="background-color: rgb(200, 181, 218);">
@@ -58,6 +73,7 @@
                     <tr>
                         <td>Nombre</td>
                         <td>Descripcion</td>
+                        <td>Fecha (AAAA-MM-DD)</td>
                         <td>Cantidad de tramos</td>
                     </tr>
                 </thead>
@@ -66,14 +82,17 @@
                     <tr>
                         <td>{{nombre}}</td>
                         <td>{{descripcion}}</td>
+                        <td>{{fecha}}</td>
                         <td>{{cantidadTramos}}</td>
                         <td>
                         <a type="button" class="btn btn-lg" href="trayectos/{{id}}/editar"
                                         style="background-color: rgb(212, 211, 211);">EDITAR TRAYECTO</a>
                         </td>
                         <td>
-                        <a type="button" class="btn btn-lg"
-                                        style="background-color: rgb(184, 9, 9);">ELIMINAR TRAYECTO</a>
+                        <form method = "post" action = "trayectos/{{id}}/eliminar">
+                        <button type="submit" class="btn btn-lg"
+                                        style="background-color: rgb(184, 9, 9);">ELIMINAR TRAYECTO</button>
+                        </form>
                         </td>
                     </tr>
                     {{/each}}
@@ -81,23 +100,12 @@
             </table>
             </div>
         </div>
-        <div class="cantTramos"
-            style="background-color: rgb(227, 235, 117); display: grid; grid-template-rows: 1fr 1fr 3fr; justify-content:center; align-items:center">
-            <h4>CANTIDAD DE TRAMOS</h4>
-            <p id="nombreTrayectoElegido"></p>
-            <h1 id="cantidadTramos"></h1>
-        </div>
-        <div class="distanciaTotal" style="background-color: rgb(255, 255, 255);">
-            <h4 style="position: absolute; left: 35px;">DISTANCIA TOTAL RECORRIDA: </h4>
-        </div>
     </section>
     <section style="width: 100%;">
         <div style="display: flex; justify-content: space-around;">
             <a href="trayectos/agregar" type="button" class="btn btn-lg"
                 style="background-color: rgb(4, 197, 45); margin-top: 1rem;">AGREGAR TRAYECTO</a>
         </div>
-        <button id="btnGuardarCambios" type="button" class="btn btn-lg"
-            style="background-color: rgb(94, 2, 122); color: white; margin: 2rem 0;">GUARDAR Y SALIR</button>
     </section>
 </main>
 <footer style="background-color: black;">

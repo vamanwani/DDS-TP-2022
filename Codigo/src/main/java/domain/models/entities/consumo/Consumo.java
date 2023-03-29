@@ -1,5 +1,7 @@
 package domain.models.entities.consumo;
 
+import domain.models.entities.organizacion.Organizacion;
+
 import javax.persistence.*;
 
 @Entity
@@ -23,6 +25,10 @@ public abstract class Consumo {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "tipo_consumo_id")
     protected TipoConsumo tipoConsumo;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "organizacion_id")
+    protected Organizacion organizacion;
 
     public void setPeriodicidad(PeriodoDeImputacion periodicidad) {
         this.periodicidad = periodicidad;
@@ -58,5 +64,9 @@ public abstract class Consumo {
 
     public TipoConsumo getTipoConsumo() {
         return tipoConsumo;
+    }
+
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
     }
 }

@@ -1,5 +1,6 @@
 package domain.models.repos;
 
+import domain.models.entities.consumo.TipoConsumo;
 import domain.models.entities.miembro.Miembro;
 import domain.models.entities.recorridos.Tramo;
 import domain.models.entities.recorridos.Trayecto;
@@ -7,18 +8,27 @@ import domain.models.entities.transporte.*;
 import domain.models.entities.ubicacion.Ubicacion;
 import domain.services.dbManager.EntityManagerHelper;
 
+import java.util.List;
+
 public class RepositoriosDeTransporte {
 
     public Transporte buscar(Integer id) {
-        return EntityManagerHelper
+        return (Transporte) EntityManagerHelper
                 .getEntityManager()
-                .find(Transporte.class, id);
+                .createQuery("from " + Transporte.class.getName() + " where id = " + id)
+                .getSingleResult();
+    }
+
+    public List<Transporte> buscarTodos() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("from " + Transporte.class.getName())
+                .getResultList();
     }
 
     public TransportePublico buscarTransportePublico(String linea, String tipo) {
         return (TransportePublico) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Transporte.class.getName() + " where linea= '" + linea + "' and transporte = '" + tipo + "'")
+                .createQuery("from " + TransportePublico.class.getName() + " where linea= '" + linea + "' and transporte = '" + tipo + "'")
                 .getSingleResult();
     }
 
@@ -65,5 +75,26 @@ public class RepositoriosDeTransporte {
         } catch (Exception e){
             this.guardar(transporte);
         }
+    }
+
+    public List<Transporte> buscarTodosLosSubtes() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TransportePublico.class.getName() + " where transporte = 'Subte'")
+                .getResultList();
+    }
+
+    public List<Transporte> buscarTodosLosColectivos() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TransportePublico.class.getName() + " where transporte = 'Colectivo'")
+                .getResultList();
+    }
+
+    public List<Transporte> buscarTodosLosTrenes() {
+        return EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TransportePublico.class.getName() + " where transporte = 'Tren'")
+                .getResultList();
     }
 }

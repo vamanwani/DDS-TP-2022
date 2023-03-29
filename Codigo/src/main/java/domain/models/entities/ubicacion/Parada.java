@@ -55,4 +55,20 @@ public class Parada {
     public double getDistanciaParadaSiguiente() {
         return distanciaParadaSiguiente;
     }
+
+    public void setParadaAnterior(Parada paradaAnterior) {
+        this.paradaAnterior = paradaAnterior;
+    }
+
+    public void setDistanciaParadaAnterior(double distanciaParadaAnterior) {
+        this.distanciaParadaAnterior = distanciaParadaAnterior;
+    }
+
+    public void setParadaSiguiente(Parada paradaSiguiente) {
+        this.paradaSiguiente = paradaSiguiente;
+    }
+
+    public void setDistanciaParadaSiguiente(double distanciaParadaSiguiente) {
+        this.distanciaParadaSiguiente = distanciaParadaSiguiente;
+    }
 }

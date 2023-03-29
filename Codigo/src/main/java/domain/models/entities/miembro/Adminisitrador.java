@@ -12,7 +12,7 @@ public class Adminisitrador {
     @Id
     @GeneratedValue
     @Column(name = "administrador_id")
-    private Long id;
+    private int id;
 
     @OneToOne
     @JoinColumn(name = "usuario_id")
@@ -21,5 +21,10 @@ public class Adminisitrador {
     public Adminisitrador(Usuario usuario){
         this.usuario = usuario;
     }
+
+    public int getId() {
+        return id;
+    }
+
 
 }

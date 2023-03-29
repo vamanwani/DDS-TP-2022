@@ -24,7 +24,7 @@
                         <h3 id="nombreUsuario">{{miembro.nombre}}</h3>
                     </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/miembro/{{miembro.id}}">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,6 +33,8 @@
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
                       <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/hc">Calculadora HC</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/reportes">Vizualizar reportes</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
@@ -43,7 +45,7 @@
             </div>
           </nav>
     </header>
-    <main style="background-color: #b854b8;">
+    <main style="background-image: linear-gradient(to left, #b368b3, #6e256e);">
         <h1>MENU MIEMBRO</h1>
         <div class="d-grid gap-2 col-6 mx-auto">
             <a href="/miembro/{{miembro.id}}/trayectos" class="btn botonMain" type="button" style="background-color: #e3f2fd;">EDITAR REGISTRO DE TRAYECTOS</a>

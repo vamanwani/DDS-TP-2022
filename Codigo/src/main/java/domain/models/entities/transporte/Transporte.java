@@ -1,5 +1,6 @@
 package domain.models.entities.transporte;
 
+import domain.models.entities.consumo.FactorDeEmision;
 import domain.models.entities.ubicacion.Ubicacion;
 import domain.services.adapters.ServicioGeodds;
 
@@ -18,6 +19,9 @@ public abstract class Transporte {
     @GeneratedValue
     private Integer id;
 
+    @Column(name = "fe")
+    private double factorDeEmision;
+
     @Column(name = "nombre")
     private String nombre;
 
@@ -34,7 +38,8 @@ public abstract class Transporte {
     }
 
     public double distancia(Ubicacion puntoInicio, Ubicacion puntoFin) throws IOException {
-        return distanciaAPI.distancia(puntoInicio,puntoFin).distancia();
+        distanciaAPI = ServicioGeodds.getInstance();
+        return distanciaAPI.distancia(puntoInicio,puntoFin).getValor();
     }
 
     public String getNombre() {
@@ -43,5 +48,20 @@ public abstract class Transporte {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public double getFe() {
+        return factorDeEmision;
+    }
+
+    public String getModelo(){
+
+        return null;
+    }
+
+
+
+    public void setFactorDeEmision(double factorDeEmision) {
+        this.factorDeEmision = factorDeEmision;
     }
 }

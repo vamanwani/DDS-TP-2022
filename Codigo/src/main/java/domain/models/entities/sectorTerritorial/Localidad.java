@@ -6,20 +6,30 @@ import javax.persistence.*;
 @Table(name = "localidad")
 public class Localidad {
     @Id
-    @GeneratedValue
-    @Column(name = "id_localidad")
+    //@GeneratedValue //TODO no tiene que ser un valor autogenerado, tiene que instanciarse una vez en la BBDD y despues recuperarlo
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "nombre")
     private String nombre;
 
-    public Localidad() {
+    public void setId(Integer id) {
+        this.id = id;
     }
 
+    public Localidad() {
+    }
     public Localidad(String nombre) {
         this.nombre = nombre;
     }
 
+    public Localidad(String nombre, Provincia provincia) {
+        this.nombre = nombre;
+    }
+    public void setearLocalidad(String Localidad)
+    {
+
+    }
     public Integer getId() {
         return id;
     }

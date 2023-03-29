@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 //import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
 @Entity
-@Table(name = "periodo_imputacion")
+@Table(name = "periodoDeImputacion")
 public class PeriodoDeImputacion {
     @Id
     @GeneratedValue
@@ -37,6 +37,17 @@ public class PeriodoDeImputacion {
         }
     }
 
+    public PeriodoDeImputacion(int mes, int anio, String periodicidad){
+        this.mes = mes;
+        this.anio = anio;
+        if (periodicidad.contains("ANUAL"))
+        {
+            setPeriodicidad(TipoPeriodicidad.ANUAL);
+        }else {
+            setPeriodicidad(TipoPeriodicidad.MENSUAL);
+        }
+    }
+
     public void setPeriodicidad(TipoPeriodicidad periodicidad) {
         this.periodicidad = periodicidad;
     }
@@ -52,4 +63,10 @@ public class PeriodoDeImputacion {
     public int getMes() {
         return mes;
     }
+
+    public boolean periodoMayor(PeriodoDeImputacion p1, PeriodoDeImputacion p2){
+        if (p1.getMes() > p2.getMes() && p1.getAnio() > p2.getAnio()) return true;
+        else  return false;
+    }
+
 }

@@ -10,13 +10,14 @@ import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "miembro")
 public class Miembro {
     @Id
     @GeneratedValue
-    @Column(name = "miembro_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "apellido")
@@ -42,12 +43,8 @@ public class Miembro {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    public List<Trayecto> getTrayectos() {
-        return trayectos;
-    }
-
     @OneToMany
-    @JoinColumn(name = "trayecto_id")
+    @JoinColumn(name = "miembro_id")
     private List<Trayecto> trayectos;
 
     @Column(name = "mail")
@@ -88,6 +85,8 @@ public class Miembro {
         return this.usuario;
     }
 
+    public void agregarTrayecto(Trayecto trayecto) {this.trayectos.add(trayecto);}
+
     public void setTrayectos(List<Trayecto> trayectos) {
         this.trayectos = trayectos;
     }
@@ -113,16 +112,22 @@ public class Miembro {
         this.linkRecomendacion = link;
     }
 
-    public double calcularHCMiembro() throws IOException {
+    public double calcularHCMiembro(PeriodoDeImputacion periodoDeImputacion) throws IOException {
+        List<Trayecto> trayectos = (List<Trayecto>) this.getTrayectosActivos().stream().filter(t -> t.getPeriodoDeImputacion().equals(periodoDeImputacion)).collect(Collectors.toList());
         return new CalculdoraHCMiembro().calcularHC(trayectos);
+    }
+
+    public double calcularHCHistorico() throws IOException {
+        return new CalculdoraHCMiembro().calcularHC(this.getTrayectos());
     }
 
     public String getLinkRecomendacion(){
         return linkRecomendacion;
     }
+
     public double impactoEnOrganizacion(Organizacion organizacion) throws IOException {
         PeriodoDeImputacion periodoDeImputacion = null;
-        return this.calcularHCMiembro()/organizacion.calcularHCOrganizacion(periodoDeImputacion);
+        return this.calcularHCMiembro(periodoDeImputacion)/organizacion.calcularHCOrganizacion(periodoDeImputacion);
     }
 
     public SolicitudVinculacion generarSolicitud(Sector sector){
@@ -170,4 +175,14 @@ public class Miembro {
     public String getTelefono(){return this.getUsuario().getTelefono();}
 
     public void agregarTrabajo(Sector sector){trabajos.add(sector);}
+
+    public List<Trayecto> getTrayectos() {
+        return trayectos;
+    }
+
+    public List<Trayecto> getTrayectosActivos() {
+        List<Trayecto> trayectos = getTrayectos();
+        return (List<Trayecto>) trayectos.stream().filter(t -> t.isEstado()).collect(Collectors.toList());
+    }
+
 }

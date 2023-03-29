@@ -59,4 +59,8 @@ public class Usuario {
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

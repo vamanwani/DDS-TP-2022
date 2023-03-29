@@ -9,42 +9,57 @@
     <link href="/organizacion/styleOrganizacion.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<header>
+    <header>
         <h1>MI IMPACTO AMBIENTAL</h1>
         <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Organizaciones</a>
+              <a class="navbar-brand" href="#">Organización</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
-                    </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="./indexOrg.html">Home</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Acciones
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./registrarMediciones.html">Registrar medición</a></li>
-                      <li><a class="dropdown-item active" href="#">Aceptar vinculación</a></li>
-                      <li><a class="dropdown-item" href="./recomendaciones.html">Ver recomendaciones</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="../login/l">Cerrar sesión</a>
-                  </li>
-                </ul>
-              </div>
+                              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                  <li class="nav-item">
+                                      <h3 id="nombreUsuario">{{organizacion.nombre}}</h3>
+                                  </li>
+                                <li class="nav-item">
+                                     <a class="nav-link active" aria-current="page" href="/organizaciones/{{organizacion.id}}">Home</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Acciones
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/registro_mediciones">Registrar medición</a></li>
+                                    <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/aceptar_vinculacion">Aceptar vinculación</a></li>
+                                    <li><a class="dropdown-item" href="/organizaciones/{{organizacion.id}}/recomendaciones">Ver recomendaciones</a></li>
+                                    <li><a href="/organizaciones/{{organizacion.id}}/hc" class="dropdown-item">Calculadora HC</a></li>
+                                    <li><a href="/organizaciones/{{organizacion.id}}/reportes" class="dropdown-item">Visualizar reportes</a></li>
+                                  </ul>
+                                </li>
+                                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Cerrar sesión</a>
+
+                                </li>
+                              </ul>
+                            </div>
             </div>
           </nav>
     </header>
-    <main style="background-color: #873ab9; display: flex; flex-direction: column; align-items: center;">
+    <main style="background-image: linear-gradient(to left, #3aa6b9, #1647e9); display: flex; flex-direction: column; align-items: center;">
         <h1>ACEPTAR VINCULACIÓN DE TRABAJADORES</h1>
+        {{#if success}}
+        <div class="alert alert-success" role="alert">
+          Se ha aceptado la solicitud con exito!
+        </div>
+        {{/if}}
+
+                {{#if fail}}
+                <div class="alert alert-success" role="alert">
+                  Se ha rechazado la solicitud con exito!
+                </div>
+                {{/if}}
+
         <h4 style="background-color: rgb(161, 161, 161); margin-bottom: 0; width: 85%;">Listado de solicitantes</h4>
         <section style="background-color: white; height: 300px; width: 85%;">
             <table id="listaSolicitantes" style="width: 100%;">
@@ -78,8 +93,7 @@
             </table>
         </section>
         <section style="display: flex; justify-content: space-evenly; width: 100%; margin-top: 1rem;">
-          <a id="aceptarVinculaciones" type="button" class="btn btn-success btn-lg" style="margin-bottom: 1rem;">ACEPTAR</a>
-          <a id="rechazarVinculaciones" type="button" class="btn btn-danger btn-lg" style="margin-bottom: 1rem;">RECHAZAR</a>
+
         </section>
     </main>
     <footer style="background-color: black;">

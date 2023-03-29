@@ -9,7 +9,7 @@
     <link href="/organizacion/styleOrganizacion.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <header>
+<header>
         <h1>MI IMPACTO AMBIENTAL</h1>
         <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
             <div class="container-fluid">
@@ -20,40 +20,44 @@
               <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">--NOMBRE USUARIO--</h3>
+
                     </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/administrador/{{administrador.id}}">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./registroAgSec.html">Registrar agente sectorial</a></li>
-                      <li><a class="dropdown-item" href="./registroOrg.html">Registrar organización</a></li>
+            <a href="/administrador/{{administrador.id}}/gestionar_fe_tipos_consumo" class="dropdown-item" >Gestionar FE tipos consumo</a>
+            <a href="/administrador/{{administrador.id}}/gestionar_fe_transportes" class="dropdown-item">Gestionar FE transportes</a>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../login/login.html">Cerrar sesión</a>
+                    <a class="nav-link" href="/logout">Cerrar sesión</a>
+
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
     </header>
-    <main style="background-color: #3ab94f;">
+    <main style="background-image: linear-gradient(to left, #5b8362, #34f03e);">
         <h1>MENU ADMINISTRADOR</h1>
         <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="./registroAgSec.html" class="btn botonMain" type="button" style="background-color: #e3f2fd;">REGISTRAR AGENTE SECTORIAL</a>
-            <a href="./registroOrg.html" class="btn botonMain" type="button" style="background-color: #e3f2fd;">REGISTRAR ORGANIZACION</a>
+            <a href="/administrador/{{administrador.id}}/crear_agente" class="btn botonMain" type="button" style="background-color: #e3f2fd;">REGISTRAR AGENTE SECTORIAL</a>
+            <form method = "post" action = "/administrador/{{administrador.id}}/crear_org">
+            <button class="btn botonMain" type="submit" style="background-color: #e3f2fd; width: 100%">REGISTRAR ORGANIZACION</button>
+            </form>
+{{!--             <form method = "post" action = "/administrador/{{admin.id}}/crear_transporte_publico"> --}}
+{{!--             <button class="btn botonMain" type="submit" style="background-color: #e3f2fd;">REGISTRAR TRANSPORTE PUBLICO</button> --}}
+{{!--             </form> --}}
+            <a href="/administrador/{{administrador.id}}/gestionar_fe_tipos_consumo" class="btn botonMain" type="button" style="background-color: #e3f2fd;" >TRANSPORTE PUBLICOONAR VALORES DE FACTOR DE EMISIÓN PARA LOS TIPOS DE CONSUMO</a>
+            <a href="/administrador/{{administrador.id}}/gestionar_fe_transportes" class="btn botonMain" type="button" style="background-color: #e3f2fd;">GESTIONAR VALORES DE FACTOR DE EMISIÓN PARA LOS MEDIOS DE TRANSPORTE</a>
         </div>
     </main>
-    <footer style="background-color: black;">
-        <p style="color: white;">@2022 Todos los derechos reservados</p>
-    </footer>
-    <!-- JavaScript Bundle with Popper -->
-    <script src="/navbar.js"></script>
+    <footer style="baccrear_transporte_publico"        <p style="color: white;">@2022 Todos los derechos reservados</p>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>

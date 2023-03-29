@@ -12,7 +12,7 @@ public class RepositorioDeMiembros {
     public Miembro buscar(Integer id) {
         return (Miembro) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Miembro.class.getName() + " where miembro_id=" + id)
+                .createQuery("from " + Miembro.class.getName() + " where id=" + id)
                 .getSingleResult();
     }
 
@@ -50,6 +50,12 @@ public class RepositorioDeMiembros {
     public List<Organizacion> mostrarOrganizaciones(){
         return EntityManagerHelper.getEntityManager()
                 .createQuery("from " + Organizacion.class.getName())
+                .getResultList();
+    }
+
+    public List<Miembro> retornarMiembros() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("from " + Miembro.class.getName())
                 .getResultList();
     }
 }

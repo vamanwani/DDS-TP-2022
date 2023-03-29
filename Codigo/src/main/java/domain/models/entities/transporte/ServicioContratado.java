@@ -1,5 +1,6 @@
 package domain.models.entities.transporte;
 
+import domain.models.entities.consumo.FactorDeEmision;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,8 @@ public class ServicioContratado extends Transporte{
 
     @Column(name = "servicio")
     private String tipoServicio;
+
+    public String getModelo(){return "-";}
 
     public void registrarConsumoDeCombustible(){
         //TODO

@@ -1,8 +1,10 @@
 package domain.models.entities.ubicacion;
 
 import domain.models.entities.sectorTerritorial.Localidad;
+import domain.models.entities.sectorTerritorial.Provincia;
 
 import javax.persistence.*;
+import javax.swing.*;
 
 @Entity
 @Table(name = "ubicacion")
@@ -19,8 +21,12 @@ public class Ubicacion extends PadreDeUbicacion{
     private int altura;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "localidad_id")
+    @JoinColumn(name = "localidad")
     private Localidad nombreLocalidad;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "provincia_id")
+    private Provincia provincia;
 
     public Long getId() {
         return id;

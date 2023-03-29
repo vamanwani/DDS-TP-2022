@@ -11,7 +11,7 @@ public class RepositorioDeTrayectos {
 
         return EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from " + Trayecto.class.getName() + " where miembro_id =" + idMiembro)
+                .createQuery("from " + Trayecto.class.getName() + " where estado = 1 and miembro_id =" + idMiembro)
                 .getResultList();
     }
     public Trayecto buscar(Integer idTrayecto) {

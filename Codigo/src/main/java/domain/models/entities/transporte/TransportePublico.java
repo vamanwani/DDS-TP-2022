@@ -1,5 +1,6 @@
 package domain.models.entities.transporte;
 
+import domain.models.entities.consumo.FactorDeEmision;
 import domain.models.entities.ubicacion.Parada;
 import domain.models.entities.ubicacion.Ubicacion;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Entity
-@NoArgsConstructor
 @DiscriminatorValue("Publico")
 public class TransportePublico extends Transporte {
 
@@ -22,7 +22,7 @@ public class TransportePublico extends Transporte {
     @Column(name = "transporte")
     private TipoTransportePublico transporte;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "paradas_id")
     private List<Parada> paradas;
 
@@ -33,6 +33,15 @@ public class TransportePublico extends Transporte {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paradaFinal_id")
     private Parada paradaFinal;
+
+    public TransportePublico(String linea, TipoTransportePublico tipoTransportePublicoEnum) {
+        super();
+    }
+
+    @Override
+    public String getModelo(){
+        return String.valueOf(transporte);
+    }
 
 
     public TransportePublico(String linea,
@@ -47,6 +56,12 @@ public class TransportePublico extends Transporte {
         this.setDistanciaAPI();
         this.setNombre("Transporte Publico");
     }
+
+    public TransportePublico(){
+        this.paradas = new ArrayList<>();
+    }
+
+
 
     public void setParadas(List<Parada> paradas) {
         this.paradas = paradas;
@@ -91,5 +106,29 @@ public class TransportePublico extends Transporte {
         } else {
             return this.distancia(puntoFin, puntoInicio);
         }
+    }
+
+    public void agregarParada(Parada parada){
+        this.paradas.add(parada);
+    }
+
+    public String getLinea() {
+        return linea;
+    }
+
+    public void setLinea(String linea) {
+        this.linea = linea;
+    }
+
+    public void setTransporte(TipoTransportePublico transporte) {
+        this.transporte = transporte;
+    }
+
+    public void setParadaInicial(Parada paradaInicial) {
+        this.paradaInicial = paradaInicial;
+    }
+
+    public void setParadaFinal(Parada paradaFinal) {
+        this.paradaFinal = paradaFinal;
     }
 }

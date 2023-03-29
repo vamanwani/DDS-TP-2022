@@ -1,5 +1,9 @@
 package distancia;
 
+import domain.models.entities.sectorTerritorial.Localidad;
+import domain.models.entities.sectorTerritorial.Provincia;
+import domain.models.entities.transporte.TransporteAnalogico;
+import domain.models.entities.transporte.TransportePublico;
 import domain.services.adapters.GeoddsServceAdapter;
 import domain.services.adapters.ServicioGeodds;
 import domain.services.entities.Distancia;
@@ -88,6 +92,20 @@ public class DistanciaTest {
     @Test
     public void contenidoElementoDeListaTest() throws IOException{
         Assert.assertEquals(servicioGeodds.localidades().get(1).getNombre(),"BUENOS AIRES");
+    }
+
+    @Test //calculo de distancia funcional de ejemplo
+    public void distanciaTransporte() throws IOException
+    {
+        Localidad unaLocalidad = new Localidad("Barracas", new Provincia("BUENOS AIRES"));
+        unaLocalidad.setId(1);
+        Localidad otraLocalidad = new Localidad("Barracas", new Provincia("BUENOS AIRES"));
+        otraLocalidad.setId(5);
+        Ubicacion unaUbicacion = new Ubicacion("Patricios", 300, unaLocalidad);
+        Ubicacion otraUbicacion = new Ubicacion("Patricios", 400, otraLocalidad);
+        TransporteAnalogico transporte = new TransporteAnalogico();
+
+        Assert.assertEquals(transporte.distancia(unaUbicacion,otraUbicacion),0.0,0.0);
     }
 
 

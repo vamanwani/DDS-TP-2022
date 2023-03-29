@@ -10,27 +10,40 @@
     <link href="login/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
     <header>
         <h1>MI IMPACTO AMBIENTAL</h1>
     </header>
+
     <main class="main palevioletred">
         <section id="login">
+                        {{#if fail}}
+                            <div class="alert alert-danger" role="alert">
+                              El nombre de usuario o contraseña son incorrectos, intente nuevamente!
+                            </div>
+                        {{/if}}
+                        {{#if signupsuccess}}
+                            <div class="alert alert-success" role="alert">
+                              Se ha creado el usuario con exito!
+                            </div>
+                        {{/if}}
             <h1>LOG-IN</h1>
-            <form method="POST" action="/login" {{!--id="formularioLogin" --}} class="formul">
+            <form method="POST" action="/log_in" {{!--id="formularioLogin" --}} class="formul">
                 <div class="bordeForm">
                     <h4>Ingrese un usuario</h4>
                     <input id="userName" class="form-control inputForm" type="text" placeholder="Nombre Usuario" name="nombre_de_usuario">
                     <h4>Ingrese una contraseña</h4>
                     <input type="password" id="userPassword" class="form-control inputForm" type="text" placeholder="Contraseña Usuario" name="contrasenia">
                 </div>
+
                 <a class="botonCrearCuenta">CREAR CUENTA</a>
-                <button id="btnIngresar" type="submit" class="botonConfirmacion">INGRESAR</button>
+                <button id="btnIngresar" type="submit" class="botonConfirmacion btn btn-lg btn-info">INGRESAR</button>
             </form>
         </section>
         <section id="crearCuenta">
             <h1>CREAR CUENTA</h1>
 
-            <form method="POST" action="/login/signup" {{!--id="formularioRegistro"--}} class="formul">
+            <form method="POST" action="/log_in/signup" {{!--id="formularioRegistro"--}} class="formul">
                 <div class="bloqueCrearCuenta">
                     <div class="bordeForm">
                         <h4>Ingrese un usuario</h4>
@@ -50,7 +63,7 @@
                         <h4>Ingrese nro de documento</h4>
                         <input type="text" class="form-control inputForm" placeholder="Numero Documento" name= "nroDoc">
                     </div>
-                    <button id="btnRegistro" type="button submit" class="botonConfirmacion">CREAR CUENTA</button>
+                    <button id="btnRegistro" type="button submit" class="botonConfirmacion btn btn-lg btn-info">CREAR CUENTA</button>
                     <a class="botonVolver">Volver</a>
                 </div>
             </form>

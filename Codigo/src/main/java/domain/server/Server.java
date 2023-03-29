@@ -6,7 +6,15 @@ import spark.debug.DebugScreen;
 public class Server {
 
     public static void main(String[] args) {
-        Spark.port(9000);
+        ProcessBuilder process = new ProcessBuilder();
+        Integer puerto;
+        if(process.environment().get("PORT")!= null)
+        {
+            puerto = Integer.parseInt(process.environment().get("PORT"));
+        }else {
+            puerto = 9000;
+        }
+        Spark.port(puerto);
         Router.init();
         DebugScreen.enableDebugScreen();
     }

@@ -22,31 +22,40 @@
             <div class="collapse navbar-collapse navbarLinks" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <h3 id="nombreUsuario">--NOMBRE USUARIO--</h3>
+                        <h3 id="nombreUsuario">{{miembro.nombre}}</h3>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./indexMiembro.hbs">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/miembro/{{miembro.id}}">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Acciones
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./editarTrayectos.hbs">Editar Trayectos</a></li>
-                            <li><a class="dropdown-item active" href="#">Unirse a Organización</a></li>
-                        </ul>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/hc">Calculadora HC</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/reportes">Vizualizar reportes</a></li>
+                    </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Login/login.hbs">Cerrar sesión</a>
+                    <a class="nav-link" href="/logout">Cerrar sesión</a>
+
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-<main style="background-color: #b854b8;">
+<main style="background-image: linear-gradient(to left, #b368b3, #6e256e);">
+
     <h1>UNIRSE A ORGANIZACION</h1>
+    {{#if success}}
+    <div class="alert alert-success" role="alert">
+      Se ha enviado su solicitud con exito, aguarde a que la organizacion confirme su vinculacion!
+    </div>
+    {{/if}}
     <h3 style="background-color: rgb(175, 174, 174); margin-bottom: 0;">LISTADO DE ORGANIZACIONES</h3>
     <div style="background-color: white; height: 300px;">
         <table id="listaOrganizaciones" style="width: 100%;">
@@ -59,7 +68,7 @@
             {{#each organizaciones}}
                 <tr style="margin-top: 15px"  class="opcionOrg org{{id_organizacion}}" onClick="elegirOrg({{id_organizacion}})">
                 <form method = "post" action = "organizaciones/{{id}}/unirse">
-                  <th>{{razon}}</th>
+                  <th>{{nombre}}</th>
                   <th>{{tipo}}</th>
                   <th>{{clasificacion}}</th>
                   <th>
@@ -69,6 +78,8 @@
                         <option value={{id}}>{{nombre}}</option>
                         {{/each}}
                    </select>
+
+
                   </th>
                   <td><button type="submit" class="btn btn-primary">Solicitar unirse</button></td>
                   </form>

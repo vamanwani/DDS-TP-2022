@@ -1,9 +1,11 @@
 package domain.models.entities.recorridos;
+import domain.models.entities.consumo.PeriodoDeImputacion;
 import domain.models.entities.miembro.Miembro;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.arrayList;
@@ -29,6 +31,24 @@ public class Trayecto {
     @JoinColumn(name = "miembro_id")
     private Miembro miembro;
 
+    @Column(name = "estado")
+    private boolean estado = true;
+
+    @ManyToOne
+    @JoinColumn(name = "periodo_imputacion_id")
+    private PeriodoDeImputacion periodoDeImputacion;
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    @Column(name = "fecha")
+    private LocalDate fecha;
+
     public Trayecto() {
     }
 
@@ -48,6 +68,9 @@ public class Trayecto {
         }).sum();
     }
 
+    public void setEstado(boolean bool){
+        this.estado = bool;
+    }
     public List<Tramo> getTramos() {
         return tramos;
     }
@@ -86,5 +109,17 @@ public class Trayecto {
 
     public void setMiembro(Miembro miembro) {
         this.miembro = miembro;
+    }
+
+    public void setPeriodoDeImputacion(PeriodoDeImputacion periodoDeImputacion) {
+        this.periodoDeImputacion = periodoDeImputacion;
+    }
+
+    public PeriodoDeImputacion getPeriodoDeImputacion() {
+        return periodoDeImputacion;
+    }
+
+    public boolean isEstado() {
+        return estado;
     }
 }

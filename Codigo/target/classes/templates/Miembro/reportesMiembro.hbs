@@ -23,28 +23,51 @@
                         <h3 id="nombreUsuario">{{usuario.nombre}}</h3>
                     </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                     <a class="nav-link active" aria-current="page" href="/miembro/{{miembro.id}}">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Acciones
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./editarTrayectos.hbs">Editar Trayectos</a></li>
-                      <li><a class="dropdown-item" href="./unirseAOrg.hbs">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/trayectos">Editar Trayectos</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/organizaciones">Unirse a Organización</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/hc">Calculadora HC</a></li>
+                      <li><a class="dropdown-item" href="/miembro/{{miembro.id}}/reportes">Vizualizar reportes</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="../Login/login.hbs">Cerrar sesión</a>
+                    <a class="nav-link" href="/logout">Cerrar sesión</a>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
     </header>
-    <main style="background-color: #b854b8;">
+    <main style="background-image: linear-gradient(to left, #b368b3, #6e256e);">
         <h1>REPORTES</h1>
         <div>
+        <select id="valueMes" class="form-select" aria-label="Default select example" name ="mes">
+                                                                    <option selected value="">Mes</option>
+                                                                    <option value="1">Enero</option>
+                                                                    <option value="2">Febrero</option>
+                                                                    <option value="3">Marzo</option>
+                                                                    <option value="4">Abril</option>
+                                                                    <option value="5">Mayo</option>
+                                                                    <option value="6">Junio</option>
+                                                                    <option value="7">Julio</option>
+                                                                    <option value="8">Agosto</option>
+                                                                    <option value="9">Septiembre</option>
+                                                                    <option value="10">Octubre</option>
+                                                                    <option value="11">Noviembre</option>
+                                                                    <option value="12">Diciembre</option>
+                                </select>
+                            <input type="number" class="form-control" id="" placeholder="Año" name= "anio">
+                            <select id="valueTipoReporte" class="form-select" aria-label="Default select example" name ="tipo_periodicidad">
+                                                                                <option selected value="">Mes</option>
+                                                                                <option value="mensual">Mensual</option>
+                                                                                <option value="anual">Anual</option>
+                                        </select>
             {{reportesMiembro}}
         </div>
     </main>

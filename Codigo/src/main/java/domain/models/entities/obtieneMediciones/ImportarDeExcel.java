@@ -3,6 +3,9 @@ package domain.models.entities.obtieneMediciones;
 import domain.models.entities.consumo.*;
 import domain.models.entities.consumo.*;
 import domain.models.entities.organizacion.Organizacion;
+import domain.models.repos.RepositorioDeConsumos;
+import domain.models.repos.RepositorioDeOrganizaciones;
+import domain.models.repos.RepositorioDeTiposConsumo;
 import domain.services.dbManager.EntityManagerHelper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -11,16 +14,50 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-public class ImportarDeExcel {
-    public void importar(String nombreExcel, Organizacion unaOrganizacion) throws IOException {
-            File file = new File("D:\\Facultad\\3er año 2022\\Diseño de sistemas\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\" + nombreExcel);   //creating a new file instance
-            FileInputStream fis = new FileInputStream(file);   //obtaining bytes from the file
+public class ImportarDeExcel extends Thread {
+
+    RepositorioDeConsumos repositorioDeConsumos = new RepositorioDeConsumos();
+    RepositorioDeOrganizaciones repositorioDeOrganizaciones = new RepositorioDeOrganizaciones();
+    RepositorioDeTiposConsumo repositorioDeTiposConsumo = new RepositorioDeTiposConsumo();
+
+    Organizacion organizacion;
+    String nombreDeExcel;
+
+//    String nombreDeExcel;
+//    Organizacion organizacion;
+
+//    public void setNombreDeExcel(String nombreDeExcel) {
+//        this.nombreDeExcel = nombreDeExcel;
+//    }
+//
+//    public void setOrganizacion(Organizacion organizacion) {
+//        this.organizacion = organizacion;
+//    }
+
+    @Override
+    public void run() {
+            File file = new File("src/main/resources/uploads/" + nombreDeExcel); //TODO RUTA DE VIG
+        // creating a new file instance
+        //File file = new File("C:\\Users\\Adrian\\Documents\\Facultad\\Diseño\\9-11\\2022-ma-ma-mama-grupo-05\\Codigo\\src\\main\\resources\\uploads\\" + nombreExcel);//TODO RUTA DE ADRIAN
+        //C:\Users\Adrian\Documents\Facultad\Diseño\9-11\2022-ma-ma-mama-grupo-05\Codigo
+        FileInputStream fis = null;   //obtaining bytes from the file
+        try {
+            fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 //creating Workbook instance that refers to .xlsx file
-            XSSFWorkbook wb = new XSSFWorkbook(fis);
-            XSSFSheet sheet = wb.getSheetAt(0);     //creating a Sheet object to retrieve object
+        XSSFWorkbook wb = null;
+        try {
+            wb = new XSSFWorkbook(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        XSSFSheet sheet = wb.getSheetAt(0);     //creating a Sheet object to retrieve object
             Iterator<Row> itr = sheet.iterator();    //iterating over excel file
             Row row = itr.next();
             SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
@@ -88,7 +125,20 @@ public class ImportarDeExcel {
                 datosFila.clear();
                 System.out.println("");
             }
-            instanciasConsumosParaOrganizacion(filaDeConsumos,unaOrganizacion);
+            instanciasConsumosParaOrganizacion(filaDeConsumos,organizacion);
+
+        try {
+            wb.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        file.delete();
     }
 
     public void instanciasConsumosParaOrganizacion(List<FilaConsumo> listaDeFilaConsumo, Organizacion organizacion) {
@@ -100,18 +150,20 @@ public class ImportarDeExcel {
                 FilaConsumo  distancia= listaDeFilaConsumo.get(i+2);
                 FilaConsumo  peso= listaDeFilaConsumo.get(i+3);
                 consumo = instaciarConsumoLogistica(fila, medio, distancia, peso,organizacion); // por fila se refiere a categoria
+                consumo.setTipoConsumo(this.repositorioDeTiposConsumo.buscarLogistica());
+
                 i += 3; // te saltea las proximas tres filas de una
             } else {
                 consumo = instanciarOtroConsumo(listaDeFilaConsumo.get(i), organizacion);
             }
-            organizacion.agregarConsumo(consumo);
-            EntityManagerHelper.beginTransaction();
-            EntityManagerHelper.persist(organizacion);
-            EntityManagerHelper.persist(consumo.getActividad());
-            EntityManagerHelper.persist(consumo.getTipoConsumo());
-            EntityManagerHelper.persist(consumo.getPeriodicidad());
-            EntityManagerHelper.persist(consumo);
-            EntityManagerHelper.commit();
+
+//            organizacion.agregarConsumo(consumo);
+            consumo.setOrganizacion(organizacion);
+//            this.repositorioDeOrganizaciones.guardar(organizacion);
+            this.repositorioDeConsumos.guardarSiNoExisteTipoConsumo(consumo.getTipoConsumo());
+            this.repositorioDeConsumos.guardarSiNoExisteActividad(consumo.getActividad());
+            this.repositorioDeConsumos.guardarSiNoExistePeriodicidad(consumo.getPeriodicidad());
+            this.repositorioDeConsumos.guardar(consumo);
         }
     }
 
@@ -119,8 +171,10 @@ public class ImportarDeExcel {
     public Consumo instaciarConsumoLogistica(FilaConsumo categoria, FilaConsumo medio, FilaConsumo distancia, FilaConsumo peso, Organizacion unaOrganizacion) {
         List<String> df = categoria.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
+
         TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
+
         Consumo consumoDeOrganizacion = new ConsumoLogistica(actividadConsumo, periodoDeImputacion, tipoConsumo, Integer.parseInt(peso.getDatosString().get(2)),
                 Integer.parseInt(distancia.getDatosString().get(2)), medio.getDatosString().get(2), categoria.getDatosString().get(2));
         return consumoDeOrganizacion;
@@ -130,7 +184,11 @@ public class ImportarDeExcel {
     public Consumo instanciarOtroConsumo(FilaConsumo filaConsumo, Organizacion unaOrganizacion) {
         List<String> df = filaConsumo.getDatosString();
         Actividad actividadConsumo = new Actividad(tipoDeAlcanceConsumo(df.get(0)), df.get(0));
-        TipoConsumo tipoConsumo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
+        TipoConsumo tipoConsumoViejo = new TipoConsumo(df.get(1), unidadPorConsumo(df.get(1)));
+        TipoConsumo tipoConsumo = (TipoConsumo) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from " + TipoConsumo.class.getName() + " where nombre = '" + df.get(1) + "'")
+                .getSingleResult();
         PeriodoDeImputacion periodoDeImputacion = new PeriodoDeImputacion(df.get(4));
         Consumo consumoDeOrganizacion = new OtroConsumo(actividadConsumo, periodoDeImputacion, tipoConsumo, Double.parseDouble(df.get(2)));
         return consumoDeOrganizacion;
@@ -161,6 +219,14 @@ public class ImportarDeExcel {
             return Unidad.KM;
         }
         return null;
+    }
+
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
+    }
+
+    public void setNombreDeExcel(String nombreDeExcel) {
+        this.nombreDeExcel = nombreDeExcel;
     }
 }
 

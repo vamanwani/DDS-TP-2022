@@ -24,4 +24,25 @@ public class RepositorioDeUsuarios {
         EntityManagerHelper.commit();
     }
 
+    public Usuario buscarSegunUsuario(Integer nombreUsuario) {
+        return (Usuario) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from "
+                        + Usuario.class.getName()
+                        + " WHERE nombre = '"
+                        + nombreUsuario
+                        + "'")
+                .getSingleResult();
+    }
+
+    public Usuario buscarSegunId(Object id) {
+        return (Usuario) EntityManagerHelper
+                .getEntityManager()
+                .createQuery("from "
+                        + Usuario.class.getName()
+                        + " WHERE usuario_id = '"
+                        + id
+                        + "'")
+                .getSingleResult();
+    }
 }
